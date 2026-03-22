@@ -22,6 +22,8 @@ if ON_COLAB:
         "kaggle-benchmarks @ git+https://github.com/Kaggle/kaggle-benchmarks.git",
     ])
 
+subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "matplotlib"])
+
 print(f"Environment: {'Kaggle' if ON_KAGGLE else 'Colab' if ON_COLAB else 'Local'}")
 
 # %% Imports
