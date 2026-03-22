@@ -16,13 +16,16 @@ import subprocess
 ON_KAGGLE = os.environ.get("KAGGLE_KERNEL_RUN_TYPE") is not None
 ON_COLAB = "google.colab" in sys.modules or os.path.exists("/content")
 
-if ON_COLAB:
+if ON_KAGGLE:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "-q",
+                           "protobuf>=5.29.6", "--no-deps"])
+elif ON_COLAB:
     subprocess.check_call([
         sys.executable, "-m", "pip", "install", "-q",
         "kaggle-benchmarks @ git+https://github.com/Kaggle/kaggle-benchmarks.git",
         "matplotlib",
     ])
-elif not ON_KAGGLE:
+else:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "matplotlib"])
 
 print(f"Environment: {'Kaggle' if ON_KAGGLE else 'Colab' if ON_COLAB else 'Local'}")
