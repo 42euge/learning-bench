@@ -1,0 +1,10 @@
+# Kaggle Benchmarks SDK (install from source)
+kaggle-benchmarks @ git+https://github.com/Kaggle/kaggle-benchmarks.git
+
+# Data & analysis
+pandas
+numpy
+matplotlib
+
+# Utilities
+python-dotenv
