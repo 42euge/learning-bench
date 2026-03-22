@@ -20,9 +20,10 @@ if ON_COLAB:
     subprocess.check_call([
         sys.executable, "-m", "pip", "install", "-q",
         "kaggle-benchmarks @ git+https://github.com/Kaggle/kaggle-benchmarks.git",
+        "matplotlib",
     ])
-
-subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "matplotlib"])
+elif not ON_KAGGLE:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "matplotlib"])
 
 print(f"Environment: {'Kaggle' if ON_KAGGLE else 'Colab' if ON_COLAB else 'Local'}")
 
@@ -36,7 +37,13 @@ from dataclasses import dataclass
 import kaggle_benchmarks as kbench
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+
+try:
+    import matplotlib.pyplot as plt
+    HAS_MATPLOTLIB = True
+except ImportError:
+    HAS_MATPLOTLIB = False
+    print("matplotlib not available — plotting will be skipped")
 
 # %% [markdown]
 # ## Task Generators
@@ -589,8 +596,11 @@ print(f"{'='*60}\n")
 print(metrics[["family", "difficulty", "aulc", "asymptotic_accuracy", "curve_shape"]].to_string(index=False))
 
 # %% Plot
-fig = plot_learning_curves(merged, title="Learning Curve Profiler")
-plt.show()
+if HAS_MATPLOTLIB:
+    fig = plot_learning_curves(merged, title="Learning Curve Profiler")
+    plt.show()
+else:
+    print("Plotting skipped (matplotlib not available)")
 
 # %% [markdown]
 # ## Detailed Results by Condition
