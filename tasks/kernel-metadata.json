@@ -1,0 +1,15 @@
+{
+  "id": "eugenio0/rule-induction",
+  "title": "Rule Induction",
+  "code_file": "rule_induction.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": ["learning", "benchmark", "rule-induction"],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": []
+}
