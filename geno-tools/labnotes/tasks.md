@@ -1,14 +1,13 @@
 # Tasks
 
 ## Active
-- [ ] run against multiple frontier models (needs MODEL_PROXY_API_KEY in .env)
-- [ ] build skill_selection benchmark task — can a model learn to pick the right tool as options grow and context gets noisy
-
-## Backlog
-- [ ] analyze results & discriminatory power (automated in `src/analysis.py`, needs model results)
-- [ ] finalize writeup with actual results (draft in `writeup.md`)
+- [ ] run remaining tasks on Kaggle (grammar induction running on e2cdd)
+- [ ] finalize writeup with cross-task results
 - [ ] create cover image & media
 - [ ] submit on Kaggle
+
+## Backlog
+- [ ] run all 12 tasks across full model ladder via Kaggle "Add Models" UI
 
 ## Done
 
@@ -21,3 +20,8 @@
 - [x] write tests → `tests/test_generators.py` (15/15 pass)
 - [x] draft writeup → `writeup.md`
 - [x] create Kaggle notebook → `notebook.py`
+- [x] build skill_selection benchmark task — strong discriminatory power confirmed
+- [x] extract all 12 datasets into standalone generate.py scripts
+- [x] upload all 12 datasets to Kaggle
+- [x] run scaling tests: skill_selection (best), novel_algorithm, category_learning, multi_armed_bandit
+- [x] draft writeup for Skill Selection Under Context Pollution
