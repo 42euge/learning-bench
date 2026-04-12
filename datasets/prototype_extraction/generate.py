@@ -14,7 +14,6 @@ import random
 
 import pandas as pd
 
-# === Prototype-based creature categories ===
 
 FEATURE_NAMES = ['horn_length', 'wing_span', 'tail_length', 'spots', 'weight']
 CATEGORY_NAMES = ['Zorplings', 'Minkles', 'Quibbles']
@@ -26,10 +25,6 @@ PROTOTYPES = {
 }
 
 OVERLAP_NOISE = {'low': 1, 'medium': 2, 'high': 3}
-OVERLAP_SEED = {'low': 0, 'medium': 1, 'high': 2}  # deterministic, no hash()
-EVIDENCE = {'few': 4, 'mid': 8, 'many': 12}
-EVIDENCE_SEED = {'few': 0, 'mid': 1, 'many': 2}  # deterministic, no hash()
-SEEDS = 3
 
 
 def generate_creature(prototype, noise, rng):
@@ -71,6 +66,13 @@ def generate_test_creature(target_cat, noise, rng):
         if classify_by_prototype(creature) == target_cat:
             return creature
     return dict(PROTOTYPES[target_cat])
+
+
+EVIDENCE = {'few': 4, 'mid': 8, 'many': 12}
+# Deterministic integer mappings replacing hash()
+OVERLAP_SEED = {'low': 0, 'medium': 1, 'high': 2}
+EVIDENCE_SEED = {'few': 0, 'mid': 1, 'many': 2}
+SEEDS = 3
 
 
 def generate_dataset():

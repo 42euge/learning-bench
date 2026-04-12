@@ -15,8 +15,6 @@ import pandas as pd
 
 
 # === Novel procedure definitions ===
-# These are invented algorithms that do NOT correspond to any standard named algorithm.
-# Each takes a list of integers and returns a single integer via deterministic steps.
 
 # --- SIMPLE (1-step) procedures ---
 
@@ -36,13 +34,13 @@ def zigzag_sum(nums):
 
 
 def mirror_diff(nums):
-    """Pair first with last, second with second-to-last, etc. Sum absolute differences, add middle if odd length."""
+    """Pair first with last, second with second-to-last, etc. Sum absolute differences."""
     pairs = []
     total = 0
     n = len(nums)
     for i in range(n // 2):
         d = abs(nums[i] - nums[n - 1 - i])
-        pairs.append(f"|{nums[i]} - {nums[n - 1 - i]}| = {d}")
+        pairs.append(f"|{nums[i]} - {nums[n-1-i]}| = {d}")
         total += d
     middle_note = ""
     if n % 2 == 1:
@@ -57,7 +55,7 @@ def mirror_diff(nums):
 
 
 def triangle_count(nums):
-    """Square each element, sum digits of each square, then take alternating sum of those digit-sums."""
+    """Square each element, sum digits of each square, then take alternating sum."""
     squares = [v * v for v in nums]
     digit_sums = [sum(int(d) for d in str(s)) for s in squares]
     alt_sum = 0
@@ -69,14 +67,14 @@ def triangle_count(nums):
     return alt_sum, [
         f"Square each element: {nums} -> {squares}",
         f"Sum digits of each square: {squares} -> {digit_sums}",
-        f"Alternating sum (+/-) of digit-sums: {' + '.join(str(ds) if i % 2 == 0 else f'(- {ds})' for i, ds in enumerate(digit_sums))} = {alt_sum}",
+        f"Alternating sum (+/-) of digit-sums: {' + '.join(str(ds) if i%2==0 else f'(- {ds})' for i,ds in enumerate(digit_sums))} = {alt_sum}",
     ]
 
 
 # --- MEDIUM (2-step) procedures ---
 
 def spiral_crunch(nums):
-    """Step 1: Reverse every other pair. Step 2: Cumulative sum, return last."""
+    """Reverse every other pair, then cumulative sum."""
     transformed = list(nums)
     for i in range(0, len(transformed) - 1, 4):
         transformed[i], transformed[i + 1] = transformed[i + 1], transformed[i]
@@ -94,7 +92,7 @@ def spiral_crunch(nums):
 
 
 def wave_hash(nums):
-    """Step 1: Sort, interleave min/max. Step 2: Multiply adjacent pairs, sum products."""
+    """Sort, interleave min/max, multiply adjacent pairs, sum products."""
     s = sorted(nums)
     interleaved = []
     lo, hi = 0, len(s) - 1
@@ -110,21 +108,20 @@ def wave_hash(nums):
     result = sum(products)
     return result, [
         f"Sort and interleave min/max: {list(nums)} -> sorted {s} -> interleaved {interleaved}",
-        f"Multiply adjacent pairs: {[f'{interleaved[i]}*{interleaved[i + 1]}' for i in range(0, len(interleaved) - 1, 2)]} = {products}",
+        f"Multiply adjacent pairs: {[f'{interleaved[i]}*{interleaved[i+1]}' for i in range(0, len(interleaved)-1, 2)]} = {products}",
         f"Sum of products = {result}",
     ]
 
 
 def cascade_mod(nums):
-    """Step 1: Replace each element with (element * its 1-based position) mod 17.
-       Step 2: XOR all results together, then multiply by count."""
+    """Replace each element with (element * position) mod 17, XOR all, multiply by count."""
     mod_vals = [(v * (i + 1)) % 17 for i, v in enumerate(nums)]
     xor_result = 0
     for v in mod_vals:
         xor_result ^= v
     result = xor_result * len(nums)
     return result, [
-        f"Multiply each by its 1-based position, mod 17: {[f'{v}*{i + 1}%17={m}' for i, (v, m) in enumerate(zip(nums, mod_vals))]}",
+        f"Multiply each by its 1-based position, mod 17: {[f'{v}*{i+1}%17={m}' for i,(v,m) in enumerate(zip(nums, mod_vals))]}",
         f"XOR all results: {' ^ '.join(str(v) for v in mod_vals)} = {xor_result}",
         f"Multiply by count ({len(nums)}): {xor_result} * {len(nums)} = {result}",
     ]
@@ -133,8 +130,7 @@ def cascade_mod(nums):
 # --- COMPLEX (3-step with conditionals) procedures ---
 
 def branch_fold(nums):
-    """If first element > 5: fold left with multiply (capped at 999), else fold right with add.
-       Then negate odd-positioned results. Finally, sum all."""
+    """If first element > 5: fold left with multiply (capped at 999), else fold right with add."""
     if nums[0] > 5:
         branch = "left-multiply"
         acc = nums[0]
@@ -161,9 +157,7 @@ def branch_fold(nums):
 
 
 def pivot_weave(nums):
-    """Step 1: Find median. Split into above/below median.
-       Step 2: Interleave below and above lists, padding shorter with 0.
-       Step 3: If length is even, sum all; if odd, alternating sum."""
+    """Find median, split above/below, interleave, conditional sum."""
     s = sorted(nums)
     median = s[len(s) // 2]
     below = [x for x in nums if x < median]
@@ -194,9 +188,7 @@ def pivot_weave(nums):
 
 
 def chain_gate(nums):
-    """Step 1: Compute pairwise sums of consecutive elements.
-       Step 2: For each pairwise sum, if > 10 keep it, else replace with 1.
-       Step 3: Product of all gated values, mod 1000, then subtract first original element."""
+    """Pairwise sums, gate >10, product mod 1000, subtract first element."""
     pair_sums = [nums[i] + nums[i + 1] for i in range(len(nums) - 1)]
     gated = [v if v > 10 else 1 for v in pair_sums]
     product = 1
@@ -205,14 +197,13 @@ def chain_gate(nums):
     product_mod = product % 1000
     result = product_mod - nums[0]
     return result, [
-        f"Pairwise sums of consecutive elements: {[f'{nums[i]}+{nums[i + 1]}={pair_sums[i]}' for i in range(len(pair_sums))]}",
+        f"Pairwise sums of consecutive elements: {[f'{nums[i]}+{nums[i+1]}={pair_sums[i]}' for i in range(len(pair_sums))]}",
         f"Gate: keep if >10, else replace with 1: {pair_sums} -> {gated}",
         f"Product mod 1000: {'*'.join(str(v) for v in gated)} = {product} mod 1000 = {product_mod}",
         f"Subtract first original element ({nums[0]}): {product_mod} - {nums[0]} = {result}",
     ]
 
 
-# === Procedure registry ===
 PROCEDURES = {
     'simple': [
         ('zigzag_sum', zigzag_sum, "Zigzag Sum: subtract even-indexed, add odd-indexed, multiply by count"),
@@ -231,7 +222,6 @@ PROCEDURES = {
     ],
 }
 
-# === Dataset parameters ===
 COMPLEXITY_LEVELS = ['simple', 'medium', 'complex']
 TRACE_COUNTS = [2, 3, 4]
 SEEDS = 3
@@ -243,7 +233,7 @@ def generate_input(rng, length=5):
 
 
 def format_trace(inputs, fn):
-    """Generate a full worked trace: input -> step1 -> step2 -> ... -> output."""
+    """Generate a full worked trace: input -> steps -> output."""
     result, steps = fn(inputs)
     trace = f"Input: {inputs}\n"
     for i, step in enumerate(steps, 1):
@@ -259,11 +249,7 @@ def generate_dataset():
         procs = PROCEDURES[complexity]
         for n_traces in TRACE_COUNTS:
             for seed in range(SEEDS):
-                rng = random.Random(
-                    seed * 1000
-                    + TRACE_COUNTS.index(n_traces) * 100
-                    + COMPLEXITY_LEVELS.index(complexity) * 10
-                )
+                rng = random.Random(seed * 1000 + TRACE_COUNTS.index(n_traces) * 100 + COMPLEXITY_LEVELS.index(complexity) * 10)
                 proc_name, proc_fn, proc_desc = procs[seed % len(procs)]
 
                 traces = []
@@ -275,7 +261,7 @@ def generate_dataset():
                 test_input = generate_input(rng)
                 expected_result, expected_steps = proc_fn(test_input)
 
-                material = "\n\n".join(f"Example {i + 1}:\n{tr}" for i, tr in enumerate(traces))
+                material = "\n\n".join(f"Example {i+1}:\n{tr}" for i, tr in enumerate(traces))
                 label = f"{complexity}_{n_traces}traces"
 
                 rows.append({

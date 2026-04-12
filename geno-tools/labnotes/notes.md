@@ -223,3 +223,32 @@ Run against frontier models via Kaggle Model Proxy.
 - **Distinct & confusable at ceiling** for all — good anchors
 - **Verdict**: STRONG discriminatory power. Adversarial similarity is the key axis. Task works.
 - **Output**: `results/skill_selection_v2_fixed/`
+
+---
+
+## 2026-04-12 — Dataset extraction complete (all 12 tasks)
+
+All 12 task notebooks now have:
+- `datasets/<task>/generate.py` — standalone, deterministic seeds (no hash())
+- `datasets/<task>/dataset-metadata.json` — Kaggle upload metadata
+- Kaggle datasets uploaded (all 12)
+- Notebooks slimmed: generation code removed, load from Kaggle CSV
+- Multi-model eval added (gemma-3-1b, gemma-3-4b, gemini-2.5-flash)
+
+| Task | Kaggle Dataset | Rows |
+|------|---------------|------|
+| skill_selection | eugenio0/skill-selection-benchmark | 27 |
+| novel_algorithm_execution | eugenio0/novel-algorithm-execution-benchmark | 27 |
+| novel_grammar_induction | eugenio0/novel-grammar-induction-benchmark | 108 |
+| category_learning | eugenio0/category-learning-benchmark | 27 |
+| analogy_completion | eugenio0/analogy-completion-benchmark | 27 |
+| sequence_extrapolation | eugenio0/sequence-extrapolation-benchmark | 27 |
+| rule_induction | eugenio0/rule-induction-benchmark | 27 |
+| belief_revision | eugenio0/belief-revision-benchmark | 27 |
+| multi_armed_bandit | eugenio0/multi-armed-bandit-benchmark | 27 |
+| paired_associate | eugenio0/paired-associate-benchmark | 27 |
+| prototype_extraction | eugenio0/prototype-extraction-benchmark | 27 |
+| trace_based_imitation | eugenio0/trace-based-imitation-benchmark | 27 |
+
+**Next**: Run each task on Kaggle with scaling ladder to find which show discriminatory power.
+**Blocker**: Single benchmark slug (e2cdd) serializes all runs.
