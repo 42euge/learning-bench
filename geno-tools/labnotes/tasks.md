@@ -2,6 +2,7 @@
 
 ## Active
 - [ ] run against multiple frontier models (needs MODEL_PROXY_API_KEY in .env)
+- [ ] build skill_selection benchmark task — can a model learn to pick the right tool as options grow and context gets noisy
 
 ## Backlog
 - [ ] analyze results & discriminatory power (automated in `src/analysis.py`, needs model results)

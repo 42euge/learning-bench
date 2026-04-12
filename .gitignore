@@ -10,3 +10,4 @@ build/
 venv/
 data/
 results/
+datasets/*/*.csv

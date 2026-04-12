@@ -164,3 +164,62 @@ Generates dataset, runs evaluation, computes metrics, saves results + plots.
 ### Next step
 
 Run against frontier models via Kaggle Model Proxy.
+
+---
+
+## 2026-04-09 — Multi-Armed Bandit: first run (Gemini 2.5 Flash)
+
+- **Task**: `eugenio0/new-benchmark-task-e2cdd` (v2)
+- **Status**: COMPLETE
+- **Model**: google/gemini-2.5-flash
+- **Results**: Pre=96.3%, Post=96.3%, Gain=+0.0%
+- **Verdict**: CEILING EFFECT — task is too easy. Flash computes win rates trivially. Only 1 failure (4arms_moderate where empirical rates were close). Zero learning gain because baseline is already near-perfect.
+- **Next**: Need to make the task harder — reduce history length, add non-stationarity, or use continuous rewards to require real statistical reasoning.
+- **Output**: `results/bandit_v1/`
+
+---
+
+## 2026-04-09 — Skill Selection benchmark built
+
+- **Path**: `tasks/procedural_learning/skill_selection.ipynb`
+- **Design**: Can a model learn to select the correct tool from a growing registry as context gets noisier?
+- **Difficulty grid**: 3 num_tools (5/15/30) × 3 similarity (distinct/confusable/adversarial) × 3 seeds = 27 items
+- **Platform**: Fictional "Nexara Platform" with invented tool names (flux_bridge, glyph_weaver, etc.)
+- **Key feature**: Adversarial mode uses tool names/descriptions that deliberately mismatch actual capabilities
+- **Status**: Built, compatibility checks pass, ready to push to Kaggle
+- **Motivation**: Directly inspired by real failure — Claude picked wrong tool (Colab upload vs Kaggle benchmarks) from 30+ loaded skills
+
+---
+
+## 2026-04-09 — Skill Selection: first multi-model run (v3, extraction bug)
+
+- **Task**: `eugenio0/new-benchmark-task-e2cdd` (v3)
+- **Status**: COMPLETE but extraction bug (underscore removal broke tool name matching)
+- **Models**: gemma-3-4b, gemini-2.5-flash, gemini-2.5-pro
+- **Re-scored locally with fixed extraction:**
+  - gemma-3-4b:      pre=70.4%  post=70.4%  gain=+0.0%
+  - gemini-2.5-flash: pre=96.3%  post=100%   gain=+3.7%
+  - gemini-2.5-pro:   pre=92.6%  post=100%   gain=+7.4%
+- **Adversarial is the discriminator**: gemma-3-4b=22%, flash=89%, pro=78%
+- **Distinct is at ceiling**: 100% for all models (good baseline anchor)
+- **Learning gain**: Flash and pro both reach 100% post-learning; gemma-3-4b gains nothing
+- **Bug fix**: `re.sub(r'[`*_]', '', text)` was removing underscores from tool names → 0% extraction. Fixed to `re.sub(r'[`*]', '', text)`.
+- **v5 pushed** with fix, awaiting results
+- **Output**: `results/skill_selection_v1/`
+
+---
+
+## 2026-04-09 — Skill Selection: official results (v5, extraction fixed)
+
+- **Task**: `eugenio0/new-benchmark-task-e2cdd` (v5)
+- **Status**: COMPLETE — clean results, 0 extraction failures
+- **Models**: gemma-3-4b, gemini-2.5-flash, gemini-2.5-pro
+- **Results:**
+  - gemma-3-4b:      pre=81.5%  post=81.5%  gain=+0.0%
+  - gemini-2.5-flash: pre=96.3%  post=100%   gain=+3.7%
+  - gemini-2.5-pro:   pre=100%   post=100%   gain=+0.0%
+- **Adversarial is the discriminator**: 4b=44%, flash=89%, pro=100%
+- **Tool count scales for weak models**: 4b drops 100%→67% at 30 tools
+- **Distinct & confusable at ceiling** for all — good anchors
+- **Verdict**: STRONG discriminatory power. Adversarial similarity is the key axis. Task works.
+- **Output**: `results/skill_selection_v2_fixed/`
