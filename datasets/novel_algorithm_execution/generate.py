@@ -465,7 +465,7 @@ def generate_dataset():
                     'task_id': tid, 'seed': seed, 'complexity': complexity,
                     'clarity': clarity, 'difficulty_label': label,
                     'algo_name': name, 'spec': spec.strip(),
-                    'test_input': str(test_input), 'test_input_list': test_input,
+                    'test_input': str(test_input),
                     'expected': str(expected),
                 })
                 tid += 1
