@@ -1,0 +1,15 @@
+{
+  "id": "eugenio0/new-benchmark-task-61bc3",
+  "title": "Skill Selection v2",
+  "code_file": "skill_selection.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": ["learning", "benchmark", "skill-selection"],
+  "dataset_sources": ["eugenio0/skill-selection-benchmark"],
+  "kernel_sources": [],
+  "competition_sources": []
+}

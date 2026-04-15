@@ -1,0 +1,15 @@
+{
+  "id": "eugenio0/new-benchmark-task-3ef91",
+  "title": "Analogy Completion",
+  "code_file": "analogy_completion.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": ["benchmark"],
+  "dataset_sources": ["eugenio0/analogy-completion-benchmark"],
+  "kernel_sources": [],
+  "competition_sources": []
+}

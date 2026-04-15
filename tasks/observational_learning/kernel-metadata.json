@@ -1,0 +1,15 @@
+{
+  "id": "eugenio0/new-benchmark-task-a60bb",
+  "title": "Trace Based Imitation",
+  "code_file": "trace_based_imitation.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": ["benchmark"],
+  "dataset_sources": ["eugenio0/trace-based-imitation-benchmark"],
+  "kernel_sources": [],
+  "competition_sources": []
+}

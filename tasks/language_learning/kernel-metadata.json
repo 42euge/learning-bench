@@ -1,0 +1,15 @@
+{
+  "id": "eugenio0/new-benchmark-task-47267",
+  "title": "Novel Grammar Induction",
+  "code_file": "novel_grammar_induction.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": ["benchmark"],
+  "dataset_sources": ["eugenio0/novel-grammar-induction-benchmark"],
+  "kernel_sources": [],
+  "competition_sources": []
+}

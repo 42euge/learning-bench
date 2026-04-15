@@ -1,0 +1,15 @@
+{
+  "id": "eugenio0/new-benchmark-task-45790",
+  "title": "Belief Revision",
+  "code_file": "belief_revision.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": ["benchmark"],
+  "dataset_sources": ["eugenio0/belief-revision-benchmark"],
+  "kernel_sources": [],
+  "competition_sources": []
+}

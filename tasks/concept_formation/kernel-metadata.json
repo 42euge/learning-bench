@@ -1,0 +1,15 @@
+{
+  "id": "eugenio0/new-benchmark-task-d895d",
+  "title": "Category Learning",
+  "code_file": "category_learning.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": ["benchmark"],
+  "dataset_sources": ["eugenio0/category-learning-benchmark"],
+  "kernel_sources": [],
+  "competition_sources": []
+}

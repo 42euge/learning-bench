@@ -1,0 +1,28 @@
+task_id,seed,complexity,evidence,difficulty_label,material,test_input,expected,item_desc
+0,0,simple,low,simple_low,"8, 16, 24, 32, 40","next after [8, 16, 24, 32, 40]",48,8*i+8
+1,1,simple,low,simple_low,"3, 6, 11, 14, 19","next after [3, 6, 11, 14, 19]",22,alt +5/+3
+2,2,simple,low,simple_low,"1, 3, 5, 7, 9","next after [1, 3, 5, 7, 9]",11,2*i+1
+3,0,simple,mid,simple_mid,"8, 16, 24, 32, 40, 48, 56","next after [8, 16, 24, 32, 40, 48, 56]",64,8*i+8
+4,1,simple,mid,simple_mid,"3, 6, 11, 14, 19, 22, 27","next after [3, 6, 11, 14, 19, 22, 27]",30,alt +5/+3
+5,2,simple,mid,simple_mid,"1, 3, 5, 7, 9, 11, 13","next after [1, 3, 5, 7, 9, 11, 13]",15,2*i+1
+6,0,simple,high,simple_high,"8, 16, 24, 32, 40, 48, 56, 64, 72, 80","next after [8, 16, 24, 32, 40, 48, 56, 64, 72, 80]",88,8*i+8
+7,1,simple,high,simple_high,"3, 6, 11, 14, 19, 22, 27, 30, 35, 38","next after [3, 6, 11, 14, 19, 22, 27, 30, 35, 38]",43,alt +5/+3
+8,2,simple,high,simple_high,"1, 3, 5, 7, 9, 11, 13, 15, 17, 19","next after [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]",21,2*i+1
+9,0,moderate,low,moderate_low,"4, 4, 8, 16, 28","next after [4, 4, 8, 16, 28]",44,2i^2+-2i+4
+10,1,moderate,low,moderate_low,"5, 2, 9, 13, 24","next after [5, 2, 9, 13, 24]",39,"fib+2(5,2)"
+11,2,moderate,low,moderate_low,"6, 9, 14, 21, 30","next after [6, 9, 14, 21, 30]",41,1i^2+2i+6
+12,0,moderate,mid,moderate_mid,"4, 4, 8, 16, 28, 44, 64","next after [4, 4, 8, 16, 28, 44, 64]",88,2i^2+-2i+4
+13,1,moderate,mid,moderate_mid,"5, 2, 9, 13, 24, 39, 65","next after [5, 2, 9, 13, 24, 39, 65]",106,"fib+2(5,2)"
+14,2,moderate,mid,moderate_mid,"6, 9, 14, 21, 30, 41, 54","next after [6, 9, 14, 21, 30, 41, 54]",69,1i^2+2i+6
+15,0,moderate,high,moderate_high,"4, 4, 8, 16, 28, 44, 64, 88, 116, 148","next after [4, 4, 8, 16, 28, 44, 64, 88, 116, 148]",184,2i^2+-2i+4
+16,1,moderate,high,moderate_high,"5, 2, 9, 13, 24, 39, 65, 106, 173, 281","next after [5, 2, 9, 13, 24, 39, 65, 106, 173, 281]",456,"fib+2(5,2)"
+17,2,moderate,high,moderate_high,"6, 9, 14, 21, 30, 41, 54, 69, 86, 105","next after [6, 9, 14, 21, 30, 41, 54, 69, 86, 105]",126,1i^2+2i+6
+18,0,complex,low,complex_low,"1, 0, -2, -6, -14","next after [1, 0, -2, -6, -14]",-30,f(i)=f(i-1)*2+-2
+19,1,complex,low,complex_low,"3, 3, 3, 3, 3","next after [3, 3, 3, 3, 3]",3,"even:+7,odd:*2-3"
+20,2,complex,low,complex_low,"4, 15, 48, 147, 444","next after [4, 15, 48, 147, 444]",1335,f(i)=f(i-1)*3+3
+21,0,complex,mid,complex_mid,"1, 0, -2, -6, -14, -30, -62","next after [1, 0, -2, -6, -14, -30, -62]",-126,f(i)=f(i-1)*2+-2
+22,1,complex,mid,complex_mid,"3, 3, 3, 3, 3, 3, 3","next after [3, 3, 3, 3, 3, 3, 3]",3,"even:+7,odd:*2-3"
+23,2,complex,mid,complex_mid,"4, 15, 48, 147, 444, 1335, 4008","next after [4, 15, 48, 147, 444, 1335, 4008]",12027,f(i)=f(i-1)*3+3
+24,0,complex,high,complex_high,"1, 0, -2, -6, -14, -30, -62, -126, -254, -510","next after [1, 0, -2, -6, -14, -30, -62, -126, -254, -510]",-1022,f(i)=f(i-1)*2+-2
+25,1,complex,high,complex_high,"3, 3, 3, 3, 3, 3, 3, 3, 3, 3","next after [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]",3,"even:+7,odd:*2-3"
+26,2,complex,high,complex_high,"4, 15, 48, 147, 444, 1335, 4008, 12027, 36084, 108255","next after [4, 15, 48, 147, 444, 1335, 4008, 12027, 36084, 108255]",324768,f(i)=f(i-1)*3+3
