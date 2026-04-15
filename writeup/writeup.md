@@ -10,11 +10,16 @@ Eugenio Rivera Ramos
 
 ### Problem Statement
 
-Do frontier models learn, or just recall? How do we create a dataset that lies truly out of scope and that actually attempts to measure jaggedness in a real and practical way? The key learning in harness systems, where these systems tend to fail, happens within an agents context. Therefore a model must perform its learning by altering an external context AND effectively use that context. So we have two problems here, how good can a model create a learned context and how good can a model given a context apply those learnings to solve a problem, we then baseline this against a oneshot approach. 
+Do frontier models learn, or just recall? Jagged intelligence is a frequent complaint about coding models but is difficult to articulate precisely — models excel at some tasks and fail at structurally similar ones, especially when the problem is genuinely new. Can we measure that gap in a practical way?
+
+Agentic harness systems are multi-step pipelines where the critical failure mode isn't typically lack of knowledge, but the inability to effectively use and manipulate context to discover proper solutions. A model must do two things: externalize its understanding into a context (notes, observations, intermediate reasoning), and then effectively use that context to solve a downstream problem. These are separable skills, and current benchmarks measure neither.
+
+
 
 ### Task & benchmark construction
+GenoBench-Learning isolates both parts of the <insert name> problem. The benchmark decomposes learning into two scored sub-problems: how well can a model construct a useful learned context from novel stimuli, and how well can it apply that context to solve a new instance? Performance on each is measured independently and baselined against a one-shot approach.
 
-This now introduces GenoBench-Learning measures in-context learning using a pre/post study paradigm on stimuli designed to fall outside training data.
+GenoBench-Learning measures in-context learning using a pre/post study paradigm on stimuli designed to fall outside training data.
 
 Each task presents the model with novel stimuli. The model is scored before and after a structured self-study phase in which it must articulate the underlying rule in its own words. Learning gain — the delta between pre- and post-study accuracy — is the primary signal.
 
