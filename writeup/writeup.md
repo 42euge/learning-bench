@@ -10,18 +10,15 @@ Eugenio Rivera Ramos
 
 ### Problem Statement
 
-Do frontier models learn, or just recall? Jagged intellegiance of coding is a frequent complain but its often difficult to articulate. models excel at some tasks and fail at structurally similar ones esspecially on genuinely new. Can we measure that gap in practicaly.
+Do frontier models learn, or just recall? Jagged intelligence is a frequent complaint about coding models but is difficult to articulate precisely — models excel at some tasks and fail at structurally similar ones, especially when the problem is genuinely new. Can we measure that gap in a practical way?
 
-Agentic harness systems are essentially multi-step pipelines, where failure mode aren't typically lack of knowledge but the inability effectively use its context and manipulate it to discover proper solutions. In other wrods a model must do two things: externalize its understanding into a context (notes, observations, intermediate reasoning), and then effectively use that context to solve a downstream problem. These are separable skills, and current benchmarks don't measure either.
-
-
+Agentic harness systems are multi-step pipelines where the critical failure mode isn't typically lack of knowledge, but the inability to effectively use and manipulate context to discover proper solutions. A model must do two things: externalize its understanding into a context (notes, observations, intermediate reasoning), and then effectively use that context to solve a downstream problem. These are separable skills, and current benchmarks measure neither.
 
 ### Task & benchmark construction
-GenoBench-Learning isolates both parts of the <insert>. The benchmark decomposes learning into two scored sub-problems: how well can a model construct a useful learned context from novel stimuli, and how well can it apply that context to solve a new instance? Performance on each is measured independently and baselined against a one-shot approach.
 
-GenoBench-Learning measures in-context learning using a pre/post study paradigm on stimuli designed to fall outside training data.
+GenoBench-Learning isolates both parts of this context-learning problem. The benchmark decomposes learning into two scored sub-problems: how well can a model construct a useful learned context from novel stimuli, and how well can it apply that context to solve a new instance? Each is measured independently and baselined against a one-shot approach.
 
-Each task presents the model with novel stimuli. The model is scored before and after a structured self-study phase in which it must articulate the underlying rule in its own words. Learning gain — the delta between pre- and post-study accuracy — is the primary signal.
+Tasks span five cognitive sub-abilities — associative learning, concept formation, language learning, observational learning, and belief revision — using a pre/post study paradigm on stimuli designed to fall outside training data. The model is scored before and after a structured self-study phase in which it must articulate the underlying rule in its own words. Learning gain — the delta between pre- and post-study accuracy — is the primary signal.
 
 
 ### Dataset
