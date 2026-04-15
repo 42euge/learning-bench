@@ -18,15 +18,16 @@ Agentic harness systems are multi-step pipelines where the critical failure mode
 
 GenoBench-Learning isolates both parts of this context-learning problem. The benchmark decomposes learning into two scored sub-problems: how well can a model construct a useful learned context from novel stimuli, and how well can it apply that context to solve a new instance? Each is measured independently and baselined against a one-shot approach.
 
-Tasks span five cognitive sub-abilities using a pre/post study paradigm on stimuli designed to fall outside training data. The model is scored before and after a structured self-study phase in which it must articulate the underlying rule in its own words. Learning gain — the delta between pre- and post-study accuracy — is the primary signal.
+Tasks span six cognitive sub-abilities using a pre/post study paradigm on stimuli designed to fall outside training data. The model is scored before and after a structured self-study phase in which it must articulate the underlying rule in its own words. Learning gain — the delta between pre- and post-study accuracy — is the primary signal.
 
-| Sub-Ability | Tasks |
+| Sub-Ability | Task |
 |---|---|
-| Associative Learning | Analogy Completion, Sequence Extrapolation, Paired Associate |
-| Concept Formation | Category Learning, Prototype Extraction, Rule Induction |
+| Associative Learning | Paired Associate |
+| Concept Formation | Rule Induction |
 | Language Learning | Novel Grammar Induction |
 | Observational Learning | Trace-Based Imitation |
-| Reinforcement Learning | Belief Revision, Multi-Armed Bandit, Skill Selection |
+| Procedural Learning | Skill Selection, Novel Algorithm Execution |
+| Reinforcement Learning | Multi-Armed Bandit |
 
 
 ### Dataset
