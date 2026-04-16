@@ -1,0 +1,1513 @@
+task_id,seed,complexity,evidence,num_attempts,difficulty_label,material,test_input,expected,item_desc
+0,0,clear_signal,few,4,clear_signal_few,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-729 (authenticate to a rate-limited API):
+Attempt 1: Strategy=http_fetch, Action=urllib.open(retry=1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=urllib.open(retry=2), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=urllib.open(retry=4), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next?",CONTINUE,clear_signal_few_s0_CONTINUE
+1,1,clear_signal,few,4,clear_signal_few,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-117 (extract tabular data from a scanned PDF):
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=10), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=httpx.get(timeout=2), Result=ERROR ""ConnectionError: refused"", state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=30), Result=ERROR ""ReadTimeout after 30s"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=urllib.open(retry=4), Result=ERROR ""HTTP 403 Forbidden"", state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next?",ADJUST_PARAMS,clear_signal_few_s1_ADJUST_PARAMS
+2,2,clear_signal,few,4,clear_signal_few,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-618 (query a legacy SQL schema):
+Attempt 1: Strategy=subprocess, Action=shell_exec(script_4), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 2: Strategy=subprocess, Action=popen(arg=6), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 3: Strategy=subprocess, Action=shell_exec(script_4), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 4: Strategy=subprocess, Action=subprocess.run(cmd_7), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Available strategies: subprocess, api_client, db_direct
+Next?",PIVOT,clear_signal_few_s2_PIVOT
+3,0,clear_signal,mid,6,clear_signal_mid,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-902 (decompress an unknown archive format):
+Attempt 1: Strategy=regex_parse, Action=findall(expr=1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=regex_parse, Action=re.search(p2), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=regex_parse, Action=regex_match(pattern_v3), Result=SUCCESS, state_changed=yes
+Attempt 4: Strategy=regex_parse, Action=findall(expr=4), Result=SUCCESS, state_changed=yes
+Attempt 5: Strategy=regex_parse, Action=findall(expr=5), Result=SUCCESS, state_changed=yes
+Attempt 6: Strategy=regex_parse, Action=regex_match(pattern_v6), Result=SUCCESS, state_changed=yes
+Available strategies: regex_parse, ast_parse, llm_extract, manual_spec
+Next?",CONTINUE,clear_signal_mid_s0_CONTINUE
+4,1,clear_signal,mid,6,clear_signal_mid,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-729 (authenticate to a rate-limited API):
+Attempt 1: Strategy=ffmpeg, Action=ffmpeg(-preset p1), Result=ERROR ""Invalid data found when processing input"", state_changed=yes
+Attempt 2: Strategy=ffmpeg, Action=ffmpeg(-crf 2), Result=ERROR ""moov atom not found"", state_changed=yes
+Attempt 3: Strategy=ffmpeg, Action=ffmpeg(-crf 3), Result=ERROR ""Unknown encoder libx265"", state_changed=yes
+Attempt 4: Strategy=ffmpeg, Action=ffmpeg(-crf 4), Result=ERROR ""Invalid data found when processing input"", state_changed=yes
+Attempt 5: Strategy=ffmpeg, Action=ffmpeg(-c:v v5), Result=ERROR ""moov atom not found"", state_changed=yes
+Attempt 6: Strategy=ffmpeg, Action=ffmpeg(-crf 6), Result=ERROR ""Unknown encoder libx265"", state_changed=yes
+Available strategies: ffmpeg, vlc_headless, subprocess
+Next?",ADJUST_PARAMS,clear_signal_mid_s1_ADJUST_PARAMS
+5,2,clear_signal,mid,6,clear_signal_mid,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-810 (transcode a corrupted video file):
+Attempt 1: Strategy=subprocess, Action=shell_exec(script_9), Result=ERROR ""exit code 127: command not found"", state_changed=no
+Attempt 2: Strategy=subprocess, Action=popen(arg=9), Result=ERROR ""exit code 127: command not found"", state_changed=no
+Attempt 3: Strategy=subprocess, Action=subprocess.run(cmd_7), Result=ERROR ""exit code 127: command not found"", state_changed=no
+Attempt 4: Strategy=subprocess, Action=popen(arg=3), Result=ERROR ""exit code 127: command not found"", state_changed=no
+Attempt 5: Strategy=subprocess, Action=popen(arg=8), Result=ERROR ""exit code 127: command not found"", state_changed=no
+Attempt 6: Strategy=subprocess, Action=popen(arg=5), Result=ERROR ""exit code 127: command not found"", state_changed=no
+Available strategies: subprocess, api_client, db_direct
+Next?",PIVOT,clear_signal_mid_s2_PIVOT
+6,0,clear_signal,many,8,clear_signal_many,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-1011 (fetch data through a corporate proxy):
+Attempt 1: Strategy=ocr_pipeline, Action=easyocr(lang_set=1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=ocr_pipeline, Action=ocr.run(dpi=200), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=ocr_pipeline, Action=ocr.run(dpi=300), Result=SUCCESS, state_changed=yes
+Attempt 4: Strategy=ocr_pipeline, Action=easyocr(lang_set=4), Result=ERROR ""TesseractError: exit code 1"", state_changed=yes
+Attempt 5: Strategy=ocr_pipeline, Action=easyocr(lang_set=5), Result=SUCCESS, state_changed=yes
+Attempt 6: Strategy=ocr_pipeline, Action=ocr.run(dpi=600), Result=SUCCESS, state_changed=yes
+Attempt 7: Strategy=ocr_pipeline, Action=ocr.run(dpi=700), Result=SUCCESS, state_changed=yes
+Attempt 8: Strategy=ocr_pipeline, Action=ocr.run(dpi=800), Result=SUCCESS, state_changed=yes
+Available strategies: ocr_pipeline, llm_extract, regex_parse
+Next?",CONTINUE,clear_signal_many_s0_CONTINUE
+7,1,clear_signal,many,8,clear_signal_many,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-204 (parse nested JSON from an HTTP endpoint):
+Attempt 1: Strategy=http_fetch, Action=httpx.get(timeout=1), Result=ERROR ""HTTP 403 Forbidden"", state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=20), Result=ERROR ""ReadTimeout after 30s"", state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=urllib.open(retry=3), Result=ERROR ""ConnectionError: refused"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=40), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 5: Strategy=http_fetch, Action=httpx.get(timeout=5), Result=ERROR ""HTTP 403 Forbidden"", state_changed=yes
+Attempt 6: Strategy=http_fetch, Action=requests.get(t=60), Result=ERROR ""ReadTimeout after 30s"", state_changed=yes
+Attempt 7: Strategy=http_fetch, Action=requests.get(t=70), Result=ERROR ""ConnectionError: refused"", state_changed=yes
+Attempt 8: Strategy=http_fetch, Action=urllib.open(retry=8), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next?",ADJUST_PARAMS,clear_signal_many_s1_ADJUST_PARAMS
+8,2,clear_signal,many,8,clear_signal_many,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-618 (query a legacy SQL schema):
+Attempt 1: Strategy=ocr_pipeline, Action=tesseract(psm=9), Result=ERROR ""low-confidence glyphs <0.2"", state_changed=no
+Attempt 2: Strategy=ocr_pipeline, Action=ocr.run(dpi=700), Result=ERROR ""low-confidence glyphs <0.2"", state_changed=no
+Attempt 3: Strategy=ocr_pipeline, Action=tesseract(psm=5), Result=ERROR ""low-confidence glyphs <0.2"", state_changed=no
+Attempt 4: Strategy=ocr_pipeline, Action=easyocr(lang_set=8), Result=ERROR ""low-confidence glyphs <0.2"", state_changed=no
+Attempt 5: Strategy=ocr_pipeline, Action=easyocr(lang_set=7), Result=ERROR ""low-confidence glyphs <0.2"", state_changed=no
+Attempt 6: Strategy=ocr_pipeline, Action=tesseract(psm=8), Result=ERROR ""low-confidence glyphs <0.2"", state_changed=no
+Attempt 7: Strategy=ocr_pipeline, Action=tesseract(psm=9), Result=ERROR ""low-confidence glyphs <0.2"", state_changed=no
+Attempt 8: Strategy=ocr_pipeline, Action=easyocr(lang_set=8), Result=ERROR ""low-confidence glyphs <0.2"", state_changed=no
+Available strategies: ocr_pipeline, llm_extract, regex_parse
+Next?",PIVOT,clear_signal_many_s2_PIVOT
+9,0,subtle_signal,few,4,subtle_signal_few,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-204 (parse nested JSON from an HTTP endpoint):
+Attempt 1: Strategy=ocr_pipeline, Action=ocr.run(dpi=100), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=ocr_pipeline, Action=ocr.run(dpi=200), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=ocr_pipeline, Action=tesseract(psm=3), Result=ERROR ""low-confidence glyphs <0.2"", state_changed=yes
+Attempt 4: Strategy=ocr_pipeline, Action=tesseract(psm=4), Result=SUCCESS, state_changed=yes
+Available strategies: ocr_pipeline, llm_extract, regex_parse
+Next?",CONTINUE,subtle_signal_few_s0_CONTINUE
+10,1,subtle_signal,few,4,subtle_signal_few,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-902 (decompress an unknown archive format):
+Attempt 1: Strategy=http_fetch, Action=httpx.get(timeout=1), Result=ERROR ""ConnectionError: refused (v1)"", state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=urllib.open(retry=2), Result=ERROR ""HTTP 403 Forbidden (v2)"", state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=urllib.open(retry=3), Result=ERROR ""HTTP 429 rate limited (v3)"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=urllib.open(retry=4), Result=ERROR ""ReadTimeout after 30s (v4)"", state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next?",ADJUST_PARAMS,subtle_signal_few_s1_ADJUST_PARAMS
+11,2,subtle_signal,few,4,subtle_signal_few,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-1011 (fetch data through a corporate proxy):
+Attempt 1: Strategy=http_fetch, Action=httpx.get(timeout=2), Result=ERROR ""ReadTimeout after 30s"", state_changed=no
+Attempt 2: Strategy=http_fetch, Action=urllib.open(retry=4), Result=ERROR ""ReadTimeout after 30s"", state_changed=no
+Attempt 3: Strategy=http_fetch, Action=urllib.open(retry=7), Result=ERROR ""ReadTimeout after 30s"", state_changed=no
+Attempt 4: Strategy=http_fetch, Action=httpx.get(timeout=3), Result=ERROR ""ReadTimeout after 30s"", state_changed=no
+Available strategies: http_fetch, selenium, playwright, js_inject
+Next?",PIVOT,subtle_signal_few_s2_PIVOT
+12,0,subtle_signal,mid,6,subtle_signal_mid,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-331 (install a native build toolchain):
+Attempt 1: Strategy=ffmpeg, Action=ffmpeg(-c:v v1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=ffmpeg, Action=ffmpeg(-crf 2), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=ffmpeg, Action=ffmpeg(-crf 3), Result=SUCCESS, state_changed=yes
+Attempt 4: Strategy=ffmpeg, Action=ffmpeg(-preset p4), Result=SUCCESS, state_changed=yes
+Attempt 5: Strategy=ffmpeg, Action=ffmpeg(-preset p5), Result=ERROR ""Unknown encoder libx265"", state_changed=yes
+Attempt 6: Strategy=ffmpeg, Action=ffmpeg(-c:v v6), Result=SUCCESS, state_changed=yes
+Available strategies: ffmpeg, vlc_headless, subprocess
+Next?",CONTINUE,subtle_signal_mid_s0_CONTINUE
+13,1,subtle_signal,mid,6,subtle_signal_mid,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-729 (authenticate to a rate-limited API):
+Attempt 1: Strategy=http_fetch, Action=urllib.open(retry=1), Result=ERROR ""ConnectionError: refused (v1)"", state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=20), Result=ERROR ""HTTP 403 Forbidden (v2)"", state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=httpx.get(timeout=3), Result=ERROR ""HTTP 429 rate limited (v3)"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=urllib.open(retry=4), Result=ERROR ""ReadTimeout after 30s (v4)"", state_changed=yes
+Attempt 5: Strategy=http_fetch, Action=httpx.get(timeout=5), Result=ERROR ""ConnectionError: refused (v5)"", state_changed=yes
+Attempt 6: Strategy=http_fetch, Action=httpx.get(timeout=6), Result=ERROR ""HTTP 403 Forbidden (v6)"", state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next?",ADJUST_PARAMS,subtle_signal_mid_s1_ADJUST_PARAMS
+14,2,subtle_signal,mid,6,subtle_signal_mid,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-331 (install a native build toolchain):
+Attempt 1: Strategy=vlc_headless, Action=vlc.convert(v1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=ffmpeg, Action=ffmpeg(-crf 1), Result=ERROR ""Unknown encoder libx265"", state_changed=no
+Attempt 3: Strategy=ffmpeg, Action=ffmpeg(-crf 7), Result=ERROR ""Unknown encoder libx265"", state_changed=no
+Attempt 4: Strategy=ffmpeg, Action=ffmpeg(-c:v v8), Result=ERROR ""Unknown encoder libx265"", state_changed=no
+Attempt 5: Strategy=ffmpeg, Action=ffmpeg(-preset p6), Result=ERROR ""Unknown encoder libx265"", state_changed=no
+Attempt 6: Strategy=ffmpeg, Action=ffmpeg(-preset p6), Result=ERROR ""Unknown encoder libx265"", state_changed=no
+Available strategies: ffmpeg, vlc_headless, subprocess
+Next?",PIVOT,subtle_signal_mid_s2_PIVOT
+15,0,subtle_signal,many,8,subtle_signal_many,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-1011 (fetch data through a corporate proxy):
+Attempt 1: Strategy=tex_compile, Action=lualatex(v=1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=xelatex(pass_2), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=SUCCESS, state_changed=yes
+Attempt 4: Strategy=tex_compile, Action=lualatex(v=4), Result=SUCCESS, state_changed=yes
+Attempt 5: Strategy=tex_compile, Action=pdflatex(run_5), Result=SUCCESS, state_changed=yes
+Attempt 6: Strategy=tex_compile, Action=lualatex(v=6), Result=SUCCESS, state_changed=yes
+Attempt 7: Strategy=tex_compile, Action=pdflatex(run_7), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 8: Strategy=tex_compile, Action=xelatex(pass_8), Result=SUCCESS, state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next?",CONTINUE,subtle_signal_many_s0_CONTINUE
+16,1,subtle_signal,many,8,subtle_signal_many,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-502 (convert a LaTeX document to HTML):
+Attempt 1: Strategy=tex_compile, Action=xelatex(pass_1), Result=ERROR ""! Undefined control sequence \begin{tabularx} (v1)"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=xelatex(pass_2), Result=ERROR ""! Package inputenc Error: unicode (v2)"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=xelatex(pass_3), Result=ERROR ""! Missing $ inserted (v3)"", state_changed=yes
+Attempt 4: Strategy=tex_compile, Action=lualatex(v=4), Result=ERROR ""! Undefined control sequence \begin{tabularx} (v4)"", state_changed=yes
+Attempt 5: Strategy=tex_compile, Action=pdflatex(run_5), Result=ERROR ""! Package inputenc Error: unicode (v5)"", state_changed=yes
+Attempt 6: Strategy=tex_compile, Action=pdflatex(run_6), Result=ERROR ""! Missing $ inserted (v6)"", state_changed=yes
+Attempt 7: Strategy=tex_compile, Action=xelatex(pass_7), Result=ERROR ""! Undefined control sequence \begin{tabularx} (v7)"", state_changed=yes
+Attempt 8: Strategy=tex_compile, Action=xelatex(pass_8), Result=ERROR ""! Package inputenc Error: unicode (v8)"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next?",ADJUST_PARAMS,subtle_signal_many_s1_ADJUST_PARAMS
+17,2,subtle_signal,many,8,subtle_signal_many,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-204 (parse nested JSON from an HTTP endpoint):
+Attempt 1: Strategy=vlc_headless, Action=vlc.convert(v1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=ffmpeg, Action=ffmpeg(-crf 7), Result=ERROR ""Invalid data found when processing input"", state_changed=no
+Attempt 3: Strategy=ffmpeg, Action=ffmpeg(-preset p4), Result=ERROR ""Invalid data found when processing input"", state_changed=no
+Attempt 4: Strategy=ffmpeg, Action=ffmpeg(-preset p3), Result=ERROR ""Invalid data found when processing input"", state_changed=no
+Attempt 5: Strategy=ffmpeg, Action=ffmpeg(-c:v v1), Result=ERROR ""Invalid data found when processing input"", state_changed=no
+Attempt 6: Strategy=ffmpeg, Action=ffmpeg(-c:v v6), Result=ERROR ""Invalid data found when processing input"", state_changed=no
+Attempt 7: Strategy=ffmpeg, Action=ffmpeg(-c:v v4), Result=ERROR ""Invalid data found when processing input"", state_changed=no
+Attempt 8: Strategy=ffmpeg, Action=ffmpeg(-preset p5), Result=ERROR ""Invalid data found when processing input"", state_changed=no
+Available strategies: ffmpeg, vlc_headless, subprocess
+Next?",PIVOT,subtle_signal_many_s2_PIVOT
+18,0,adversarial,few,4,adversarial_few,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-331 (install a native build toolchain):
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=ERROR ""YAML parse error in metadata"", state_changed=no
+Attempt 2: Strategy=tex_compile, Action=xelatex(pass_2), Result=ERROR ""! Package inputenc Error: unicode (different cause)"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=xelatex(pass_3), Result=ERROR ""! Undefined control sequence \begin{tabularx} (different cause)"", state_changed=yes
+Attempt 4: Strategy=tex_compile, Action=xelatex(pass_4), Result=SUCCESS, state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next?",CONTINUE,adversarial_few_s0_CONTINUE
+19,1,adversarial,few,4,adversarial_few,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-458 (scrape a JavaScript-rendered site):
+Attempt 1: Strategy=ocr_pipeline, Action=ocr.run(dpi=100), Result=ERROR ""TesseractError: exit code 1 [code=107, line=23]"", state_changed=yes
+Attempt 2: Strategy=ocr_pipeline, Action=ocr.run(dpi=200), Result=ERROR ""TesseractError: exit code 1 [code=114, line=26]"", state_changed=yes
+Attempt 3: Strategy=ocr_pipeline, Action=easyocr(lang_set=3), Result=ERROR ""TesseractError: exit code 1 [code=121, line=29]"", state_changed=yes
+Attempt 4: Strategy=ocr_pipeline, Action=tesseract(psm=4), Result=ERROR ""TesseractError: exit code 1 [code=128, line=32]"", state_changed=yes
+Available strategies: ocr_pipeline, llm_extract, regex_parse
+Next?",ADJUST_PARAMS,adversarial_few_s1_ADJUST_PARAMS
+20,2,adversarial,few,4,adversarial_few,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-1011 (fetch data through a corporate proxy):
+Attempt 1: Strategy=api_client, Action=rest.post(body_1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=subprocess, Action=popen(arg=2), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 3: Strategy=subprocess, Action=shell_exec(script_3), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 4: Strategy=subprocess, Action=subprocess.run(cmd_5), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Available strategies: subprocess, api_client, db_direct
+Next?",PIVOT,adversarial_few_s2_PIVOT
+21,0,adversarial,mid,6,adversarial_mid,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-117 (extract tabular data from a scanned PDF):
+Attempt 1: Strategy=llm_extract, Action=llm.extract(k=1), Result=ERROR ""rate_limit: 429 from provider"", state_changed=no
+Attempt 2: Strategy=regex_parse, Action=re.search(p2), Result=ERROR ""no match for pattern"", state_changed=no
+Attempt 3: Strategy=ocr_pipeline, Action=easyocr(lang_set=3), Result=ERROR ""empty output region (different cause)"", state_changed=yes
+Attempt 4: Strategy=ocr_pipeline, Action=ocr.run(dpi=400), Result=ERROR ""TesseractError: exit code 1 (different cause)"", state_changed=yes
+Attempt 5: Strategy=ocr_pipeline, Action=ocr.run(dpi=500), Result=ERROR ""TesseractError: exit code 1 (different cause)"", state_changed=yes
+Attempt 6: Strategy=ocr_pipeline, Action=easyocr(lang_set=6), Result=SUCCESS, state_changed=yes
+Available strategies: ocr_pipeline, llm_extract, regex_parse
+Next?",CONTINUE,adversarial_mid_s0_CONTINUE
+22,1,adversarial,mid,6,adversarial_mid,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-458 (scrape a JavaScript-rendered site):
+Attempt 1: Strategy=subprocess, Action=subprocess.run(cmd_1), Result=ERROR ""exit code 134: aborted (SIGABRT) [code=107, line=23]"", state_changed=yes
+Attempt 2: Strategy=subprocess, Action=popen(arg=2), Result=ERROR ""exit code 134: aborted (SIGABRT) [code=114, line=26]"", state_changed=yes
+Attempt 3: Strategy=subprocess, Action=popen(arg=3), Result=ERROR ""exit code 134: aborted (SIGABRT) [code=121, line=29]"", state_changed=yes
+Attempt 4: Strategy=subprocess, Action=popen(arg=4), Result=ERROR ""exit code 134: aborted (SIGABRT) [code=128, line=32]"", state_changed=yes
+Attempt 5: Strategy=subprocess, Action=shell_exec(script_5), Result=ERROR ""exit code 134: aborted (SIGABRT) [code=135, line=35]"", state_changed=yes
+Attempt 6: Strategy=subprocess, Action=subprocess.run(cmd_6), Result=ERROR ""exit code 134: aborted (SIGABRT) [code=142, line=38]"", state_changed=yes
+Available strategies: subprocess, api_client, db_direct
+Next?",ADJUST_PARAMS,adversarial_mid_s1_ADJUST_PARAMS
+23,2,adversarial,mid,6,adversarial_mid,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-729 (authenticate to a rate-limited API):
+Attempt 1: Strategy=ast_parse, Action=parse_tree(version=1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=regex_parse, Action=re.search(p6), Result=ERROR ""no match for pattern"", state_changed=no
+Attempt 3: Strategy=regex_parse, Action=re.search(p9), Result=ERROR ""no match for pattern"", state_changed=no
+Attempt 4: Strategy=regex_parse, Action=regex_match(pattern_v6), Result=ERROR ""no match for pattern"", state_changed=no
+Attempt 5: Strategy=regex_parse, Action=findall(expr=5), Result=ERROR ""no match for pattern"", state_changed=no
+Attempt 6: Strategy=regex_parse, Action=regex_match(pattern_v9), Result=ERROR ""no match for pattern"", state_changed=no
+Available strategies: regex_parse, ast_parse, llm_extract, manual_spec
+Next?",PIVOT,adversarial_mid_s2_PIVOT
+24,0,adversarial,many,8,adversarial_many,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-458 (scrape a JavaScript-rendered site):
+Attempt 1: Strategy=api_client, Action=client.call(v1), Result=ERROR ""SSL handshake failure"", state_changed=no
+Attempt 2: Strategy=db_direct, Action=sqlalchemy(q=2), Result=ERROR ""ambiguous column reference"", state_changed=no
+Attempt 3: Strategy=subprocess, Action=popen(arg=3), Result=ERROR ""exit code 1: permission denied (different cause)"", state_changed=yes
+Attempt 4: Strategy=subprocess, Action=popen(arg=4), Result=ERROR ""exit code 134: aborted (SIGABRT) (different cause)"", state_changed=yes
+Attempt 5: Strategy=subprocess, Action=shell_exec(script_5), Result=ERROR ""exit code 134: aborted (SIGABRT) (different cause)"", state_changed=yes
+Attempt 6: Strategy=subprocess, Action=popen(arg=6), Result=ERROR ""exit code 1: permission denied (different cause)"", state_changed=yes
+Attempt 7: Strategy=subprocess, Action=popen(arg=7), Result=ERROR ""exit code 127: command not found (different cause)"", state_changed=yes
+Attempt 8: Strategy=subprocess, Action=shell_exec(script_8), Result=SUCCESS, state_changed=yes
+Available strategies: subprocess, api_client, db_direct
+Next?",CONTINUE,adversarial_many_s0_CONTINUE
+25,1,adversarial,many,8,adversarial_many,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-458 (scrape a JavaScript-rendered site):
+Attempt 1: Strategy=http_fetch, Action=httpx.get(timeout=1), Result=ERROR ""ConnectionError: refused [code=107, line=23]"", state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=20), Result=ERROR ""ConnectionError: refused [code=114, line=26]"", state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=urllib.open(retry=3), Result=ERROR ""ConnectionError: refused [code=121, line=29]"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=40), Result=ERROR ""ConnectionError: refused [code=128, line=32]"", state_changed=yes
+Attempt 5: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""ConnectionError: refused [code=135, line=35]"", state_changed=yes
+Attempt 6: Strategy=http_fetch, Action=httpx.get(timeout=6), Result=ERROR ""ConnectionError: refused [code=142, line=38]"", state_changed=yes
+Attempt 7: Strategy=http_fetch, Action=httpx.get(timeout=7), Result=ERROR ""ConnectionError: refused [code=149, line=41]"", state_changed=yes
+Attempt 8: Strategy=http_fetch, Action=urllib.open(retry=8), Result=ERROR ""ConnectionError: refused [code=156, line=44]"", state_changed=yes
+Available strategies: http_fetch, selenium, playwright, js_inject
+Next?",ADJUST_PARAMS,adversarial_many_s1_ADJUST_PARAMS
+26,2,adversarial,many,8,adversarial_many,"Here are worked examples that illustrate when to CONTINUE, ADJUST_PARAMS, or PIVOT.
+
+Rules you should follow:
+  1. If the same strategy has failed 3+ times with the SAME error and
+     state_changed=no, choose PIVOT. The approach is stuck.
+  2. If the same strategy is failing but the errors are DIFFERENT each time
+     and state_changed=yes, choose ADJUST_PARAMS. Progress is being made.
+  3. If the most recent attempt succeeded, or failures are limited to a
+     single hiccup in an otherwise successful run, choose CONTINUE.
+  4. A strategy that has not yet failed 3+ times on an identical error is
+     not yet ""stuck""; avoid pivoting prematurely.
+  5. When evaluating the CURRENT strategy, ignore attempts that used a
+     different strategy. Focus on the recent trajectory of the current one.
+
+EXAMPLE 1 — PIVOT (same error 3x, no state change)
+HISTORY for task DEMO-A:
+Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR ""TimeoutException waiting for selector"", state_changed=no
+Available strategies: selenium, playwright, http_fetch
+Next? -> PIVOT
+
+EXAMPLE 2 — ADJUST_PARAMS (different errors, state changing)
+HISTORY for task DEMO-B:
+Attempt 1: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Undefined control sequence \begin{tabularx}"", state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Package inputenc Error: unicode"", state_changed=yes
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=yes
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> ADJUST_PARAMS
+
+EXAMPLE 3 — CONTINUE (mostly successful)
+HISTORY for task DEMO-C:
+Attempt 1: Strategy=http_fetch, Action=requests.get(t=30), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=http_fetch, Action=requests.get(t=40), Result=SUCCESS, state_changed=yes
+Attempt 3: Strategy=http_fetch, Action=requests.get(t=50), Result=ERROR ""HTTP 429 rate limited"", state_changed=yes
+Attempt 4: Strategy=http_fetch, Action=requests.get(t=60), Result=SUCCESS, state_changed=yes
+Available strategies: http_fetch, api_client, playwright
+Next? -> CONTINUE
+
+EXAMPLE 4 — PIVOT (alternative available, current blocked)
+HISTORY for task DEMO-D:
+Attempt 1: Strategy=pandoc, Action=pandoc(--to=html1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=tex_compile, Action=pdflatex(run_1), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 3: Strategy=tex_compile, Action=pdflatex(run_2), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Attempt 4: Strategy=tex_compile, Action=pdflatex(run_3), Result=ERROR ""! Missing $ inserted"", state_changed=no
+Available strategies: tex_compile, pandoc, manual_spec
+Next? -> PIVOT
+","HISTORY for task T-729 (authenticate to a rate-limited API):
+Attempt 1: Strategy=api_client, Action=sdk.invoke(retry=1), Result=SUCCESS, state_changed=yes
+Attempt 2: Strategy=subprocess, Action=popen(arg=3), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 3: Strategy=subprocess, Action=shell_exec(script_7), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 4: Strategy=subprocess, Action=subprocess.run(cmd_2), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 5: Strategy=subprocess, Action=shell_exec(script_2), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 6: Strategy=subprocess, Action=subprocess.run(cmd_9), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 7: Strategy=subprocess, Action=subprocess.run(cmd_3), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Attempt 8: Strategy=subprocess, Action=popen(arg=4), Result=ERROR ""exit code 1: permission denied"", state_changed=no
+Available strategies: subprocess, api_client, db_direct
+Next?",PIVOT,adversarial_many_s2_PIVOT

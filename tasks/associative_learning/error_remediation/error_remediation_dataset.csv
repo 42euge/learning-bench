@@ -1,0 +1,397 @@
+task_id,seed,complexity,evidence,difficulty_label,material,test_input,expected,item_desc
+0,0,direct_lookup,few,direct_lookup_few,"  ERROR: E3002: operation failed during credential load.
+  FIX:   zkl auth rotate --keyring
+  ERROR: error E1007 raised by registry handshake.
+  FIX:   zkl registry refresh --scope user
+  ERROR: error E3008 raised by session bootstrap.
+  FIX:   zkl auth rotate --token
+  ERROR: [E2040] snapshot write did not complete.
+  FIX:   zkl fs repair --manifest
+  ERROR: E2003: operation failed during snapshot write.
+  FIX:   zkl cache purge --deep",error E2003 raised by workspace open.,zkl cache purge --deep,direct_lookup: exact code -> exact remediation
+1,1,direct_lookup,few,direct_lookup_few,"  ERROR: error E2040 raised by snapshot write.
+  FIX:   zkl fs repair --manifest
+  ERROR: error E3008 raised by credential load.
+  FIX:   zkl auth rotate --token
+  ERROR: error E2024 raised by layer extraction.
+  FIX:   zkl fs repair --index
+  ERROR: [E3015] credential load did not complete.
+  FIX:   zkl auth login --provider sso
+  ERROR: [E1022] registry handshake did not complete.
+  FIX:   zkl net retry --backoff 30s",E1022 reported while handling registry handshake.,zkl net retry --backoff 30s,direct_lookup: exact code -> exact remediation
+2,2,direct_lookup,few,direct_lookup_few,"  ERROR: [E2040] layer extraction did not complete.
+  FIX:   zkl fs repair --manifest
+  ERROR: error E2018 raised by object commit.
+  FIX:   zkl fs relink --force
+  ERROR: E1007 reported while handling package sync.
+  FIX:   zkl registry refresh --scope user
+  ERROR: E2011 reported while handling object commit.
+  FIX:   zkl cache purge --shallow
+  ERROR: error E2024 raised by workspace open.
+  FIX:   zkl fs repair --index",E2018 reported while handling layer extraction.,zkl fs relink --force,direct_lookup: exact code -> exact remediation
+3,0,direct_lookup,mid,direct_lookup_mid,"  ERROR: E1022 reported while handling package sync.
+  FIX:   zkl net retry --backoff 30s
+  ERROR: error E1001 raised by dependency fetch.
+  FIX:   zkl registry refresh --scope global
+  ERROR: E3019: operation failed during credential load.
+  FIX:   zkl auth trust --renew
+  ERROR: E3002: operation failed during grant verify.
+  FIX:   zkl auth rotate --keyring
+  ERROR: E2011: operation failed during snapshot write.
+  FIX:   zkl cache purge --shallow
+  ERROR: E3027 reported while handling session bootstrap.
+  FIX:   zkl auth login --provider oauth
+  ERROR: E2003: operation failed during workspace open.
+  FIX:   zkl cache purge --deep",E2003 reported while handling layer extraction.,zkl cache purge --deep,direct_lookup: exact code -> exact remediation
+4,1,direct_lookup,mid,direct_lookup_mid,"  ERROR: [E1014] index download did not complete.
+  FIX:   zkl net retry --backoff 5s
+  ERROR: error E1007 raised by dependency fetch.
+  FIX:   zkl registry refresh --scope user
+  ERROR: E3002 reported while handling identity attach.
+  FIX:   zkl auth rotate --keyring
+  ERROR: error E3008 raised by session bootstrap.
+  FIX:   zkl auth rotate --token
+  ERROR: [E2011] layer extraction did not complete.
+  FIX:   zkl cache purge --shallow
+  ERROR: E1031 reported while handling registry handshake.
+  FIX:   zkl proxy reset
+  ERROR: E3027 reported while handling session bootstrap.
+  FIX:   zkl auth login --provider oauth",E1014: operation failed during registry handshake.,zkl net retry --backoff 5s,direct_lookup: exact code -> exact remediation
+5,2,direct_lookup,mid,direct_lookup_mid,"  ERROR: error E3019 raised by session bootstrap.
+  FIX:   zkl auth trust --renew
+  ERROR: E3002 reported while handling credential load.
+  FIX:   zkl auth rotate --keyring
+  ERROR: [E3027] session bootstrap did not complete.
+  FIX:   zkl auth login --provider oauth
+  ERROR: [E2024] layer extraction did not complete.
+  FIX:   zkl fs repair --index
+  ERROR: [E1014] index download did not complete.
+  FIX:   zkl net retry --backoff 5s
+  ERROR: E2040: operation failed during object commit.
+  FIX:   zkl fs repair --manifest
+  ERROR: [E1022] package sync did not complete.
+  FIX:   zkl net retry --backoff 30s",E1014 reported while handling package sync.,zkl net retry --backoff 5s,direct_lookup: exact code -> exact remediation
+6,0,direct_lookup,many,direct_lookup_many,"  ERROR: error E3015 raised by session bootstrap.
+  FIX:   zkl auth login --provider sso
+  ERROR: E2040 reported while handling object commit.
+  FIX:   zkl fs repair --manifest
+  ERROR: E1022 reported while handling index download.
+  FIX:   zkl net retry --backoff 30s
+  ERROR: [E2003] snapshot write did not complete.
+  FIX:   zkl cache purge --deep
+  ERROR: E2011: operation failed during snapshot write.
+  FIX:   zkl cache purge --shallow
+  ERROR: error E3002 raised by grant verify.
+  FIX:   zkl auth rotate --keyring
+  ERROR: [E1014] package sync did not complete.
+  FIX:   zkl net retry --backoff 5s
+  ERROR: E2018 reported while handling object commit.
+  FIX:   zkl fs relink --force
+  ERROR: [E2024] layer extraction did not complete.
+  FIX:   zkl fs repair --index
+  ERROR: [E1031] registry handshake did not complete.
+  FIX:   zkl proxy reset",[E2024] snapshot write did not complete.,zkl fs repair --index,direct_lookup: exact code -> exact remediation
+7,1,direct_lookup,many,direct_lookup_many,"  ERROR: E2011: operation failed during layer extraction.
+  FIX:   zkl cache purge --shallow
+  ERROR: E1001 reported while handling registry handshake.
+  FIX:   zkl registry refresh --scope global
+  ERROR: E3019 reported while handling identity attach.
+  FIX:   zkl auth trust --renew
+  ERROR: E3015: operation failed during grant verify.
+  FIX:   zkl auth login --provider sso
+  ERROR: [E1022] registry handshake did not complete.
+  FIX:   zkl net retry --backoff 30s
+  ERROR: E1007 reported while handling dependency fetch.
+  FIX:   zkl registry refresh --scope user
+  ERROR: [E3008] credential load did not complete.
+  FIX:   zkl auth rotate --token
+  ERROR: E1031 reported while handling dependency fetch.
+  FIX:   zkl proxy reset
+  ERROR: E2024 reported while handling layer extraction.
+  FIX:   zkl fs repair --index
+  ERROR: E2018: operation failed during workspace open.
+  FIX:   zkl fs relink --force",E2024 reported while handling object commit.,zkl fs repair --index,direct_lookup: exact code -> exact remediation
+8,2,direct_lookup,many,direct_lookup_many,"  ERROR: E3027 reported while handling grant verify.
+  FIX:   zkl auth login --provider oauth
+  ERROR: E2003 reported while handling object commit.
+  FIX:   zkl cache purge --deep
+  ERROR: [E2024] workspace open did not complete.
+  FIX:   zkl fs repair --index
+  ERROR: E1001 reported while handling index download.
+  FIX:   zkl registry refresh --scope global
+  ERROR: E2040: operation failed during snapshot write.
+  FIX:   zkl fs repair --manifest
+  ERROR: E1022: operation failed during registry handshake.
+  FIX:   zkl net retry --backoff 30s
+  ERROR: [E1007] dependency fetch did not complete.
+  FIX:   zkl registry refresh --scope user
+  ERROR: [E1031] dependency fetch did not complete.
+  FIX:   zkl proxy reset
+  ERROR: error E3008 raised by grant verify.
+  FIX:   zkl auth rotate --token
+  ERROR: [E1014] registry handshake did not complete.
+  FIX:   zkl net retry --backoff 5s",error E2024 raised by object commit.,zkl fs repair --index,direct_lookup: exact code -> exact remediation
+9,0,pattern_match,few,pattern_match_few,"  ERROR: E1123 raised by upstream reconciler on ""onyx-gate"".
+  FIX:   zkl refresh registry
+  ERROR: [E2808] inode subsystem reports invalid state at ""halo-index"".
+  FIX:   zkl purge index
+  ERROR: E2657: manifest check failed for target ""redline-sdk"".
+  FIX:   zkl purge manifest
+  ERROR: error E3358 while validating session for ""redline-sdk"".
+  FIX:   zkl rotate session
+  ERROR: [E1833] cert subsystem reports invalid state at ""onyx-gate"".
+  FIX:   zkl refresh ca-bundle","E1101: upstream check failed for target ""glacier-net"".",zkl refresh registry,pattern_match: family prefix + keyword -> verb+noun remediation
+10,1,pattern_match,few,pattern_match_few,"  ERROR: E2833: shard check failed for target ""nimbus-store"".
+  FIX:   zkl purge shard-cache
+  ERROR: E1642 raised by mirror reconciler on ""halo-index"".
+  FIX:   zkl refresh mirror
+  ERROR: error E3955 while validating session for ""halo-index"".
+  FIX:   zkl rotate session
+  ERROR: E1306: tunnel check failed for target ""slate-auth"".
+  FIX:   zkl refresh proxy
+  ERROR: E3229 raised by keyring reconciler on ""halo-index"".
+  FIX:   zkl rotate keyring","[E2370] shard subsystem reports invalid state at ""acme-core"".",zkl purge shard-cache,pattern_match: family prefix + keyword -> verb+noun remediation
+11,2,pattern_match,few,pattern_match_few,"  ERROR: E3487 raised by keyring reconciler on ""acme-core"".
+  FIX:   zkl rotate keyring
+  ERROR: E1788 raised by cert reconciler on ""redline-sdk"".
+  FIX:   zkl refresh ca-bundle
+  ERROR: E3223: scope check failed for target ""fjord-sync"".
+  FIX:   zkl rotate scope-map
+  ERROR: [E2349] lock subsystem reports invalid state at ""onyx-gate"".
+  FIX:   zkl purge lockfile
+  ERROR: error E1277 while validating mirror for ""north-star"".
+  FIX:   zkl refresh mirror","error E1965 while validating mirror for ""north-star"".",zkl refresh mirror,pattern_match: family prefix + keyword -> verb+noun remediation
+12,0,pattern_match,mid,pattern_match_mid,"  ERROR: E1252: mirror check failed for target ""fjord-sync"".
+  FIX:   zkl refresh mirror
+  ERROR: E3656 raised by token reconciler on ""nimbus-store"".
+  FIX:   zkl rotate token
+  ERROR: error E1202 while validating cert for ""fjord-sync"".
+  FIX:   zkl refresh ca-bundle
+  ERROR: error E2191 while validating vault for ""pivot-tools"".
+  FIX:   zkl purge blob-store
+  ERROR: E2270: lock check failed for target ""quartz-runtime"".
+  FIX:   zkl purge lockfile
+  ERROR: E3722: session check failed for target ""north-star"".
+  FIX:   zkl rotate session
+  ERROR: E2544: inode check failed for target ""slate-auth"".
+  FIX:   zkl purge index","error E1693 while validating mirror for ""fjord-sync"".",zkl refresh mirror,pattern_match: family prefix + keyword -> verb+noun remediation
+13,1,pattern_match,mid,pattern_match_mid,"  ERROR: E1208 raised by upstream reconciler on ""nimbus-store"".
+  FIX:   zkl refresh registry
+  ERROR: [E1524] tunnel subsystem reports invalid state at ""fjord-sync"".
+  FIX:   zkl refresh proxy
+  ERROR: [E3923] keyring subsystem reports invalid state at ""onyx-gate"".
+  FIX:   zkl rotate keyring
+  ERROR: E3851: token check failed for target ""north-star"".
+  FIX:   zkl rotate token
+  ERROR: error E2125 while validating vault for ""bluefin-utils"".
+  FIX:   zkl purge blob-store
+  ERROR: error E3342 while validating device for ""slate-auth"".
+  FIX:   zkl rotate device-trust
+  ERROR: E2717 raised by inode reconciler on ""acme-core"".
+  FIX:   zkl purge index","[E2573] inode subsystem reports invalid state at ""redline-sdk"".",zkl purge index,pattern_match: family prefix + keyword -> verb+noun remediation
+14,2,pattern_match,mid,pattern_match_mid,"  ERROR: E2366: lock check failed for target ""glacier-net"".
+  FIX:   zkl purge lockfile
+  ERROR: E3536: device check failed for target ""bluefin-utils"".
+  FIX:   zkl rotate device-trust
+  ERROR: [E1977] dns subsystem reports invalid state at ""north-star"".
+  FIX:   zkl refresh resolver
+  ERROR: E2532 raised by inode reconciler on ""glacier-net"".
+  FIX:   zkl purge index
+  ERROR: E3316 raised by keyring reconciler on ""pivot-tools"".
+  FIX:   zkl rotate keyring
+  ERROR: [E1692] mirror subsystem reports invalid state at ""glacier-net"".
+  FIX:   zkl refresh mirror
+  ERROR: [E2737] manifest subsystem reports invalid state at ""onyx-gate"".
+  FIX:   zkl purge manifest","[E2571] lock subsystem reports invalid state at ""ember-cli"".",zkl purge lockfile,pattern_match: family prefix + keyword -> verb+noun remediation
+15,0,pattern_match,many,pattern_match_many,"  ERROR: E3737: token check failed for target ""pivot-tools"".
+  FIX:   zkl rotate token
+  ERROR: E1916: mirror check failed for target ""acme-core"".
+  FIX:   zkl refresh mirror
+  ERROR: E3186 raised by device reconciler on ""onyx-gate"".
+  FIX:   zkl rotate device-trust
+  ERROR: [E2607] manifest subsystem reports invalid state at ""bluefin-utils"".
+  FIX:   zkl purge manifest
+  ERROR: [E1420] dns subsystem reports invalid state at ""onyx-gate"".
+  FIX:   zkl refresh resolver
+  ERROR: E2167: inode check failed for target ""ember-cli"".
+  FIX:   zkl purge index
+  ERROR: E1712: tunnel check failed for target ""quartz-runtime"".
+  FIX:   zkl refresh proxy
+  ERROR: E2203: vault check failed for target ""quartz-runtime"".
+  FIX:   zkl purge blob-store
+  ERROR: E2760 raised by lock reconciler on ""bluefin-utils"".
+  FIX:   zkl purge lockfile
+  ERROR: E3181 raised by scope reconciler on ""halo-index"".
+  FIX:   zkl rotate scope-map","E2375: vault check failed for target ""fjord-sync"".",zkl purge blob-store,pattern_match: family prefix + keyword -> verb+noun remediation
+16,1,pattern_match,many,pattern_match_many,"  ERROR: [E1198] mirror subsystem reports invalid state at ""halo-index"".
+  FIX:   zkl refresh mirror
+  ERROR: E2652: lock check failed for target ""ember-cli"".
+  FIX:   zkl purge lockfile
+  ERROR: error E2688 while validating manifest for ""onyx-gate"".
+  FIX:   zkl purge manifest
+  ERROR: E1219: upstream check failed for target ""nimbus-store"".
+  FIX:   zkl refresh registry
+  ERROR: [E3418] token subsystem reports invalid state at ""glacier-net"".
+  FIX:   zkl rotate token
+  ERROR: [E3884] device subsystem reports invalid state at ""opal-queue"".
+  FIX:   zkl rotate device-trust
+  ERROR: E1603: tunnel check failed for target ""fjord-sync"".
+  FIX:   zkl refresh proxy
+  ERROR: E2310 raised by vault reconciler on ""slate-auth"".
+  FIX:   zkl purge blob-store
+  ERROR: error E3783 while validating keyring for ""bluefin-utils"".
+  FIX:   zkl rotate keyring
+  ERROR: [E2922] shard subsystem reports invalid state at ""nimbus-store"".
+  FIX:   zkl purge shard-cache","E2422 raised by lock reconciler on ""acme-core"".",zkl purge lockfile,pattern_match: family prefix + keyword -> verb+noun remediation
+17,2,pattern_match,many,pattern_match_many,"  ERROR: E1483: mirror check failed for target ""acme-core"".
+  FIX:   zkl refresh mirror
+  ERROR: E3240: scope check failed for target ""quartz-runtime"".
+  FIX:   zkl rotate scope-map
+  ERROR: [E1504] tunnel subsystem reports invalid state at ""nimbus-store"".
+  FIX:   zkl refresh proxy
+  ERROR: E2103: lock check failed for target ""slate-auth"".
+  FIX:   zkl purge lockfile
+  ERROR: [E2992] inode subsystem reports invalid state at ""onyx-gate"".
+  FIX:   zkl purge index
+  ERROR: E3234: token check failed for target ""pivot-tools"".
+  FIX:   zkl rotate token
+  ERROR: [E1958] cert subsystem reports invalid state at ""slate-auth"".
+  FIX:   zkl refresh ca-bundle
+  ERROR: [E1174] dns subsystem reports invalid state at ""quartz-runtime"".
+  FIX:   zkl refresh resolver
+  ERROR: error E3401 while validating device for ""glacier-net"".
+  FIX:   zkl rotate device-trust
+  ERROR: E2575 raised by shard reconciler on ""glacier-net"".
+  FIX:   zkl purge shard-cache","error E2761 while validating lock for ""redline-sdk"".",zkl purge lockfile,pattern_match: family prefix + keyword -> verb+noun remediation
+18,0,multi_factor,few,multi_factor_few,"  ERROR: E3898 emitted by the cold-start executor handling ""onyx-gate"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: [E1292] hot-path run aborted while touching ""fjord-sync"".
+  FIX:   zkl reconnect registry --keepalive
+  ERROR: [E2688] cold-start run aborted while touching ""opal-queue"".
+  FIX:   zkl rebuild cache --from-manifest
+  ERROR: error E3647 observed on a hot-path attempt against ""opal-queue"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: E1452 emitted by the cold-start executor handling ""nimbus-store"".
+  FIX:   zkl bootstrap registry --seed","E1311: failure detected on hot-path pathway for ""verdant-lib"".",zkl reconnect registry --keepalive,"multi_factor: (family, qualifier) -> verb+target+flag remediation"
+19,1,multi_factor,few,multi_factor_few,"  ERROR: E1213 emitted by the cold-start executor handling ""quartz-runtime"".
+  FIX:   zkl bootstrap registry --seed
+  ERROR: error E2405 observed on a hot-path attempt against ""bluefin-utils"".
+  FIX:   zkl compact cache --online
+  ERROR: E3480: failure detected on cold-start pathway for ""verdant-lib"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: E3914 emitted by the hot-path executor handling ""nimbus-store"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: [E1946] hot-path run aborted while touching ""bluefin-utils"".
+  FIX:   zkl reconnect registry --keepalive","error E1488 observed on a hot-path attempt against ""quartz-runtime"".",zkl reconnect registry --keepalive,"multi_factor: (family, qualifier) -> verb+target+flag remediation"
+20,2,multi_factor,few,multi_factor_few,"  ERROR: E1904: failure detected on cold-start pathway for ""glacier-net"".
+  FIX:   zkl bootstrap registry --seed
+  ERROR: E3226: failure detected on hot-path pathway for ""pivot-tools"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: [E3910] cold-start run aborted while touching ""north-star"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: error E2276 observed on a hot-path attempt against ""ember-cli"".
+  FIX:   zkl compact cache --online
+  ERROR: E1184 emitted by the hot-path executor handling ""glacier-net"".
+  FIX:   zkl reconnect registry --keepalive","[E3969] hot-path run aborted while touching ""slate-auth"".",zkl refresh credentials --silent,"multi_factor: (family, qualifier) -> verb+target+flag remediation"
+21,0,multi_factor,mid,multi_factor_mid,"  ERROR: [E3462] cold-start run aborted while touching ""halo-index"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: E1757: failure detected on cold-start pathway for ""quartz-runtime"".
+  FIX:   zkl bootstrap registry --seed
+  ERROR: [E2682] hot-path run aborted while touching ""halo-index"".
+  FIX:   zkl compact cache --online
+  ERROR: E1766: failure detected on hot-path pathway for ""slate-auth"".
+  FIX:   zkl reconnect registry --keepalive
+  ERROR: error E3734 observed on a hot-path attempt against ""acme-core"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: error E1546 observed on a hot-path attempt against ""ember-cli"".
+  FIX:   zkl reconnect registry --keepalive
+  ERROR: E2574: failure detected on cold-start pathway for ""redline-sdk"".
+  FIX:   zkl rebuild cache --from-manifest","[E3484] cold-start run aborted while touching ""quartz-runtime"".",zkl provision credentials --enroll,"multi_factor: (family, qualifier) -> verb+target+flag remediation"
+22,1,multi_factor,mid,multi_factor_mid,"  ERROR: error E3720 observed on a cold-start attempt against ""glacier-net"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: [E3713] cold-start run aborted while touching ""redline-sdk"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: E2682: failure detected on hot-path pathway for ""redline-sdk"".
+  FIX:   zkl compact cache --online
+  ERROR: [E1626] cold-start run aborted while touching ""onyx-gate"".
+  FIX:   zkl bootstrap registry --seed
+  ERROR: [E3192] hot-path run aborted while touching ""quartz-runtime"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: [E2285] cold-start run aborted while touching ""fjord-sync"".
+  FIX:   zkl rebuild cache --from-manifest
+  ERROR: E1176 emitted by the hot-path executor handling ""opal-queue"".
+  FIX:   zkl reconnect registry --keepalive","E2801 emitted by the hot-path executor handling ""slate-auth"".",zkl compact cache --online,"multi_factor: (family, qualifier) -> verb+target+flag remediation"
+23,2,multi_factor,mid,multi_factor_mid,"  ERROR: error E2960 observed on a hot-path attempt against ""bluefin-utils"".
+  FIX:   zkl compact cache --online
+  ERROR: [E1418] hot-path run aborted while touching ""halo-index"".
+  FIX:   zkl reconnect registry --keepalive
+  ERROR: E3868 emitted by the cold-start executor handling ""pivot-tools"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: [E3547] hot-path run aborted while touching ""ember-cli"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: E1808 emitted by the cold-start executor handling ""fjord-sync"".
+  FIX:   zkl bootstrap registry --seed
+  ERROR: E2712 emitted by the cold-start executor handling ""redline-sdk"".
+  FIX:   zkl rebuild cache --from-manifest
+  ERROR: E2132 emitted by the cold-start executor handling ""bluefin-utils"".
+  FIX:   zkl rebuild cache --from-manifest","[E3559] cold-start run aborted while touching ""verdant-lib"".",zkl provision credentials --enroll,"multi_factor: (family, qualifier) -> verb+target+flag remediation"
+24,0,multi_factor,many,multi_factor_many,"  ERROR: E3712: failure detected on cold-start pathway for ""onyx-gate"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: E2831 emitted by the hot-path executor handling ""acme-core"".
+  FIX:   zkl compact cache --online
+  ERROR: error E1892 observed on a cold-start attempt against ""glacier-net"".
+  FIX:   zkl bootstrap registry --seed
+  ERROR: E3898 emitted by the cold-start executor handling ""glacier-net"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: E1279 emitted by the hot-path executor handling ""slate-auth"".
+  FIX:   zkl reconnect registry --keepalive
+  ERROR: error E2177 observed on a cold-start attempt against ""acme-core"".
+  FIX:   zkl rebuild cache --from-manifest
+  ERROR: error E2215 observed on a hot-path attempt against ""pivot-tools"".
+  FIX:   zkl compact cache --online
+  ERROR: E3127: failure detected on hot-path pathway for ""ember-cli"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: error E1357 observed on a hot-path attempt against ""halo-index"".
+  FIX:   zkl reconnect registry --keepalive
+  ERROR: error E2651 observed on a cold-start attempt against ""acme-core"".
+  FIX:   zkl rebuild cache --from-manifest","E3847 emitted by the cold-start executor handling ""nimbus-store"".",zkl provision credentials --enroll,"multi_factor: (family, qualifier) -> verb+target+flag remediation"
+25,1,multi_factor,many,multi_factor_many,"  ERROR: E1126: failure detected on cold-start pathway for ""ember-cli"".
+  FIX:   zkl bootstrap registry --seed
+  ERROR: [E3185] hot-path run aborted while touching ""ember-cli"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: E2686 emitted by the hot-path executor handling ""nimbus-store"".
+  FIX:   zkl compact cache --online
+  ERROR: E3516: failure detected on cold-start pathway for ""bluefin-utils"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: [E3534] hot-path run aborted while touching ""bluefin-utils"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: E1122 emitted by the cold-start executor handling ""north-star"".
+  FIX:   zkl bootstrap registry --seed
+  ERROR: [E2597] hot-path run aborted while touching ""redline-sdk"".
+  FIX:   zkl compact cache --online
+  ERROR: [E1202] hot-path run aborted while touching ""opal-queue"".
+  FIX:   zkl reconnect registry --keepalive
+  ERROR: E2445 emitted by the cold-start executor handling ""verdant-lib"".
+  FIX:   zkl rebuild cache --from-manifest
+  ERROR: error E1319 observed on a hot-path attempt against ""nimbus-store"".
+  FIX:   zkl reconnect registry --keepalive","[E3980] cold-start run aborted while touching ""north-star"".",zkl provision credentials --enroll,"multi_factor: (family, qualifier) -> verb+target+flag remediation"
+26,2,multi_factor,many,multi_factor_many,"  ERROR: error E2673 observed on a cold-start attempt against ""halo-index"".
+  FIX:   zkl rebuild cache --from-manifest
+  ERROR: [E2471] hot-path run aborted while touching ""slate-auth"".
+  FIX:   zkl compact cache --online
+  ERROR: error E3391 observed on a hot-path attempt against ""ember-cli"".
+  FIX:   zkl refresh credentials --silent
+  ERROR: error E3798 observed on a cold-start attempt against ""glacier-net"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: error E2230 observed on a hot-path attempt against ""nimbus-store"".
+  FIX:   zkl compact cache --online
+  ERROR: E1981 emitted by the hot-path executor handling ""bluefin-utils"".
+  FIX:   zkl reconnect registry --keepalive
+  ERROR: E1604: failure detected on cold-start pathway for ""verdant-lib"".
+  FIX:   zkl bootstrap registry --seed
+  ERROR: [E3485] cold-start run aborted while touching ""redline-sdk"".
+  FIX:   zkl provision credentials --enroll
+  ERROR: E2598 emitted by the cold-start executor handling ""verdant-lib"".
+  FIX:   zkl rebuild cache --from-manifest
+  ERROR: error E1742 observed on a hot-path attempt against ""glacier-net"".
+  FIX:   zkl reconnect registry --keepalive","[E1202] cold-start run aborted while touching ""verdant-lib"".",zkl bootstrap registry --seed,"multi_factor: (family, qualifier) -> verb+target+flag remediation"

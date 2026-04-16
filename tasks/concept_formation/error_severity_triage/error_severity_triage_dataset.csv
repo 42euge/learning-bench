@@ -1,0 +1,226 @@
+task_id,seed,complexity,evidence,difficulty_label,material,test_input,expected,item_desc
+0,0,single_tag,few,single_tag_few,"  <Ef> index buffer-pool    -> TERMINAL_ERROR
+  <W> resolve bundle    -> WARNING
+  <Er> drain cache-ring    -> RETRYABLE_ERROR
+  <I> drain bundle    -> INFO
+  <I> validate task-queue    -> INFO",<I> validate manifest,INFO,single_tag / tool=quarkctl
+1,1,single_tag,few,single_tag_few,"  @ok validate manifest    -> INFO
+  @redo validate cache-ring    -> RETRYABLE_ERROR
+  @ok fetch buffer-pool    -> INFO
+  @dead stream ledger    -> TERMINAL_ERROR
+  @mild bind ledger    -> WARNING",@mild snapshot vault,WARNING,single_tag / tool=zephyrq
+2,2,single_tag,few,single_tag_few,"  ^^ compile cache-ring    -> RETRYABLE_ERROR
+  ~~ flush manifest    -> WARNING
+  ++ flush cache-ring    -> INFO
+  ++ resolve buffer-pool    -> INFO
+  xx fetch segment    -> TERMINAL_ERROR",^^ replicate segment,RETRYABLE_ERROR,single_tag / tool=glintd
+3,0,single_tag,mid,single_tag_mid,"  ::soft:: flush vault    -> WARNING
+  ::retry:: flush pipeline    -> RETRYABLE_ERROR
+  ::halt:: index shard    -> TERMINAL_ERROR
+  ::halt:: index artifact    -> TERMINAL_ERROR
+  ::retry:: flush manifest    -> RETRYABLE_ERROR
+  ::note:: resolve pipeline    -> INFO
+  ::note:: bind artifact    -> INFO
+  ::soft:: unpack vault    -> WARNING",::halt:: bind bundle,TERMINAL_ERROR,single_tag / tool=orbix
+4,1,single_tag,mid,single_tag_mid,"  <I> resolve keyring    -> INFO
+  <Ef> replicate bundle    -> TERMINAL_ERROR
+  <I> bind keyring    -> INFO
+  <Er> snapshot bundle    -> RETRYABLE_ERROR
+  <W> resolve task-queue    -> WARNING
+  <Er> bind task-queue    -> RETRYABLE_ERROR
+  <Ef> warm keyring    -> TERMINAL_ERROR
+  <W> stream vault    -> WARNING",<Er> warm cache-ring,RETRYABLE_ERROR,single_tag / tool=quarkctl
+5,2,single_tag,mid,single_tag_mid,"  ++ validate shard    -> INFO
+  ^^ migrate vault    -> RETRYABLE_ERROR
+  ~~ flush segment    -> WARNING
+  xx snapshot task-queue    -> TERMINAL_ERROR
+  ^^ replicate manifest    -> RETRYABLE_ERROR
+  ++ drain shard    -> INFO
+  ~~ unpack manifest    -> WARNING
+  xx bind pipeline    -> TERMINAL_ERROR",++ flush task-queue,INFO,single_tag / tool=glintd
+6,0,single_tag,many,single_tag_many,"  <Ef> replicate cache-ring    -> TERMINAL_ERROR
+  <I> compile buffer-pool    -> INFO
+  <Ef> index cache-ring    -> TERMINAL_ERROR
+  <W> flush task-queue    -> WARNING
+  <I> warm shard    -> INFO
+  <Er> stream pipeline    -> RETRYABLE_ERROR
+  <Er> resolve shard    -> RETRYABLE_ERROR
+  <Er> compile segment    -> RETRYABLE_ERROR
+  <W> validate shard    -> WARNING
+  <I> stream ledger    -> INFO
+  <W> replicate task-queue    -> WARNING
+  <Ef> flush buffer-pool    -> TERMINAL_ERROR",<W> fetch shard,WARNING,single_tag / tool=quarkctl
+7,1,single_tag,many,single_tag_many,"  ::note:: drain vault    -> INFO
+  ::note:: index buffer-pool    -> INFO
+  ::soft:: warm keyring    -> WARNING
+  ::halt:: unpack manifest    -> TERMINAL_ERROR
+  ::soft:: flush vault    -> WARNING
+  ::halt:: resolve bundle    -> TERMINAL_ERROR
+  ::soft:: snapshot segment    -> WARNING
+  ::note:: resolve task-queue    -> INFO
+  ::retry:: migrate segment    -> RETRYABLE_ERROR
+  ::retry:: replicate ledger    -> RETRYABLE_ERROR
+  ::retry:: snapshot cache-ring    -> RETRYABLE_ERROR
+  ::halt:: replicate segment    -> TERMINAL_ERROR",::halt:: migrate bundle,TERMINAL_ERROR,single_tag / tool=orbix
+8,2,single_tag,many,single_tag_many,"  ++ validate task-queue    -> INFO
+  xx snapshot cache-ring    -> TERMINAL_ERROR
+  xx snapshot buffer-pool    -> TERMINAL_ERROR
+  ++ unpack manifest    -> INFO
+  ~~ snapshot segment    -> WARNING
+  ++ migrate vault    -> INFO
+  ^^ migrate buffer-pool    -> RETRYABLE_ERROR
+  ~~ warm vault    -> WARNING
+  ^^ flush pipeline    -> RETRYABLE_ERROR
+  xx migrate task-queue    -> TERMINAL_ERROR
+  ^^ compile artifact    -> RETRYABLE_ERROR
+  ~~ migrate segment    -> WARNING",^^ bind task-queue,RETRYABLE_ERROR,single_tag / tool=glintd
+9,0,tag_plus_code,few,tag_plus_code_few,"  ERR :: replicate artifact [E-133]    -> RETRYABLE_ERROR
+  OK :: replicate ledger    -> INFO
+  ERR :: fetch vault [E-812]    -> TERMINAL_ERROR
+  WARN :: replicate keyring    -> WARNING
+  OK :: resolve vault    -> INFO",OK :: snapshot buffer-pool,INFO,tag_plus_code / tool=nimboforge
+10,1,tag_plus_code,few,tag_plus_code_few,"  SOFT :: drain pipeline    -> WARNING
+  HARD :: index vault [H3006]    -> RETRYABLE_ERROR
+  HARD :: warm keyring [H3007]    -> TERMINAL_ERROR
+  LOG :: fetch keyring    -> INFO
+  LOG :: stream artifact    -> INFO",SOFT :: resolve artifact,WARNING,tag_plus_code / tool=helixsync
+11,2,tag_plus_code,few,tag_plus_code_few,"  BREAK :: bind keyring [rt-23]    -> RETRYABLE_ERROR
+  HINT :: resolve keyring    -> WARNING
+  TRACE :: migrate manifest    -> INFO
+  TRACE :: snapshot pipeline    -> INFO
+  BREAK :: snapshot cache-ring [tm-66]    -> TERMINAL_ERROR",BREAK :: stream artifact [rt-61],RETRYABLE_ERROR,tag_plus_code / tool=lumenrun
+12,0,tag_plus_code,mid,tag_plus_code_mid,"  HARD :: replicate bundle [H2005]    -> TERMINAL_ERROR
+  HARD :: resolve ledger [H1013]    -> TERMINAL_ERROR
+  LOG :: unpack buffer-pool    -> INFO
+  HARD :: compile manifest [H2008]    -> RETRYABLE_ERROR
+  HARD :: unpack manifest [H1024]    -> RETRYABLE_ERROR
+  LOG :: index buffer-pool    -> INFO
+  SOFT :: stream vault    -> WARNING
+  SOFT :: compile keyring    -> WARNING",HARD :: flush segment [H1001],TERMINAL_ERROR,tag_plus_code / tool=helixsync
+13,1,tag_plus_code,mid,tag_plus_code_mid,"  HINT :: index vault    -> WARNING
+  BREAK :: bind bundle [rt-79]    -> RETRYABLE_ERROR
+  BREAK :: validate buffer-pool [tm-30]    -> TERMINAL_ERROR
+  HINT :: replicate buffer-pool    -> WARNING
+  BREAK :: index ledger [rt-61]    -> RETRYABLE_ERROR
+  TRACE :: drain segment    -> INFO
+  TRACE :: replicate shard    -> INFO
+  BREAK :: compile bundle [tm-04]    -> TERMINAL_ERROR",BREAK :: validate manifest [rt-58],RETRYABLE_ERROR,tag_plus_code / tool=lumenrun
+14,2,tag_plus_code,mid,tag_plus_code_mid,"  ERR :: warm ledger [E-355]    -> RETRYABLE_ERROR
+  OK :: unpack ledger    -> INFO
+  OK :: snapshot manifest    -> INFO
+  ERR :: validate cache-ring [E-101]    -> RETRYABLE_ERROR
+  WARN :: index vault    -> WARNING
+  ERR :: validate ledger [E-903]    -> TERMINAL_ERROR
+  WARN :: fetch keyring    -> WARNING
+  ERR :: compile shard [E-577]    -> TERMINAL_ERROR",OK :: drain bundle,INFO,tag_plus_code / tool=nimboforge
+15,0,tag_plus_code,many,tag_plus_code_many,"  WARN :: compile ledger    -> WARNING
+  ERR :: unpack manifest [E-204]    -> RETRYABLE_ERROR
+  WARN :: bind keyring    -> WARNING
+  ERR :: bind artifact [E-501]    -> TERMINAL_ERROR
+  OK :: drain ledger    -> INFO
+  OK :: snapshot shard    -> INFO
+  WARN :: warm vault    -> WARNING
+  ERR :: validate buffer-pool [E-133]    -> RETRYABLE_ERROR
+  ERR :: unpack pipeline [E-455]    -> TERMINAL_ERROR
+  ERR :: snapshot ledger [E-355]    -> RETRYABLE_ERROR
+  ERR :: unpack cache-ring [E-903]    -> TERMINAL_ERROR
+  OK :: fetch segment    -> INFO",WARN :: stream task-queue,WARNING,tag_plus_code / tool=nimboforge
+16,1,tag_plus_code,many,tag_plus_code_many,"  LOG :: migrate buffer-pool    -> INFO
+  HARD :: bind cache-ring [H1002]    -> RETRYABLE_ERROR
+  SOFT :: flush keyring    -> WARNING
+  SOFT :: compile shard    -> WARNING
+  HARD :: index segment [H4009]    -> TERMINAL_ERROR
+  LOG :: compile pipeline    -> INFO
+  HARD :: fetch artifact [H3007]    -> TERMINAL_ERROR
+  HARD :: compile manifest [H4002]    -> RETRYABLE_ERROR
+  HARD :: snapshot ledger [H1001]    -> TERMINAL_ERROR
+  SOFT :: fetch pipeline    -> WARNING
+  LOG :: migrate task-queue    -> INFO
+  HARD :: snapshot manifest [H2008]    -> RETRYABLE_ERROR",HARD :: fetch manifest [H1013],TERMINAL_ERROR,tag_plus_code / tool=helixsync
+17,2,tag_plus_code,many,tag_plus_code_many,"  TRACE :: validate keyring    -> INFO
+  BREAK :: flush task-queue [rt-58]    -> RETRYABLE_ERROR
+  BREAK :: validate bundle [tm-12]    -> TERMINAL_ERROR
+  BREAK :: replicate task-queue [rt-61]    -> RETRYABLE_ERROR
+  TRACE :: fetch pipeline    -> INFO
+  BREAK :: unpack segment [tm-66]    -> TERMINAL_ERROR
+  HINT :: index segment    -> WARNING
+  TRACE :: index cache-ring    -> INFO
+  HINT :: drain bundle    -> WARNING
+  BREAK :: fetch shard [tm-04]    -> TERMINAL_ERROR
+  HINT :: validate segment    -> WARNING
+  BREAK :: warm ledger [rt-23]    -> RETRYABLE_ERROR",BREAK :: unpack artifact [rt-44],RETRYABLE_ERROR,tag_plus_code / tool=lumenrun
+18,0,contextual,few,contextual_few,"  STATUS: stale manifest detected, refreshing    -> WARNING
+  STATUS: manifest returned transient 503    -> RETRYABLE_ERROR
+  STATUS: handshake ok with manifest    -> INFO
+  STATUS: resolve task-queue completed    -> INFO
+  STATUS: bundle manifest is corrupt    -> TERMINAL_ERROR",STATUS: heartbeat from pipeline,INFO,contextual / tool=orbix
+19,1,contextual,few,contextual_few,"  >> permanent authentication failure for ledger    -> TERMINAL_ERROR
+  >> warm start of manifest    -> INFO
+  >> fetch segment done    -> INFO
+  >> temporary DNS failure for cache-ring    -> RETRYABLE_ERROR
+  >> deprecated call during replicate buffer-pool    -> WARNING",>> segment fragmentation rising,WARNING,contextual / tool=tessera
+20,2,contextual,few,contextual_few,"  >> loaded bundle index    -> INFO
+  >> deprecated call during replicate keyring    -> WARNING
+  >> upstream busy: artifact try later    -> RETRYABLE_ERROR
+  >> warm start of ledger    -> INFO
+  >> incompatible format version for artifact    -> TERMINAL_ERROR",>> socket reset while streaming cache-ring,RETRYABLE_ERROR,contextual / tool=tessera
+21,0,contextual,mid,contextual_mid,"  >> hardware fault on device backing ledger    -> TERMINAL_ERROR
+  >> socket reset while streaming manifest    -> RETRYABLE_ERROR
+  >> upstream busy: manifest try later    -> RETRYABLE_ERROR
+  >> degraded unpack on shard    -> WARNING
+  >> task-queue size approaching limit    -> WARNING
+  >> replica of bundle in sync    -> INFO
+  >> permanent authentication failure for ledger    -> TERMINAL_ERROR
+  >> loaded buffer-pool index    -> INFO",>> license for shard has expired,TERMINAL_ERROR,contextual / tool=tessera
+22,1,contextual,mid,contextual_mid,"  STATUS: checkpoint saved for segment    -> INFO
+  STATUS: vault manifest is corrupt    -> TERMINAL_ERROR
+  STATUS: disk full: no space left while writing segment    -> TERMINAL_ERROR
+  STATUS: lock contention on keyring    -> RETRYABLE_ERROR
+  STATUS: ledger returned transient 503    -> RETRYABLE_ERROR
+  STATUS: validate buffer-pool retried once and succeeded    -> WARNING
+  STATUS: stale pipeline detected, refreshing    -> WARNING
+  STATUS: handshake ok with vault    -> INFO",STATUS: throttled by manifest (try again),RETRYABLE_ERROR,contextual / tool=orbix
+23,2,contextual,mid,contextual_mid,"  >> opened handle to shard    -> INFO
+  >> permanent authentication failure for artifact    -> TERMINAL_ERROR
+  >> deprecated call during warm manifest    -> WARNING
+  >> retry succeeded for shard after 1 attempt    -> WARNING
+  >> license for cache-ring has expired    -> TERMINAL_ERROR
+  >> warm start of task-queue    -> INFO
+  >> temporary DNS failure for pipeline    -> RETRYABLE_ERROR
+  >> socket reset while streaming pipeline    -> RETRYABLE_ERROR",>> loaded artifact index,INFO,contextual / tool=tessera
+24,0,contextual,many,contextual_many,"  STATUS: artifact approaching capacity    -> WARNING
+  STATUS: lock contention on ledger    -> RETRYABLE_ERROR
+  STATUS: task-queue manifest is corrupt    -> TERMINAL_ERROR
+  STATUS: schema mismatch: bundle incompatible    -> TERMINAL_ERROR
+  STATUS: rate limit hit on warm keyring    -> RETRYABLE_ERROR
+  STATUS: started index on artifact    -> INFO
+  STATUS: migrate pipeline completed    -> INFO
+  STATUS: cache-ring returned transient 503    -> RETRYABLE_ERROR
+  STATUS: slow stream on vault (610ms)    -> WARNING
+  STATUS: vault latency above baseline    -> WARNING
+  STATUS: checkpoint saved for buffer-pool    -> INFO
+  STATUS: unauthorized: credentials rejected for pipeline    -> TERMINAL_ERROR","STATUS: stale manifest detected, refreshing",WARNING,contextual / tool=orbix
+25,1,contextual,many,contextual_many,"  STATUS: disk full: no space left while writing buffer-pool    -> TERMINAL_ERROR
+  STATUS: throttled by task-queue (try again)    -> RETRYABLE_ERROR
+  STATUS: unauthorized: credentials rejected for bundle    -> TERMINAL_ERROR
+  STATUS: lock contention on task-queue    -> RETRYABLE_ERROR
+  STATUS: warm segment retried once and succeeded    -> WARNING
+  STATUS: slow flush on task-queue (150ms)    -> WARNING
+  STATUS: temporarily unreachable: segment    -> RETRYABLE_ERROR
+  STATUS: checkpoint saved for cache-ring    -> INFO
+  STATUS: buffer-pool manifest is corrupt    -> TERMINAL_ERROR
+  STATUS: started snapshot on keyring    -> INFO
+  STATUS: stale manifest detected, refreshing    -> WARNING
+  STATUS: heartbeat from shard    -> INFO",STATUS: schema mismatch: buffer-pool incompatible,TERMINAL_ERROR,contextual / tool=orbix
+26,2,contextual,many,contextual_many,"  STATUS: slow drain on keyring (610ms)    -> WARNING
+  STATUS: heartbeat from segment    -> INFO
+  STATUS: unpack buffer-pool retried once and succeeded    -> WARNING
+  STATUS: started fetch on buffer-pool    -> INFO
+  STATUS: schema mismatch: vault incompatible    -> TERMINAL_ERROR
+  STATUS: unauthorized: credentials rejected for task-queue    -> TERMINAL_ERROR
+  STATUS: handshake ok with bundle    -> INFO
+  STATUS: quota permanently exceeded for cache-ring    -> TERMINAL_ERROR
+  STATUS: pipeline latency above baseline    -> WARNING
+  STATUS: lock contention on manifest    -> RETRYABLE_ERROR
+  STATUS: throttled by manifest (try again)    -> RETRYABLE_ERROR
+  STATUS: rate limit hit on warm vault    -> RETRYABLE_ERROR",STATUS: connection timeout reaching ledger,RETRYABLE_ERROR,contextual / tool=orbix

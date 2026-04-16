@@ -1,0 +1,1886 @@
+task_id,material,test_input,expected,complexity,evidence,difficulty_label,seed,item_desc,stale_step
+0,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK
+7. act(s2.item_G)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_E)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK
+7. act(s2.item_B)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_F)  # OK
+6. act(s2.item_C)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_D)
+3. act(s1.item_C)
+4. mutate()
+5. act(s1.item_E)","1. s1 = snapshot()
+2. act(s1.item_D)
+3. act(s1.item_C)
+4. mutate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_E)",single_mutation,few,single_mutation_few,0,"complexity=single_mutation, evidence=few(3ex), seed=0, stale_step=5, len=5",5
+1,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_A)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_C)  # OK
+7. act(s2.item_D)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_B)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. act(s1.item_E)","1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. s2 = snapshot()  # re-snapshot after mutation
+5. act(s2.item_E)",single_mutation,few,single_mutation_few,1,"complexity=single_mutation, evidence=few(3ex), seed=1, stale_step=4, len=4",4
+2,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. act(s1.item_B)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_C)  # OK
+7. act(s2.item_A)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_G)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_E)
+3. act(s1.item_A)
+4. mutate()
+5. act(s1.item_C)","1. s1 = snapshot()
+2. act(s1.item_E)
+3. act(s1.item_A)
+4. mutate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_C)",single_mutation,few,single_mutation_few,2,"complexity=single_mutation, evidence=few(3ex), seed=2, stale_step=5, len=5",5
+3,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_A)  # OK
+6. act(s2.item_E)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_C)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. act(s1.item_B)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. act(s2.item_G)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_E)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_B)  # OK
+7. act(s2.item_C)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. act(s1.item_A)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_B)  # OK
+7. act(s2.item_G)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_G)
+3. mutate()
+4. act(s1.item_B)","1. s1 = snapshot()
+2. act(s1.item_G)
+3. mutate()
+4. s2 = snapshot()  # re-snapshot after mutation
+5. act(s2.item_B)",single_mutation,mid,single_mutation_mid,0,"complexity=single_mutation, evidence=mid(5ex), seed=0, stale_step=4, len=4",4
+4,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_E)  # OK
+6. act(s2.item_D)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_C)  # OK
+6. act(s2.item_A)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. act(s1.item_C)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_E)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_E)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_B)
+3. act(s1.item_F)
+4. mutate()
+5. act(s1.item_C)","1. s1 = snapshot()
+2. act(s1.item_B)
+3. act(s1.item_F)
+4. mutate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_C)",single_mutation,mid,single_mutation_mid,1,"complexity=single_mutation, evidence=mid(5ex), seed=1, stale_step=5, len=5",5
+5,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_G)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_C)  # OK
+6. act(s2.item_E)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_B)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. act(s1.item_B)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_C)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_C)  # OK
+6. act(s2.item_G)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_C)
+3. mutate()
+4. act(s1.item_E)","1. s1 = snapshot()
+2. act(s1.item_C)
+3. mutate()
+4. s2 = snapshot()  # re-snapshot after mutation
+5. act(s2.item_E)",single_mutation,mid,single_mutation_mid,2,"complexity=single_mutation, evidence=mid(5ex), seed=2, stale_step=4, len=4",4
+6,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_C)  # OK
+6. act(s2.item_G)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_B)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. act(s1.item_F)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. act(s2.item_C)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_B)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. act(s1.item_G)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK
+
+Worked Example 6:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_E)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_B)  # OK
+7. act(s2.item_G)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_B)
+3. act(s1.item_F)
+4. mutate()
+5. act(s1.item_C)","1. s1 = snapshot()
+2. act(s1.item_B)
+3. act(s1.item_F)
+4. mutate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_C)",single_mutation,many,single_mutation_many,0,"complexity=single_mutation, evidence=many(6ex), seed=0, stale_step=5, len=5",5
+7,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_A)  # OK
+6. act(s2.item_D)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_E)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_D)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_D)  # OK
+6. act(s2.item_G)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_G)  # OK
+6. act(s2.item_B)  # OK
+
+Worked Example 6:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. act(s1.item_G)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_C)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_E)
+3. act(s1.item_D)
+4. mutate()
+5. act(s1.item_B)","1. s1 = snapshot()
+2. act(s1.item_E)
+3. act(s1.item_D)
+4. mutate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_B)",single_mutation,many,single_mutation_many,1,"complexity=single_mutation, evidence=many(6ex), seed=1, stale_step=5, len=5",5
+8,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_D)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. act(s1.item_F)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. act(s2.item_D)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. act(s1.item_A)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. act(s1.item_G)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. act(s2.item_B)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. act(s1.item_E)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_B)  # OK
+
+Worked Example 6:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_C)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_F)
+3. mutate()
+4. act(s1.item_D)","1. s1 = snapshot()
+2. act(s1.item_F)
+3. mutate()
+4. s2 = snapshot()  # re-snapshot after mutation
+5. act(s2.item_D)",single_mutation,many,single_mutation_many,2,"complexity=single_mutation, evidence=many(6ex), seed=2, stale_step=4, len=4",4
+9,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. act(s1.item_G)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_B)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_C)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_B)  # OK
+10. mutate()  # invalidates all prior refs
+11. s4 = snapshot()  # captures current state
+12. act(s4.item_B)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. act(s1.item_C)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_G)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_B)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_E)
+6. mutate()
+7. act(s2.item_G)
+8. mutate()
+9. s3 = snapshot()
+10. act(s3.item_F)","1. s1 = snapshot()
+2. act(s1.item_B)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_E)
+6. mutate()
+7. s3 = snapshot()  # re-snapshot after mutation
+8. act(s3.item_G)
+9. mutate()
+10. s4 = snapshot()
+11. act(s4.item_F)",multiple_mutations,few,multiple_mutations_few,0,"complexity=multiple_mutations, evidence=few(3ex), seed=0, stale_step=7, len=10",7
+10,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_G)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_B)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_E)  # OK
+6. act(s2.item_A)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_D)  # OK
+10. act(s3.item_E)  # OK
+11. mutate()  # invalidates all prior refs
+12. s4 = snapshot()  # captures current state
+13. act(s4.item_A)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_F)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_D)  # OK
+10. act(s3.item_F)  # OK
+11. mutate()  # invalidates all prior refs
+12. s4 = snapshot()  # captures current state
+13. act(s4.item_E)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_C)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_F)
+6. mutate()
+7. act(s2.item_G)
+8. mutate()
+9. s3 = snapshot()
+10. act(s3.item_B)","1. s1 = snapshot()
+2. act(s1.item_C)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_F)
+6. mutate()
+7. s3 = snapshot()  # re-snapshot after mutation
+8. act(s3.item_G)
+9. mutate()
+10. s4 = snapshot()
+11. act(s4.item_B)",multiple_mutations,few,multiple_mutations_few,1,"complexity=multiple_mutations, evidence=few(3ex), seed=1, stale_step=7, len=10",7
+11,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_F)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_D)  # OK
+10. mutate()  # invalidates all prior refs
+11. s4 = snapshot()  # captures current state
+12. act(s4.item_F)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. act(s1.item_A)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. act(s2.item_E)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_D)  # OK
+11. act(s3.item_A)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. act(s2.item_C)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_C)  # OK
+11. act(s3.item_G)  # OK
+12. mutate()  # invalidates all prior refs
+13. s4 = snapshot()  # captures current state
+14. act(s4.item_D)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_C)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_D)
+6. mutate()
+7. s3 = snapshot()
+8. act(s3.item_F)
+9. mutate()
+10. act(s3.item_G)","1. s1 = snapshot()
+2. act(s1.item_C)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_D)
+6. mutate()
+7. s3 = snapshot()
+8. act(s3.item_F)
+9. mutate()
+10. s4 = snapshot()  # re-snapshot after mutation
+11. act(s4.item_G)",multiple_mutations,few,multiple_mutations_few,2,"complexity=multiple_mutations, evidence=few(3ex), seed=2, stale_step=10, len=10",10
+12,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_C)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_G)  # OK
+9. mutate()  # invalidates all prior refs
+10. s4 = snapshot()  # captures current state
+11. act(s4.item_D)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. act(s2.item_F)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_F)  # OK
+11. act(s3.item_A)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_B)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_E)  # OK
+9. mutate()  # invalidates all prior refs
+10. s4 = snapshot()  # captures current state
+11. act(s4.item_D)  # OK
+12. act(s4.item_D)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. act(s1.item_C)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_F)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. act(s1.item_E)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_B)  # OK
+10. act(s3.item_E)  # OK
+11. mutate()  # invalidates all prior refs
+12. s4 = snapshot()  # captures current state
+13. act(s4.item_G)  # OK
+14. act(s4.item_B)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_G)
+6. mutate()
+7. s3 = snapshot()
+8. act(s3.item_F)
+9. mutate()
+10. act(s3.item_D)","1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_G)
+6. mutate()
+7. s3 = snapshot()
+8. act(s3.item_F)
+9. mutate()
+10. s4 = snapshot()  # re-snapshot after mutation
+11. act(s4.item_D)",multiple_mutations,mid,multiple_mutations_mid,0,"complexity=multiple_mutations, evidence=mid(5ex), seed=0, stale_step=10, len=10",10
+13,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_E)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_A)  # OK
+9. act(s3.item_F)  # OK
+10. mutate()  # invalidates all prior refs
+11. s4 = snapshot()  # captures current state
+12. act(s4.item_G)  # OK
+13. act(s4.item_A)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_G)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_D)  # OK
+9. act(s3.item_F)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_A)  # OK
+6. act(s2.item_C)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_G)  # OK
+10. act(s3.item_E)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_E)  # OK
+6. act(s2.item_D)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_C)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_C)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. act(s2.item_D)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_F)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_D)
+3. act(s1.item_A)
+4. mutate()
+5. act(s1.item_B)
+6. mutate()
+7. s2 = snapshot()
+8. act(s2.item_G)
+9. mutate()
+10. s3 = snapshot()
+11. act(s3.item_F)","1. s1 = snapshot()
+2. act(s1.item_D)
+3. act(s1.item_A)
+4. mutate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_B)
+7. mutate()
+8. s3 = snapshot()
+9. act(s3.item_G)
+10. mutate()
+11. s4 = snapshot()
+12. act(s4.item_F)",multiple_mutations,mid,multiple_mutations_mid,1,"complexity=multiple_mutations, evidence=mid(5ex), seed=1, stale_step=5, len=11",5
+14,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_D)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_G)  # OK
+9. act(s3.item_E)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_A)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_D)  # OK
+9. mutate()  # invalidates all prior refs
+10. s4 = snapshot()  # captures current state
+11. act(s4.item_B)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. act(s1.item_E)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK
+7. act(s2.item_D)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_E)  # OK
+11. act(s3.item_D)  # OK
+12. mutate()  # invalidates all prior refs
+13. s4 = snapshot()  # captures current state
+14. act(s4.item_F)  # OK
+15. act(s4.item_B)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_D)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_E)  # OK
+9. act(s3.item_C)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_A)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_F)  # OK
+9. mutate()  # invalidates all prior refs
+10. s4 = snapshot()  # captures current state
+11. act(s4.item_B)  # OK
+12. act(s4.item_B)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. act(s1.item_C)
+5. mutate()
+6. s2 = snapshot()
+7. act(s2.item_D)","1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. s2 = snapshot()  # re-snapshot after mutation
+5. act(s2.item_C)
+6. mutate()
+7. s3 = snapshot()
+8. act(s3.item_D)",multiple_mutations,mid,multiple_mutations_mid,2,"complexity=multiple_mutations, evidence=mid(5ex), seed=2, stale_step=4, len=7",4
+15,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_G)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_D)  # OK
+9. act(s3.item_E)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. act(s1.item_F)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_B)  # OK
+7. act(s2.item_C)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_B)  # OK
+11. act(s3.item_F)  # OK
+12. mutate()  # invalidates all prior refs
+13. s4 = snapshot()  # captures current state
+14. act(s4.item_A)  # OK
+15. act(s4.item_C)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_A)  # OK
+6. act(s2.item_G)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_F)  # OK
+10. act(s3.item_E)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_B)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. act(s2.item_C)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_G)  # OK
+11. act(s3.item_F)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_C)  # OK
+10. act(s3.item_C)  # OK
+11. mutate()  # invalidates all prior refs
+12. s4 = snapshot()  # captures current state
+13. act(s4.item_E)  # OK
+
+Worked Example 6:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_F)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_A)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_D)
+6. mutate()
+7. s3 = snapshot()
+8. act(s3.item_G)
+9. mutate()
+10. act(s3.item_E)","1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. s2 = snapshot()
+5. act(s2.item_D)
+6. mutate()
+7. s3 = snapshot()
+8. act(s3.item_G)
+9. mutate()
+10. s4 = snapshot()  # re-snapshot after mutation
+11. act(s4.item_E)",multiple_mutations,many,multiple_mutations_many,0,"complexity=multiple_mutations, evidence=many(6ex), seed=0, stale_step=10, len=10",10
+16,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_C)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK
+7. act(s2.item_B)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_G)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_C)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_B)  # OK
+9. mutate()  # invalidates all prior refs
+10. s4 = snapshot()  # captures current state
+11. act(s4.item_E)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_A)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_F)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. act(s1.item_A)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_C)  # OK
+7. act(s2.item_G)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_A)  # OK
+11. mutate()  # invalidates all prior refs
+12. s4 = snapshot()  # captures current state
+13. act(s4.item_C)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. act(s1.item_E)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+7. act(s2.item_B)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_E)  # OK
+11. mutate()  # invalidates all prior refs
+12. s4 = snapshot()  # captures current state
+13. act(s4.item_D)  # OK
+14. act(s4.item_C)  # OK
+
+Worked Example 6:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_G)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_D)  # OK
+9. act(s3.item_F)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_D)
+3. act(s1.item_C)
+4. mutate()
+5. s2 = snapshot()
+6. act(s2.item_G)
+7. mutate()
+8. act(s2.item_F)
+9. mutate()
+10. s3 = snapshot()
+11. act(s3.item_A)","1. s1 = snapshot()
+2. act(s1.item_D)
+3. act(s1.item_C)
+4. mutate()
+5. s2 = snapshot()
+6. act(s2.item_G)
+7. mutate()
+8. s3 = snapshot()  # re-snapshot after mutation
+9. act(s3.item_F)
+10. mutate()
+11. s4 = snapshot()
+12. act(s4.item_A)",multiple_mutations,many,multiple_mutations_many,1,"complexity=multiple_mutations, evidence=many(6ex), seed=1, stale_step=8, len=11",8
+17,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_F)  # OK
+6. act(s2.item_D)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_A)  # OK
+10. act(s3.item_D)  # OK
+11. mutate()  # invalidates all prior refs
+12. s4 = snapshot()  # captures current state
+13. act(s4.item_F)  # OK
+14. act(s4.item_B)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_B)  # OK
+6. act(s2.item_G)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_D)  # OK
+10. act(s3.item_E)  # OK
+11. mutate()  # invalidates all prior refs
+12. s4 = snapshot()  # captures current state
+13. act(s4.item_G)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_B)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_E)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_G)  # OK
+6. act(s2.item_C)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_F)  # OK
+10. mutate()  # invalidates all prior refs
+11. s4 = snapshot()  # captures current state
+12. act(s4.item_C)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. act(s1.item_C)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_G)  # OK
+10. mutate()  # invalidates all prior refs
+11. s4 = snapshot()  # captures current state
+12. act(s4.item_C)  # OK
+
+Worked Example 6:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. act(s2.item_E)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_B)  # OK
+11. act(s3.item_D)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. act(s1.item_B)
+5. mutate()
+6. s2 = snapshot()
+7. act(s2.item_D)","1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. s2 = snapshot()  # re-snapshot after mutation
+5. act(s2.item_B)
+6. mutate()
+7. s3 = snapshot()
+8. act(s3.item_D)",multiple_mutations,many,multiple_mutations_many,2,"complexity=multiple_mutations, evidence=many(6ex), seed=2, stale_step=4, len=7",4
+18,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Some named operations (e.g. `write_file()`, `navigate()`,
+`commit()`, `deploy()`) mutate the world as a side-effect — they
+invalidate refs just like `mutate()` does. Others (e.g.
+`read_file()`, `inspect()`, `log()`, `ping()`, `hash()`) are pure
+and do NOT invalidate refs. The worked examples below demonstrate
+which is which.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_F)  # OK
+6. act(s2.item_G)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_A)  # OK
+4. write_file()  # MUTATING: invalidates all prior refs
+5. inspect()  # pure: refs remain valid
+6. s2 = snapshot()  # captures current state
+7. act(s2.item_B)  # OK
+8. act(s2.item_D)  # OK
+9. write_file()  # MUTATING: invalidates all prior refs
+10. s3 = snapshot()  # captures current state
+11. act(s3.item_A)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_B)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_G)
+3. act(s1.item_B)
+4. commit()
+5. act(s1.item_D)
+6. mutate()
+7. log()
+8. s2 = snapshot()
+9. act(s2.item_E)","1. s1 = snapshot()
+2. act(s1.item_G)
+3. act(s1.item_B)
+4. commit()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_D)
+7. mutate()
+8. log()
+9. s3 = snapshot()
+10. act(s3.item_E)",implicit_mutation,few,implicit_mutation_few,0,"complexity=implicit_mutation, evidence=few(3ex), seed=0, stale_step=5, len=9",5
+19,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Some named operations (e.g. `write_file()`, `navigate()`,
+`commit()`, `deploy()`) mutate the world as a side-effect — they
+invalidate refs just like `mutate()` does. Others (e.g.
+`read_file()`, `inspect()`, `log()`, `ping()`, `hash()`) are pure
+and do NOT invalidate refs. The worked examples below demonstrate
+which is which.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_A)  # OK
+4. navigate()  # MUTATING: invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK
+7. commit()  # MUTATING: invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_B)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. act(s1.item_F)  # OK
+4. mutate()  # invalidates all prior refs
+5. inspect()  # pure: refs remain valid
+6. s2 = snapshot()  # captures current state
+7. act(s2.item_A)  # OK
+8. act(s2.item_D)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. act(s1.item_G)  # OK
+4. mutate()  # invalidates all prior refs
+5. read_file()  # pure: refs remain valid
+6. s2 = snapshot()  # captures current state
+7. act(s2.item_E)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_A)
+3. act(s1.item_D)
+4. mutate()
+5. ping()
+6. act(s1.item_B)
+7. mutate()
+8. s2 = snapshot()
+9. act(s2.item_F)","1. s1 = snapshot()
+2. act(s1.item_A)
+3. act(s1.item_D)
+4. mutate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. ping()
+7. act(s2.item_B)
+8. mutate()
+9. s3 = snapshot()
+10. act(s3.item_F)",implicit_mutation,few,implicit_mutation_few,1,"complexity=implicit_mutation, evidence=few(3ex), seed=1, stale_step=6, len=9",6
+20,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Some named operations (e.g. `write_file()`, `navigate()`,
+`commit()`, `deploy()`) mutate the world as a side-effect — they
+invalidate refs just like `mutate()` does. Others (e.g.
+`read_file()`, `inspect()`, `log()`, `ping()`, `hash()`) are pure
+and do NOT invalidate refs. The worked examples below demonstrate
+which is which.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. write_file()  # MUTATING: invalidates all prior refs
+4. read_file()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. commit()  # MUTATING: invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_E)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. mutate()  # invalidates all prior refs
+4. log()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK
+7. deploy()  # MUTATING: invalidates all prior refs
+8. inspect()  # pure: refs remain valid
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_D)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. navigate()  # MUTATING: invalidates all prior refs
+4. read_file()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+7. act(s2.item_A)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_B)
+3. commit()
+4. act(s1.item_E)
+5. mutate()
+6. log()
+7. s2 = snapshot()
+8. act(s2.item_D)","1. s1 = snapshot()
+2. act(s1.item_B)
+3. commit()
+4. s2 = snapshot()  # re-snapshot after mutation
+5. act(s2.item_E)
+6. mutate()
+7. log()
+8. s3 = snapshot()
+9. act(s3.item_D)",implicit_mutation,few,implicit_mutation_few,2,"complexity=implicit_mutation, evidence=few(3ex), seed=2, stale_step=4, len=8",4
+21,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Some named operations (e.g. `write_file()`, `navigate()`,
+`commit()`, `deploy()`) mutate the world as a side-effect — they
+invalidate refs just like `mutate()` does. Others (e.g.
+`read_file()`, `inspect()`, `log()`, `ping()`, `hash()`) are pure
+and do NOT invalidate refs. The worked examples below demonstrate
+which is which.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. navigate()  # MUTATING: invalidates all prior refs
+4. ping()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+7. mutate()  # invalidates all prior refs
+8. ping()  # pure: refs remain valid
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_G)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. write_file()  # MUTATING: invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_A)  # OK
+6. act(s2.item_C)  # OK
+7. mutate()  # invalidates all prior refs
+8. read_file()  # pure: refs remain valid
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_F)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_B)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. act(s1.item_F)  # OK
+4. write_file()  # MUTATING: invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. commit()  # MUTATING: invalidates all prior refs
+8. log()  # pure: refs remain valid
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_B)  # OK
+11. act(s3.item_F)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_F)  # OK
+4. navigate()  # MUTATING: invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_F)
+3. mutate()
+4. act(s1.item_G)
+5. mutate()
+6. s2 = snapshot()
+7. act(s2.item_D)","1. s1 = snapshot()
+2. act(s1.item_F)
+3. mutate()
+4. s2 = snapshot()  # re-snapshot after mutation
+5. act(s2.item_G)
+6. mutate()
+7. s3 = snapshot()
+8. act(s3.item_D)",implicit_mutation,mid,implicit_mutation_mid,0,"complexity=implicit_mutation, evidence=mid(5ex), seed=0, stale_step=4, len=7",4
+22,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Some named operations (e.g. `write_file()`, `navigate()`,
+`commit()`, `deploy()`) mutate the world as a side-effect — they
+invalidate refs just like `mutate()` does. Others (e.g.
+`read_file()`, `inspect()`, `log()`, `ping()`, `hash()`) are pure
+and do NOT invalidate refs. The worked examples below demonstrate
+which is which.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK
+7. act(s2.item_A)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. act(s1.item_B)  # OK
+4. write_file()  # MUTATING: invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK
+7. act(s2.item_E)  # OK
+8. mutate()  # invalidates all prior refs
+9. log()  # pure: refs remain valid
+10. s3 = snapshot()  # captures current state
+11. act(s3.item_E)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. mutate()  # invalidates all prior refs
+4. read_file()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK
+7. act(s2.item_E)  # OK
+8. commit()  # MUTATING: invalidates all prior refs
+9. log()  # pure: refs remain valid
+10. s3 = snapshot()  # captures current state
+11. act(s3.item_C)  # OK
+12. act(s3.item_C)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. mutate()  # invalidates all prior refs
+4. log()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_D)  # OK
+3. deploy()  # MUTATING: invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_B)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. ping()
+5. act(s1.item_F)","1. s1 = snapshot()
+2. act(s1.item_A)
+3. mutate()
+4. s2 = snapshot()  # re-snapshot after mutation
+5. ping()
+6. act(s2.item_F)",implicit_mutation,mid,implicit_mutation_mid,1,"complexity=implicit_mutation, evidence=mid(5ex), seed=1, stale_step=5, len=5",5
+23,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Some named operations (e.g. `write_file()`, `navigate()`,
+`commit()`, `deploy()`) mutate the world as a side-effect — they
+invalidate refs just like `mutate()` does. Others (e.g.
+`read_file()`, `inspect()`, `log()`, `ping()`, `hash()`) are pure
+and do NOT invalidate refs. The worked examples below demonstrate
+which is which.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_C)  # OK
+7. act(s2.item_A)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. act(s1.item_G)  # OK
+4. write_file()  # MUTATING: invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. navigate()  # MUTATING: invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_E)  # OK
+6. commit()  # MUTATING: invalidates all prior refs
+7. ping()  # pure: refs remain valid
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_B)  # OK
+10. act(s3.item_D)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. write_file()  # MUTATING: invalidates all prior refs
+4. inspect()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_C)  # OK
+7. mutate()  # invalidates all prior refs
+8. ping()  # pure: refs remain valid
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_A)  # OK
+11. act(s3.item_C)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_C)
+3. act(s1.item_D)
+4. mutate()
+5. act(s1.item_B)","1. s1 = snapshot()
+2. act(s1.item_C)
+3. act(s1.item_D)
+4. mutate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_B)",implicit_mutation,mid,implicit_mutation_mid,2,"complexity=implicit_mutation, evidence=mid(5ex), seed=2, stale_step=5, len=5",5
+24,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Some named operations (e.g. `write_file()`, `navigate()`,
+`commit()`, `deploy()`) mutate the world as a side-effect — they
+invalidate refs just like `mutate()` does. Others (e.g.
+`read_file()`, `inspect()`, `log()`, `ping()`, `hash()`) are pure
+and do NOT invalidate refs. The worked examples below demonstrate
+which is which.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. navigate()  # MUTATING: invalidates all prior refs
+4. ping()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. navigate()  # MUTATING: invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_B)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_A)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. mutate()  # invalidates all prior refs
+8. log()  # pure: refs remain valid
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_B)  # OK
+11. act(s3.item_B)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. act(s1.item_A)  # OK
+4. write_file()  # MUTATING: invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. act(s2.item_F)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. navigate()  # MUTATING: invalidates all prior refs
+4. inspect()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. act(s2.item_A)  # OK
+
+Worked Example 6:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. act(s1.item_C)  # OK
+4. deploy()  # MUTATING: invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_F)
+3. mutate()
+4. inspect()
+5. s2 = snapshot()
+6. act(s2.item_A)
+7. navigate()
+8. read_file()
+9. act(s2.item_B)","1. s1 = snapshot()
+2. act(s1.item_F)
+3. mutate()
+4. inspect()
+5. s2 = snapshot()
+6. act(s2.item_A)
+7. navigate()
+8. s3 = snapshot()  # re-snapshot after mutation
+9. read_file()
+10. act(s3.item_B)",implicit_mutation,many,implicit_mutation_many,0,"complexity=implicit_mutation, evidence=many(6ex), seed=0, stale_step=9, len=9",9
+25,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Some named operations (e.g. `write_file()`, `navigate()`,
+`commit()`, `deploy()`) mutate the world as a side-effect — they
+invalidate refs just like `mutate()` does. Others (e.g.
+`read_file()`, `inspect()`, `log()`, `ping()`, `hash()`) are pure
+and do NOT invalidate refs. The worked examples below demonstrate
+which is which.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. act(s1.item_C)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK
+7. act(s2.item_B)  # OK
+8. mutate()  # invalidates all prior refs
+9. hash()  # pure: refs remain valid
+10. s3 = snapshot()  # captures current state
+11. act(s3.item_B)  # OK
+12. act(s3.item_C)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. commit()  # MUTATING: invalidates all prior refs
+4. read_file()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+7. act(s2.item_B)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_C)  # OK
+3. mutate()  # invalidates all prior refs
+4. inspect()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_D)  # OK
+7. act(s2.item_A)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. mutate()  # invalidates all prior refs
+4. log()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. mutate()  # invalidates all prior refs
+8. s3 = snapshot()  # captures current state
+9. act(s3.item_A)  # OK
+10. act(s3.item_C)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. hash()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_A)  # OK
+
+Worked Example 6:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. act(s1.item_D)  # OK
+4. mutate()  # invalidates all prior refs
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_F)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_C)
+3. act(s1.item_G)
+4. navigate()
+5. act(s1.item_E)","1. s1 = snapshot()
+2. act(s1.item_C)
+3. act(s1.item_G)
+4. navigate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_E)",implicit_mutation,many,implicit_mutation_many,1,"complexity=implicit_mutation, evidence=many(6ex), seed=1, stale_step=5, len=5",5
+26,"World model: `snapshot()` captures the current world and returns a
+ref token. `act(ref.item_X)` uses a ref to perform an action. A ref
+becomes STALE once the world state it captured is mutated — any
+further `act(ref.*)` with that stale ref FAILS. To recover, you must
+re-snapshot to get a fresh ref before acting again.
+
+Some named operations (e.g. `write_file()`, `navigate()`,
+`commit()`, `deploy()`) mutate the world as a side-effect — they
+invalidate refs just like `mutate()` does. Others (e.g.
+`read_file()`, `inspect()`, `log()`, `ping()`, `hash()`) are pure
+and do NOT invalidate refs. The worked examples below demonstrate
+which is which.
+
+Worked Example 1:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_B)  # OK
+3. deploy()  # MUTATING: invalidates all prior refs
+4. ping()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. act(s2.item_C)  # OK
+8. deploy()  # MUTATING: invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_F)  # OK
+
+Worked Example 2:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_G)  # OK
+3. commit()  # MUTATING: invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_A)  # OK
+6. act(s2.item_E)  # OK
+
+Worked Example 3:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_A)  # OK
+3. commit()  # MUTATING: invalidates all prior refs
+4. ping()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_G)  # OK
+7. act(s2.item_F)  # OK
+8. mutate()  # invalidates all prior refs
+9. s3 = snapshot()  # captures current state
+10. act(s3.item_E)  # OK
+11. act(s3.item_G)  # OK
+
+Worked Example 4:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. act(s1.item_D)  # OK
+4. navigate()  # MUTATING: invalidates all prior refs
+5. log()  # pure: refs remain valid
+6. s2 = snapshot()  # captures current state
+7. act(s2.item_F)  # OK
+8. write_file()  # MUTATING: invalidates all prior refs
+9. read_file()  # pure: refs remain valid
+10. s3 = snapshot()  # captures current state
+11. act(s3.item_C)  # OK
+
+Worked Example 5:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_F)  # OK
+3. write_file()  # MUTATING: invalidates all prior refs
+4. read_file()  # pure: refs remain valid
+5. s2 = snapshot()  # captures current state
+6. act(s2.item_E)  # OK
+7. act(s2.item_G)  # OK
+
+Worked Example 6:
+1. s1 = snapshot()  # captures current state
+2. act(s1.item_E)  # OK
+3. mutate()  # invalidates all prior refs
+4. s2 = snapshot()  # captures current state
+5. act(s2.item_D)  # OK
+6. mutate()  # invalidates all prior refs
+7. s3 = snapshot()  # captures current state
+8. act(s3.item_A)  # OK","OPS:
+1. s1 = snapshot()
+2. act(s1.item_C)
+3. act(s1.item_G)
+4. mutate()
+5. act(s1.item_D)","1. s1 = snapshot()
+2. act(s1.item_C)
+3. act(s1.item_G)
+4. mutate()
+5. s2 = snapshot()  # re-snapshot after mutation
+6. act(s2.item_D)",implicit_mutation,many,implicit_mutation_many,2,"complexity=implicit_mutation, evidence=many(6ex), seed=2, stale_step=5, len=5",5

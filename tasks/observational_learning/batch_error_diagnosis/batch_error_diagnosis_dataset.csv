@@ -1,0 +1,1560 @@
+task_id,seed,complexity,evidence,n_examples,difficulty_label,material,test_input,expected,item_desc
+0,0,independent_errors,few,3,independent_errors_few,"Example 1:
+BUILD OUTPUT:
+src/store/reducer.ts:159:31 - error TS6133: 'fetchOrders' is declared but its value is never read.
+FAIL test/orderapi.test.ts > OrderApi > persists across refresh
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. test:OrderApi:persists across refresh
+  2. unused:fetchOrders
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/utils/format.ts:125:35 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/lib/client.ts:168:10 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+src/models/user.ts:138:25 - error TS18047: 'RequestHeaders' is possibly 'null'.
+src/api/users.ts:45:38 - error TS6133: 'RequestHeaders' is declared but its value is never read.
+
+Diagnosis:
+Distinct root causes:
+  1. null:RequestHeaders
+  2. prop:validateEmail.email
+  3. type:OrderItem
+  4. unused:RequestHeaders
+Count of distinct root causes: 4
+
+Example 3:
+BUILD OUTPUT:
+test/auth.test.ts:157:25 - error TS18047: 'validateEmail' is possibly 'null'.
+src/lib/client.ts:152:29 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:validateEmail
+  2. type:UserProfile
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/models/user.ts:131:14 - error TS18047: 'formatDate' is possibly 'null'.
+src/lib/validator.ts:165:20 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'ResponsePayload'.
+
+How many distinct root causes are there?",2,"independent_errors (few=3 examples, seed 0)"
+1,1,independent_errors,few,3,independent_errors_few,"Example 1:
+BUILD OUTPUT:
+src/lib/validator.ts:106:20 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/pages/dashboard.tsx:127:10 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+
+Diagnosis:
+Distinct root causes:
+  1. prop:validateEmail.email
+  2. type:OrderItem
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/pages/settings.tsx:79:8 - error TS6133: 'useSettings' is declared but its value is never read.
+test/api.test.ts:94:34 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'ResponsePayload'.
+FAIL test/dashboardpage.test.ts > DashboardPage > returns 200 on success
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. test:DashboardPage:returns 200 on success
+  2. type:ResponsePayload
+  3. unused:useSettings
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/api/orders.ts:26:32 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+FAIL test/orderapi.test.ts > OrderApi > persists across refresh
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/utils/logger
+  2. test:OrderApi:persists across refresh
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/api/users.ts:35:27 - error TS18047: 'AuthContext' is possibly 'null'.
+src/auth/session.ts:42:36 - error TS2304: Cannot find name 'date-fns'. Did you forget to import from 'date-fns'?
+src/api/users.ts:135:39 - error TS2741: Property 'id' is missing in type but required in 'sessionToken'.
+
+How many distinct root causes are there?",3,"independent_errors (few=3 examples, seed 1)"
+2,2,independent_errors,few,3,independent_errors_few,"Example 1:
+BUILD OUTPUT:
+src/models/order.ts:62:4 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+src/hooks/useAuth.ts:81:35 - error TS2304: Cannot find name 'react-query'. Did you forget to import from 'react-query'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:react-query
+  2. type:UserProfile
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/utils/parse.ts:101:2 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+src/utils/format.ts:105:4 - error TS18047: 'UserProfile' is possibly 'null'.
+src/utils/format.ts:129:5 - error TS2741: Property 'token' is missing in type but required in 'UserProfile'.
+FAIL test/orderapi.test.ts > OrderApi > returns 200 on success
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:UserProfile
+  2. prop:UserProfile.token
+  3. test:OrderApi:returns 200 on success
+  4. type:UserProfile
+Count of distinct root causes: 4
+
+Example 3:
+BUILD OUTPUT:
+test/api.test.ts:101:24 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+FAIL test/orderapi.test.ts > OrderApi > persists across refresh
+  Expected: 200  Received: 500
+src/api/orders.ts:168:9 - error TS6133: 'OrderItem' is declared but its value is never read.
+
+Diagnosis:
+Distinct root causes:
+  1. test:OrderApi:persists across refresh
+  2. type:UserProfile
+  3. unused:OrderItem
+Count of distinct root causes: 3","BUILD OUTPUT:
+src/pages/settings.tsx:43:31 - error TS2304: Cannot find name 'lodash'. Did you forget to import from 'lodash'?
+src/models/order.ts:145:15 - error TS6133: 'AuthContext' is declared but its value is never read.
+src/utils/parse.ts:146:10 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'StoreState'.
+
+How many distinct root causes are there?",3,"independent_errors (few=3 examples, seed 2)"
+3,0,independent_errors,mid,4,independent_errors_mid,"Example 1:
+BUILD OUTPUT:
+test/auth.test.ts:44:6 - error TS18047: 'AuthContext' is possibly 'null'.
+src/auth/session.ts:107:36 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:AuthContext
+  2. type:normalizeInput
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/models/order.ts:32:17 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'sessionToken'.
+src/auth/session.ts:169:17 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+src/utils/format.ts:47:20 - error TS18047: 'ResponsePayload' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/models/base
+  2. null:ResponsePayload
+  3. type:sessionToken
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+FAIL test/usermodel.test.ts > UserModel > handles empty list
+  Expected: 200  Received: 500
+src/utils/parse.ts:50:16 - error TS18047: 'formatDate' is possibly 'null'.
+src/pages/dashboard.tsx:27:36 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:formatDate
+  2. test:UserModel:handles empty list
+  3. type:normalizeInput
+Count of distinct root causes: 3
+
+Example 4:
+BUILD OUTPUT:
+src/lib/validator.ts:113:39 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/lib/validator.ts:120:11 - error TS18047: 'sessionToken' is possibly 'null'.
+src/pages/settings.tsx:71:3 - error TS6133: 'sessionToken' is declared but its value is never read.
+
+Diagnosis:
+Distinct root causes:
+  1. null:sessionToken
+  2. type:OrderItem
+  3. unused:sessionToken
+Count of distinct root causes: 3","BUILD OUTPUT:
+test/auth.test.ts:92:10 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'sessionToken'.
+src/api/users.ts:110:13 - error TS2741: Property 'status' is missing in type but required in 'formatDate'.
+
+How many distinct root causes are there?",2,"independent_errors (mid=4 examples, seed 0)"
+4,1,independent_errors,mid,4,independent_errors_mid,"Example 1:
+BUILD OUTPUT:
+src/auth/login.ts:143:10 - error TS2741: Property 'token' is missing in type but required in 'fetchOrders'.
+src/api/orders.ts:154:24 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+src/models/user.ts:67:17 - error TS18047: 'ResponsePayload' is possibly 'null'.
+FAIL test/dashboardpage.test.ts > DashboardPage > handles empty list
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:ResponsePayload
+  2. prop:fetchOrders.token
+  3. test:DashboardPage:handles empty list
+  4. type:RequestHeaders
+Count of distinct root causes: 4
+
+Example 2:
+BUILD OUTPUT:
+src/api/users.ts:66:18 - error TS2741: Property 'createdAt' is missing in type but required in 'AuthContext'.
+src/pages/settings.tsx:84:17 - error TS18047: 'sessionToken' is possibly 'null'.
+src/models/order.ts:120:24 - error TS6133: 'OrderItem' is declared but its value is never read.
+
+Diagnosis:
+Distinct root causes:
+  1. null:sessionToken
+  2. prop:AuthContext.createdAt
+  3. unused:OrderItem
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/pages/settings.tsx:51:39 - error TS2741: Property 'createdAt' is missing in type but required in 'AuthContext'.
+FAIL test/orderapi.test.ts > OrderApi > persists across refresh
+  Expected: 200  Received: 500
+src/api/users.ts:54:34 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'ApiClient'.
+src/api/orders.ts:52:34 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/models/base
+  2. prop:AuthContext.createdAt
+  3. test:OrderApi:persists across refresh
+  4. type:ApiClient
+Count of distinct root causes: 4
+
+Example 4:
+BUILD OUTPUT:
+src/api/users.ts:142:9 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/models/order.ts:117:10 - error TS18047: 'OrderItem' is possibly 'null'.
+src/lib/validator.ts:176:30 - error TS2741: Property 'status' is missing in type but required in 'ResponsePayload'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:OrderItem
+  2. prop:ResponsePayload.status
+  3. type:formatDate
+Count of distinct root causes: 3","BUILD OUTPUT:
+src/api/users.ts:137:29 - error TS18047: 'formatDate' is possibly 'null'.
+FAIL test/dashboardpage.test.ts > DashboardPage > handles empty list
+  Expected: 200  Received: 500
+
+How many distinct root causes are there?",2,"independent_errors (mid=4 examples, seed 1)"
+5,2,independent_errors,mid,4,independent_errors_mid,"Example 1:
+BUILD OUTPUT:
+src/models/order.ts:27:26 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/pages/dashboard.tsx:133:4 - error TS18047: 'OrderItem' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:OrderItem
+  2. type:OrderItem
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/models/order.ts:53:36 - error TS2304: Cannot find name 'lodash'. Did you forget to import from 'lodash'?
+src/pages/settings.tsx:35:37 - error TS18047: 'UserProfile' is possibly 'null'.
+src/api/users.ts:135:11 - error TS2741: Property 'id' is missing in type but required in 'sessionToken'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:lodash
+  2. null:UserProfile
+  3. prop:sessionToken.id
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/lib/client.ts:141:39 - error TS2741: Property 'id' is missing in type but required in 'validateEmail'.
+src/api/users.ts:77:9 - error TS18047: 'OrderItem' is possibly 'null'.
+src/api/orders.ts:31:26 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'fetchOrders'.
+FAIL test/dashboardpage.test.ts > DashboardPage > handles empty list
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:OrderItem
+  2. prop:validateEmail.id
+  3. test:DashboardPage:handles empty list
+  4. type:fetchOrders
+Count of distinct root causes: 4
+
+Example 4:
+BUILD OUTPUT:
+FAIL test/usermodel.test.ts > UserModel > handles empty list
+  Expected: 200  Received: 500
+src/utils/format.ts:160:17 - error TS6133: 'parseAmount' is declared but its value is never read.
+
+Diagnosis:
+Distinct root causes:
+  1. test:UserModel:handles empty list
+  2. unused:parseAmount
+Count of distinct root causes: 2","BUILD OUTPUT:
+FAIL test/authflow.test.ts > AuthFlow > returns 200 on success
+  Expected: 200  Received: 500
+test/api.test.ts:49:26 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+
+How many distinct root causes are there?",2,"independent_errors (mid=4 examples, seed 2)"
+6,0,independent_errors,many,5,independent_errors_many,"Example 1:
+BUILD OUTPUT:
+src/auth/login.ts:45:8 - error TS18047: 'parseAmount' is possibly 'null'.
+FAIL test/validatorutil.test.ts > ValidatorUtil > rejects invalid input
+  Expected: 200  Received: 500
+src/utils/parse.ts:102:35 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+src/utils/parse.ts:8:14 - error TS2304: Cannot find name 'lodash'. Did you forget to import from 'lodash'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:lodash
+  2. null:parseAmount
+  3. test:ValidatorUtil:rejects invalid input
+  4. type:normalizeInput
+Count of distinct root causes: 4
+
+Example 2:
+BUILD OUTPUT:
+src/api/users.ts:40:40 - error TS18047: 'parseAmount' is possibly 'null'.
+src/models/user.ts:38:1 - error TS2304: Cannot find name 'actions'. Did you forget to import from '@/store/actions'?
+src/utils/format.ts:60:11 - error TS2741: Property 'status' is missing in type but required in 'ResponsePayload'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/store/actions
+  2. null:parseAmount
+  3. prop:ResponsePayload.status
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/utils/format.ts:51:13 - error TS18047: 'parseAmount' is possibly 'null'.
+FAIL test/dashboardpage.test.ts > DashboardPage > handles empty list
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:parseAmount
+  2. test:DashboardPage:handles empty list
+Count of distinct root causes: 2
+
+Example 4:
+BUILD OUTPUT:
+src/models/user.ts:72:5 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/pages/settings.tsx:159:38 - error TS18047: 'sessionToken' is possibly 'null'.
+src/hooks/useAuth.ts:21:20 - error TS2741: Property 'status' is missing in type but required in 'ResponsePayload'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:sessionToken
+  2. prop:ResponsePayload.status
+  3. type:OrderItem
+Count of distinct root causes: 3
+
+Example 5:
+BUILD OUTPUT:
+test/auth.test.ts:125:12 - error TS18047: 'parseAmount' is possibly 'null'.
+src/pages/dashboard.tsx:10:23 - error TS2741: Property 'createdAt' is missing in type but required in 'sessionToken'.
+FAIL test/authflow.test.ts > AuthFlow > rejects invalid input
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:parseAmount
+  2. prop:sessionToken.createdAt
+  3. test:AuthFlow:rejects invalid input
+Count of distinct root causes: 3","BUILD OUTPUT:
+src/lib/client.ts:153:1 - error TS6133: 'StoreState' is declared but its value is never read.
+src/auth/login.ts:51:40 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+
+How many distinct root causes are there?",2,"independent_errors (many=5 examples, seed 0)"
+7,1,independent_errors,many,5,independent_errors_many,"Example 1:
+BUILD OUTPUT:
+FAIL test/validatorutil.test.ts > ValidatorUtil > persists across refresh
+  Expected: 200  Received: 500
+src/auth/login.ts:97:33 - error TS2741: Property 'token' is missing in type but required in 'parseAmount'.
+src/hooks/useAuth.ts:27:10 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'fetchOrders'.
+src/models/user.ts:24:36 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/models/base
+  2. prop:parseAmount.token
+  3. test:ValidatorUtil:persists across refresh
+  4. type:fetchOrders
+Count of distinct root causes: 4
+
+Example 2:
+BUILD OUTPUT:
+FAIL test/orderapi.test.ts > OrderApi > rejects invalid input
+  Expected: 200  Received: 500
+src/api/users.ts:38:28 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+src/models/user.ts:157:4 - error TS18047: 'normalizeInput' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:normalizeInput
+  2. prop:validateEmail.email
+  3. test:OrderApi:rejects invalid input
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/utils/parse.ts:124:29 - error TS6133: 'fetchOrders' is declared but its value is never read.
+src/models/user.ts:120:35 - error TS2741: Property 'token' is missing in type but required in 'parseAmount'.
+src/pages/settings.tsx:131:14 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+src/store/reducer.ts:111:13 - error TS18047: 'StoreState' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/utils/logger
+  2. null:StoreState
+  3. prop:parseAmount.token
+  4. unused:fetchOrders
+Count of distinct root causes: 4
+
+Example 4:
+BUILD OUTPUT:
+src/lib/validator.ts:112:39 - error TS2304: Cannot find name 'react-query'. Did you forget to import from 'react-query'?
+src/models/order.ts:180:17 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+src/auth/session.ts:20:1 - error TS6133: 'parseAmount' is declared but its value is never read.
+
+Diagnosis:
+Distinct root causes:
+  1. import:react-query
+  2. type:RequestHeaders
+  3. unused:parseAmount
+Count of distinct root causes: 3
+
+Example 5:
+BUILD OUTPUT:
+src/pages/dashboard.tsx:179:33 - error TS18047: 'validateEmail' is possibly 'null'.
+src/lib/client.ts:50:2 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+src/auth/session.ts:156:5 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/models/base
+  2. null:validateEmail
+  3. type:normalizeInput
+Count of distinct root causes: 3","BUILD OUTPUT:
+src/api/orders.ts:9:39 - error TS18047: 'validateEmail' is possibly 'null'.
+src/store/reducer.ts:41:31 - error TS2741: Property 'token' is missing in type but required in 'parseAmount'.
+FAIL test/dashboardpage.test.ts > DashboardPage > returns 200 on success
+  Expected: 200  Received: 500
+
+How many distinct root causes are there?",3,"independent_errors (many=5 examples, seed 1)"
+8,2,independent_errors,many,5,independent_errors_many,"Example 1:
+BUILD OUTPUT:
+src/utils/format.ts:140:37 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'sessionToken'.
+src/pages/dashboard.tsx:129:13 - error TS6133: 'parseAmount' is declared but its value is never read.
+src/pages/dashboard.tsx:47:7 - error TS18047: 'RequestHeaders' is possibly 'null'.
+src/api/users.ts:122:1 - error TS2304: Cannot find name 'lodash'. Did you forget to import from 'lodash'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:lodash
+  2. null:RequestHeaders
+  3. type:sessionToken
+  4. unused:parseAmount
+Count of distinct root causes: 4
+
+Example 2:
+BUILD OUTPUT:
+src/lib/client.ts:84:35 - error TS6133: 'useSettings' is declared but its value is never read.
+src/auth/session.ts:179:33 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/models/base
+  2. unused:useSettings
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+src/models/user.ts:178:20 - error TS2304: Cannot find name 'lodash'. Did you forget to import from 'lodash'?
+FAIL test/validatorutil.test.ts > ValidatorUtil > rejects invalid input
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. import:lodash
+  2. test:ValidatorUtil:rejects invalid input
+Count of distinct root causes: 2
+
+Example 4:
+BUILD OUTPUT:
+test/auth.test.ts:63:34 - error TS2304: Cannot find name 'react-query'. Did you forget to import from 'react-query'?
+FAIL test/validatorutil.test.ts > ValidatorUtil > rejects invalid input
+  Expected: 200  Received: 500
+test/auth.test.ts:81:25 - error TS6133: 'parseAmount' is declared but its value is never read.
+src/auth/session.ts:38:38 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'validateEmail'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:react-query
+  2. test:ValidatorUtil:rejects invalid input
+  3. type:validateEmail
+  4. unused:parseAmount
+Count of distinct root causes: 4
+
+Example 5:
+BUILD OUTPUT:
+src/auth/login.ts:56:16 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/hooks/useAuth.ts:18:22 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+src/store/reducer.ts:158:22 - error TS18047: 'UserProfile' is possibly 'null'.
+src/hooks/useAuth.ts:30:35 - error TS2304: Cannot find name 'react-query'. Did you forget to import from 'react-query'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:react-query
+  2. null:UserProfile
+  3. prop:validateEmail.email
+  4. type:OrderItem
+Count of distinct root causes: 4","BUILD OUTPUT:
+src/models/order.ts:115:39 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/pages/dashboard.tsx:136:37 - error TS18047: 'formatDate' is possibly 'null'.
+
+How many distinct root causes are there?",2,"independent_errors (many=5 examples, seed 2)"
+9,0,chained_errors,few,3,chained_errors_few,"Example 1:
+BUILD OUTPUT:
+src/utils/format.ts:24:39 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+src/api/orders.ts:172:25 - error TS18047: 'AuthContext' is possibly 'null'.
+FAIL test/usermodel.test.ts > UserModel > persists across refresh
+  Expected: 200  Received: 500
+test/api.test.ts:91:8 - error TS2741: Property 'id' is missing in type but required in 'AuthContext'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:AuthContext
+  2. prop:AuthContext.id
+  3. test:UserModel:persists across refresh
+  4. type:UserProfile
+Count of distinct root causes: 4
+
+Example 2:
+BUILD OUTPUT:
+src/models/user.ts:61:38 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'sessionToken'.
+src/auth/session.ts:16:15 - error TS18047: 'fetchOrders' is possibly 'null'.
+FAIL test/authflow.test.ts > AuthFlow > persists across refresh
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:fetchOrders
+  2. test:AuthFlow:persists across refresh
+  3. type:sessionToken
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/pages/settings.tsx:51:27 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+src/lib/validator.ts:63:37 - error TS18047: 'ApiClient' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:ApiClient
+  2. type:parseAmount
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/api/users.ts:99:13 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'useSettings'.
+src/utils/format.ts:163:33 - error TS18047: 'ResponsePayload' is possibly 'null'.
+FAIL test/authflow.test.ts > AuthFlow > returns 200 on success
+  Expected: 200  Received: 500
+test/auth.test.ts:69:19 - error TS2741: Property 'token' is missing in type but required in 'ResponsePayload'.
+
+How many distinct root causes are there?",4,"chained_errors (few=3 examples, seed 0)"
+10,1,chained_errors,few,3,chained_errors_few,"Example 1:
+BUILD OUTPUT:
+src/api/users.ts:78:11 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/models/order.ts:67:1 - error TS18047: 'StoreState' is possibly 'null'.
+FAIL test/authflow.test.ts > AuthFlow > handles empty list
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:StoreState
+  2. test:AuthFlow:handles empty list
+  3. type:formatDate
+Count of distinct root causes: 3
+
+Example 2:
+BUILD OUTPUT:
+src/auth/session.ts:119:10 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'useSettings'.
+src/utils/format.ts:104:1 - error TS18047: 'ResponsePayload' is possibly 'null'.
+FAIL test/authflow.test.ts > AuthFlow > returns 200 on success
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:ResponsePayload
+  2. test:AuthFlow:returns 200 on success
+  3. type:useSettings
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/hooks/useAuth.ts:15:31 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+src/utils/parse.ts:155:21 - error TS18047: 'AuthContext' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:AuthContext
+  2. type:UserProfile
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/utils/parse.ts:27:39 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'sessionToken'.
+src/auth/login.ts:90:27 - error TS18047: 'fetchOrders' is possibly 'null'.
+
+How many distinct root causes are there?",2,"chained_errors (few=3 examples, seed 1)"
+11,2,chained_errors,few,3,chained_errors_few,"Example 1:
+BUILD OUTPUT:
+src/auth/session.ts:152:34 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+src/lib/client.ts:153:23 - error TS18047: 'ApiClient' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:ApiClient
+  2. type:parseAmount
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+test/api.test.ts:65:33 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'StoreState'.
+src/models/user.ts:65:8 - error TS18047: 'OrderItem' is possibly 'null'.
+FAIL test/usermodel.test.ts > UserModel > handles empty list
+  Expected: 200  Received: 500
+src/utils/format.ts:148:14 - error TS2741: Property 'id' is missing in type but required in 'OrderItem'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:OrderItem
+  2. prop:OrderItem.id
+  3. test:UserModel:handles empty list
+  4. type:StoreState
+Count of distinct root causes: 4
+
+Example 3:
+BUILD OUTPUT:
+src/store/reducer.ts:26:34 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/utils/parse.ts:171:20 - error TS18047: 'useSettings' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:useSettings
+  2. type:OrderItem
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/pages/settings.tsx:135:8 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+test/api.test.ts:63:23 - error TS18047: 'StoreState' is possibly 'null'.
+FAIL test/orderapi.test.ts > OrderApi > returns 200 on success
+  Expected: 200  Received: 500
+test/auth.test.ts:36:21 - error TS2741: Property 'email' is missing in type but required in 'StoreState'.
+
+How many distinct root causes are there?",4,"chained_errors (few=3 examples, seed 2)"
+12,0,chained_errors,mid,4,chained_errors_mid,"Example 1:
+BUILD OUTPUT:
+src/utils/parse.ts:105:22 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'AuthContext'.
+src/auth/session.ts:37:2 - error TS18047: 'RequestHeaders' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:RequestHeaders
+  2. type:AuthContext
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/models/user.ts:35:5 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/hooks/useAuth.ts:99:4 - error TS18047: 'StoreState' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:StoreState
+  2. type:formatDate
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+src/pages/dashboard.tsx:105:21 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+src/models/order.ts:165:20 - error TS18047: 'ApiClient' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:ApiClient
+  2. type:parseAmount
+Count of distinct root causes: 2
+
+Example 4:
+BUILD OUTPUT:
+test/api.test.ts:119:35 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/utils/parse.ts:71:12 - error TS18047: 'useSettings' is possibly 'null'.
+FAIL test/dashboardpage.test.ts > DashboardPage > handles empty list
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:useSettings
+  2. test:DashboardPage:handles empty list
+  3. type:OrderItem
+Count of distinct root causes: 3","BUILD OUTPUT:
+src/api/orders.ts:14:39 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/api/orders.ts:46:17 - error TS18047: 'useSettings' is possibly 'null'.
+FAIL test/dashboardpage.test.ts > DashboardPage > handles empty list
+  Expected: 200  Received: 500
+src/lib/validator.ts:92:5 - error TS2741: Property 'status' is missing in type but required in 'useSettings'.
+
+How many distinct root causes are there?",4,"chained_errors (mid=4 examples, seed 0)"
+13,1,chained_errors,mid,4,chained_errors_mid,"Example 1:
+BUILD OUTPUT:
+test/api.test.ts:92:20 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+src/utils/parse.ts:56:22 - error TS18047: 'AuthContext' is possibly 'null'.
+FAIL test/usermodel.test.ts > UserModel > persists across refresh
+  Expected: 200  Received: 500
+test/auth.test.ts:135:27 - error TS2741: Property 'id' is missing in type but required in 'AuthContext'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:AuthContext
+  2. prop:AuthContext.id
+  3. test:UserModel:persists across refresh
+  4. type:UserProfile
+Count of distinct root causes: 4
+
+Example 2:
+BUILD OUTPUT:
+src/pages/dashboard.tsx:142:29 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'validateEmail'.
+src/lib/validator.ts:111:28 - error TS18047: 'normalizeInput' is possibly 'null'.
+FAIL test/usermodel.test.ts > UserModel > returns 200 on success
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:normalizeInput
+  2. test:UserModel:returns 200 on success
+  3. type:validateEmail
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/api/users.ts:105:32 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'ApiClient'.
+src/models/user.ts:168:24 - error TS18047: 'sessionToken' is possibly 'null'.
+FAIL test/validatorutil.test.ts > ValidatorUtil > persists across refresh
+  Expected: 200  Received: 500
+src/pages/settings.tsx:25:1 - error TS2741: Property 'createdAt' is missing in type but required in 'sessionToken'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:sessionToken
+  2. prop:sessionToken.createdAt
+  3. test:ValidatorUtil:persists across refresh
+  4. type:ApiClient
+Count of distinct root causes: 4
+
+Example 4:
+BUILD OUTPUT:
+src/models/user.ts:77:32 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+src/api/orders.ts:119:19 - error TS18047: 'ApiClient' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:ApiClient
+  2. type:parseAmount
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/lib/validator.ts:92:40 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'fetchOrders'.
+src/auth/session.ts:152:23 - error TS18047: 'UserProfile' is possibly 'null'.
+
+How many distinct root causes are there?",2,"chained_errors (mid=4 examples, seed 1)"
+14,2,chained_errors,mid,4,chained_errors_mid,"Example 1:
+BUILD OUTPUT:
+src/models/order.ts:121:30 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'fetchOrders'.
+src/auth/session.ts:108:9 - error TS18047: 'UserProfile' is possibly 'null'.
+FAIL test/orderapi.test.ts > OrderApi > rejects invalid input
+  Expected: 200  Received: 500
+src/api/users.ts:102:18 - error TS2741: Property 'email' is missing in type but required in 'UserProfile'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:UserProfile
+  2. prop:UserProfile.email
+  3. test:OrderApi:rejects invalid input
+  4. type:fetchOrders
+Count of distinct root causes: 4
+
+Example 2:
+BUILD OUTPUT:
+src/models/user.ts:135:26 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+src/auth/session.ts:162:9 - error TS18047: 'formatDate' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:formatDate
+  2. type:normalizeInput
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+src/api/users.ts:168:8 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'AuthContext'.
+src/auth/session.ts:18:1 - error TS18047: 'RequestHeaders' is possibly 'null'.
+FAIL test/dashboardpage.test.ts > DashboardPage > persists across refresh
+  Expected: 200  Received: 500
+src/auth/session.ts:158:6 - error TS2741: Property 'status' is missing in type but required in 'RequestHeaders'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:RequestHeaders
+  2. prop:RequestHeaders.status
+  3. test:DashboardPage:persists across refresh
+  4. type:AuthContext
+Count of distinct root causes: 4
+
+Example 4:
+BUILD OUTPUT:
+test/auth.test.ts:153:34 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+test/api.test.ts:77:33 - error TS18047: 'parseAmount' is possibly 'null'.
+FAIL test/authflow.test.ts > AuthFlow > rejects invalid input
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:parseAmount
+  2. test:AuthFlow:rejects invalid input
+  3. type:RequestHeaders
+Count of distinct root causes: 3","BUILD OUTPUT:
+src/auth/session.ts:145:2 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/store/reducer.ts:26:40 - error TS18047: 'StoreState' is possibly 'null'.
+FAIL test/orderapi.test.ts > OrderApi > returns 200 on success
+  Expected: 200  Received: 500
+test/api.test.ts:172:8 - error TS2741: Property 'email' is missing in type but required in 'StoreState'.
+
+How many distinct root causes are there?",4,"chained_errors (mid=4 examples, seed 2)"
+15,0,chained_errors,many,5,chained_errors_many,"Example 1:
+BUILD OUTPUT:
+src/api/orders.ts:5:20 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+src/hooks/useAuth.ts:79:11 - error TS18047: 'formatDate' is possibly 'null'.
+FAIL test/dashboardpage.test.ts > DashboardPage > returns 200 on success
+  Expected: 200  Received: 500
+src/store/reducer.ts:47:10 - error TS2741: Property 'status' is missing in type but required in 'formatDate'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:formatDate
+  2. prop:formatDate.status
+  3. test:DashboardPage:returns 200 on success
+  4. type:normalizeInput
+Count of distinct root causes: 4
+
+Example 2:
+BUILD OUTPUT:
+src/store/reducer.ts:48:28 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+src/lib/client.ts:122:32 - error TS18047: 'parseAmount' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:parseAmount
+  2. type:RequestHeaders
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+src/models/order.ts:161:20 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'useSettings'.
+src/pages/dashboard.tsx:20:21 - error TS18047: 'ResponsePayload' is possibly 'null'.
+FAIL test/authflow.test.ts > AuthFlow > returns 200 on success
+  Expected: 200  Received: 500
+src/api/orders.ts:96:12 - error TS2741: Property 'token' is missing in type but required in 'ResponsePayload'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:ResponsePayload
+  2. prop:ResponsePayload.token
+  3. test:AuthFlow:returns 200 on success
+  4. type:useSettings
+Count of distinct root causes: 4
+
+Example 4:
+BUILD OUTPUT:
+test/auth.test.ts:163:33 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+src/lib/client.ts:156:19 - error TS18047: 'parseAmount' is possibly 'null'.
+FAIL test/authflow.test.ts > AuthFlow > rejects invalid input
+  Expected: 200  Received: 500
+src/api/orders.ts:150:27 - error TS2741: Property 'token' is missing in type but required in 'parseAmount'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:parseAmount
+  2. prop:parseAmount.token
+  3. test:AuthFlow:rejects invalid input
+  4. type:RequestHeaders
+Count of distinct root causes: 4
+
+Example 5:
+BUILD OUTPUT:
+src/pages/dashboard.tsx:149:9 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'StoreState'.
+src/api/orders.ts:146:31 - error TS18047: 'OrderItem' is possibly 'null'.
+FAIL test/usermodel.test.ts > UserModel > handles empty list
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:OrderItem
+  2. test:UserModel:handles empty list
+  3. type:StoreState
+Count of distinct root causes: 3","BUILD OUTPUT:
+src/auth/session.ts:145:13 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+src/utils/format.ts:19:40 - error TS18047: 'formatDate' is possibly 'null'.
+FAIL test/dashboardpage.test.ts > DashboardPage > returns 200 on success
+  Expected: 200  Received: 500
+
+How many distinct root causes are there?",3,"chained_errors (many=5 examples, seed 0)"
+16,1,chained_errors,many,5,chained_errors_many,"Example 1:
+BUILD OUTPUT:
+src/pages/settings.tsx:93:7 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'useSettings'.
+src/api/orders.ts:118:21 - error TS18047: 'ResponsePayload' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:ResponsePayload
+  2. type:useSettings
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/lib/validator.ts:127:1 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/lib/validator.ts:9:35 - error TS18047: 'useSettings' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:useSettings
+  2. type:OrderItem
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+src/pages/dashboard.tsx:41:20 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+src/pages/dashboard.tsx:17:33 - error TS18047: 'parseAmount' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:parseAmount
+  2. type:RequestHeaders
+Count of distinct root causes: 2
+
+Example 4:
+BUILD OUTPUT:
+src/hooks/useAuth.ts:89:38 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'StoreState'.
+src/auth/session.ts:151:1 - error TS18047: 'OrderItem' is possibly 'null'.
+FAIL test/usermodel.test.ts > UserModel > handles empty list
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:OrderItem
+  2. test:UserModel:handles empty list
+  3. type:StoreState
+Count of distinct root causes: 3
+
+Example 5:
+BUILD OUTPUT:
+src/utils/format.ts:51:5 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+src/models/user.ts:123:38 - error TS18047: 'ApiClient' is possibly 'null'.
+FAIL test/orderapi.test.ts > OrderApi > persists across refresh
+  Expected: 200  Received: 500
+src/hooks/useAuth.ts:153:28 - error TS2741: Property 'email' is missing in type but required in 'ApiClient'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:ApiClient
+  2. prop:ApiClient.email
+  3. test:OrderApi:persists across refresh
+  4. type:parseAmount
+Count of distinct root causes: 4","BUILD OUTPUT:
+test/auth.test.ts:160:29 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'useSettings'.
+src/auth/session.ts:96:5 - error TS18047: 'ResponsePayload' is possibly 'null'.
+
+How many distinct root causes are there?",2,"chained_errors (many=5 examples, seed 1)"
+17,2,chained_errors,many,5,chained_errors_many,"Example 1:
+BUILD OUTPUT:
+src/api/orders.ts:128:12 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+src/api/orders.ts:88:19 - error TS18047: 'ApiClient' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:ApiClient
+  2. type:parseAmount
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/models/order.ts:132:22 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'fetchOrders'.
+src/lib/validator.ts:66:26 - error TS18047: 'UserProfile' is possibly 'null'.
+FAIL test/orderapi.test.ts > OrderApi > rejects invalid input
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:UserProfile
+  2. test:OrderApi:rejects invalid input
+  3. type:fetchOrders
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/lib/client.ts:100:34 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'ResponsePayload'.
+src/models/order.ts:107:7 - error TS18047: 'validateEmail' is possibly 'null'.
+FAIL test/orderapi.test.ts > OrderApi > handles empty list
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:validateEmail
+  2. test:OrderApi:handles empty list
+  3. type:ResponsePayload
+Count of distinct root causes: 3
+
+Example 4:
+BUILD OUTPUT:
+src/models/order.ts:180:27 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+test/auth.test.ts:141:3 - error TS18047: 'ApiClient' is possibly 'null'.
+FAIL test/orderapi.test.ts > OrderApi > persists across refresh
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:ApiClient
+  2. test:OrderApi:persists across refresh
+  3. type:parseAmount
+Count of distinct root causes: 3
+
+Example 5:
+BUILD OUTPUT:
+src/lib/validator.ts:105:33 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'AuthContext'.
+src/utils/parse.ts:20:2 - error TS18047: 'RequestHeaders' is possibly 'null'.
+FAIL test/dashboardpage.test.ts > DashboardPage > persists across refresh
+  Expected: 200  Received: 500
+
+Diagnosis:
+Distinct root causes:
+  1. null:RequestHeaders
+  2. test:DashboardPage:persists across refresh
+  3. type:AuthContext
+Count of distinct root causes: 3","BUILD OUTPUT:
+src/auth/login.ts:54:15 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'useSettings'.
+src/hooks/useAuth.ts:179:31 - error TS18047: 'ResponsePayload' is possibly 'null'.
+FAIL test/authflow.test.ts > AuthFlow > returns 200 on success
+  Expected: 200  Received: 500
+
+How many distinct root causes are there?",3,"chained_errors (many=5 examples, seed 2)"
+18,0,redundant_errors,few,3,redundant_errors_few,"Example 1:
+BUILD OUTPUT:
+src/utils/parse.ts:10:16 - error TS2304: Cannot find name 'actions'. Did you forget to import from '@/store/actions'?
+src/auth/session.ts:157:17 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'validateEmail'.
+src/store/reducer.ts:169:7 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'validateEmail'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/store/actions
+  2. type:validateEmail
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/lib/client.ts:118:13 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+src/api/users.ts:121:39 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+test/auth.test.ts:31:20 - error TS18047: 'normalizeInput' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:normalizeInput
+  2. type:parseAmount
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+src/hooks/useAuth.ts:166:21 - error TS2741: Property 'email' is missing in type but required in 'ApiClient'.
+src/pages/settings.tsx:177:28 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+src/auth/login.ts:63:12 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+src/store/reducer.ts:22:31 - error TS2741: Property 'email' is missing in type but required in 'ApiClient'.
+src/models/user.ts:128:33 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+
+Diagnosis:
+Distinct root causes:
+  1. prop:ApiClient.email
+  2. type:RequestHeaders
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/lib/validator.ts:172:3 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+src/pages/settings.tsx:130:33 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+src/api/users.ts:16:12 - error TS2769: No overload matches this call. Overload 1 expected 'fetchOrders' but got 'string'.
+
+How many distinct root causes are there?",2,"redundant_errors (few=3 examples, seed 0)"
+19,1,redundant_errors,few,3,redundant_errors_few,"Example 1:
+BUILD OUTPUT:
+src/utils/parse.ts:88:37 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'ResponsePayload'.
+src/hooks/useAuth.ts:175:18 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+test/auth.test.ts:130:25 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'ResponsePayload'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/utils/logger
+  2. type:ResponsePayload
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/lib/validator.ts:35:9 - error TS18047: 'ResponsePayload' is possibly 'null'.
+src/auth/login.ts:127:29 - error TS18047: 'ResponsePayload' is possibly 'null'.
+src/pages/settings.tsx:17:28 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/hooks/useAuth.ts:64:30 - error TS2769: No overload matches this call. Overload 1 expected 'validateEmail' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:ResponsePayload
+  2. type:formatDate
+  3. type:validateEmail
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/api/orders.ts:26:5 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+src/models/order.ts:179:6 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+test/auth.test.ts:103:7 - error TS2741: Property 'token' is missing in type but required in 'StoreState'.
+
+Diagnosis:
+Distinct root causes:
+  1. prop:StoreState.token
+  2. type:normalizeInput
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/auth/session.ts:86:7 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'parseAmount'.
+src/hooks/useAuth.ts:146:19 - error TS2741: Property 'token' is missing in type but required in 'parseAmount'.
+src/api/orders.ts:53:29 - error TS2769: No overload matches this call. Overload 1 expected 'normalizeInput' but got 'string'.
+test/api.test.ts:76:10 - error TS2741: Property 'token' is missing in type but required in 'parseAmount'.
+
+How many distinct root causes are there?",3,"redundant_errors (few=3 examples, seed 1)"
+20,2,redundant_errors,few,3,redundant_errors_few,"Example 1:
+BUILD OUTPUT:
+src/lib/client.ts:50:16 - error TS18047: 'AuthContext' is possibly 'null'.
+test/auth.test.ts:144:30 - error TS2304: Cannot find name 'lodash'. Did you forget to import from 'lodash'?
+src/models/order.ts:109:25 - error TS2304: Cannot find name 'lodash'. Did you forget to import from 'lodash'?
+src/lib/validator.ts:138:4 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'RequestHeaders'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:lodash
+  2. null:AuthContext
+  3. type:RequestHeaders
+Count of distinct root causes: 3
+
+Example 2:
+BUILD OUTPUT:
+src/auth/session.ts:64:8 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+src/utils/format.ts:71:19 - error TS2769: No overload matches this call. Overload 1 expected 'RequestHeaders' but got 'string'.
+src/models/order.ts:95:37 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+
+Diagnosis:
+Distinct root causes:
+  1. prop:validateEmail.email
+  2. type:RequestHeaders
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+test/auth.test.ts:144:28 - error TS2304: Cannot find name 'config'. Did you forget to import from '@/lib/config'?
+src/models/user.ts:19:28 - error TS2741: Property 'email' is missing in type but required in 'UserProfile'.
+src/hooks/useAuth.ts:106:31 - error TS2304: Cannot find name 'config'. Did you forget to import from '@/lib/config'?
+src/models/order.ts:39:6 - error TS2741: Property 'email' is missing in type but required in 'UserProfile'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/lib/config
+  2. prop:UserProfile.email
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/models/user.ts:74:29 - error TS2769: No overload matches this call. Overload 1 expected 'validateEmail' but got 'string'.
+src/models/order.ts:45:7 - error TS18047: 'formatDate' is possibly 'null'.
+src/auth/login.ts:118:10 - error TS2741: Property 'createdAt' is missing in type but required in 'useSettings'.
+src/models/user.ts:99:30 - error TS2769: No overload matches this call. Overload 1 expected 'validateEmail' but got 'string'.
+
+How many distinct root causes are there?",3,"redundant_errors (few=3 examples, seed 2)"
+21,0,redundant_errors,mid,4,redundant_errors_mid,"Example 1:
+BUILD OUTPUT:
+src/models/order.ts:88:27 - error TS2769: No overload matches this call. Overload 1 expected 'ResponsePayload' but got 'string'.
+test/api.test.ts:177:34 - error TS2769: No overload matches this call. Overload 1 expected 'ResponsePayload' but got 'string'.
+test/auth.test.ts:90:7 - error TS2741: Property 'email' is missing in type but required in 'StoreState'.
+src/api/users.ts:117:5 - error TS2741: Property 'email' is missing in type but required in 'StoreState'.
+
+Diagnosis:
+Distinct root causes:
+  1. prop:StoreState.email
+  2. type:ResponsePayload
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/utils/format.ts:87:18 - error TS2769: No overload matches this call. Overload 1 expected 'validateEmail' but got 'string'.
+src/pages/settings.tsx:120:25 - error TS18047: 'StoreState' is possibly 'null'.
+src/models/user.ts:108:34 - error TS18047: 'StoreState' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:StoreState
+  2. type:validateEmail
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+src/models/order.ts:123:19 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+test/api.test.ts:118:21 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+src/store/reducer.ts:140:5 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/models/base
+  2. prop:validateEmail.email
+Count of distinct root causes: 2
+
+Example 4:
+BUILD OUTPUT:
+src/lib/validator.ts:178:2 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+test/api.test.ts:162:3 - error TS2741: Property 'createdAt' is missing in type but required in 'sessionToken'.
+src/pages/settings.tsx:54:5 - error TS2741: Property 'createdAt' is missing in type but required in 'sessionToken'.
+src/models/user.ts:142:38 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+test/api.test.ts:154:37 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/models/base
+  2. prop:sessionToken.createdAt
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/store/reducer.ts:122:19 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+src/lib/client.ts:55:11 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+src/lib/client.ts:148:39 - error TS18047: 'normalizeInput' is possibly 'null'.
+src/utils/format.ts:50:35 - error TS18047: 'normalizeInput' is possibly 'null'.
+
+How many distinct root causes are there?",2,"redundant_errors (mid=4 examples, seed 0)"
+22,1,redundant_errors,mid,4,redundant_errors_mid,"Example 1:
+BUILD OUTPUT:
+src/api/users.ts:176:23 - error TS18047: 'normalizeInput' is possibly 'null'.
+src/auth/session.ts:76:40 - error TS18047: 'normalizeInput' is possibly 'null'.
+src/auth/session.ts:164:39 - error TS2769: No overload matches this call. Overload 1 expected 'StoreState' but got 'string'.
+src/models/order.ts:178:8 - error TS2769: No overload matches this call. Overload 1 expected 'StoreState' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:normalizeInput
+  2. type:StoreState
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/lib/client.ts:133:2 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+src/store/reducer.ts:126:13 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+src/lib/validator.ts:134:1 - error TS2769: No overload matches this call. Overload 1 expected 'AuthContext' but got 'string'.
+src/pages/dashboard.tsx:78:20 - error TS2769: No overload matches this call. Overload 1 expected 'AuthContext' but got 'string'.
+src/pages/settings.tsx:113:26 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'normalizeInput'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/models/base
+  2. type:AuthContext
+  3. type:normalizeInput
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/lib/client.ts:134:25 - error TS18047: 'fetchOrders' is possibly 'null'.
+src/lib/validator.ts:61:24 - error TS18047: 'fetchOrders' is possibly 'null'.
+src/utils/parse.ts:161:32 - error TS18047: 'fetchOrders' is possibly 'null'.
+src/auth/login.ts:114:24 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+src/auth/session.ts:119:15 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:fetchOrders
+  2. type:UserProfile
+Count of distinct root causes: 2
+
+Example 4:
+BUILD OUTPUT:
+src/lib/client.ts:108:19 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'sessionToken'.
+src/utils/format.ts:90:34 - error TS2741: Property 'id' is missing in type but required in 'ApiClient'.
+src/utils/format.ts:131:20 - error TS18047: 'parseAmount' is possibly 'null'.
+src/models/order.ts:139:25 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'sessionToken'.
+src/api/users.ts:86:6 - error TS18047: 'parseAmount' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:parseAmount
+  2. prop:ApiClient.id
+  3. type:sessionToken
+Count of distinct root causes: 3","BUILD OUTPUT:
+src/lib/client.ts:8:20 - error TS2769: No overload matches this call. Overload 1 expected 'StoreState' but got 'string'.
+src/pages/settings.tsx:144:30 - error TS18047: 'OrderItem' is possibly 'null'.
+src/lib/validator.ts:136:17 - error TS18047: 'OrderItem' is possibly 'null'.
+
+How many distinct root causes are there?",2,"redundant_errors (mid=4 examples, seed 1)"
+23,2,redundant_errors,mid,4,redundant_errors_mid,"Example 1:
+BUILD OUTPUT:
+src/lib/client.ts:29:40 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'AuthContext'.
+src/store/reducer.ts:147:18 - error TS2769: No overload matches this call. Overload 1 expected 'AuthContext' but got 'string'.
+src/api/orders.ts:31:36 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+src/pages/dashboard.tsx:113:28 - error TS2741: Property 'email' is missing in type but required in 'validateEmail'.
+
+Diagnosis:
+Distinct root causes:
+  1. prop:validateEmail.email
+  2. type:AuthContext
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/lib/validator.ts:58:25 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+src/utils/parse.ts:82:6 - error TS2769: No overload matches this call. Overload 1 expected 'parseAmount' but got 'string'.
+src/auth/session.ts:110:34 - error TS18047: 'sessionToken' is possibly 'null'.
+src/auth/login.ts:10:12 - error TS2769: No overload matches this call. Overload 1 expected 'parseAmount' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/utils/logger
+  2. null:sessionToken
+  3. type:parseAmount
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+test/api.test.ts:40:35 - error TS2769: No overload matches this call. Overload 1 expected 'OrderItem' but got 'string'.
+src/utils/parse.ts:14:39 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'validateEmail'.
+src/models/user.ts:34:29 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'validateEmail'.
+src/auth/session.ts:17:28 - error TS2769: No overload matches this call. Overload 1 expected 'OrderItem' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. type:OrderItem
+  2. type:validateEmail
+Count of distinct root causes: 2
+
+Example 4:
+BUILD OUTPUT:
+src/utils/parse.ts:71:35 - error TS2769: No overload matches this call. Overload 1 expected 'useSettings' but got 'string'.
+src/api/users.ts:11:5 - error TS18047: 'AuthContext' is possibly 'null'.
+test/api.test.ts:107:18 - error TS18047: 'AuthContext' is possibly 'null'.
+src/lib/client.ts:174:29 - error TS18047: 'AuthContext' is possibly 'null'.
+src/utils/format.ts:40:39 - error TS2769: No overload matches this call. Overload 1 expected 'useSettings' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:AuthContext
+  2. type:useSettings
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/lib/validator.ts:83:17 - error TS2769: No overload matches this call. Overload 1 expected 'AuthContext' but got 'string'.
+test/api.test.ts:176:33 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'fetchOrders'.
+src/utils/format.ts:16:17 - error TS2769: No overload matches this call. Overload 1 expected 'AuthContext' but got 'string'.
+
+How many distinct root causes are there?",2,"redundant_errors (mid=4 examples, seed 2)"
+24,0,redundant_errors,many,5,redundant_errors_many,"Example 1:
+BUILD OUTPUT:
+src/models/user.ts:165:13 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+src/pages/settings.tsx:87:18 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'useSettings'.
+src/api/orders.ts:55:15 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'useSettings'.
+src/hooks/useAuth.ts:6:33 - error TS2769: No overload matches this call. Overload 1 expected 'validateEmail' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/utils/logger
+  2. type:useSettings
+  3. type:validateEmail
+Count of distinct root causes: 3
+
+Example 2:
+BUILD OUTPUT:
+src/auth/session.ts:177:35 - error TS2741: Property 'status' is missing in type but required in 'RequestHeaders'.
+src/models/user.ts:81:35 - error TS18047: 'RequestHeaders' is possibly 'null'.
+src/store/reducer.ts:34:31 - error TS2741: Property 'status' is missing in type but required in 'RequestHeaders'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:RequestHeaders
+  2. prop:RequestHeaders.status
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+src/store/reducer.ts:114:23 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/api/orders.ts:91:16 - error TS2304: Cannot find name 'base'. Did you forget to import from '@/models/base'?
+src/pages/dashboard.tsx:27:15 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/lib/validator.ts:6:34 - error TS2741: Property 'email' is missing in type but required in 'ApiClient'.
+test/auth.test.ts:139:23 - error TS2741: Property 'email' is missing in type but required in 'ApiClient'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/models/base
+  2. prop:ApiClient.email
+  3. type:formatDate
+Count of distinct root causes: 3
+
+Example 4:
+BUILD OUTPUT:
+src/lib/validator.ts:74:20 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+src/lib/client.ts:81:37 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+src/pages/settings.tsx:123:24 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/utils/logger
+  2. type:UserProfile
+Count of distinct root causes: 2
+
+Example 5:
+BUILD OUTPUT:
+src/hooks/useAuth.ts:72:21 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'validateEmail'.
+src/models/order.ts:5:35 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'validateEmail'.
+src/pages/dashboard.tsx:159:13 - error TS2769: No overload matches this call. Overload 1 expected 'sessionToken' but got 'string'.
+src/store/reducer.ts:107:3 - error TS2769: No overload matches this call. Overload 1 expected 'sessionToken' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. type:sessionToken
+  2. type:validateEmail
+Count of distinct root causes: 2","BUILD OUTPUT:
+test/auth.test.ts:67:36 - error TS2769: No overload matches this call. Overload 1 expected 'sessionToken' but got 'string'.
+src/store/reducer.ts:94:30 - error TS2741: Property 'email' is missing in type but required in 'ApiClient'.
+test/auth.test.ts:80:16 - error TS2769: No overload matches this call. Overload 1 expected 'sessionToken' but got 'string'.
+
+How many distinct root causes are there?",2,"redundant_errors (many=5 examples, seed 0)"
+25,1,redundant_errors,many,5,redundant_errors_many,"Example 1:
+BUILD OUTPUT:
+src/models/user.ts:20:26 - error TS2769: No overload matches this call. Overload 1 expected 'normalizeInput' but got 'string'.
+src/pages/dashboard.tsx:31:16 - error TS18047: 'normalizeInput' is possibly 'null'.
+src/models/user.ts:112:10 - error TS2769: No overload matches this call. Overload 1 expected 'normalizeInput' but got 'string'.
+src/hooks/useAuth.ts:47:2 - error TS18047: 'normalizeInput' is possibly 'null'.
+src/models/user.ts:68:33 - error TS2769: No overload matches this call. Overload 1 expected 'normalizeInput' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:normalizeInput
+  2. type:normalizeInput
+Count of distinct root causes: 2
+
+Example 2:
+BUILD OUTPUT:
+src/utils/format.ts:147:12 - error TS2769: No overload matches this call. Overload 1 expected 'UserProfile' but got 'string'.
+src/models/order.ts:69:7 - error TS2304: Cannot find name 'react-query'. Did you forget to import from 'react-query'?
+src/lib/client.ts:5:6 - error TS2304: Cannot find name 'react-query'. Did you forget to import from 'react-query'?
+src/api/orders.ts:57:10 - error TS2769: No overload matches this call. Overload 1 expected 'UserProfile' but got 'string'.
+src/api/users.ts:53:14 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'useSettings'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:react-query
+  2. type:UserProfile
+  3. type:useSettings
+Count of distinct root causes: 3
+
+Example 3:
+BUILD OUTPUT:
+src/utils/format.ts:129:12 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'AuthContext'.
+src/store/reducer.ts:61:21 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'AuthContext'.
+src/models/user.ts:96:24 - error TS2769: No overload matches this call. Overload 1 expected 'validateEmail' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. type:AuthContext
+  2. type:validateEmail
+Count of distinct root causes: 2
+
+Example 4:
+BUILD OUTPUT:
+src/pages/settings.tsx:36:32 - error TS2769: No overload matches this call. Overload 1 expected 'parseAmount' but got 'string'.
+src/lib/client.ts:130:31 - error TS2769: No overload matches this call. Overload 1 expected 'parseAmount' but got 'string'.
+src/models/order.ts:72:17 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'ApiClient'.
+
+Diagnosis:
+Distinct root causes:
+  1. type:ApiClient
+  2. type:parseAmount
+Count of distinct root causes: 2
+
+Example 5:
+BUILD OUTPUT:
+src/models/order.ts:72:29 - error TS2741: Property 'createdAt' is missing in type but required in 'sessionToken'.
+src/api/users.ts:82:12 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/models/user.ts:24:21 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'formatDate'.
+src/lib/client.ts:179:36 - error TS2741: Property 'createdAt' is missing in type but required in 'sessionToken'.
+src/api/orders.ts:102:15 - error TS2741: Property 'createdAt' is missing in type but required in 'sessionToken'.
+
+Diagnosis:
+Distinct root causes:
+  1. prop:sessionToken.createdAt
+  2. type:formatDate
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/hooks/useAuth.ts:14:30 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'AuthContext'.
+src/lib/validator.ts:111:18 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'AuthContext'.
+test/auth.test.ts:125:3 - error TS18047: 'sessionToken' is possibly 'null'.
+
+How many distinct root causes are there?",2,"redundant_errors (many=5 examples, seed 1)"
+26,2,redundant_errors,many,5,redundant_errors_many,"Example 1:
+BUILD OUTPUT:
+src/models/order.ts:135:22 - error TS18047: 'useSettings' is possibly 'null'.
+src/models/user.ts:62:2 - error TS2304: Cannot find name 'config'. Did you forget to import from '@/lib/config'?
+src/pages/dashboard.tsx:138:13 - error TS2304: Cannot find name 'config'. Did you forget to import from '@/lib/config'?
+src/models/order.ts:18:6 - error TS2769: No overload matches this call. Overload 1 expected 'validateEmail' but got 'string'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/lib/config
+  2. null:useSettings
+  3. type:validateEmail
+Count of distinct root causes: 3
+
+Example 2:
+BUILD OUTPUT:
+src/store/reducer.ts:167:23 - error TS18047: 'UserProfile' is possibly 'null'.
+src/api/users.ts:27:2 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+src/models/order.ts:149:3 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserProfile'.
+src/auth/session.ts:112:12 - error TS18047: 'UserProfile' is possibly 'null'.
+
+Diagnosis:
+Distinct root causes:
+  1. null:UserProfile
+  2. type:UserProfile
+Count of distinct root causes: 2
+
+Example 3:
+BUILD OUTPUT:
+src/auth/session.ts:110:29 - error TS2769: No overload matches this call. Overload 1 expected 'parseAmount' but got 'string'.
+src/lib/validator.ts:170:33 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+src/pages/dashboard.tsx:178:3 - error TS2304: Cannot find name 'logger'. Did you forget to import from '@/utils/logger'?
+
+Diagnosis:
+Distinct root causes:
+  1. import:@/utils/logger
+  2. type:parseAmount
+Count of distinct root causes: 2
+
+Example 4:
+BUILD OUTPUT:
+src/utils/format.ts:67:16 - error TS2769: No overload matches this call. Overload 1 expected 'UserProfile' but got 'string'.
+src/api/orders.ts:88:32 - error TS2741: Property 'status' is missing in type but required in 'fetchOrders'.
+src/hooks/useAuth.ts:146:22 - error TS2769: No overload matches this call. Overload 1 expected 'UserProfile' but got 'string'.
+src/models/user.ts:158:27 - error TS2741: Property 'status' is missing in type but required in 'fetchOrders'.
+test/api.test.ts:15:19 - error TS2741: Property 'status' is missing in type but required in 'fetchOrders'.
+
+Diagnosis:
+Distinct root causes:
+  1. prop:fetchOrders.status
+  2. type:UserProfile
+Count of distinct root causes: 2
+
+Example 5:
+BUILD OUTPUT:
+src/lib/validator.ts:100:31 - error TS2304: Cannot find name 'react-query'. Did you forget to import from 'react-query'?
+src/hooks/useAuth.ts:68:36 - error TS2304: Cannot find name 'react-query'. Did you forget to import from 'react-query'?
+src/utils/parse.ts:175:13 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'fetchOrders'.
+test/api.test.ts:14:22 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'fetchOrders'.
+
+Diagnosis:
+Distinct root causes:
+  1. import:react-query
+  2. type:fetchOrders
+Count of distinct root causes: 2","BUILD OUTPUT:
+src/api/users.ts:51:37 - error TS2769: No overload matches this call. Overload 1 expected 'UserProfile' but got 'string'.
+src/pages/settings.tsx:45:37 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+src/models/user.ts:126:18 - error TS18047: 'StoreState' is possibly 'null'.
+src/api/users.ts:122:10 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'OrderItem'.
+
+How many distinct root causes are there?",3,"redundant_errors (many=5 examples, seed 2)"
