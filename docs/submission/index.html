@@ -122,8 +122,9 @@
       JSONL session logs from <code>~/.claude/projects/</code>. For each session it computes:
       error patterns (tool + error type, grouped by frequency), thrashing score (fraction of tool
       calls targeting resources accessed 3+ times), error streaks (consecutive failures indicating
-      no-progress loops), and tool distribution. The tool is installable as a Claude Code skill:
-      <code>npx skills add 42euge/geno-bench -g -a claude-code -y</code>.
+      no-progress loops), and tool distribution. The tool is installable via pip
+      (<code>pip install git+https://github.com/42euge/geno-bench.git</code>) or as a Claude Code
+      skill (<code>npx skills add 42euge/geno-bench -g -a claude-code -y</code>).
     </p>
     <p>
       <strong>Evaluation.</strong> Tasks run on the Kaggle Benchmarks platform using the
@@ -157,7 +158,7 @@
 
     <h2>References &amp; Citations</h2>
     <ul>
-      <li>geno-bench: session mining tool for Claude Code. <a href="https://github.com/42euge/geno-bench">github.com/42euge/geno-bench</a></li>
+      <li>geno-bench: benchmark creation system — mines coding agent sessions for failure-grounded evaluation tasks. <a href="https://github.com/42euge/geno-bench">github.com/42euge/geno-bench</a></li>
       <li>Kaggle Benchmarks SDK (kaggle-benchmarks). <a href="https://github.com/Kaggle/kaggle-benchmarks">github.com/Kaggle/kaggle-benchmarks</a></li>
       <li>Morris et al. &ldquo;Measuring Progress Toward AGI: A Cognitive Framework.&rdquo; Google DeepMind, 2026.</li>
       <li>vercel-labs/skills: open agent skills ecosystem. <a href="https://github.com/vercel-labs/skills">github.com/vercel-labs/skills</a></li>

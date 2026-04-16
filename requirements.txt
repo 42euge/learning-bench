@@ -1,6 +1,9 @@
 # Kaggle Benchmarks SDK (install from source)
 kaggle-benchmarks @ git+https://github.com/Kaggle/kaggle-benchmarks.git
 
+# Benchmark creation
+geno-bench @ git+https://github.com/42euge/geno-bench.git
+
 # Data & analysis
 pandas
 numpy

@@ -40,13 +40,13 @@ Stimuli come from two sources, both designed to fall outside training data:
 
 **Procedural generation.** Six tasks use algorithmically generated stimuli — novel vocabularies, artificial grammars, invented classification rules, and synthetic execution traces. Each task produces a 3x3x3 difficulty grid (complexity × evidence × seed = 27 items) to ensure statistical stability and scaling visibility.
 
-**Session mining.** Five tasks are grounded in real failure patterns mined from 620 Claude Code session logs across 46 projects using geno-bench (`geno-bench/`). We scanned for sessions with high thrashing scores (repeated resource access) and error streaks (3+ consecutive failures), then abstracted the failure shapes — stale state recovery, error severity confusion, strategy over-commitment, error-to-remediation mapping, and batch diagnosis failures — into synthetic stimuli. No raw session data appears in the benchmark; only the structural failure patterns are preserved.
+**Session mining.** Five tasks are grounded in real failure patterns mined from 620 Claude Code session logs across 46 projects using [geno-bench](https://github.com/42euge/geno-bench). We scanned for sessions with high thrashing scores (repeated resource access) and error streaks (3+ consecutive failures), then abstracted the failure shapes — stale state recovery, error severity confusion, strategy over-commitment, error-to-remediation mapping, and batch diagnosis failures — into synthetic stimuli. No raw session data appears in the benchmark; only the structural failure patterns are preserved.
 
 ### Technical details
 
 **Pre/post study paradigm.** Every task follows an identical three-phase protocol: (1) pre-test — the model answers cold, measuring baseline capability; (2) study — the model analyzes worked examples and articulates the underlying rule in its own words; (3) post-test — the model answers the same question conditioned on its own study notes. Learning gain (post − pre accuracy) is the primary metric.
 
-**Session mining pipeline (geno-bench).** We built an open-source tool (`geno-bench/`) that parses Claude Code JSONL session logs from `~/.claude/projects/`. For each session it computes: error patterns (tool + error type, grouped by frequency), thrashing score (fraction of tool calls targeting resources accessed 3+ times), error streaks (consecutive failures indicating no-progress loops), and tool distribution. Sessions are ranked by a composite "interestingness" signal (thrashing + error density). Analysts then write structured mining notes that categorize failures and propose benchmark abstractions. The tool is installable as a Claude Code skill: `npx skills add 42euge/geno-bench -g -a claude-code -y`.
+**Session mining pipeline (geno-bench).** We built an open-source tool ([geno-bench](https://github.com/42euge/geno-bench)) that parses Claude Code JSONL session logs from `~/.claude/projects/`. For each session it computes: error patterns (tool + error type, grouped by frequency), thrashing score (fraction of tool calls targeting resources accessed 3+ times), error streaks (consecutive failures indicating no-progress loops), and tool distribution. Sessions are ranked by a composite "interestingness" signal (thrashing + error density). Analysts then write structured mining notes that categorize failures and propose benchmark abstractions. The tool is installable via pip (`pip install git+https://github.com/42euge/geno-bench.git`) or as a Claude Code skill (`npx skills add 42euge/geno-bench -g -a claude-code -y`).
 
 **Evaluation.** Tasks run on the Kaggle Benchmarks platform using the `kaggle_benchmarks` SDK. Each task is a self-contained notebook with a `@kbench.task` decorated function. Models are evaluated via the Kaggle LLM proxy, enabling head-to-head comparison across providers without local inference.
 
@@ -66,7 +66,7 @@ Blue Origin; University of Washington. All work was completed using personal res
 
 ### References & citations
 
-- geno-bench: session mining tool for Claude Code. https://github.com/42euge/geno-bench
+- geno-bench: benchmark creation system — mines coding agent sessions for failure-grounded evaluation tasks. https://github.com/42euge/geno-bench
 - Kaggle Benchmarks SDK (kaggle-benchmarks). https://github.com/Kaggle/kaggle-benchmarks
 - Morris et al. "Measuring Progress Toward AGI: A Cognitive Framework." Google DeepMind, 2026.
 - vercel-labs/skills: open agent skills ecosystem. https://github.com/vercel-labs/skills
