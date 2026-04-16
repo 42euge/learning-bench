@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Submission - GenoBench-Learning</title>
+  <title>AGI Kaggle Submission - GenoBench-Learning</title>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -26,97 +26,150 @@
 <!-- Hero -->
 <header class="task-hero">
   <div class="container">
-    <h1>Google DeepMind &times; Kaggle AGI Hackathon</h1>
-    <p class="tagline">Submission Materials</p>
+    <h1>GenoBench-Learning</h1>
+    <p class="tagline">Google DeepMind &times; Kaggle AGI Hackathon &middot; Track: Learning</p>
     <p class="description" style="max-width:640px; margin: 1rem auto 0;">
-      All required and optional materials for the hackathon submission.
-      Track: <strong>Learning</strong>.
+      Eugenio Rivera Ramos
     </p>
   </div>
 </header>
 
-<!-- Submission Overview -->
 <section>
   <div class="container">
-    <h2>Submission Checklist</h2>
-    <p class="section-subtitle">Required and optional components</p>
 
-    <div class="task-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+    <h2>Problem Statement</h2>
+    <p>
+      Do frontier models learn, or just recall? Jagged intelligence is a frequent complaint
+      about coding models but is difficult to articulate precisely&mdash;models excel at some
+      tasks and fail at structurally similar ones, especially when the problem is genuinely new.
+      Can we measure that gap in a practical way?
+    </p>
+    <p>
+      Agentic harness systems are multi-step pipelines where the critical failure mode isn't
+      typically lack of knowledge, but the inability to effectively use and manipulate context
+      to discover proper solutions. A model must do two things: externalize its understanding
+      into a context (notes, observations, intermediate reasoning), and then effectively use
+      that context to solve a downstream problem. These are separable skills, and current
+      benchmarks measure neither.
+    </p>
 
-      <!-- Writeup -->
-      <a href="writeup.html" class="task-card-link">
-      <div class="task-card">
-        <div class="card-icon">&#x1F4DD;</div>
-        <h3>Writeup</h3>
-        <div class="task-name">Required &middot; Max 1,500 words</div>
-        <p>
-          Project report covering problem statement, task construction, dataset,
-          technical details, results, and conclusions.
-        </p>
-        <div class="card-meta">
-          <span class="badge status-ready">ready</span>
-        </div>
-      </div>
-      </a>
+    <h2>Task &amp; Benchmark Construction</h2>
+    <p>
+      GenoBench-Learning isolates both parts of this context-learning problem. The benchmark
+      decomposes learning into two scored sub-problems: how well can a model construct a useful
+      learned context from novel stimuli, and how well can it apply that context to solve a new
+      instance? Each is measured independently and baselined against a one-shot approach.
+    </p>
+    <p>
+      Tasks span six cognitive sub-abilities using a pre/post study paradigm on stimuli designed
+      to fall outside training data. The model is scored before and after a structured self-study
+      phase in which it must articulate the underlying rule in its own words. Learning
+      gain&mdash;the delta between pre- and post-study accuracy&mdash;is the primary signal.
+    </p>
 
-      <!-- Benchmark -->
-      <a href="benchmark.html" class="task-card-link">
-      <div class="task-card">
-        <div class="card-icon">&#x1F4CA;</div>
-        <h3>Kaggle Benchmark</h3>
-        <div class="task-name">Required &middot; Project Link</div>
-        <p>
-          The benchmark itself: 12 tasks across 6 sub-abilities, running on the
-          Kaggle Benchmarks platform with the kaggle_benchmarks SDK.
-        </p>
-        <div class="card-meta">
-          <span class="badge">private until deadline</span>
-        </div>
-      </div>
-      </a>
+    <table>
+      <thead>
+        <tr><th>Sub-Ability</th><th>Task</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Associative Learning</td><td>Paired Associate</td><td>procedural generation</td></tr>
+        <tr><td>Associative Learning</td><td>Error Remediation</td><td>session mining</td></tr>
+        <tr><td>Concept Formation</td><td>Rule Induction</td><td>procedural generation</td></tr>
+        <tr><td>Concept Formation</td><td>Error Severity Triage</td><td>session mining</td></tr>
+        <tr><td>Language Learning</td><td>Novel Grammar Induction</td><td>procedural generation</td></tr>
+        <tr><td>Observational Learning</td><td>Trace-Based Imitation</td><td>procedural generation</td></tr>
+        <tr><td>Observational Learning</td><td>Batch Error Diagnosis</td><td>session mining</td></tr>
+        <tr><td>Procedural Learning</td><td>Skill Selection, Novel Algorithm Execution</td><td>procedural generation</td></tr>
+        <tr><td>Procedural Learning</td><td>Stale State Recovery</td><td>session mining</td></tr>
+        <tr><td>Reinforcement Learning</td><td>Multi-Armed Bandit</td><td>procedural generation</td></tr>
+        <tr><td>Reinforcement Learning</td><td>Strategy Pivot</td><td>session mining</td></tr>
+      </tbody>
+    </table>
 
-      <!-- Media Gallery -->
-      <a href="media.html" class="task-card-link">
-      <div class="task-card">
-        <div class="card-icon">&#x1F3AC;</div>
-        <h3>Media Gallery</h3>
-        <div class="task-name">Optional &middot; Cover image required</div>
-        <p>
-          Images and videos illustrating the benchmark design, results,
-          and session mining methodology.
-        </p>
-        <div class="card-meta">
-          <span class="badge">optional</span>
-        </div>
-      </div>
-      </a>
+    <h2>Dataset</h2>
+    <p>
+      Stimuli come from two sources, both designed to fall outside training data:
+    </p>
+    <p>
+      <strong>Procedural generation.</strong> Seven tasks use algorithmically generated
+      stimuli&mdash;novel vocabularies, artificial grammars, invented classification rules, and
+      synthetic execution traces. Each task produces a 3&times;3&times;3 difficulty grid
+      (complexity &times; evidence &times; seed = 27 items) to ensure statistical stability and
+      scaling visibility.
+    </p>
+    <p>
+      <strong>Session mining.</strong> Five tasks are grounded in real failure patterns mined
+      from 620 Claude Code session logs across 46 projects using
+      <a href="https://github.com/42euge/geno-bench">geno-bench</a>. We scanned for sessions
+      with high thrashing scores (repeated resource access) and error streaks (3+ consecutive
+      failures), then abstracted the failure shapes&mdash;stale state recovery, error severity
+      confusion, strategy over-commitment, error-to-remediation mapping, and batch diagnosis
+      failures&mdash;into synthetic stimuli. No raw session data appears in the benchmark; only
+      the structural failure patterns are preserved.
+    </p>
 
-      <!-- Public Notebook -->
-      <a href="notebook.html" class="task-card-link">
-      <div class="task-card">
-        <div class="card-icon">&#x1F4D3;</div>
-        <h3>Public Notebook</h3>
-        <div class="task-name">Optional &middot; No login required</div>
-        <p>
-          Publicly accessible code showing the benchmark in action.
-          Can include dataset generation, analysis, or a walkthrough.
-        </p>
-        <div class="card-meta">
-          <span class="badge">optional</span>
-        </div>
-      </div>
-      </a>
+    <h2>Technical Details</h2>
+    <p>
+      <strong>Pre/post study paradigm.</strong> Every task follows an identical three-phase
+      protocol: (1) pre-test&mdash;the model answers cold, measuring baseline capability;
+      (2) study&mdash;the model analyzes worked examples and articulates the underlying rule
+      in its own words; (3) post-test&mdash;the model answers the same question conditioned on
+      its own study notes. Learning gain (post &minus; pre accuracy) is the primary metric.
+    </p>
+    <p>
+      <strong>Session mining pipeline (geno-bench).</strong> We built an open-source tool
+      (<a href="https://github.com/42euge/geno-bench">geno-bench</a>) that parses Claude Code
+      JSONL session logs from <code>~/.claude/projects/</code>. For each session it computes:
+      error patterns (tool + error type, grouped by frequency), thrashing score (fraction of tool
+      calls targeting resources accessed 3+ times), error streaks (consecutive failures indicating
+      no-progress loops), and tool distribution. The tool is installable as a Claude Code skill:
+      <code>npx skills add 42euge/geno-bench -g -a claude-code -y</code>.
+    </p>
+    <p>
+      <strong>Evaluation.</strong> Tasks run on the Kaggle Benchmarks platform using the
+      <code>kaggle_benchmarks</code> SDK. Each task is a self-contained notebook with a
+      <code>@kbench.task</code> decorated function. Models are evaluated via the Kaggle LLM proxy,
+      enabling head-to-head comparison across providers without local inference.
+    </p>
 
-    </div>
+    <h2>Results, Insights, and Conclusions</h2>
+    <p>
+      The benchmark reveals what standard evaluations cannot: not just whether a model knows
+      things, but whether it can learn new things on demand, and whether explicit self-generated
+      reasoning aids that learning.
+    </p>
+    <p>
+      A key methodological insight is that benchmark tasks can be systematically derived from
+      observed agentic failures rather than invented from scratch. By mining 620 real Claude Code
+      sessions across 46 projects, we identified 15 recurring failure categories (stale state,
+      retry without diagnosis, tool-task mismatch, warning-as-error confusion, strategy
+      over-commitment, etc.) and abstracted five of them into benchmark tasks. This grounding in
+      real failures ensures the benchmark tests abilities that actually matter in deployed
+      systems&mdash;the stimuli are synthetic, but the cognitive gaps they target are empirically
+      observed.
+    </p>
+
+    <h2>Organizational Affiliations</h2>
+    <p>
+      Blue Origin; University of Washington. All work was completed using personal resources only,
+      with no institutional support or resources.
+    </p>
+
+    <h2>References &amp; Citations</h2>
+    <ul>
+      <li>geno-bench: session mining tool for Claude Code. <a href="https://github.com/42euge/geno-bench">github.com/42euge/geno-bench</a></li>
+      <li>Kaggle Benchmarks SDK (kaggle-benchmarks). <a href="https://github.com/Kaggle/kaggle-benchmarks">github.com/Kaggle/kaggle-benchmarks</a></li>
+      <li>Morris et al. &ldquo;Measuring Progress Toward AGI: A Cognitive Framework.&rdquo; Google DeepMind, 2026.</li>
+      <li>vercel-labs/skills: open agent skills ecosystem. <a href="https://github.com/vercel-labs/skills">github.com/vercel-labs/skills</a></li>
+    </ul>
+
   </div>
 </section>
 
 <!-- Footer -->
 <footer>
   <div class="container">
-    <p>
-      <strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos
-    </p>
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
     <p style="margin-top: 0.25rem;">
       Blue Origin &middot; University of Washington
       <br>
@@ -124,6 +177,7 @@
     </p>
     <div class="footer-links">
       <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="https://github.com/42euge/geno-bench">geno-bench</a>
       <a href="https://www.kaggle.com/competitions/kaggle-measuring-agi">Kaggle Competition</a>
     </div>
   </div>
