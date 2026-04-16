@@ -1,5 +1,0 @@
-{
-  "versionNumber": 1,
-  "name": "Learning Curve Profiler",
-  "description": "Measures how model accuracy improves as more in-context examples are provided, across three procedurally generated task families (string rewriting, modular arithmetic, artificial grammar) at three difficulty tiers."
-}

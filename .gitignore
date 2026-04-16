@@ -11,3 +11,10 @@ venv/
 data/
 results/
 datasets/*/*.csv
+
+# Local-only / dev tooling
+research/
+.geno-agents
+.mcp.json
+.playwright-mcp/
+geno-tools/
