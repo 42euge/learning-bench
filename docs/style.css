@@ -557,6 +557,11 @@ nav .nav-links a.active {
   color: #fff;
 }
 
+.badge.badge-mined {
+  background: #7c3aed;
+  color: #fff;
+}
+
 /* --- Responsive --- */
 
 @media (max-width: 640px) {

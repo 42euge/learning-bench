@@ -112,12 +112,11 @@
 <section id="tasks">
   <div class="container">
     <h2>Tasks</h2>
-    <p class="section-subtitle">Six cognitive sub-abilities, each with dedicated evaluation tasks</p>
+    <p class="section-subtitle">Six cognitive sub-abilities, 12 tasks &mdash; 7 procedurally generated + 5 mined from real agent failures</p>
 
     <div class="task-grid">
 
-      <!-- Associative Learning -->
-      <a href="tasks/paired-associate.html" class="task-card-link">
+      <!-- Associative Learning: Paired Associate -->
       <div class="task-card">
         <div class="card-icon">&#x1F517;</div>
         <h3>Associative Learning</h3>
@@ -128,118 +127,175 @@
         </p>
         <div class="card-meta">
           <span class="badge">27 items</span>
-          <span class="badge">3 complexity &times; 3 evidence &times; 3 seeds</span>
-        </div>
-        <div class="discriminator">
-          Relational/many: compositional modifiers across 12 pairs separate learners from memorizers.
+          <span class="badge">procedural generation</span>
         </div>
       </div>
-      </a>
 
-      <!-- Concept Formation -->
-      <a href="tasks/category-learning.html" class="task-card-link">
+      <!-- Associative Learning: Error Remediation -->
       <div class="task-card">
-        <div class="card-icon">&#x1F9E9;</div>
-        <h3>Concept Formation</h3>
-        <div class="task-name">Category Learning</div>
+        <div class="card-icon">&#x1F517;</div>
+        <h3>Associative Learning</h3>
+        <div class="task-name">Error Remediation</div>
         <p>
-          Discover a hidden classification rule from labeled examples (objects described by size,
-          color, pattern, shape) and apply it to a novel object. Scales from single-feature rules
-          to conditional if-then chains.
+          Learn the mapping from novel CLI error codes to correct remediation commands.
+          An invented tool (<code>zkl</code>) with structured error families&mdash;models must learn
+          the fix from examples, not guess.
         </p>
         <div class="card-meta">
           <span class="badge">27 items</span>
-          <span class="badge">3 complexity &times; 3 evidence &times; 3 seeds</span>
-        </div>
-        <div class="discriminator">
-          Conditional/few: multi-step rules from minimal data, with irrelevant features as distractors.
+          <span class="badge badge-mined">session mining</span>
         </div>
       </div>
-      </a>
 
-      <!-- Language Learning -->
-      <a href="tasks/novel-grammar-induction.html" class="task-card-link">
+      <!-- Concept Formation: Rule Induction -->
+      <div class="task-card">
+        <div class="card-icon">&#x1F9E9;</div>
+        <h3>Concept Formation</h3>
+        <div class="task-name">Rule Induction</div>
+        <p>
+          Discover a hidden classification rule from labeled examples and apply it to novel inputs.
+          Scales from single-feature rules to conditional if-then chains with distractors.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge">procedural generation</span>
+        </div>
+      </div>
+
+      <!-- Concept Formation: Error Severity Triage -->
+      <div class="task-card">
+        <div class="card-icon">&#x1F9E9;</div>
+        <h3>Concept Formation</h3>
+        <div class="task-name">Error Severity Triage</div>
+        <p>
+          Classify output lines by severity: INFO, WARNING, RETRYABLE_ERROR, or TERMINAL_ERROR.
+          Uses invented tool conventions&mdash;models must learn the tag system from labeled examples.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge badge-mined">session mining</span>
+        </div>
+      </div>
+
+      <!-- Language Learning: Novel Grammar Induction -->
       <div class="task-card">
         <div class="card-icon">&#x1F30D;</div>
         <h3>Language Learning</h3>
         <div class="task-name">Novel Grammar Induction</div>
         <p>
           Induce the grammar of a completely novel language from example sentences, then judge
-          whether new sentences are grammatical. Scales from fixed word order to nested agreement
-          systems.
+          whether new sentences are grammatical. Scales from fixed word order to nested agreement.
         </p>
         <div class="card-meta">
-          <span class="badge">108 items</span>
-          <span class="badge">3 complexity &times; 3 evidence &times; 3 seeds &times; 4 tests</span>
-        </div>
-        <div class="discriminator">
-          Complex/4 examples: nested cross-element agreement from just 4 sentences.
+          <span class="badge">27 items</span>
+          <span class="badge">procedural generation</span>
         </div>
       </div>
-      </a>
 
-      <!-- Observational Learning -->
-      <a href="tasks/trace-based-imitation.html" class="task-card-link">
+      <!-- Observational Learning: Trace-Based Imitation -->
       <div class="task-card">
         <div class="card-icon">&#x1F441;</div>
         <h3>Observational Learning</h3>
         <div class="task-name">Trace-Based Imitation</div>
         <p>
           Learn a novel procedure by observing worked examples (execution traces on number lists),
-          then apply it to new input. Scales from 1-step operations to 3+ step conditional
-          branching procedures.
+          then apply it to new input. Scales from 1-step to 3+ step conditional branching.
         </p>
         <div class="card-meta">
           <span class="badge">27 items</span>
-          <span class="badge">3 complexity &times; 3 traces &times; 3 seeds</span>
-        </div>
-        <div class="discriminator">
-          Complex/2 traces: conditional branching from only 2 demonstrations requires genuine procedural reasoning.
+          <span class="badge">procedural generation</span>
         </div>
       </div>
-      </a>
 
-      <!-- Procedural Learning -->
-      <a href="tasks/skill-selection.html" class="task-card-link">
+      <!-- Observational Learning: Batch Error Diagnosis -->
+      <div class="task-card">
+        <div class="card-icon">&#x1F441;</div>
+        <h3>Observational Learning</h3>
+        <div class="task-name">Batch Error Diagnosis</div>
+        <p>
+          Given build output with multiple errors, count the distinct root causes. Tests whether
+          models diagnose all issues at once instead of fixing one at a time.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge badge-mined">session mining</span>
+        </div>
+      </div>
+
+      <!-- Procedural Learning: Skill Selection -->
       <div class="task-card">
         <div class="card-icon">&#x2699;</div>
         <h3>Procedural Learning</h3>
         <div class="task-name">Skill Selection</div>
         <p>
-          Select the correct tool from a growing registry with potentially misleading names and
-          descriptions. In adversarial mode, tool names deliberately mismatch their actual
-          capabilities&mdash;only deep analysis reveals the right choice.
+          Select the correct tool from a growing registry with misleading names.
+          In adversarial mode, only deep analysis of capabilities reveals the right choice.
         </p>
         <div class="card-meta">
           <span class="badge">27 items</span>
-          <span class="badge">3 registry sizes &times; 3 similarity &times; 3 seeds</span>
-        </div>
-        <div class="discriminator">
-          30/adversarial: misleading descriptions with 30 tools. Only models that read capabilities over names succeed.
+          <span class="badge">procedural generation</span>
         </div>
       </div>
-      </a>
 
-      <!-- Reinforcement Learning -->
-      <a href="tasks/belief-revision.html" class="task-card-link">
+      <!-- Procedural Learning: Novel Algorithm Execution -->
+      <div class="task-card">
+        <div class="card-icon">&#x2699;</div>
+        <h3>Procedural Learning</h3>
+        <div class="task-name">Novel Algorithm Execution</div>
+        <p>
+          Execute a novel algorithm described in pseudocode on a given input.
+          Tests whether the model can follow multi-step procedures it has never seen.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge">procedural generation</span>
+        </div>
+      </div>
+
+      <!-- Procedural Learning: Stale State Recovery -->
+      <div class="task-card">
+        <div class="card-icon">&#x2699;</div>
+        <h3>Procedural Learning</h3>
+        <div class="task-name">Stale State Recovery</div>
+        <p>
+          Given a sequence of operations where state becomes invalid after mutations, identify
+          where staleness occurs and insert the correct recovery step.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge badge-mined">session mining</span>
+        </div>
+      </div>
+
+      <!-- Reinforcement Learning: Multi-Armed Bandit -->
       <div class="task-card">
         <div class="card-icon">&#x1F504;</div>
         <h3>Reinforcement Learning</h3>
-        <div class="task-name">Belief Revision</div>
+        <div class="task-name">Multi-Armed Bandit</div>
         <p>
-          Update answers when presented with new evidence that contradicts initial evidence.
-          Tests the ability to overcome anchoring bias and integrate corrections, from simple
-          numeric overrides to nested rule cascades.
+          Infer reward distributions from a history of pulls and select the optimal arm.
+          Tests whether models can learn value estimates from outcome data.
         </p>
         <div class="card-meta">
           <span class="badge">27 items</span>
-          <span class="badge">3 complexity &times; 3 contradiction &times; 3 seeds</span>
-        </div>
-        <div class="discriminator">
-          Nested/strong: complete overrides in nested rule systems require tracking cascading changes.
+          <span class="badge">procedural generation</span>
         </div>
       </div>
-      </a>
+
+      <!-- Reinforcement Learning: Strategy Pivot -->
+      <div class="task-card">
+        <div class="card-icon">&#x1F504;</div>
+        <h3>Reinforcement Learning</h3>
+        <div class="task-name">Strategy Pivot</div>
+        <p>
+          Given a history of failed attempts, decide: CONTINUE, ADJUST_PARAMS, or PIVOT.
+          Tests whether models recognize when to abandon a broken strategy.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge badge-mined">session mining</span>
+        </div>
+      </div>
 
     </div>
   </div>
