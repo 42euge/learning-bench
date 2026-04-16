@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benchmark - GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../#overview">Overview</a></li>
+      <li><a href="../#method">Method</a></li>
+      <li><a href="../#tasks">Tasks</a></li>
+      <li><a href="../#results">Results</a></li>
+      <li><a href="./" class="active">Submission</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <a href="./" style="color: var(--text-muted); text-decoration: none;">&larr; Submission Materials</a>
+    <h1 style="margin-top: 0.5rem;">Kaggle Benchmark</h1>
+    <p class="tagline">Required &middot; Linked as project link &middot; Private until deadline</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    <h2>Benchmark Structure</h2>
+    <p>
+      The benchmark consists of 12 tasks organized into 6 cognitive sub-abilities. Each task
+      is a self-contained Kaggle Benchmark notebook that uses the <code>kaggle_benchmarks</code>
+      SDK to evaluate models via the LLM proxy.
+    </p>
+
+    <h2>Task Notebooks</h2>
+    <p>Each notebook lives at <code>tasks/{sub-ability}/{task-name}/{task-name}.ipynb</code> and follows the pre/study/post paradigm.</p>
+
+    <h3>Procedurally Generated Tasks (7)</h3>
+    <table>
+      <thead><tr><th>Sub-Ability</th><th>Task</th><th>Items</th><th>Kaggle Dataset</th></tr></thead>
+      <tbody>
+        <tr><td>Associative</td><td>Paired Associate</td><td>27</td><td>eugenio0/paired-associate-benchmark</td></tr>
+        <tr><td>Concept</td><td>Rule Induction</td><td>27</td><td>eugenio0/rule-induction-benchmark</td></tr>
+        <tr><td>Language</td><td>Novel Grammar Induction</td><td>27</td><td>eugenio0/novel-grammar-induction-benchmark</td></tr>
+        <tr><td>Observational</td><td>Trace-Based Imitation</td><td>27</td><td>eugenio0/trace-based-imitation-benchmark</td></tr>
+        <tr><td>Procedural</td><td>Skill Selection</td><td>27</td><td>eugenio0/skill-selection-benchmark</td></tr>
+        <tr><td>Procedural</td><td>Novel Algorithm Execution</td><td>27</td><td>eugenio0/novel-algorithm-execution-benchmark</td></tr>
+        <tr><td>Reinforcement</td><td>Multi-Armed Bandit</td><td>27</td><td>eugenio0/multi-armed-bandit-benchmark</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Session-Mined Tasks (5)</h3>
+    <p>Grounded in real failure patterns from 620 Claude Code sessions via <a href="https://github.com/42euge/geno-bench">geno-bench</a>.</p>
+    <table>
+      <thead><tr><th>Sub-Ability</th><th>Task</th><th>Items</th><th>Kaggle Dataset</th></tr></thead>
+      <tbody>
+        <tr><td>Associative</td><td>Error Remediation</td><td>27</td><td>eugenio0/error-remediation-benchmark</td></tr>
+        <tr><td>Concept</td><td>Error Severity Triage</td><td>27</td><td>eugenio0/error-severity-triage-benchmark</td></tr>
+        <tr><td>Observational</td><td>Batch Error Diagnosis</td><td>27</td><td>eugenio0/batch-error-diagnosis-benchmark</td></tr>
+        <tr><td>Procedural</td><td>Stale State Recovery</td><td>27</td><td>eugenio0/stale-state-recovery-benchmark</td></tr>
+        <tr><td>Reinforcement</td><td>Strategy Pivot</td><td>27</td><td>eugenio0/strategy-pivot-benchmark</td></tr>
+      </tbody>
+    </table>
+
+    <h2>How to Link</h2>
+    <p>
+      In the Kaggle submission: <strong>Attachments &gt; Add a link</strong> &rarr; paste the benchmark URL.
+      The benchmark should remain private until the submission deadline.
+    </p>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="./">Back to Submission</a>
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

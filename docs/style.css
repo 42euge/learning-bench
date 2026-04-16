@@ -537,6 +537,26 @@ footer .footer-links {
   color: var(--accent);
 }
 
+/* --- Active nav link --- */
+
+nav .nav-links a.active {
+  color: var(--accent-light);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+/* --- Status badges --- */
+
+.badge.status-ready {
+  background: #059669;
+  color: #fff;
+}
+
+.badge.status-wip {
+  background: #d97706;
+  color: #fff;
+}
+
 /* --- Responsive --- */
 
 @media (max-width: 640px) {
