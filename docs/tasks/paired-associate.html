@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paired Associate &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F517;</span>
+    <h1>Paired Associate</h1>
+    <p class="task-hero-sub">Associative Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model memorize and recall arbitrary word-meaning pairs from a novel vocabulary?
+      This isolates rote associative binding&mdash;the ability to form new arbitrary mappings
+      during a conversation&mdash;rather than relying on prior knowledge.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See a vocabulary list and answer a lookup question cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Create a study guide: group words, find patterns, build mnemonics.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Answer with own study notes + original vocabulary.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>simple, compound, relational</td>
+          <td>Simple: 1:1 word&rarr;object. Compound: word&rarr;&ldquo;size color&rdquo; pairs.
+              Relational: modifier words that compose with base words
+              (e.g., &ldquo;mako-&rdquo; = &ldquo;very&rdquo;, &ldquo;trel&rdquo; = &ldquo;blue&rdquo;
+              &rarr; &ldquo;mako-trel&rdquo; = &ldquo;very blue&rdquo;).</td>
+        </tr>
+        <tr>
+          <td><strong>Evidence</strong></td>
+          <td>few (4), mid (8), many (12)</td>
+          <td>Number of word-meaning pairs to memorize. More pairs = harder recall.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations for statistical robustness.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 evidence &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Nonsense words are built from pronounceable syllable templates (onset + vowel + optional coda).
+      Meanings are drawn from pools of concrete nouns, colors, sizes, actions, and modifiers.
+      For <strong>simple</strong> and <strong>compound</strong> conditions, the test pair is included
+      in the material&mdash;the task is pure recall from a list. For <strong>relational</strong>
+      conditions, the test is a novel composition whose modifier and base are both shown in the
+      material, so the model must derive the answer by composing known parts.
+    </p>
+
+    <h2>Examples</h2>
+
+    <h3>Simple (1:1 mapping)</h3>
+    <p>The model sees a vocabulary of nonsense words with direct English meanings, then must recall one:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        laisnautun = &ldquo;cloud&rdquo;<br>
+        flesoudglaush = &ldquo;purple&rdquo;<br>
+        staidrospot = &ldquo;growing&rdquo;<br>
+        fleibloint = &ldquo;rope&rdquo;
+      </div>
+      <div class="example-question">
+        <strong>Question:</strong> What does &ldquo;fleibloint&rdquo; mean?<br>
+        <strong>Expected:</strong> rope
+      </div>
+    </div>
+    <p>
+      The answer is right there in the vocabulary&mdash;pure recall. With 4 pairs this is easy,
+      but with 12 pairs the model must scan a longer list and avoid confusing similar nonsense words.
+    </p>
+
+    <h3>Compound (size + color)</h3>
+    <p>Each word maps to a two-part meaning combining a size and a color:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        fredoufeish = &ldquo;enormous green&rdquo;<br>
+        woutun = &ldquo;tiny silver&rdquo;<br>
+        kampreiwroung = &ldquo;tall purple&rdquo;<br>
+        sipswaut = &ldquo;thin blue&rdquo;
+      </div>
+      <div class="example-question">
+        <strong>Question:</strong> What does &ldquo;kampreiwroung&rdquo; mean?<br>
+        <strong>Expected:</strong> tall purple
+      </div>
+    </div>
+    <p>
+      The model must recall the exact two-word compound. Partial answers
+      (&ldquo;purple&rdquo; or &ldquo;tall&rdquo; alone) are scored as incorrect.
+    </p>
+
+    <h3>Relational (modifier + base composition)</h3>
+    <p>
+      The material includes base words, modifier definitions, and some example compositions.
+      The test is a <em>novel composition</em> not shown in the material&mdash;the model must derive it:
+    </p>
+    <div class="example-box">
+      <div class="example-vocab">
+        woutun- = &ldquo;extremely (modifier)&rdquo;<br>
+        sipswaut = &ldquo;purple&rdquo;<br>
+        fleibloint-sipswaut = &ldquo;not purple&rdquo;<br>
+        fleibloint-fredoufeish = &ldquo;not red&rdquo;
+      </div>
+      <div class="example-question">
+        <strong>Question:</strong> What does &ldquo;woutun-sipswaut&rdquo; mean?<br>
+        <strong>Expected:</strong> extremely purple
+      </div>
+    </div>
+    <p>
+      The modifier <em>woutun-</em> (&ldquo;extremely&rdquo;) and the base <em>sipswaut</em>
+      (&ldquo;purple&rdquo;) are both in the material, but the specific combination
+      <em>woutun-sipswaut</em> is not. The model must learn the compositional rule from the
+      example compositions (like <em>fleibloint-sipswaut</em> = &ldquo;not purple&rdquo;) and
+      apply it to derive &ldquo;extremely purple.&rdquo;
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact meaning match).</li>
+      <li><strong>Extraction:</strong> Last short line (&le;60 chars), lowercased and stripped of quotes/punctuation.</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, expected)</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Simple/few:</strong> Most models handle 4 arbitrary 1:1 mappings&mdash;this is a baseline.</li>
+      <li><strong>Relational/many:</strong> Requires compositional understanding (modifier + base) across 12 pairs.
+          Models that truly &ldquo;learn&rdquo; the modifier system generalize; surface memorizers fail.</li>
+      <li><strong>Study quality matters:</strong> Models that produce organized, complete study notes
+          (with every pair listed) outperform those that produce vague summaries.</li>
+    </ul>
+
+    <h2>Prior Work &amp; References</h2>
+    <p>
+      The paired-associate paradigm originates in cognitive psychology. No existing benchmark
+      applies it as a behavioral study-test evaluation for LLMs&mdash;the closest work studies
+      representational dynamics rather than recall accuracy.
+    </p>
+
+    <h3>Cognitive Science Foundations</h3>
+    <ul>
+      <li>
+        <strong>Ebbinghaus (1885).</strong> <em>&Uuml;ber das Ged&auml;chtnis</em>.
+        Pioneered nonsense syllables (CVC trigrams) for studying memory without semantic
+        contamination&mdash;the same principle behind our use of invented words.
+      </li>
+      <li>
+        <strong>Calkins (1894).</strong> Invented the paired-associate method itself: pairing
+        arbitrary stimuli (numbers with colors) and testing cued recall. Discovered frequency,
+        primacy, and recency effects on association strength.
+      </li>
+    </ul>
+
+    <h3>LLMs and Associative Learning</h3>
+    <ul>
+      <li>
+        <strong>Kolling, Vo &amp; Toneva (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2510.21408">Large Language Models as Model
+        Organisms for Human Associative Learning</a>&rdquo; (NeurIPS 2025).
+        The closest prior work&mdash;they adapted paired-associate paradigms to study how
+        LLM <em>internal representations</em> change when token pairs are presented in-context.
+        Found non-monotonic plasticity and vocabulary interference effects. However, they studied
+        representational dynamics, not behavioral recall accuracy in a study-test paradigm.
+      </li>
+      <li>
+        <strong>Ji-An, Zhou, Benna &amp; Mattar (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2405.14992">Linking In-context Learning in
+        Transformers to Human Episodic Memory</a>&rdquo; (NeurIPS 2024).
+        Showed that induction heads in LLMs are functionally similar to the Contextual
+        Maintenance and Retrieval model of human episodic memory, exhibiting primacy, recency,
+        and temporal contiguity effects&mdash;directly justifying cognitive memory paradigms
+        as LLM benchmarks.
+      </li>
+    </ul>
+
+    <h3>Why Arbitrary Mappings Are Hard for LLMs</h3>
+    <ul>
+      <li>
+        <strong>Min et al. (2022).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2202.12837">Rethinking the Role of Demonstrations</a>&rdquo;
+        (EMNLP 2022). Found that ground-truth input-label mappings barely matter for ICL on
+        classification tasks&mdash;models rely on format and label space, not actual associations.
+        Our task directly probes whether models can go beyond this to real associative binding.
+      </li>
+      <li>
+        <strong>Semantic Anchors (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2511.21038">Why Small LLMs Cannot Flip Their
+        Labels</a>&rdquo;. Showed that smaller models have zero semantic override rate&mdash;ICL
+        operates as &ldquo;prior refinement,&rdquo; not flexible learning. Using genuinely novel
+        nonsense words (as we do) avoids the semantic anchor problem entirely.
+      </li>
+      <li>
+        <strong>Wei et al. (2023).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2305.08298">Symbol Tuning Improves In-Context
+        Learning</a>&rdquo; (EMNLP 2023). Standard LLMs are weak at learning truly arbitrary
+        mappings; symbol-tuned models improve by up to 18%. Our benchmark measures this capacity
+        in standard models.
+      </li>
+    </ul>
+
+    <h3>Mechanistic Foundations</h3>
+    <ul>
+      <li>
+        <strong>Olsson et al. (2022).</strong>
+        &ldquo;<a href="https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html">In-context
+        Learning and Induction Heads</a>&rdquo;. Induction heads implement the [A][B]&hellip;[A]&rarr;[B]
+        pattern&mdash;the core mechanism that makes paired-associate recall possible in
+        transformers.
+      </li>
+      <li>
+        <strong>Feng &amp; Steinhardt (2023).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2310.17191">How Do Language Models Bind Entities
+        in Context?</a>&rdquo;. Discovered a &ldquo;Binding ID&rdquo; mechanism for entity-attribute
+        binding&mdash;paired-associate learning is fundamentally a binding problem.
+      </li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/paired-associate-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

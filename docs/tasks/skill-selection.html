@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Selection &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x2699;</span>
+    <h1>Skill Selection</h1>
+    <p class="task-hero-sub">Procedural Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model learn to select the correct tool from a growing registry of tools with
+      potentially misleading names and descriptions? This tests procedural learning in a
+      realistic scenario&mdash;navigating a complex tool ecosystem where surface-level cues
+      can be deceptive and only deep capability analysis reveals the right choice.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See a tool registry and task description, select the correct tool cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Analyze practice examples with correct selections and build a quick-reference guide.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Select tool with own study notes + original registry.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Registry size</strong></td>
+          <td>5, 15, 30</td>
+          <td>Number of tools. Larger registries = more distractors and context to parse.</td>
+        </tr>
+        <tr>
+          <td><strong>Similarity</strong></td>
+          <td>distinct, confusable, adversarial</td>
+          <td>Distinct: clear descriptions. Confusable: generic overlapping descriptions.
+              Adversarial: deliberately misleading names/descriptions (capabilities are ground truth).</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      Study examples scale with registry: 4 for 5 tools, 6 for 15, 8 for 30.
+      <br><strong>Total:</strong> 3 sizes &times; 3 similarity &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Tools are generated on a fictional &ldquo;Nexara Platform&rdquo; with synthetic names
+      (e.g., <code>flux_bridge</code>, <code>data_weaver</code>), descriptions, and capability
+      lists across 15 domains. In adversarial mode, tool names and descriptions are swapped or
+      made misleading while capabilities remain truthful. Practice examples include explicit
+      explanations of why the correct tool was chosen.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact tool name match).</li>
+      <li><strong>Extraction:</strong> Fuzzy match against valid tool names&mdash;exact match first, then substring on short lines.</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, expected)</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>5/distinct:</strong> Easy baseline&mdash;5 clearly described tools, most models succeed.</li>
+      <li><strong>30/adversarial:</strong> The hardest setting. 30 tools with misleading names and
+          descriptions. Only models that carefully read capabilities (not names) and learned from
+          practice examples select correctly.</li>
+      <li><strong>Study quality:</strong> Models that build accurate quick-reference guides mapping
+          each tool to its actual capabilities outperform those that just summarize descriptions.</li>
+    </ul>
+
+    <h2>Results</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th><th>Pre</th><th>Post</th><th>Gain</th>
+          <th>Distinct</th><th>Confusable</th><th>Adversarial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>gemma-3-1b</td><td>14.8%</td><td>14.8%</td><td>+0.0%</td><td>33%</td><td>11%</td><td>0%</td></tr>
+        <tr><td>gemma-3-4b</td><td>85.2%</td><td>81.5%</td><td>&minus;3.7%</td><td>100%</td><td>100%</td><td>56%</td></tr>
+        <tr><td>gemini-2.5-flash</td><td>88.9%</td><td>96.3%</td><td>+7.4%</td><td>100%</td><td>100%</td><td>67%</td></tr>
+        <tr><td>gemini-2.5-pro</td><td>100%</td><td>100%</td><td>+0.0%</td><td>100%</td><td>100%</td><td>100%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/skill-selection-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

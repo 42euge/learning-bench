@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belief Revision &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F504;</span>
+    <h1>Belief Revision</h1>
+    <p class="task-hero-sub">Reinforcement Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model update its answer when presented with new evidence that contradicts or
+      modifies initial evidence? This tests belief revision&mdash;the ability to overcome
+      anchoring bias and integrate corrections, a core component of learning from feedback.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See all evidence (initial + correction) and answer cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Analyze what changed, what the initial evidence suggested, and how corrections affect the conclusion.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Answer with own analysis + all evidence.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>simple, chain, nested</td>
+          <td>Simple: numeric constraints with corrections. Chain: causal chains (A&rarr;B&rarr;C) where
+              an intermediate link changes. Nested: if-then rules where an override cascades through conditions.</td>
+        </tr>
+        <tr>
+          <td><strong>Contradiction</strong></td>
+          <td>weak, moderate, strong</td>
+          <td>Weak: minor addendum. Moderate: correction to a specific fact. Strong: complete override
+              that reverses the conclusion.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 contradiction &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Evidence scenarios are generated with an initial evidence block and an update/correction block.
+      The initial evidence leads to one answer (<code>old_answer</code>), but the correction changes
+      the correct answer (<code>expected</code>). The material presents both blocks together, testing
+      whether the model properly integrates the update rather than anchoring on initial evidence.
+    </p>
+    <p><strong>Example scenario types:</strong></p>
+    <ul>
+      <li><strong>Simple:</strong> &ldquo;The total is 15&rdquo; &rarr; &ldquo;CORRECTION: The total is actually 12&rdquo;</li>
+      <li><strong>Chain:</strong> &ldquo;A causes B, B causes C&rdquo; &rarr; &ldquo;UPDATE: A no longer causes B&rdquo;</li>
+      <li><strong>Nested:</strong> &ldquo;IF condition1 THEN X, ELSE Y&rdquo; &rarr; &ldquo;CORRECTION: condition1 is false&rdquo;</li>
+    </ul>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact answer match, case-insensitive).</li>
+      <li><strong>Extraction:</strong> Last short line (&le;30 chars), lowercased and stripped.</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, expected)</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Simple/weak:</strong> Most models handle basic corrections&mdash;easy baseline.</li>
+      <li><strong>Nested/strong:</strong> Complete overrides in nested rule systems require tracking
+          cascading changes through multiple levels. Many models anchor on initial evidence.</li>
+      <li><strong>Pre vs. post insight:</strong> Models that fail pre but succeed post demonstrate that
+          explicit analysis helps overcome anchoring. Models that fail both reveal a fundamental
+          limitation in evidence integration.</li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/belief-revision-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

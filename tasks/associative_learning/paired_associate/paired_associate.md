@@ -23,7 +23,7 @@ Can the model memorize and recall arbitrary word-meaning pairs from a novel voca
 
 ## Dataset generation
 
-Nonsense words are built from pronounceable syllable templates (onset + vowel + optional coda). Meanings are drawn from pools of concrete nouns, colors, sizes, actions, and modifiers. The test item is always a pair that was present in the study material but not among the first N study pairs — so the model must have actually read and retained it.
+Nonsense words are built from pronounceable syllable templates (onset + vowel + optional coda). Meanings are drawn from pools of concrete nouns, colors, sizes, actions, and modifiers. For simple and compound conditions, the test pair is included in the material — the task is pure recall from a list. For relational conditions, the test is a novel composition whose modifier and base are both shown in the material, so the model must derive the answer by composing known parts.
 
 ## Scoring
 

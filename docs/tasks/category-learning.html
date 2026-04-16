@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Learning &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F9E9;</span>
+    <h1>Category Learning</h1>
+    <p class="task-hero-sub">Concept Formation</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model discover a hidden classification rule from labeled examples and apply it to
+      a novel object? This isolates concept formation&mdash;the ability to identify which features
+      are relevant for categorization and form an explicit rule.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See labeled objects (size, color, pattern, shape) and classify a new one cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Analyze examples to identify the classification rule and verify it.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Classify with own rule analysis + original examples.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>single, two_feat, conditional</td>
+          <td>Single: one feature determines category. Two-feature: conjunction of two features.
+              Conditional: if-then chains with overrides.</td>
+        </tr>
+        <tr>
+          <td><strong>Evidence</strong></td>
+          <td>few (4), mid (6), many (10)</td>
+          <td>Number of labeled examples. Fewer = harder to disambiguate which features matter.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 evidence &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Objects are described by four features (size, color, pattern, shape) drawn from fixed pools.
+      Classification rules are generated at three complexity levels. Training examples are sampled
+      to be consistent with the rule, and the test object is guaranteed to be unambiguous under the
+      true rule. Feature values are varied to avoid spurious correlations.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact category letter match, A&ndash;D).</li>
+      <li><strong>Extraction:</strong> Last category letter found in the response via reverse line scan.</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, expected)</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Single/many:</strong> Easy baseline&mdash;one feature, lots of examples.</li>
+      <li><strong>Conditional/few:</strong> Requires identifying multi-step rules from minimal data
+          with &ldquo;ELSE IF&rdquo; logic.</li>
+      <li><strong>Feature distraction:</strong> All four features are always present, but only 1&ndash;2
+          are relevant. Models that latch onto irrelevant features fail.</li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/category-learning-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

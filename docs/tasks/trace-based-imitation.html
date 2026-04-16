@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trace-Based Imitation &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F441;</span>
+    <h1>Trace-Based Imitation</h1>
+    <p class="task-hero-sub">Observational Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model learn a novel procedure by observing worked examples (execution traces),
+      then apply it to a new input? This tests observational learning&mdash;inferring a procedure
+      from demonstrations without explicit instruction.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See worked examples of a procedure on number lists, apply to a new input cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Analyze traces to write down the exact procedure, order of operations, conditions.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Apply procedure with own notes + original traces.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>simple, medium, complex</td>
+          <td>Simple: 1-step procedures (zigzag_sum, mirror_diff, triangle_count).
+              Medium: 2-step compositions (spiral_crunch, wave_hash, cascade_mod).
+              Complex: 3+ steps with conditional branching (branch_fold, pivot_weave, chain_gate).</td>
+        </tr>
+        <tr>
+          <td><strong>Traces</strong></td>
+          <td>2, 3, 4</td>
+          <td>Number of worked examples provided. More traces = easier to identify the procedure.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 traces &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Nine novel procedures are defined with increasing complexity. Each transforms a list of
+      integers into a single integer through specific operations. Worked traces are generated
+      by running each procedure on random inputs and formatting each step explicitly. The test
+      input is always different from any traced input.
+    </p>
+    <p><strong>Example procedures:</strong></p>
+    <ul>
+      <li><code>zigzag_sum</code> &mdash; Alternate adding and subtracting elements left-to-right</li>
+      <li><code>wave_hash</code> &mdash; Sort, take differences of consecutive elements, then sum</li>
+      <li><code>branch_fold</code> &mdash; If first element is even, fold left with addition; else fold right with subtraction</li>
+    </ul>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact integer match).</li>
+      <li><strong>Extraction:</strong> Last integer found in the response (handles negatives).</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, str(expected))</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Simple/4 traces:</strong> Most models identify single-step operations from 4 examples.</li>
+      <li><strong>Complex/2 traces:</strong> Conditional branching with only 2 traces requires genuine
+          procedural reasoning&mdash;figuring out what triggers different code paths.</li>
+      <li><strong>Precision matters:</strong> Procedures like <code>cascade_mod</code> involve modular
+          arithmetic chains where off-by-one errors cascade.</li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/trace-based-imitation-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

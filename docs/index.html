@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GenoBench-Learning</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#method">Method</a></li>
+      <li><a href="#tasks">Tasks</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <h1>Geno<span>Bench</span>-Learning</h1>
+  <p class="tagline">Do frontier models learn, or just recall?</p>
+  <p class="description">
+    A benchmark measuring whether LLMs can acquire and apply new knowledge&mdash;not
+    just recall what they were trained on. Six cognitive sub-abilities, twelve tasks,
+    all built on synthetic stimuli that cannot be memorized from training data.
+  </p>
+  <a href="https://www.kaggle.com/competitions/kaggle-measuring-agi" class="cta">
+    View on Kaggle
+  </a>
+</header>
+
+<!-- Overview -->
+<section id="overview">
+  <div class="container">
+    <h2>Problem Statement</h2>
+    <p class="section-subtitle">Why existing benchmarks miss this</p>
+
+    <p>
+      Jagged intelligence is a frequent complaint about coding models but is difficult to
+      articulate precisely&mdash;models excel at some tasks and fail at structurally similar
+      ones, especially when the problem is genuinely new. Can we measure that gap in a
+      practical way?
+    </p>
+    <p>
+      Agentic harness systems are multi-step pipelines where the critical failure mode
+      isn't typically lack of knowledge, but the inability to effectively use and manipulate
+      context to discover proper solutions. A model must do two things:
+      <strong>externalize its understanding</strong> into a context (notes, observations,
+      intermediate reasoning), and then <strong>effectively use that context</strong> to solve
+      a downstream problem. These are separable skills, and current benchmarks measure neither.
+    </p>
+    <p>
+      GenoBench-Learning isolates both parts of this context-learning problem. The benchmark
+      decomposes learning into two scored sub-problems: how well can a model
+      <em>construct</em> a useful learned context from novel stimuli, and how well can it
+      <em>apply</em> that context to solve a new instance? Each is measured independently and
+      baselined against a one-shot approach.
+    </p>
+  </div>
+</section>
+
+<!-- Method -->
+<section id="method">
+  <div class="container">
+    <h2>Method</h2>
+    <p class="section-subtitle">Pre/post study paradigm across all tasks</p>
+
+    <p>
+      Every task follows the same three-phase framework. The model is tested before and after
+      a structured self-study phase in which it must articulate the underlying rule in its own
+      words. <strong>Learning gain</strong>&mdash;the delta between pre- and post-study
+      accuracy&mdash;is the primary signal.
+    </p>
+
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">Answer cold. No study, no hints. Measures baseline.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Analyze material. Write notes, rules, mnemonics.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Answer again with own study notes. Measures learning.</div>
+      </div>
+    </div>
+
+    <p>
+      All stimuli are procedurally generated with random seeds, using invented vocabularies,
+      grammars, and procedures that cannot exist in any training corpus. This guarantees that
+      correct answers require genuine in-context learning, not memorization.
+    </p>
+  </div>
+</section>
+
+<!-- Tasks -->
+<section id="tasks">
+  <div class="container">
+    <h2>Tasks</h2>
+    <p class="section-subtitle">Six cognitive sub-abilities, each with dedicated evaluation tasks</p>
+
+    <div class="task-grid">
+
+      <!-- Associative Learning -->
+      <a href="tasks/paired-associate.html" class="task-card-link">
+      <div class="task-card">
+        <div class="card-icon">&#x1F517;</div>
+        <h3>Associative Learning</h3>
+        <div class="task-name">Paired Associate</div>
+        <p>
+          Memorize and recall arbitrary nonsense-word-to-meaning pairs from a novel vocabulary.
+          Tests rote associative binding&mdash;forming new arbitrary mappings during a conversation.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge">3 complexity &times; 3 evidence &times; 3 seeds</span>
+        </div>
+        <div class="discriminator">
+          Relational/many: compositional modifiers across 12 pairs separate learners from memorizers.
+        </div>
+      </div>
+      </a>
+
+      <!-- Concept Formation -->
+      <a href="tasks/category-learning.html" class="task-card-link">
+      <div class="task-card">
+        <div class="card-icon">&#x1F9E9;</div>
+        <h3>Concept Formation</h3>
+        <div class="task-name">Category Learning</div>
+        <p>
+          Discover a hidden classification rule from labeled examples (objects described by size,
+          color, pattern, shape) and apply it to a novel object. Scales from single-feature rules
+          to conditional if-then chains.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge">3 complexity &times; 3 evidence &times; 3 seeds</span>
+        </div>
+        <div class="discriminator">
+          Conditional/few: multi-step rules from minimal data, with irrelevant features as distractors.
+        </div>
+      </div>
+      </a>
+
+      <!-- Language Learning -->
+      <a href="tasks/novel-grammar-induction.html" class="task-card-link">
+      <div class="task-card">
+        <div class="card-icon">&#x1F30D;</div>
+        <h3>Language Learning</h3>
+        <div class="task-name">Novel Grammar Induction</div>
+        <p>
+          Induce the grammar of a completely novel language from example sentences, then judge
+          whether new sentences are grammatical. Scales from fixed word order to nested agreement
+          systems.
+        </p>
+        <div class="card-meta">
+          <span class="badge">108 items</span>
+          <span class="badge">3 complexity &times; 3 evidence &times; 3 seeds &times; 4 tests</span>
+        </div>
+        <div class="discriminator">
+          Complex/4 examples: nested cross-element agreement from just 4 sentences.
+        </div>
+      </div>
+      </a>
+
+      <!-- Observational Learning -->
+      <a href="tasks/trace-based-imitation.html" class="task-card-link">
+      <div class="task-card">
+        <div class="card-icon">&#x1F441;</div>
+        <h3>Observational Learning</h3>
+        <div class="task-name">Trace-Based Imitation</div>
+        <p>
+          Learn a novel procedure by observing worked examples (execution traces on number lists),
+          then apply it to new input. Scales from 1-step operations to 3+ step conditional
+          branching procedures.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge">3 complexity &times; 3 traces &times; 3 seeds</span>
+        </div>
+        <div class="discriminator">
+          Complex/2 traces: conditional branching from only 2 demonstrations requires genuine procedural reasoning.
+        </div>
+      </div>
+      </a>
+
+      <!-- Procedural Learning -->
+      <a href="tasks/skill-selection.html" class="task-card-link">
+      <div class="task-card">
+        <div class="card-icon">&#x2699;</div>
+        <h3>Procedural Learning</h3>
+        <div class="task-name">Skill Selection</div>
+        <p>
+          Select the correct tool from a growing registry with potentially misleading names and
+          descriptions. In adversarial mode, tool names deliberately mismatch their actual
+          capabilities&mdash;only deep analysis reveals the right choice.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge">3 registry sizes &times; 3 similarity &times; 3 seeds</span>
+        </div>
+        <div class="discriminator">
+          30/adversarial: misleading descriptions with 30 tools. Only models that read capabilities over names succeed.
+        </div>
+      </div>
+      </a>
+
+      <!-- Reinforcement Learning -->
+      <a href="tasks/belief-revision.html" class="task-card-link">
+      <div class="task-card">
+        <div class="card-icon">&#x1F504;</div>
+        <h3>Reinforcement Learning</h3>
+        <div class="task-name">Belief Revision</div>
+        <p>
+          Update answers when presented with new evidence that contradicts initial evidence.
+          Tests the ability to overcome anchoring bias and integrate corrections, from simple
+          numeric overrides to nested rule cascades.
+        </p>
+        <div class="card-meta">
+          <span class="badge">27 items</span>
+          <span class="badge">3 complexity &times; 3 contradiction &times; 3 seeds</span>
+        </div>
+        <div class="discriminator">
+          Nested/strong: complete overrides in nested rule systems require tracking cascading changes.
+        </div>
+      </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+<section id="results">
+  <div class="container">
+    <h2>Results</h2>
+    <p class="section-subtitle">Scaling ladder from 1B parameters to frontier</p>
+
+    <img src="assets/leaderboard.png" alt="Benchmark leaderboard" class="results-image">
+
+    <div class="pullquote">
+      The benchmark reveals what standard evaluations cannot: not just whether a model
+      knows things, but whether it can learn new things on demand, and whether explicit
+      self-generated reasoning aids that learning.
+    </div>
+
+    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Skill Selection &mdash; Detailed Results</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th><th>Pre</th><th>Post</th><th>Gain</th>
+          <th>Distinct</th><th>Confusable</th><th>Adversarial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>gemma-3-1b</td><td>14.8%</td><td>14.8%</td><td>+0.0%</td>
+          <td>33%</td><td>11%</td><td>0%</td>
+        </tr>
+        <tr>
+          <td>gemma-3-4b</td><td>85.2%</td><td>81.5%</td><td>&minus;3.7%</td>
+          <td>100%</td><td>100%</td><td>56%</td>
+        </tr>
+        <tr>
+          <td>gemini-2.5-flash</td><td>88.9%</td><td>96.3%</td><td>+7.4%</td>
+          <td>100%</td><td>100%</td><td>67%</td>
+        </tr>
+        <tr>
+          <td>gemini-2.5-pro</td><td>100%</td><td>100%</td><td>+0.0%</td>
+          <td>100%</td><td>100%</td><td>100%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Key Findings</h3>
+
+    <ul class="findings-list">
+      <li>
+        <strong>Adversarial similarity is the pure discriminator.</strong>
+        Distinct and confusable conditions hit ceiling (100%) for all models above 1B.
+        Adversarial produces a clean gradient: 0% &rarr; 56% &rarr; 67% &rarr; 100%.
+      </li>
+      <li>
+        <strong>Small models can't follow the format.</strong>
+        gemma-3-1b scores 33% on distinct (the easiest condition) and 0% at 15+ tools.
+        It cannot reliably parse a tool registry regardless of difficulty.
+      </li>
+      <li>
+        <strong>Tool count compounds the difficulty.</strong>
+        gemma-3-1b drops from 44% (5 tools) to 0% (30 tools). Even gemma-3-4b drops
+        from 100% to 56&ndash;89%.
+      </li>
+      <li>
+        <strong>Learning gain requires sufficient baseline capability.</strong>
+        Only gemini-2.5-flash shows meaningful positive gain (+7.4%). Models below a
+        capability threshold produce study notes that are noise, not signal.
+      </li>
+      <li>
+        <strong>Negative learning gain is real.</strong>
+        gemma-3-4b's post-learning accuracy is lower than pre-learning (&minus;3.7%).
+        Self-generated study notes introduced confusion&mdash;mirroring a known human
+        learning phenomenon.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>
+      <strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos
+    </p>
+    <p style="margin-top: 0.25rem;">
+      Blue Origin &middot; University of Washington
+      <br>
+      All work completed using personal resources only.
+    </p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="https://www.kaggle.com/competitions/kaggle-measuring-agi">Kaggle Competition</a>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.78rem; color: #475569;">
+      Part of the Google DeepMind &times; Kaggle AGI Hackathon
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

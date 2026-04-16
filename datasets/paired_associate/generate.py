@@ -42,32 +42,40 @@ def gen_nonsense_word(rng, min_syl=2, max_syl=3):
 
 
 def gen_vocab_simple(seed, n_pairs):
-    """Simple: word -> single concrete meaning (1:1 arbitrary mapping)."""
+    """Simple: word -> single concrete meaning (1:1 arbitrary mapping).
+
+    The test pair IS included in the material — the task is recall, not generalization.
+    We test a pair from the second half of the list to avoid primacy bias.
+    """
     rng = random.Random(seed)
     meanings_pool = OBJECTS + COLORS + ACTIONS
     rng.shuffle(meanings_pool)
     words = []
     seen = set()
-    while len(words) < n_pairs + 2:
+    while len(words) < n_pairs:
         w = gen_nonsense_word(rng)
         if w not in seen and len(w) >= 4:
             seen.add(w)
             words.append(w)
-    meanings = meanings_pool[:n_pairs + 2]
+    meanings = meanings_pool[:n_pairs]
     vocab = list(zip(words, meanings))
     rng.shuffle(vocab)
-    study_pairs = vocab[:n_pairs]
-    test_word, test_meaning = vocab[n_pairs]
-    rev_word, rev_meaning = vocab[n_pairs + 1]
-    return study_pairs, test_word, test_meaning, rev_word, rev_meaning, 'simple 1:1 mapping'
+    # Test a pair from the second half (avoids primacy/recency at edges)
+    test_idx = n_pairs // 2 + rng.randint(0, n_pairs // 2 - 1)
+    test_word, test_meaning = vocab[test_idx]
+    study_pairs = list(vocab)  # all pairs shown in material
+    return study_pairs, test_word, test_meaning, None, None, 'simple 1:1 mapping'
 
 
 def gen_vocab_compound(seed, n_pairs):
-    """Compound: word -> compound meaning (word = size + color)."""
+    """Compound: word -> compound meaning (word = size + color).
+
+    The test pair IS included in the material — the task is recall of a two-part meaning.
+    """
     rng = random.Random(seed)
     words = []
     seen = set()
-    while len(words) < n_pairs + 2:
+    while len(words) < n_pairs:
         w = gen_nonsense_word(rng)
         if w not in seen and len(w) >= 4:
             seen.add(w)
@@ -75,18 +83,24 @@ def gen_vocab_compound(seed, n_pairs):
     colors_pool = list(COLORS); rng.shuffle(colors_pool)
     sizes_pool = list(SIZES); rng.shuffle(sizes_pool)
     meanings = []
-    for i in range(n_pairs + 2):
+    for i in range(n_pairs):
         meanings.append(f'{sizes_pool[i % len(sizes_pool)]} {colors_pool[i % len(colors_pool)]}')
     vocab = list(zip(words, meanings))
     rng.shuffle(vocab)
-    study_pairs = vocab[:n_pairs]
-    test_word, test_meaning = vocab[n_pairs]
-    rev_word, rev_meaning = vocab[n_pairs + 1]
-    return study_pairs, test_word, test_meaning, rev_word, rev_meaning, 'compound (size+color)'
+    # Test a pair from the second half
+    test_idx = n_pairs // 2 + rng.randint(0, n_pairs // 2 - 1)
+    test_word, test_meaning = vocab[test_idx]
+    study_pairs = list(vocab)  # all pairs shown in material
+    return study_pairs, test_word, test_meaning, None, None, 'compound (size+color)'
 
 
 def gen_vocab_relational(seed, n_pairs):
-    """Relational: modifier words change base-word meanings."""
+    """Relational: modifier words change base-word meanings.
+
+    The test is a novel composition (modifier-base) NOT shown in the material,
+    but both the modifier and the base ARE shown so the model can derive the answer.
+    We guarantee the test's components are always included.
+    """
     rng = random.Random(seed)
     all_words = []
     seen = set()
@@ -103,26 +117,43 @@ def gen_vocab_relational(seed, n_pairs):
     base_map = {w: base_pool[i] for i, w in enumerate(base_words)}
     mod_pool = list(MODIFIERS[:n_mod + 2]); rng.shuffle(mod_pool)
     mod_map = {w: mod_pool[i] for i, w in enumerate(mod_words)}
-    study_pairs = []
-    for w, m in base_map.items():
-        study_pairs.append((w, m))
-    for w, m in mod_map.items():
-        study_pairs.append((f'{w}-', f'{m} (modifier)'))
+
+    # Generate all possible compositions and pick the test composition
     composed = []
     for mw in mod_words:
         for bw in base_words:
-            composed.append((f'{mw}-{bw}', f'{mod_map[mw]} {base_map[bw]}'))
+            composed.append((f'{mw}-{bw}', f'{mod_map[mw]} {base_map[bw]}', mw, bw))
     rng.shuffle(composed)
-    n_composed_study = min(3, len(composed) - 2)
-    study_pairs.extend(composed[:n_composed_study])
+    test_word, test_meaning, test_mod, test_base = composed[0]
+
+    # Build study pairs: MUST include the test's modifier and base definitions
+    required = [
+        (test_base, base_map[test_base]),        # base word definition
+        (f'{test_mod}-', f'{mod_map[test_mod]} (modifier)'),  # modifier definition
+    ]
+
+    # Add other base and modifier definitions
+    other_pairs = []
+    for w, m in base_map.items():
+        if w != test_base:
+            other_pairs.append((w, m))
+    for w, m in mod_map.items():
+        if w != test_mod:
+            other_pairs.append((f'{w}-', f'{m} (modifier)'))
+
+    # Add some example compositions (not the test one) to show the pattern
+    example_compositions = [(w, m) for w, m, _, _ in composed[1:]]
+    other_pairs.extend(example_compositions[:3])
+    rng.shuffle(other_pairs)
+
+    # Fill remaining slots with other pairs
+    study_pairs = list(required)
+    remaining_slots = n_pairs - len(study_pairs)
+    study_pairs.extend(other_pairs[:remaining_slots])
     rng.shuffle(study_pairs)
-    study_pairs = study_pairs[:n_pairs]
-    test_comp = composed[n_composed_study]
-    test_word, test_meaning = test_comp
-    rev_comp = composed[n_composed_study + 1]
-    rev_word, rev_meaning = rev_comp
+
     desc = 'relational (modifier+base composition)'
-    return study_pairs, test_word, test_meaning, rev_word, rev_meaning, desc
+    return study_pairs, test_word, test_meaning, None, None, desc
 
 
 VOCAB_FNS = {'simple': gen_vocab_simple, 'compound': gen_vocab_compound, 'relational': gen_vocab_relational}

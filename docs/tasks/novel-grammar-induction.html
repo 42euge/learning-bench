@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novel Grammar Induction &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F30D;</span>
+    <h1>Novel Grammar Induction</h1>
+    <p class="task-hero-sub">Language Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model induce the grammar rules of a completely novel language from example sentences,
+      then judge whether new sentences are grammatical? This is the most linguistically grounded
+      task in the benchmark&mdash;it tests the fundamental human ability to acquire language
+      structure from exposure.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See valid sentences and judge a test sentence (YES/NO) cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Identify word classes, word order, agreement patterns, embedding structures.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Judge with own grammar notes + original examples.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>simple, medium, complex</td>
+          <td>Simple: DET NOUN VERB, fixed word order, no agreement. Medium: DET-NOUN and DET-VERB
+              agreement. Complex: DET ADJ NOUN VERB DET NOUN with nested structure and cross-element agreement.</td>
+        </tr>
+        <tr>
+          <td><strong>Evidence</strong></td>
+          <td>4, 8, 12 examples</td>
+          <td>Number of valid example sentences. More examples expose more of the grammar.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent vocabulary and rule generations.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      Each seed generates 4 test items (1 valid + 3 violations).
+      <br><strong>Total:</strong> 3 complexity &times; 3 evidence &times; 3 seeds &times; 4 tests = <strong>108 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Languages are procedurally generated with novel words for determiners, nouns, verbs, and
+      adjectives drawn from phonotactically plausible nonsense. Agreement systems use class markers.
+      Test sentences include specific error types: wrong word order, agreement mismatches, or
+      out-of-vocabulary words.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact YES/NO match).</li>
+      <li><strong>Extraction:</strong> Finds &ldquo;yes&rdquo; or &ldquo;no&rdquo; in the response (case-insensitive).</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, expected)</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Simple/12 examples:</strong> Basic word order with many examples&mdash;most models detect violations.</li>
+      <li><strong>Complex/4 examples:</strong> Nested agreement from just 4 sentences separates genuine
+          grammar induction from surface-level pattern matching.</li>
+      <li><strong>Bias detection:</strong> The 1:3 valid-to-invalid ratio exposes models biased toward
+          always-YES or always-NO.</li>
+      <li><strong>Study quality:</strong> Models that write formal grammar rules with explicit agreement
+          tables dramatically outperform those with vague descriptions.</li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/novel-grammar-induction-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
