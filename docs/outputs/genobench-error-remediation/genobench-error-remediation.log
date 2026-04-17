@@ -1,0 +1,342 @@
+[{"stream_name":"stdout","time":10.98790893,"data":"Available models: ['anthropic/claude-haiku-4-5@20251001', 'anthropic/claude-opus-4-1@20250805', 'anthropic/claude-opus-4-5@20251101', 'anthropic/claude-opus-4-6@default', 'anthropic/claude-sonnet-4-5@20250929', 'anthropic/claude-sonnet-4-6@default', 'anthropic/claude-sonnet-4@20250514', 'deepseek-ai/deepseek-r1-0528', 'deepseek-ai/deepseek-v3.1', 'deepseek-ai/deepseek-v3.2', 'google/gemini-2.0-flash', 'google/gemini-2.0-flash-lite', 'google/gemini-2.5-flash', 'google/gemini-2.5-pro', 'google/gemini-3-flash-preview', 'google/gemini-3.1-flash-lite-preview', 'google/gemini-3.1-pro-preview', 'google/gemma-3-12b', 'google/gemma-3-1b', 'google/gemma-3-27b', 'google/gemma-3-4b', 'google/gemma-4-26b-a4b', 'google/gemma-4-31b', 'openai/gpt-5.4-2026-03-05', 'openai/gpt-5.4-mini-2026-03-17', 'openai/gpt-5.4-nano-2026-03-17', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3-235b-a22b-instruct-2507', 'qwen/qwen3-coder-480b-a35b-instruct', 'qwen/qwen3-next-80b-a3b-instruct', 'qwen/qwen3-next-80b-a3b-thinking', 'zai/glm-5']\n"}
+,{"stream_name":"stdout","time":10.9879822,"data":"Default model: 🤖 google/gemini-3-flash-preview\n"}
+,{"stream_name":"stdout","time":11.0433533,"data":"Loading from: /kaggle/input/datasets/eugenio0/error-remediation-dataset/error_remediation_dataset.csv\n"}
+,{"stream_name":"stdout","time":11.04339756,"data":"Dataset: 27 items\n"}
+,{"stream_name":"stdout","time":36.838225807,"data":"[🤖 google/gemini-3-flash-preview         ] [direct_lookup_few     ] \"error E2003 raised by workspace open.\" -\u003e \"zkl cache purge --deep\"  pre=\"zkl repair\"(N)  post=\"zkl cache purge --deep\"(Y)\n"}
+,{"stream_name":"stdout","time":51.624429668,"data":"[🤖 google/gemini-3-flash-preview         ] [direct_lookup_few     ] \"E1022 reported while handling registry handshake.\" -\u003e \"zkl net retry --backoff 30s\"  pre=\"zkl registry refresh --scope user\"(N)  post=\"zkl net retry --backoff 30s\"(Y)\n"}
+,{"stream_name":"stdout","time":95.199878489,"data":"[🤖 google/gemini-3-flash-preview         ] [direct_lookup_few     ] \"E2018 reported while handling layer extraction.\" -\u003e \"zkl fs relink --force\"  pre=\"zkl fs repair --index\"(N)  post=\"zkl fs relink --force\"(Y)\n"}
+,{"stream_name":"stdout","time":115.968474479,"data":"[🤖 google/gemini-3-flash-preview         ] [direct_lookup_mid     ] \"E2003 reported while handling layer extraction.\" -\u003e \"zkl cache purge --deep\"  pre=\"zkl cache purge --deep\"(Y)  post=\"zkl cache purge --deep\"(Y)\n"}
+,{"stream_name":"stdout","time":163.777571719,"data":"[🤖 google/gemini-3-flash-preview         ] [direct_lookup_mid     ] \"E1014: operation failed during registry handshake.\" -\u003e \"zkl net retry --backoff 5s\"  pre=\"zkl registry refresh --scope user\"(N)  post=\"zkl proxy reset\"(N)\n"}
+,{"stream_name":"stdout","time":228.38646922,"data":"[🤖 google/gemini-3-flash-preview         ] [direct_lookup_mid     ] \"E1014 reported while handling package sync.\" -\u003e \"zkl net retry --backoff 5s\"  pre=\"zkl net retry --backoff 5s\"(Y)  post=\"zkl net retry --backoff 30s\"(N)\n"}
+,{"stream_name":"stdout","time":311.19477211,"data":"[🤖 google/gemini-3-flash-preview         ] [direct_lookup_many    ] \"[E2024] snapshot write did not complete.\" -\u003e \"zkl fs repair --index\"  pre=\"zkl fs repair --index\"(Y)  post=\"zkl fs repair --index\"(Y)\n"}
+,{"stream_name":"stdout","time":336.571681381,"data":"[🤖 google/gemini-3-flash-preview         ] [direct_lookup_many    ] \"E2024 reported while handling object commit.\" -\u003e \"zkl fs repair --index\"  pre=\"zkl fs repair --index\"(Y)  post=\"zkl fs repair --index\"(Y)\n"}
+,{"stream_name":"stdout","time":368.535592676,"data":"[🤖 google/gemini-3-flash-preview         ] [direct_lookup_many    ] \"error E2024 raised by object commit.\" -\u003e \"zkl fs repair --index\"  pre=\"zkl fs repair --index\"(Y)  post=\"zkl fs repair --index\"(Y)\n"}
+,{"stream_name":"stdout","time":423.563371759,"data":"[🤖 google/gemini-3-flash-preview         ] [pattern_match_few     ] \"E1101: upstream check failed for target \"glacier-n...\" -\u003e \"zkl refresh registry\"  pre=\"zkl net retry --backoff 30s\"(N)  post=\"zkl refresh registry\"(Y)\n"}
+,{"stream_name":"stdout","time":448.939815174,"data":"[🤖 google/gemini-3-flash-preview         ] [pattern_match_few     ] \"[E2370] shard subsystem reports invalid state at \"...\" -\u003e \"zkl purge shard-cache\"  pre=\"zkl purge index\"(N)  post=\"zkl purge shard-cache\"(Y)\n"}
+,{"stream_name":"stdout","time":462.666881751,"data":"[🤖 google/gemini-3-flash-preview         ] [pattern_match_few     ] \"error E1965 while validating mirror for \"north-star\".\" -\u003e \"zkl refresh mirror\"  pre=\"zkl refresh mirror\"(Y)  post=\"zkl refresh mirror\"(Y)\n"}
+,{"stream_name":"stdout","time":477.204430948,"data":"[🤖 google/gemini-3-flash-preview         ] [pattern_match_mid     ] \"error E1693 while validating mirror for \"fjord-sync\".\" -\u003e \"zkl refresh mirror\"  pre=\"zkl refresh mirror\"(Y)  post=\"zkl refresh mirror\"(Y)\n"}
+,{"stream_name":"stdout","time":491.806207858,"data":"[🤖 google/gemini-3-flash-preview         ] [pattern_match_mid     ] \"[E2573] inode subsystem reports invalid state at \"...\" -\u003e \"zkl purge index\"  pre=\"zkl purge index\"(Y)  post=\"zkl purge index\"(Y)\n"}
+,{"stream_name":"stdout","time":507.645436337,"data":"[🤖 google/gemini-3-flash-preview         ] [pattern_match_mid     ] \"[E2571] lock subsystem reports invalid state at \"e...\" -\u003e \"zkl purge lockfile\"  pre=\"zkl purge lockfile\"(Y)  post=\"zkl purge lockfile\"(Y)\n"}
+,{"stream_name":"stdout","time":522.528829159,"data":"[🤖 google/gemini-3-flash-preview         ] [pattern_match_many    ] \"E2375: vault check failed for target \"fjord-sync\".\" -\u003e \"zkl purge blob-store\"  pre=\"zkl purge blob-store\"(Y)  post=\"zkl purge blob-store\"(Y)\n"}
+,{"stream_name":"stdout","time":537.621733052,"data":"[🤖 google/gemini-3-flash-preview         ] [pattern_match_many    ] \"E2422 raised by lock reconciler on \"acme-core\".\" -\u003e \"zkl purge lockfile\"  pre=\"zkl purge lockfile\"(Y)  post=\"zkl purge lockfile\"(Y)\n"}
+,{"stream_name":"stdout","time":556.23602028,"data":"[🤖 google/gemini-3-flash-preview         ] [pattern_match_many    ] \"error E2761 while validating lock for \"redline-sdk\".\" -\u003e \"zkl purge lockfile\"  pre=\"zkl purge lockfile\"(Y)  post=\"zkl purge lockfile\"(Y)\n"}
+,{"stream_name":"stdout","time":610.32233828,"data":"[🤖 google/gemini-3-flash-preview         ] [multi_factor_few      ] \"E1311: failure detected on hot-path pathway for \"v...\" -\u003e \"zkl reconnect registry --keepalive\"  pre=\"zkl refresh proxy\"(N)  post=\"zkl reconnect registry --keepalive\"(Y)\n"}
+,{"stream_name":"stdout","time":625.224197591,"data":"[🤖 google/gemini-3-flash-preview         ] [multi_factor_few      ] \"error E1488 observed on a hot-path attempt against...\" -\u003e \"zkl reconnect registry --keepalive\"  pre=\"zkl reconnect registry --keepalive\"(Y)  post=\"zkl reconnect registry --keepalive\"(Y)\n"}
+,{"stream_name":"stdout","time":640.667084587,"data":"[🤖 google/gemini-3-flash-preview         ] [multi_factor_few      ] \"[E3969] hot-path run aborted while touching \"slate...\" -\u003e \"zkl refresh credentials --silent\"  pre=\"zkl refresh credentials --silent\"(Y)  post=\"zkl refresh credentials --silent\"(Y)\n"}
+,{"stream_name":"stdout","time":655.933647292,"data":"[🤖 google/gemini-3-flash-preview         ] [multi_factor_mid      ] \"[E3484] cold-start run aborted while touching \"qua...\" -\u003e \"zkl provision credentials --enroll\"  pre=\"zkl provision credentials --enroll\"(Y)  post=\"zkl provision credentials --enroll\"(Y)\n"}
+,{"stream_name":"stdout","time":670.915424399,"data":"[🤖 google/gemini-3-flash-preview         ] [multi_factor_mid      ] \"E2801 emitted by the hot-path executor handling \"s...\" -\u003e \"zkl compact cache --online\"  pre=\"zkl compact cache --online\"(Y)  post=\"zkl compact cache --online\"(Y)\n"}
+,{"stream_name":"stdout","time":687.496438324,"data":"[🤖 google/gemini-3-flash-preview         ] [multi_factor_mid      ] \"[E3559] cold-start run aborted while touching \"ver...\" -\u003e \"zkl provision credentials --enroll\"  pre=\"zkl provision credentials --enroll\"(Y)  post=\"zkl provision credentials --enroll\"(Y)\n"}
+,{"stream_name":"stdout","time":704.341164321,"data":"[🤖 google/gemini-3-flash-preview         ] [multi_factor_many     ] \"E3847 emitted by the cold-start executor handling ...\" -\u003e \"zkl provision credentials --enroll\"  pre=\"zkl provision credentials --enroll\"(Y)  post=\"zkl provision credentials --enroll\"(Y)\n"}
+,{"stream_name":"stdout","time":722.568377967,"data":"[🤖 google/gemini-3-flash-preview         ] [multi_factor_many     ] \"[E3980] cold-start run aborted while touching \"nor...\" -\u003e \"zkl provision credentials --enroll\"  pre=\"zkl provision credentials --enroll\"(Y)  post=\"zkl provision credentials --enroll\"(Y)\n"}
+,{"stream_name":"stdout","time":739.401203486,"data":"[🤖 google/gemini-3-flash-preview         ] [multi_factor_many     ] \"[E1202] cold-start run aborted while touching \"ver...\" -\u003e \"zkl bootstrap registry --seed\"  pre=\"zkl bootstrap registry --seed\"(Y)  post=\"zkl bootstrap registry --seed\"(Y)\n"}
+,{"stream_name":"stdout","time":739.401250356,"data":"\n"}
+,{"stream_name":"stdout","time":739.401257526,"data":"Score: 25/27 = 0.9259\n"}
+,{"stream_name":"stdout","time":739.401263216,"data":"\n"}
+,{"stream_name":"stdout","time":739.401268366,"data":"Done: 1 items\n"}
+,{"stream_name":"stdout","time":739.448067593,"data":"Total runs: 27\n"}
+,{"stream_name":"stdout","time":739.448105642,"data":"\n"}
+,{"stream_name":"stdout","time":739.448113293,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":739.448120273,"data":"Model: 🤖 google/gemini-3-flash-preview\n"}
+,{"stream_name":"stdout","time":739.448127633,"data":"Pre-learning accuracy:  74.1%\n"}
+,{"stream_name":"stdout","time":739.448134773,"data":"Post-learning accuracy: 92.6%\n"}
+,{"stream_name":"stdout","time":739.448140353,"data":"Learning gain:          +18.5%\n"}
+,{"stream_name":"stdout","time":739.448145693,"data":"\n"}
+,{"stream_name":"stdout","time":739.448151923,"data":"By Difficulty:\n"}
+,{"stream_name":"stdout","time":739.448158303,"data":"------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":739.448164803,"data":"  direct_lookup_few          pre=0.0%  post=100.0%  gain=+100.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":739.448170743,"data":"  direct_lookup_many         pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":739.448175823,"data":"  direct_lookup_mid          pre=66.7%  post=33.3%  gain=-33.3%  (n=3)\n"}
+,{"stream_name":"stdout","time":739.448181393,"data":"  multi_factor_few           pre=66.7%  post=100.0%  gain=+33.3%  (n=3)\n"}
+,{"stream_name":"stdout","time":739.448187223,"data":"  multi_factor_many          pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":739.448192463,"data":"  multi_factor_mid           pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":739.448197613,"data":"  pattern_match_few          pre=33.3%  post=100.0%  gain=+66.7%  (n=3)\n"}
+,{"stream_name":"stdout","time":739.448207683,"data":"  pattern_match_many         pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":739.448212773,"data":"  pattern_match_mid          pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":739.448235613,"data":"\n"}
+,{"stream_name":"stdout","time":739.448239723,"data":"Timing: pre=9.8s  study=10.0s  post=7.2s\n"}
+,{"stream_name":"stdout","time":739.467026991,"data":"STUDY NOTES INSPECTION\n"}
+,{"stream_name":"stdout","time":739.467074691,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":739.467080091,"data":"\n"}
+,{"stream_name":"stdout","time":739.467083881,"data":"--- [direct_lookup_few] seed=0 ---\n"}
+,{"stream_name":"stdout","time":739.467087131,"data":"Item: direct_lookup: exact code -\u003e exact remediation\n"}
+,{"stream_name":"stdout","time":739.467091001,"data":"Expected: \"zkl cache purge --deep\"\n"}
+,{"stream_name":"stdout","time":739.467094201,"data":"Pre: \"zkl repair\" (N)  Post: \"zkl cache purge --deep\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467097331,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467100831,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467104101,"data":"*   **E1xxx (External/Registry):** Relates to communication with remote registries and handshake protocols.\n"}
+,{"stream_name":"stdout","time":739.467107181,"data":"*   **E2xxx (Storage/Persistence):** Relates to local data integrity, snapshots, and the underlyi\n"}
+,{"stream_name":"stdout","time":739.467109981,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467112661,"data":"\n"}
+,{"stream_name":"stdout","time":739.467115491,"data":"--- [direct_lookup_few] seed=1 ---\n"}
+,{"stream_name":"stdout","time":739.467118341,"data":"Item: direct_lookup: exact code -\u003e exact remediation\n"}
+,{"stream_name":"stdout","time":739.467121281,"data":"Expected: \"zkl net retry --backoff 30s\"\n"}
+,{"stream_name":"stdout","time":739.467124241,"data":"Pre: \"zkl registry refresh --scope user\" (N)  Post: \"zkl net retry --backoff 30s\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467127461,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467130721,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467133771,"data":"*   **E1xxx (Network/Connectivity):** Relates to network communication, remote registry handshakes, and connectivity timing.\n"}
+,{"stream_name":"stdout","time":739.467136971,"data":"*   **E2xxx (Filesystem/Data):** Relates to local storage operations, including \n"}
+,{"stream_name":"stdout","time":739.467139721,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467142391,"data":"\n"}
+,{"stream_name":"stdout","time":739.467145111,"data":"--- [direct_lookup_few] seed=2 ---\n"}
+,{"stream_name":"stdout","time":739.467148001,"data":"Item: direct_lookup: exact code -\u003e exact remediation\n"}
+,{"stream_name":"stdout","time":739.467151041,"data":"Expected: \"zkl fs relink --force\"\n"}
+,{"stream_name":"stdout","time":739.467154031,"data":"Pre: \"zkl fs repair --index\" (N)  Post: \"zkl fs relink --force\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467157291,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467160471,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467163981,"data":"*   **E1xxx (Registry/External):** Relates to communication with remote package registries and synchronization of external assets.\n"}
+,{"stream_name":"stdout","time":739.467167401,"data":"*   **E2xxx (Filesystem/Cache):** Relates to local storage operations, inc\n"}
+,{"stream_name":"stdout","time":739.467186472,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467189492,"data":"\n"}
+,{"stream_name":"stdout","time":739.467192241,"data":"--- [direct_lookup_mid] seed=0 ---\n"}
+,{"stream_name":"stdout","time":739.467195041,"data":"Item: direct_lookup: exact code -\u003e exact remediation\n"}
+,{"stream_name":"stdout","time":739.467197941,"data":"Expected: \"zkl cache purge --deep\"\n"}
+,{"stream_name":"stdout","time":739.467200861,"data":"Pre: \"zkl cache purge --deep\" (Y)  Post: \"zkl cache purge --deep\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467203832,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467206812,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467211241,"data":"*   **E1xxx (Network \u0026 External):** Relates to connectivity, package synchronization, and external registry communication.\n"}
+,{"stream_name":"stdout","time":739.467214921,"data":"*   **E2xxx (State \u0026 Cache):** Relates to local data persistence, including worksp\n"}
+,{"stream_name":"stdout","time":739.467224372,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467227592,"data":"\n"}
+,{"stream_name":"stdout","time":739.467230632,"data":"--- [direct_lookup_mid] seed=1 ---\n"}
+,{"stream_name":"stdout","time":739.467234092,"data":"Item: direct_lookup: exact code -\u003e exact remediation\n"}
+,{"stream_name":"stdout","time":739.467237201,"data":"Expected: \"zkl net retry --backoff 5s\"\n"}
+,{"stream_name":"stdout","time":739.467242952,"data":"Pre: \"zkl registry refresh --scope user\" (N)  Post: \"zkl proxy reset\" (N)\n"}
+,{"stream_name":"stdout","time":739.467246301,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467249461,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467252712,"data":"*   **E1xxx (Network \u0026 Connectivity):** Relates to external communications, including downloads, registry interactions, and proxy settings.\n"}
+,{"stream_name":"stdout","time":739.467256521,"data":"*   **E2xxx (Local Data \u0026 Storage):** Relates to the handling of \n"}
+,{"stream_name":"stdout","time":739.467259801,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467262741,"data":"\n"}
+,{"stream_name":"stdout","time":739.467265901,"data":"--- [direct_lookup_mid] seed=2 ---\n"}
+,{"stream_name":"stdout","time":739.467269052,"data":"Item: direct_lookup: exact code -\u003e exact remediation\n"}
+,{"stream_name":"stdout","time":739.467272241,"data":"Expected: \"zkl net retry --backoff 5s\"\n"}
+,{"stream_name":"stdout","time":739.467275581,"data":"Pre: \"zkl net retry --backoff 5s\" (Y)  Post: \"zkl net retry --backoff 30s\" (N)\n"}
+,{"stream_name":"stdout","time":739.467279061,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467282261,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467285521,"data":"*   **E1xxx (Network/Connectivity):** Relates to data transmission and synchronization with external registries (downloads, syncs).\n"}
+,{"stream_name":"stdout","time":739.467288801,"data":"*   **E2xxx (Filesystem/Storage):** Relates to local data integrity, incl\n"}
+,{"stream_name":"stdout","time":739.467291921,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467294921,"data":"\n"}
+,{"stream_name":"stdout","time":739.467297921,"data":"--- [direct_lookup_many] seed=0 ---\n"}
+,{"stream_name":"stdout","time":739.467301001,"data":"Item: direct_lookup: exact code -\u003e exact remediation\n"}
+,{"stream_name":"stdout","time":739.467309091,"data":"Expected: \"zkl fs repair --index\"\n"}
+,{"stream_name":"stdout","time":739.467312681,"data":"Pre: \"zkl fs repair --index\" (Y)  Post: \"zkl fs repair --index\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467315891,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467319081,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467322321,"data":"*   **E1xxx (Network \u0026 Connectivity):** Relates to remote communication, data transmission (syncing/downloading), and proxy/handshake protocols.\n"}
+,{"stream_name":"stdout","time":739.467325861,"data":"*   **E2xxx (Persistence \u0026 Storage):** Relates to the local \n"}
+,{"stream_name":"stdout","time":739.467329141,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467332231,"data":"\n"}
+,{"stream_name":"stdout","time":739.467335281,"data":"--- [direct_lookup_many] seed=1 ---\n"}
+,{"stream_name":"stdout","time":739.467338371,"data":"Item: direct_lookup: exact code -\u003e exact remediation\n"}
+,{"stream_name":"stdout","time":739.467341631,"data":"Expected: \"zkl fs repair --index\"\n"}
+,{"stream_name":"stdout","time":739.467344771,"data":"Pre: \"zkl fs repair --index\" (Y)  Post: \"zkl fs repair --index\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467348361,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467351561,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467355261,"data":"*   **E1xxx (Network \u0026 Registry):** Relates to communication with remote servers, handshakes, dependency resolution (fetching), and proxy settings.\n"}
+,{"stream_name":"stdout","time":739.467358901,"data":"*   **E2xxx (Filesystem \u0026 Local Storage):** Relates to lo\n"}
+,{"stream_name":"stdout","time":739.467362251,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467365281,"data":"\n"}
+,{"stream_name":"stdout","time":739.467368271,"data":"--- [direct_lookup_many] seed=2 ---\n"}
+,{"stream_name":"stdout","time":739.467371351,"data":"Item: direct_lookup: exact code -\u003e exact remediation\n"}
+,{"stream_name":"stdout","time":739.467374731,"data":"Expected: \"zkl fs repair --index\"\n"}
+,{"stream_name":"stdout","time":739.467378021,"data":"Pre: \"zkl fs repair --index\" (Y)  Post: \"zkl fs repair --index\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467381441,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467384551,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467387781,"data":"*   **E1xxx (Network \u0026 Registry):** Relates to external communications, including registry handshakes, metadata downloads, and dependency fetching.\n"}
+,{"stream_name":"stdout","time":739.467391531,"data":"*   **E2xxx (Filesystem \u0026 Cache):** Relates to local data\n"}
+,{"stream_name":"stdout","time":739.467394871,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467397931,"data":"\n"}
+,{"stream_name":"stdout","time":739.467400911,"data":"--- [pattern_match_few] seed=0 ---\n"}
+,{"stream_name":"stdout","time":739.467403971,"data":"Item: pattern_match: family prefix + keyword -\u003e verb+noun remediation\n"}
+,{"stream_name":"stdout","time":739.467407461,"data":"Expected: \"zkl refresh registry\"\n"}
+,{"stream_name":"stdout","time":739.467410661,"data":"Pre: \"zkl net retry --backoff 30s\" (N)  Post: \"zkl refresh registry\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467414191,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467421451,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467424901,"data":"*   **E1xxx (Infrastructure \u0026 Connectivity):** Relates to external gateways (\"onyx-gate\"), upstream reconcilers, and security infrastructure (certificate subsystems).\n"}
+,{"stream_name":"stdout","time":739.467428671,"data":"*   **E2xxx (Structure \u0026 Integrity):**\n"}
+,{"stream_name":"stdout","time":739.467431791,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467434861,"data":"\n"}
+,{"stream_name":"stdout","time":739.467437821,"data":"--- [pattern_match_few] seed=1 ---\n"}
+,{"stream_name":"stdout","time":739.467441131,"data":"Item: pattern_match: family prefix + keyword -\u003e verb+noun remediation\n"}
+,{"stream_name":"stdout","time":739.467444411,"data":"Expected: \"zkl purge shard-cache\"\n"}
+,{"stream_name":"stdout","time":739.467447921,"data":"Pre: \"zkl purge index\" (N)  Post: \"zkl purge shard-cache\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467451281,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467454591,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467457881,"data":"*   **E1xxx (Network \u0026 Proxy):** Relates to external connectivity, mirror synchronization, and data tunneling.\n"}
+,{"stream_name":"stdout","time":739.467461481,"data":"*   **E2xxx (Data \u0026 Integrity):** Relates to local storage, data sharding, and caching mechani\n"}
+,{"stream_name":"stdout","time":739.467464741,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467467791,"data":"\n"}
+,{"stream_name":"stdout","time":739.467470801,"data":"--- [pattern_match_few] seed=2 ---\n"}
+,{"stream_name":"stdout","time":739.467473971,"data":"Item: pattern_match: family prefix + keyword -\u003e verb+noun remediation\n"}
+,{"stream_name":"stdout","time":739.467477251,"data":"Expected: \"zkl refresh mirror\"\n"}
+,{"stream_name":"stdout","time":739.467480371,"data":"Pre: \"zkl refresh mirror\" (Y)  Post: \"zkl refresh mirror\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467484281,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467487631,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467490881,"data":"*   **E1xxx (Infrastructure \u0026 Connectivity):** Relates to external synchronization, certificates, and mirror validation.\n"}
+,{"stream_name":"stdout","time":739.467494361,"data":"*   **E2xxx (Filesystem \u0026 Subsystems):** Relates to internal tool states, specifical\n"}
+,{"stream_name":"stdout","time":739.467497781,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467500901,"data":"\n"}
+,{"stream_name":"stdout","time":739.467503811,"data":"--- [pattern_match_mid] seed=0 ---\n"}
+,{"stream_name":"stdout","time":739.467506781,"data":"Item: pattern_match: family prefix + keyword -\u003e verb+noun remediation\n"}
+,{"stream_name":"stdout","time":739.467510061,"data":"Expected: \"zkl refresh mirror\"\n"}
+,{"stream_name":"stdout","time":739.467513201,"data":"Pre: \"zkl refresh mirror\" (Y)  Post: \"zkl refresh mirror\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467516701,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467520051,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467523521,"data":"\n"}
+,{"stream_name":"stdout","time":739.467526711,"data":"*   **E1xxx (External/Connectivity):** Relates to remote synchronization (mirrors) and security certificates (certs).\n"}
+,{"stream_name":"stdout","time":739.467533891,"data":"*   **E2xxx (Local Integrity/Storage):** Relates to the state of local data structures\n"}
+,{"stream_name":"stdout","time":739.467537101,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467540071,"data":"\n"}
+,{"stream_name":"stdout","time":739.467543161,"data":"--- [pattern_match_mid] seed=1 ---\n"}
+,{"stream_name":"stdout","time":739.467546171,"data":"Item: pattern_match: family prefix + keyword -\u003e verb+noun remediation\n"}
+,{"stream_name":"stdout","time":739.467549681,"data":"Expected: \"zkl purge index\"\n"}
+,{"stream_name":"stdout","time":739.467552911,"data":"Pre: \"zkl purge index\" (Y)  Post: \"zkl purge index\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467556631,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467559681,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467562991,"data":"*   **E1xxx (Network \u0026 External Connectivity):** Relates to external synchronization, upstream reconcilers, and network infrastructure (tunnels/proxies).\n"}
+,{"stream_name":"stdout","time":739.467566611,"data":"*   **E2xxx (Storage \u0026 Data Integrity):** Relates t\n"}
+,{"stream_name":"stdout","time":739.467569701,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467572741,"data":"\n"}
+,{"stream_name":"stdout","time":739.467575821,"data":"--- [pattern_match_mid] seed=2 ---\n"}
+,{"stream_name":"stdout","time":739.467578941,"data":"Item: pattern_match: family prefix + keyword -\u003e verb+noun remediation\n"}
+,{"stream_name":"stdout","time":739.467582351,"data":"Expected: \"zkl purge lockfile\"\n"}
+,{"stream_name":"stdout","time":739.467585771,"data":"Pre: \"zkl purge lockfile\" (Y)  Post: \"zkl purge lockfile\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467588961,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467592081,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467595271,"data":"*   **E1xxx (Network \u0026 External Services):** Relates to external lookups, connection routing (DNS), and remote synchronization (Mirrors).\n"}
+,{"stream_name":"stdout","time":739.467598751,"data":"*   **E2xxx (Local File \u0026 State Integrity):** Relates to local conc\n"}
+,{"stream_name":"stdout","time":739.467602071,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467605081,"data":"\n"}
+,{"stream_name":"stdout","time":739.467608141,"data":"--- [pattern_match_many] seed=0 ---\n"}
+,{"stream_name":"stdout","time":739.467611051,"data":"Item: pattern_match: family prefix + keyword -\u003e verb+noun remediation\n"}
+,{"stream_name":"stdout","time":739.467614321,"data":"Expected: \"zkl purge blob-store\"\n"}
+,{"stream_name":"stdout","time":739.467617881,"data":"Pre: \"zkl purge blob-store\" (Y)  Post: \"zkl purge blob-store\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467621341,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467624591,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467627861,"data":"*   **E1xxx (Network \u0026 External Connectivity):** Relates to communication with external services, name resolution (DNS), data tunneling, and remote synchronization (mirrors).\n"}
+,{"stream_name":"stdout","time":739.467631521,"data":"*   **E2xxx (Local Integrity \u0026\n"}
+,{"stream_name":"stdout","time":739.467634961,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467638061,"data":"\n"}
+,{"stream_name":"stdout","time":739.467640991,"data":"--- [pattern_match_many] seed=1 ---\n"}
+,{"stream_name":"stdout","time":739.467648321,"data":"Item: pattern_match: family prefix + keyword -\u003e verb+noun remediation\n"}
+,{"stream_name":"stdout","time":739.467651871,"data":"Expected: \"zkl purge lockfile\"\n"}
+,{"stream_name":"stdout","time":739.467655321,"data":"Pre: \"zkl purge lockfile\" (Y)  Post: \"zkl purge lockfile\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467658571,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467661671,"data":"Errors in the `zkl` tool are categorized by their numerical prefix, which dictates the primary remediation action:\n"}
+,{"stream_name":"stdout","time":739.467665151,"data":"\n"}
+,{"stream_name":"stdout","time":739.467668271,"data":"*   **E1xxx (Connectivity \u0026 Synchronization):** Relates to remote communication, upstream resources, and network tunnels. These errors indicate a discrepancy\n"}
+,{"stream_name":"stdout","time":739.467671721,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467674631,"data":"\n"}
+,{"stream_name":"stdout","time":739.467677651,"data":"--- [pattern_match_many] seed=2 ---\n"}
+,{"stream_name":"stdout","time":739.467680531,"data":"Item: pattern_match: family prefix + keyword -\u003e verb+noun remediation\n"}
+,{"stream_name":"stdout","time":739.467683901,"data":"Expected: \"zkl purge lockfile\"\n"}
+,{"stream_name":"stdout","time":739.467687111,"data":"Pre: \"zkl purge lockfile\" (Y)  Post: \"zkl purge lockfile\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467690631,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467693801,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467696851,"data":"*   **E1xxx (Network \u0026 Connectivity):** Relates to remote synchronization, proxying, and name resolution. These errors indicate a failure to communicate with or validate against external services.\n"}
+,{"stream_name":"stdout","time":739.467700511,"data":"*   **E2\n"}
+,{"stream_name":"stdout","time":739.467703731,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467706811,"data":"\n"}
+,{"stream_name":"stdout","time":739.467709621,"data":"--- [multi_factor_few] seed=0 ---\n"}
+,{"stream_name":"stdout","time":739.467712761,"data":"Item: multi_factor: (family, qualifier) -\u003e verb+target+flag remediation\n"}
+,{"stream_name":"stdout","time":739.467716341,"data":"Expected: \"zkl reconnect registry --keepalive\"\n"}
+,{"stream_name":"stdout","time":739.467719381,"data":"Pre: \"zkl refresh proxy\" (N)  Post: \"zkl reconnect registry --keepalive\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467722771,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467725931,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467729161,"data":"*   **E1xxx (Registry/Connectivity):** Relates to communication and initialization of the remote registry service.\n"}
+,{"stream_name":"stdout","time":739.467732661,"data":"*   **E2xxx (Local State/Cache):** Relates to the integrity and structure of local data st\n"}
+,{"stream_name":"stdout","time":739.467735911,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467738921,"data":"\n"}
+,{"stream_name":"stdout","time":739.467742001,"data":"--- [multi_factor_few] seed=1 ---\n"}
+,{"stream_name":"stdout","time":739.467745411,"data":"Item: multi_factor: (family, qualifier) -\u003e verb+target+flag remediation\n"}
+,{"stream_name":"stdout","time":739.467748711,"data":"Expected: \"zkl reconnect registry --keepalive\"\n"}
+,{"stream_name":"stdout","time":739.467752051,"data":"Pre: \"zkl reconnect registry --keepalive\" (Y)  Post: \"zkl reconnect registry --keepalive\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467759351,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467762691,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467765851,"data":"*   **E1xxx (Registry/Connectivity):** Relates to communication with the central data source. Errors involve establishing or maintaining the link to the remote registry.\n"}
+,{"stream_name":"stdout","time":739.467769321,"data":"*   **E2xxx (Cache/Optimization):**\n"}
+,{"stream_name":"stdout","time":739.467772551,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467775621,"data":"\n"}
+,{"stream_name":"stdout","time":739.467778661,"data":"--- [multi_factor_few] seed=2 ---\n"}
+,{"stream_name":"stdout","time":739.467781681,"data":"Item: multi_factor: (family, qualifier) -\u003e verb+target+flag remediation\n"}
+,{"stream_name":"stdout","time":739.467784961,"data":"Expected: \"zkl refresh credentials --silent\"\n"}
+,{"stream_name":"stdout","time":739.467788151,"data":"Pre: \"zkl refresh credentials --silent\" (Y)  Post: \"zkl refresh credentials --silent\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467791491,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467794771,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467798321,"data":"*   **E1xxx (Connectivity/Registry):** Relates to external synchronization with the registry service and connection management.\n"}
+,{"stream_name":"stdout","time":739.467801851,"data":"*   **E2xxx (Local Optimization/Cache):** Relates to the state of local data \n"}
+,{"stream_name":"stdout","time":739.467805261,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467808331,"data":"\n"}
+,{"stream_name":"stdout","time":739.467811431,"data":"--- [multi_factor_mid] seed=0 ---\n"}
+,{"stream_name":"stdout","time":739.467815671,"data":"Item: multi_factor: (family, qualifier) -\u003e verb+target+flag remediation\n"}
+,{"stream_name":"stdout","time":739.467818921,"data":"Expected: \"zkl provision credentials --enroll\"\n"}
+,{"stream_name":"stdout","time":739.467822271,"data":"Pre: \"zkl provision credentials --enroll\" (Y)  Post: \"zkl provision credentials --enroll\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467825731,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467829041,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467832471,"data":"*   **E1xxx (Network/Registry):** Relates to communication with the central package/metadata registry.\n"}
+,{"stream_name":"stdout","time":739.467835831,"data":"*   **E2xxx (Storage/Cache):** Relates to the integrity and optimization of local data storage.\n"}
+,{"stream_name":"stdout","time":739.467839221,"data":"*   **\n"}
+,{"stream_name":"stdout","time":739.467842321,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467845201,"data":"\n"}
+,{"stream_name":"stdout","time":739.467848181,"data":"--- [multi_factor_mid] seed=1 ---\n"}
+,{"stream_name":"stdout","time":739.467851451,"data":"Item: multi_factor: (family, qualifier) -\u003e verb+target+flag remediation\n"}
+,{"stream_name":"stdout","time":739.467854721,"data":"Expected: \"zkl compact cache --online\"\n"}
+,{"stream_name":"stdout","time":739.467857891,"data":"Pre: \"zkl compact cache --online\" (Y)  Post: \"zkl compact cache --online\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467876811,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467889181,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467893291,"data":"*   **E1xxx (Registry/Connection):** Relates to external communication, initial registry synchronization, and maintaining active service connections.\n"}
+,{"stream_name":"stdout","time":739.467904271,"data":"*   **E2xxx (Cache/Data State):** Relates to local data\n"}
+,{"stream_name":"stdout","time":739.467907591,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467910801,"data":"\n"}
+,{"stream_name":"stdout","time":739.467913831,"data":"--- [multi_factor_mid] seed=2 ---\n"}
+,{"stream_name":"stdout","time":739.467917051,"data":"Item: multi_factor: (family, qualifier) -\u003e verb+target+flag remediation\n"}
+,{"stream_name":"stdout","time":739.467920331,"data":"Expected: \"zkl provision credentials --enroll\"\n"}
+,{"stream_name":"stdout","time":739.467923431,"data":"Pre: \"zkl provision credentials --enroll\" (Y)  Post: \"zkl provision credentials --enroll\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467926961,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467930031,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467933451,"data":"*   **E1xxx (Network \u0026 Connectivity):** Relates to external synchronization with the registry service. These errors involve establishing or maintaining the link to remote data sources.\n"}
+,{"stream_name":"stdout","time":739.467937541,"data":"*   **E2xxx (Storage\n"}
+,{"stream_name":"stdout","time":739.467940651,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467943721,"data":"\n"}
+,{"stream_name":"stdout","time":739.467946871,"data":"--- [multi_factor_many] seed=0 ---\n"}
+,{"stream_name":"stdout","time":739.467949971,"data":"Item: multi_factor: (family, qualifier) -\u003e verb+target+flag remediation\n"}
+,{"stream_name":"stdout","time":739.467953371,"data":"Expected: \"zkl provision credentials --enroll\"\n"}
+,{"stream_name":"stdout","time":739.467956461,"data":"Pre: \"zkl provision credentials --enroll\" (Y)  Post: \"zkl provision credentials --enroll\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467959911,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467963131,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467966281,"data":"*   **E1xxx (Registry \u0026 Connectivity):** Relates to the communication between the local client and the remote registry service.\n"}
+,{"stream_name":"stdout","time":739.467969671,"data":"*   **E2xxx (Storage \u0026 Cache):** Relates to the integrity, structure, and opt\n"}
+,{"stream_name":"stdout","time":739.467972961,"data":"...\n"}
+,{"stream_name":"stdout","time":739.467975711,"data":"\n"}
+,{"stream_name":"stdout","time":739.467978731,"data":"--- [multi_factor_many] seed=1 ---\n"}
+,{"stream_name":"stdout","time":739.467981901,"data":"Item: multi_factor: (family, qualifier) -\u003e verb+target+flag remediation\n"}
+,{"stream_name":"stdout","time":739.467985151,"data":"Expected: \"zkl provision credentials --enroll\"\n"}
+,{"stream_name":"stdout","time":739.467988531,"data":"Pre: \"zkl provision credentials --enroll\" (Y)  Post: \"zkl provision credentials --enroll\" (Y)\n"}
+,{"stream_name":"stdout","time":739.467991981,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.467995141,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.467999481,"data":"*   **E1xxx (Connectivity/Registry):** Relates to external communication with the central data repository. These errors occur when the tool cannot establish or maintain a link to the remote registry.\n"}
+,{"stream_name":"stdout","time":739.468007401,"data":"*   *\n"}
+,{"stream_name":"stdout","time":739.468010421,"data":"...\n"}
+,{"stream_name":"stdout","time":739.468013521,"data":"\n"}
+,{"stream_name":"stdout","time":739.468016491,"data":"--- [multi_factor_many] seed=2 ---\n"}
+,{"stream_name":"stdout","time":739.468019861,"data":"Item: multi_factor: (family, qualifier) -\u003e verb+target+flag remediation\n"}
+,{"stream_name":"stdout","time":739.468023121,"data":"Expected: \"zkl bootstrap registry --seed\"\n"}
+,{"stream_name":"stdout","time":739.468026821,"data":"Pre: \"zkl bootstrap registry --seed\" (Y)  Post: \"zkl bootstrap registry --seed\" (Y)\n"}
+,{"stream_name":"stdout","time":739.468030521,"data":"Notes (first 300 chars): ### 1. Error Code Families\n"}
+,{"stream_name":"stdout","time":739.468033871,"data":"Errors in the `zkl` tool are categorized by their numerical prefix:\n"}
+,{"stream_name":"stdout","time":739.468036941,"data":"*   **E1xxx (Connectivity \u0026 Registry):** Relates to communication with the remote registry and managing the connection state.\n"}
+,{"stream_name":"stdout","time":739.468040231,"data":"*   **E2xxx (Storage \u0026 Cache):** Relates to local data persistence, the integri\n"}
+,{"stream_name":"stdout","time":739.468043701,"data":"...\n"}
+,{"stream_name":"stderr","time":749.971017061,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"remove_papermill_header.RemovePapermillHeader\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":749.971066981,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":749.99166642,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":750.294131678,"data":"[NbConvertApp] Writing 181127 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":752.580646795,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"nbconvert.preprocessors.ExtractOutputPreprocessor\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":752.580697745,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":752.601372923,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":753.555201245,"data":"[NbConvertApp] WARNING | Alternative text is missing on 1 image(s).\n"}
+,{"stream_name":"stderr","time":753.588961733,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":753.589005693,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":753.589235173,"data":"[NbConvertApp] Writing 381970 bytes to __results__.html\n"}
+]

@@ -1,0 +1,86 @@
+[{"stream_name":"stdout","time":13.762741525,"data":"Available models: ['anthropic/claude-haiku-4-5@20251001', 'anthropic/claude-opus-4-1@20250805', 'anthropic/claude-opus-4-5@20251101', 'anthropic/claude-opus-4-6@default', 'anthropic/claude-sonnet-4-5@20250929', 'anthropic/claude-sonnet-4-6@default', 'anthropic/claude-sonnet-4@20250514', 'deepseek-ai/deepseek-r1-0528', 'deepseek-ai/deepseek-v3.1', 'deepseek-ai/deepseek-v3.2', 'google/gemini-2.0-flash', 'google/gemini-2.0-flash-lite', 'google/gemini-2.5-flash', 'google/gemini-2.5-pro', 'google/gemini-3-flash-preview', 'google/gemini-3.1-flash-lite-preview', 'google/gemini-3.1-pro-preview', 'google/gemma-3-12b', 'google/gemma-3-1b', 'google/gemma-3-27b', 'google/gemma-3-4b', 'google/gemma-4-26b-a4b', 'google/gemma-4-31b', 'openai/gpt-5.4-2026-03-05', 'openai/gpt-5.4-mini-2026-03-17', 'openai/gpt-5.4-nano-2026-03-17', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3-235b-a22b-instruct-2507', 'qwen/qwen3-coder-480b-a35b-instruct', 'qwen/qwen3-next-80b-a3b-instruct', 'qwen/qwen3-next-80b-a3b-thinking', 'zai/glm-5']\n"}
+,{"stream_name":"stdout","time":13.762823242,"data":"Default model: 🤖 google/gemini-3-flash-preview\n"}
+,{"stream_name":"stdout","time":13.963912266,"data":"Loading from: /kaggle/input/batch_error_diagnosis_dataset.csv\n"}
+,{"stream_name":"stderr","time":15.699062221,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":15.699120621,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":15.699126769,"data":"  File \"/benchmarks/.venv/lib/python3.11/site-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":15.700126988,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":15.700162649,"data":"  File \"/benchmarks/.venv/lib/python3.11/site-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":15.700382597,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":15.700935474,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":15.700959103,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":15.700964812,"data":"Exception encountered at \"In [4]\":\n"}
+,{"stream_name":"stderr","time":15.700969752,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":15.700974597,"data":"FileNotFoundError                         Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":15.700979133,"data":"Cell In[4], line 9\n"}
+,{"stream_name":"stderr","time":15.700983528,"data":"      7     csv_path = '/kaggle/input/batch_error_diagnosis_dataset.csv'\n"}
+,{"stream_name":"stderr","time":15.700988541,"data":"      8 print(f'Loading from: {csv_path}')\n"}
+,{"stream_name":"stderr","time":15.700993264,"data":"----\u003e 9 dataset = pd.read_csv(csv_path)\n"}
+,{"stream_name":"stderr","time":15.700998184,"data":"     10 print(f'Dataset: {len(dataset)} items')\n"}
+,{"stream_name":"stderr","time":15.701003044,"data":"\n"}
+,{"stream_name":"stderr","time":15.701010043,"data":"File /benchmarks/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1026, in read_csv(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)\n"}
+,{"stream_name":"stderr","time":15.701035893,"data":"   1013 kwds_defaults = _refine_defaults_read(\n"}
+,{"stream_name":"stderr","time":15.701041139,"data":"   1014     dialect,\n"}
+,{"stream_name":"stderr","time":15.701045856,"data":"   1015     delimiter,\n"}
+,{"stream_name":"stderr","time":15.701050811,"data":"   (...)\n"}
+,{"stream_name":"stderr","time":15.701055383,"data":"   1022     dtype_backend=dtype_backend,\n"}
+,{"stream_name":"stderr","time":15.701059846,"data":"   1023 )\n"}
+,{"stream_name":"stderr","time":15.701064677,"data":"   1024 kwds.update(kwds_defaults)\n"}
+,{"stream_name":"stderr","time":15.701069391,"data":"-\u003e 1026 return _read(filepath_or_buffer, kwds)\n"}
+,{"stream_name":"stderr","time":15.70107422,"data":"\n"}
+,{"stream_name":"stderr","time":15.701078721,"data":"File /benchmarks/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:620, in _read(filepath_or_buffer, kwds)\n"}
+,{"stream_name":"stderr","time":15.701083651,"data":"    617 _validate_names(kwds.get(\"names\", None))\n"}
+,{"stream_name":"stderr","time":15.701088751,"data":"    619 # Create the parser.\n"}
+,{"stream_name":"stderr","time":15.701093647,"data":"--\u003e 620 parser = TextFileReader(filepath_or_buffer, **kwds)\n"}
+,{"stream_name":"stderr","time":15.701098681,"data":"    622 if chunksize or iterator:\n"}
+,{"stream_name":"stderr","time":15.701110643,"data":"    623     return parser\n"}
+,{"stream_name":"stderr","time":15.701115481,"data":"\n"}
+,{"stream_name":"stderr","time":15.701120543,"data":"File /benchmarks/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1620, in TextFileReader.__init__(self, f, engine, **kwds)\n"}
+,{"stream_name":"stderr","time":15.701125781,"data":"   1617     self.options[\"has_index_names\"] = kwds[\"has_index_names\"]\n"}
+,{"stream_name":"stderr","time":15.701130768,"data":"   1619 self.handles: IOHandles | None = None\n"}
+,{"stream_name":"stderr","time":15.701137291,"data":"-\u003e 1620 self._engine = self._make_engine(f, self.engine)\n"}
+,{"stream_name":"stderr","time":15.701142597,"data":"\n"}
+,{"stream_name":"stderr","time":15.701147119,"data":"File /benchmarks/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1880, in TextFileReader._make_engine(self, f, engine)\n"}
+,{"stream_name":"stderr","time":15.701152586,"data":"   1878     if \"b\" not in mode:\n"}
+,{"stream_name":"stderr","time":15.701157579,"data":"   1879         mode += \"b\"\n"}
+,{"stream_name":"stderr","time":15.701162662,"data":"-\u003e 1880 self.handles = get_handle(\n"}
+,{"stream_name":"stderr","time":15.701167324,"data":"   1881     f,\n"}
+,{"stream_name":"stderr","time":15.701172093,"data":"   1882     mode,\n"}
+,{"stream_name":"stderr","time":15.701176639,"data":"   1883     encoding=self.options.get(\"encoding\", None),\n"}
+,{"stream_name":"stderr","time":15.701181489,"data":"   1884     compression=self.options.get(\"compression\", None),\n"}
+,{"stream_name":"stderr","time":15.701186488,"data":"   1885     memory_map=self.options.get(\"memory_map\", False),\n"}
+,{"stream_name":"stderr","time":15.701191693,"data":"   1886     is_text=is_text,\n"}
+,{"stream_name":"stderr","time":15.701196638999999,"data":"   1887     errors=self.options.get(\"encoding_errors\", \"strict\"),\n"}
+,{"stream_name":"stderr","time":15.701202296,"data":"   1888     storage_options=self.options.get(\"storage_options\", None),\n"}
+,{"stream_name":"stderr","time":15.701207330999999,"data":"   1889 )\n"}
+,{"stream_name":"stderr","time":15.701212153,"data":"   1890 assert self.handles is not None\n"}
+,{"stream_name":"stderr","time":15.701221491,"data":"   1891 f = self.handles.handle\n"}
+,{"stream_name":"stderr","time":15.701236313,"data":"\n"}
+,{"stream_name":"stderr","time":15.701240977,"data":"File /benchmarks/.venv/lib/python3.11/site-packages/pandas/io/common.py:873, in get_handle(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)\n"}
+,{"stream_name":"stderr","time":15.701246549,"data":"    868 elif isinstance(handle, str):\n"}
+,{"stream_name":"stderr","time":15.701251581,"data":"    869     # Check whether the filename is to be opened in binary mode.\n"}
+,{"stream_name":"stderr","time":15.701256393,"data":"    870     # Binary mode does not support 'encoding' and 'newline'.\n"}
+,{"stream_name":"stderr","time":15.701261121,"data":"    871     if ioargs.encoding and \"b\" not in ioargs.mode:\n"}
+,{"stream_name":"stderr","time":15.701265851,"data":"    872         # Encoding\n"}
+,{"stream_name":"stderr","time":15.701270541,"data":"--\u003e 873         handle = open(\n"}
+,{"stream_name":"stderr","time":15.701275426,"data":"    874             handle,\n"}
+,{"stream_name":"stderr","time":15.701280159,"data":"    875             ioargs.mode,\n"}
+,{"stream_name":"stderr","time":15.701285004,"data":"    876             encoding=ioargs.encoding,\n"}
+,{"stream_name":"stderr","time":15.701290151,"data":"    877             errors=errors,\n"}
+,{"stream_name":"stderr","time":15.701294727,"data":"    878             newline=\"\",\n"}
+,{"stream_name":"stderr","time":15.701299496,"data":"    879         )\n"}
+,{"stream_name":"stderr","time":15.701303947,"data":"    880     else:\n"}
+,{"stream_name":"stderr","time":15.701308661,"data":"    881         # Binary mode\n"}
+,{"stream_name":"stderr","time":15.701313519,"data":"    882         handle = open(handle, ioargs.mode)\n"}
+,{"stream_name":"stderr","time":15.701318371,"data":"\n"}
+,{"stream_name":"stderr","time":15.701322656,"data":"FileNotFoundError: [Errno 2] No such file or directory: '/kaggle/input/batch_error_diagnosis_dataset.csv'\n"}
+,{"stream_name":"stderr","time":15.701327866,"data":"\n"}
+,{"stream_name":"stderr","time":19.158614198,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"remove_papermill_header.RemovePapermillHeader\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":19.158668863,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":19.181496006,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":19.644529269,"data":"[NbConvertApp] Writing 91779 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":22.913973524,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"nbconvert.preprocessors.ExtractOutputPreprocessor\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":22.914030296,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":22.937856128,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":24.356699575,"data":"[NbConvertApp] Writing 375839 bytes to __results__.html\n"}
+]

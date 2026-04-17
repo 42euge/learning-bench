@@ -1,0 +1,6 @@
+{
+  "versionNumber": 1,
+  "name": "GenoBench-paired_associate",
+  "description": "Does the LLM know what Kaggle is?",
+  "definition": "@kbench.task(name=\"GenoBench-paired_associate\", description=\"Does the LLM know what Kaggle is?\")\ndef what_is_kaggle(llm) -> None:\n\n    # A. Prompt the model\n    response: str = llm.prompt(\"What is Kaggle?\")\n\n    # B. Simple Check (Hard Rule)\n    # Fast and cheap: Ensure specific keywords exist in the output.\n    kbench.assertions.assert_in(\"platform\", response.lower())\n\n    # C. Optional Advanced Check (LLM Judge)\n    # Use a helper LLM to evaluate the quality of the answer against criteria.\n    assessment = kbench.assertions.assess_response_with_judge(\n        response_text=response,\n        judge_llm=kbench.judge_llm,\n        criteria=[\n            \"The answer must mention data science or machine learning.\",\n            \"The answer should mention competitions.\",\n        ]\n    )\n\n    # Iterate through the judge's feedback and assert success\n    for result in assessment.results:\n        kbench.assertions.assert_true(\n            result.passed,\n            expectation=f\"Judge Criterion '{result.criterion}' should pass: {result.reason}\"\n        )\n"
+}

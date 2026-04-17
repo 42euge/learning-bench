@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Severity Triage &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F9E9;</span>
+    <h1>Error Severity Triage</h1>
+    <p class="task-hero-sub">Concept Formation</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model learn a new tool&rsquo;s severity classification system from a handful
+      of labeled log lines and apply it to a novel line? The twist: models have a strong
+      prior that anything labeled &ldquo;error&rdquo; is blocking. This benchmark tests
+      whether a model can override that prior and correctly distinguish
+      <code>RETRYABLE_ERROR</code> from <code>TERMINAL_ERROR</code> using only the evidence
+      in the labeled examples.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See labeled log lines and classify a new line cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Build a decision procedure: identify surface features for each class, verify against every example.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Classify with own study notes + original labeled examples.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>single_tag, tag_plus_code, contextual</td>
+          <td>Single-tag: each line has a unique prefix token (e.g., <code>[.]</code>,
+              <code>[!]</code>) that maps 1:1 to a severity class.
+              Tag-plus-code: a generic error tag plus a numeric code; the code range
+              or prefix distinguishes retryable from terminal.
+              Contextual: all lines share the same tag; severity depends on keywords
+              in the message body.</td>
+        </tr>
+        <tr>
+          <td><strong>Evidence</strong></td>
+          <td>few (5), mid (8), many (12)</td>
+          <td>Number of labeled log lines shown. More examples give more coverage
+              of the four severity classes.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations for statistical robustness.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 evidence &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Log lines come from invented CLI tools (prismd, orbix, quarkctl, zephyrq, vantaloop,
+      helixsync, nimboforge, tessera, lumenrun, glintd) with tool-specific severity conventions.
+      For <strong>single_tag</strong>, each tool uses unique prefix tokens per class
+      (e.g., <code>@ok</code> = INFO, <code>@dead</code> = TERMINAL_ERROR). For
+      <strong>tag_plus_code</strong>, a generic error tag is shared but the attached code
+      determines severity&mdash;e.g., codes 1xx&ndash;3xx are retryable while 4xx&ndash;9xx
+      are terminal. For <strong>contextual</strong>, all lines share the same tag
+      (<code>STATUS:</code> or <code>&gt;&gt;</code>) and severity depends entirely on
+      message body keywords: &ldquo;timeout&rdquo; / &ldquo;throttled&rdquo; / &ldquo;transient&rdquo;
+      signal retryable, while &ldquo;corrupt&rdquo; / &ldquo;disk full&rdquo; / &ldquo;unauthorized&rdquo;
+      signal terminal. Test classes are stratified to ensure balanced probing of all four
+      severities, with extra emphasis on the retryable vs. terminal distinction.
+    </p>
+
+    <h2>Examples</h2>
+
+    <h3>Single Tag (1:1 prefix mapping)</h3>
+    <p>Each line has a unique prefix token that determines its severity class:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        [.] fetch shard &nbsp;&nbsp;&rarr; INFO<br>
+        [~] resolve manifest &nbsp;&nbsp;&rarr; WARNING<br>
+        [*] compile pipeline &nbsp;&nbsp;&rarr; RETRYABLE_ERROR<br>
+        [!] flush segment &nbsp;&nbsp;&rarr; TERMINAL_ERROR<br>
+        [.] index ledger &nbsp;&nbsp;&rarr; INFO
+      </div>
+      <div class="example-question">
+        <strong>Classify:</strong> [*] validate cache-ring<br>
+        <strong>Expected:</strong> RETRYABLE_ERROR
+      </div>
+    </div>
+    <p>
+      The <code>[*]</code> prefix was shown mapping to RETRYABLE_ERROR. The model must
+      learn the prefix&ndash;class mapping and ignore the action/target content.
+    </p>
+
+    <h3>Tag Plus Code (error code determines retryable vs terminal)</h3>
+    <p>A generic error tag plus a code; the code range distinguishes retryable from terminal:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        OK :: fetch shard &nbsp;&nbsp;&rarr; INFO<br>
+        WARN :: resolve manifest &nbsp;&nbsp;&rarr; WARNING<br>
+        ERR :: compile pipeline [E-204] &nbsp;&nbsp;&rarr; RETRYABLE_ERROR<br>
+        ERR :: flush segment [E-501] &nbsp;&nbsp;&rarr; TERMINAL_ERROR<br>
+        ERR :: index ledger [E-133] &nbsp;&nbsp;&rarr; RETRYABLE_ERROR
+      </div>
+      <div class="example-question">
+        <strong>Classify:</strong> ERR :: validate cache-ring [E-455]<br>
+        <strong>Expected:</strong> TERMINAL_ERROR
+      </div>
+    </div>
+    <p>
+      All three ERR lines share the same tag. The model must notice that lower codes
+      (1xx&ndash;3xx) are retryable while higher codes (4xx&ndash;9xx) are terminal.
+      Code <code>E-455</code> is in the 4xx range, so it is TERMINAL_ERROR.
+    </p>
+
+    <h3>Contextual (body keywords determine severity)</h3>
+    <p>All lines share the same tag; severity depends on message content:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        STATUS: started fetch on shard &nbsp;&nbsp;&rarr; INFO<br>
+        STATUS: slow resolve on manifest (240ms) &nbsp;&nbsp;&rarr; WARNING<br>
+        STATUS: connection timeout reaching pipeline &nbsp;&nbsp;&rarr; RETRYABLE_ERROR<br>
+        STATUS: disk full: no space left while writing segment &nbsp;&nbsp;&rarr; TERMINAL_ERROR<br>
+        STATUS: throttled by ledger (try again) &nbsp;&nbsp;&rarr; RETRYABLE_ERROR
+      </div>
+      <div class="example-question">
+        <strong>Classify:</strong> STATUS: cache-ring manifest is corrupt<br>
+        <strong>Expected:</strong> TERMINAL_ERROR
+      </div>
+    </div>
+    <p>
+      &ldquo;Corrupt&rdquo; signals a terminal condition in this tool&rsquo;s conventions.
+      A model relying on its prior that any error-ish word means &ldquo;error&rdquo;
+      would miss the retryable vs. terminal distinction.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact severity label match).</li>
+      <li><strong>Extraction:</strong> Scan response bottom-up for an exact token match
+          (RETRYABLE_ERROR, TERMINAL_ERROR, WARNING, INFO), checking compound labels first
+          to avoid partial matches.</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, expected)</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Prior override:</strong> The core challenge. Models with a strong prior that
+          &ldquo;error&rdquo; means terminal will misclassify retryable errors. Only models that
+          learn from the examples can distinguish the two error classes.</li>
+      <li><strong>Single-tag is easy:</strong> 1:1 prefix&ndash;class mappings are simple pattern matching.
+          Most models get these right even pre-learning.</li>
+      <li><strong>Tag-plus-code requires numeric reasoning:</strong> The model must infer a
+          threshold rule (code range) from a few examples and apply it to an unseen code.</li>
+      <li><strong>Contextual is hardest:</strong> Without any structural prefix to anchor on,
+          the model must learn which specific keywords (timeout, throttled, corrupt, disk full)
+          map to which severity class&mdash;and resist applying generic priors.</li>
+      <li><strong>Study quality:</strong> Models that produce explicit decision procedures
+          (&ldquo;if keyword X, then class Y&rdquo;) and verify them against every example
+          outperform those that produce vague summaries.</li>
+    </ul>
+
+    <h2>Prior Work &amp; References</h2>
+    <p>
+      Error severity triage adapts the concept formation paradigm to a practical domain:
+      learning a new tool&rsquo;s severity conventions from examples. The key insight is that
+      LLMs carry strong priors about what &ldquo;error&rdquo; means, and the benchmark tests
+      whether they can override those priors with in-context evidence.
+    </p>
+
+    <h3>Cognitive Science Foundations</h3>
+    <ul>
+      <li>
+        <strong>Bruner, Goodnow &amp; Austin (1956).</strong> <em>A Study of Thinking</em>.
+        Concept attainment through classification: learners group instances into categories
+        by discovering the relevant features. Our task is a four-class concept attainment
+        problem where the features (tags, codes, keywords) define category boundaries.
+      </li>
+      <li>
+        <strong>Shepard, Hovland &amp; Jenkins (1961).</strong>
+        &ldquo;Learning and memorization of classifications.&rdquo;
+        Showed that classification difficulty depends on rule complexity. Our three
+        complexity levels (single_tag &rarr; tag_plus_code &rarr; contextual) mirror
+        their type hierarchy: single-dimension rules are easiest, multi-cue rules
+        are hardest.
+      </li>
+    </ul>
+
+    <h3>Log Analysis &amp; Error Classification</h3>
+    <ul>
+      <li>
+        <strong>Chen et al. (2026).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2604.12218">LLM-Enhanced Log Anomaly Detection:
+        A Comprehensive Benchmark</a>&rdquo;.
+        Compared LLM-based and traditional approaches for log anomaly detection. Our task
+        differs by testing whether models can learn a <em>new</em> tool&rsquo;s conventions
+        in-context, rather than applying knowledge of known log formats.
+      </li>
+      <li>
+        <strong>LogSage (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2506.03691">LogSage: An LLM-Based Framework
+        for CI/CD Failure Detection and Remediation</a>&rdquo;.
+        Uses RAG for root cause analysis in CI/CD pipelines. Our task strips away retrieval
+        to isolate the in-context category learning capability.
+      </li>
+      <li>
+        <strong>L4 (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2503.20263">L4: Diagnosing Large-scale LLM
+        Training Failures via Automated Log Analysis</a>&rdquo;.
+        Analyzed 428 LLM training failures using taxonomy-based classification. Our task
+        tests whether models can learn such a taxonomy from a handful of examples rather
+        than having it pre-specified.
+      </li>
+    </ul>
+
+    <h3>Automated Incident Response</h3>
+    <ul>
+      <li>
+        <strong>IRCopilot (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2505.20945">IRCopilot: Automated Incident
+        Response with Large Language Models</a>&rdquo;.
+        Automated incident detection and classification using LLMs. Our benchmark isolates
+        the classification component: can the model learn severity conventions from examples
+        without relying on prior knowledge of real incident-response systems?
+      </li>
+      <li>
+        <strong>Guo et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2502.00677">LLM-based Event Log Analysis
+        Techniques: A Survey</a>&rdquo;.
+        Comprehensive survey of LLM-based log analysis. Notes that LLMs often apply
+        generic priors about severity rather than learning tool-specific conventions
+        &mdash;exactly the failure mode our benchmark targets.
+      </li>
+    </ul>
+
+    <h3>In-Context Learning &amp; Prior Override</h3>
+    <ul>
+      <li>
+        <strong>Min et al. (2022).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2202.12837">Rethinking the Role of Demonstrations</a>&rdquo;
+        (EMNLP 2022). Found that ICL often relies on label space priors rather than
+        learning from demonstrations. Our task directly tests whether models can
+        override their &ldquo;error = blocking&rdquo; prior using in-context evidence.
+      </li>
+      <li>
+        <strong>Semantic Anchors (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2511.21038">Why Small LLMs Cannot Flip Their
+        Labels</a>&rdquo;. Showed that smaller models have near-zero semantic override
+        rate&mdash;ICL operates as prior refinement. Our RETRYABLE_ERROR vs. TERMINAL_ERROR
+        distinction specifically probes this: can the model override its default notion
+        of what &ldquo;error&rdquo; means?
+      </li>
+      <li>
+        <strong>Wei et al. (2023).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2305.08298">Symbol Tuning Improves In-Context
+        Learning</a>&rdquo; (EMNLP 2023). Our single_tag condition (novel tokens like
+        <code>[*]</code> and <code>[!]</code>) is essentially a symbol-mapping task;
+        symbol-tuned models would have an advantage.
+      </li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/error-severity-triage-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Remediation &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F517;</span>
+    <h1>Error Remediation</h1>
+    <p class="task-hero-sub">Associative Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model learn the remediation procedures of an <strong>invented CLI tool</strong>
+      from a few worked examples, instead of hallucinating plausible-looking flags?
+      We introduce <code>zkl</code>, a fictional package/deploy CLI whose errors follow a
+      structured grammar (error-code prefix = category; keywords = specific fix).
+      The model studies a short troubleshooting manual, then must emit the correct
+      remediation command for a <em>new</em> error from the same tool.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See a novel error message and guess the remediation cold (no manual).</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Read a troubleshooting manual excerpt; group errors by family, extract patterns, build a lookup table.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Answer with own study notes + original manual. Must produce the exact <code>zkl</code> command.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>direct_lookup, pattern_match, multi_factor</td>
+          <td>Direct: exact error code &rarr; fixed remediation (1:1 lookup).
+              Pattern: code family prefix + keyword in message &rarr; verb + target.
+              Multi-factor: code family AND context qualifier (cold-start vs hot-path)
+              jointly select remediation verb, target, and flag.</td>
+        </tr>
+        <tr>
+          <td><strong>Evidence</strong></td>
+          <td>few (5), mid (7), many (10)</td>
+          <td>Number of error&ndash;remediation pairs in the manual excerpt. More pairs
+              provide more coverage but also more to process.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations for statistical robustness.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 evidence &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      The fictional tool <code>zkl</code> has three error families: E1xxx (network/registry),
+      E2xxx (filesystem/cache), and E3xxx (auth/credentials). Each family maps to a specific
+      remediation verb. For <strong>direct_lookup</strong>, exact error codes map 1:1 to exact
+      commands (e.g., <code>E1001</code> &rarr; <code>zkl registry refresh --scope global</code>).
+      For <strong>pattern_match</strong>, the family prefix plus a keyword in the message body
+      determines the remediation noun. For <strong>multi_factor</strong>, both the family AND
+      a context qualifier (cold-start vs hot-path) must be considered jointly to select the
+      correct verb, target, and flag. Test errors use new message templates and targets so
+      recognition must come from the learned patterns, not surface matching.
+    </p>
+
+    <h2>Examples</h2>
+
+    <h3>Direct Lookup (1:1 code mapping)</h3>
+    <p>The model sees a troubleshooting manual with exact error&ndash;remediation pairs, then must recall one:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        ERROR: E1001: operation failed during package sync.<br>
+        FIX: &nbsp; zkl registry refresh --scope global<br><br>
+        ERROR: E2003: operation failed during workspace open.<br>
+        FIX: &nbsp; zkl cache purge --deep<br><br>
+        ERROR: E3002: operation failed during session bootstrap.<br>
+        FIX: &nbsp; zkl auth rotate --keyring
+      </div>
+      <div class="example-question">
+        <strong>New error:</strong> [E1001] dependency fetch did not complete.<br>
+        <strong>Expected:</strong> zkl registry refresh --scope global
+      </div>
+    </div>
+    <p>
+      The error code <code>E1001</code> appeared in the manual with its exact fix. The test uses a
+      different message template and context, so the model must recognize the code, not the sentence.
+    </p>
+
+    <h3>Pattern Match (family + keyword)</h3>
+    <p>Remediation depends on the error family prefix and a keyword in the message:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        ERROR: E1204: mirror check failed for target &ldquo;acme-core&rdquo;.<br>
+        FIX: &nbsp; zkl refresh mirror<br><br>
+        ERROR: E2317: inode subsystem reports invalid state at &ldquo;bluefin-utils&rdquo;.<br>
+        FIX: &nbsp; zkl purge index<br><br>
+        ERROR: E3158: keyring reconciler on &ldquo;slate-auth&rdquo;.<br>
+        FIX: &nbsp; zkl rotate keyring
+      </div>
+      <div class="example-question">
+        <strong>New error:</strong> E1440: mirror subsystem reports invalid state at &ldquo;glacier-net&rdquo;.<br>
+        <strong>Expected:</strong> zkl refresh mirror
+      </div>
+    </div>
+    <p>
+      The specific code <code>E1440</code> is new, but the E1 family (&ldquo;refresh&rdquo;) and
+      keyword &ldquo;mirror&rdquo; were both shown&mdash;the model must apply the pattern rule.
+    </p>
+
+    <h3>Multi-Factor (family + qualifier)</h3>
+    <p>Both the error family and a context qualifier jointly determine the remediation:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        ERROR: E1305: failure on cold-start pathway for &ldquo;north-star&rdquo;.<br>
+        FIX: &nbsp; zkl bootstrap registry --seed<br><br>
+        ERROR: E1422: failure on hot-path pathway for &ldquo;pivot-tools&rdquo;.<br>
+        FIX: &nbsp; zkl reconnect registry --keepalive<br><br>
+        ERROR: E2187: cold-start run aborted while touching &ldquo;ember-cli&rdquo;.<br>
+        FIX: &nbsp; zkl rebuild cache --from-manifest
+      </div>
+      <div class="example-question">
+        <strong>New error:</strong> E2533: hot-path executor handling &ldquo;quartz-runtime&rdquo;.<br>
+        <strong>Expected:</strong> zkl compact cache --online
+      </div>
+    </div>
+    <p>
+      Using only the family (E2) would suggest &ldquo;rebuild cache&rdquo;, and using only the
+      qualifier (&ldquo;hot-path&rdquo;) is ambiguous. The model must use <em>both</em> factors
+      jointly to produce the correct remediation with the right flag.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact command match).</li>
+      <li><strong>Extraction:</strong> Last line starting with &ldquo;zkl&rdquo;, lowercased and stripped of formatting.</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, expected)</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Hallucinated flags:</strong> Models that ignore the study notes and guess from training priors
+          will produce plausible-looking but wrong commands (e.g., <code>--libgs</code>, <code>--no-turbopack</code>).
+          Only models that actually learn the mapping succeed.</li>
+      <li><strong>Direct vs pattern:</strong> Direct lookup is rote recall; pattern matching requires
+          abstracting the family&ndash;verb and keyword&ndash;noun rules from examples.</li>
+      <li><strong>Multi-factor:</strong> The hardest condition&mdash;models that latch onto a single
+          factor (family OR qualifier) will be wrong on disambiguating test cases where both matter.</li>
+      <li><strong>Study quality matters:</strong> Models that produce organized lookup tables
+          outperform those that generate vague summaries of the manual.</li>
+    </ul>
+
+    <h2>Prior Work &amp; References</h2>
+    <p>
+      Error remediation draws on fault localization in software engineering and the
+      growing body of work on LLM-based debugging. No existing benchmark tests whether
+      models can learn an <em>invented</em> tool&rsquo;s error&ndash;fix mappings from a
+      short manual&mdash;most evaluate against real codebases where prior training
+      knowledge is a confound.
+    </p>
+
+    <h3>Cognitive Science Foundations</h3>
+    <ul>
+      <li>
+        <strong>Stimulus&ndash;Response Learning (Thorndike, 1911).</strong>
+        The law of effect: responses followed by satisfaction are strengthened. Error
+        remediation is fundamentally an S&ndash;R mapping task: specific error patterns
+        (stimuli) must be associated with specific fix commands (responses).
+      </li>
+      <li>
+        <strong>Paired-Associate Paradigm (Calkins, 1894).</strong>
+        Our error&ndash;fix pairs are a domain-specific instantiation of the classic
+        paired-associate method, where arbitrary stimuli are paired with arbitrary
+        responses and the learner must recall the correct response given the stimulus.
+      </li>
+    </ul>
+
+    <h3>Fault Localization &amp; Program Repair</h3>
+    <ul>
+      <li>
+        <strong>Jimenez et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2310.06770">SWE-bench: Can Language Models
+        Resolve Real-world GitHub Issues?</a>&rdquo; (ICLR 2024).
+        The leading benchmark for LLM-based software repair. Unlike SWE-bench, which
+        tests against real repositories where models may have memorized patterns, our
+        task uses a wholly invented tool to isolate in-context learning from prior knowledge.
+      </li>
+      <li>
+        <strong>Yang et al. (2026).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2604.05481">On the Role of Fault Localization
+        Context for LLM-Based Program Repair</a>&rdquo;.
+        Showed that file-level localization context yields a 15&ndash;17x improvement
+        over a no-file baseline. Our task similarly tests whether models can use provided
+        context (the manual) to localize the correct fix.
+      </li>
+      <li>
+        <strong>Xie et al. (2026).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2601.18044">RGFL: Reasoning Guided Fault
+        Localization for Automated Program Repair</a>&rdquo;.
+        Introduced hierarchical reasoning for fault localization. Our multi-factor
+        condition similarly requires hierarchical reasoning (family + qualifier) to
+        select the correct remediation.
+      </li>
+    </ul>
+
+    <h3>LLM Tool Use &amp; Error Diagnosis</h3>
+    <ul>
+      <li>
+        <strong>Ye et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2401.04621">DebugBench: Evaluating Debugging
+        Capability of Large Language Models</a>&rdquo;.
+        A benchmark of 4,253 bugs across C++, Java, and Python. Tests bug <em>fixing</em>
+        in real languages; our task tests whether the model can learn a new tool&rsquo;s
+        conventions from examples rather than relying on prior knowledge of real tools.
+      </li>
+      <li>
+        <strong>Huang et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2411.13547">SpecTool: A Benchmark for
+        Characterizing Errors in Tool-Use LLMs</a>&rdquo;.
+        Identified seven common error patterns in LLM tool-use tasks. Our benchmark
+        specifically targets one of these: hallucinated tool arguments (flags and options
+        the model invents rather than learning from documentation).
+      </li>
+      <li>
+        <strong>Guo et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2509.25370">Where LLM Agents Fail and How
+        They Can Learn From Failures</a>&rdquo;.
+        Studied failure recovery in agentic systems. Our task isolates the core
+        capability: can the model learn the correct recovery action from a manual,
+        rather than persevering with incorrect guesses?
+      </li>
+    </ul>
+
+    <h3>Log Analysis &amp; Automated Remediation</h3>
+    <ul>
+      <li>
+        <strong>LogSage (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2506.03691">LogSage: An LLM-Based Framework
+        for CI/CD Failure Detection and Remediation</a>&rdquo;.
+        An end-to-end framework using RAG for root cause analysis. Our task strips away
+        the retrieval component to test whether the model can learn the mapping directly
+        from a short manual provided in-context.
+      </li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/error-remediation-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

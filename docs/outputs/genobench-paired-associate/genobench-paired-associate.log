@@ -1,0 +1,9 @@
+[{"stream_name":"stderr","time":31.467765233,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"remove_papermill_header.RemovePapermillHeader\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":31.467872786,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":31.488359592,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":31.93136778,"data":"[NbConvertApp] Writing 416882 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":34.669531936,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"nbconvert.preprocessors.ExtractOutputPreprocessor\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":34.669578838,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":34.69212406,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":35.669110115,"data":"[NbConvertApp] Writing 661557 bytes to __results__.html\n"}
+]

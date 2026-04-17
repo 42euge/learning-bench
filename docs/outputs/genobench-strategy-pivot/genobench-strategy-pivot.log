@@ -1,0 +1,85 @@
+[{"stream_name":"stdout","time":14.659946149,"data":"Available models: ['anthropic/claude-haiku-4-5@20251001', 'anthropic/claude-opus-4-1@20250805', 'anthropic/claude-opus-4-5@20251101', 'anthropic/claude-opus-4-6@default', 'anthropic/claude-sonnet-4-5@20250929', 'anthropic/claude-sonnet-4-6@default', 'anthropic/claude-sonnet-4@20250514', 'deepseek-ai/deepseek-r1-0528', 'deepseek-ai/deepseek-v3.1', 'deepseek-ai/deepseek-v3.2', 'google/gemini-2.0-flash', 'google/gemini-2.0-flash-lite', 'google/gemini-2.5-flash', 'google/gemini-2.5-pro', 'google/gemini-3-flash-preview', 'google/gemini-3.1-flash-lite-preview', 'google/gemini-3.1-pro-preview', 'google/gemma-3-12b', 'google/gemma-3-1b', 'google/gemma-3-27b', 'google/gemma-3-4b', 'google/gemma-4-26b-a4b', 'google/gemma-4-31b', 'openai/gpt-5.4-2026-03-05', 'openai/gpt-5.4-mini-2026-03-17', 'openai/gpt-5.4-nano-2026-03-17', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3-235b-a22b-instruct-2507', 'qwen/qwen3-coder-480b-a35b-instruct', 'qwen/qwen3-next-80b-a3b-instruct', 'qwen/qwen3-next-80b-a3b-thinking', 'zai/glm-5']\n"}
+,{"stream_name":"stdout","time":14.660030682,"data":"Default model: 🤖 anthropic/claude-opus-4-6@default\n"}
+,{"stream_name":"stdout","time":14.798585989,"data":"Loading from: /kaggle/input/datasets/eugenio0/strategy-pivot-benchmark/strategy_pivot_dataset.csv\n"}
+,{"stream_name":"stdout","time":14.798627125,"data":"Dataset: 27 items\n"}
+,{"stream_name":"stdout","time":14.798633605,"data":"difficulty_label    expected     \n"}
+,{"stream_name":"stdout","time":14.79863838,"data":"adversarial_few     ADJUST_PARAMS    1\n"}
+,{"stream_name":"stdout","time":14.798642429000001,"data":"                    CONTINUE         1\n"}
+,{"stream_name":"stdout","time":14.798647214,"data":"                    PIVOT            1\n"}
+,{"stream_name":"stdout","time":14.798651085,"data":"adversarial_many    ADJUST_PARAMS    1\n"}
+,{"stream_name":"stdout","time":14.798654929,"data":"                    CONTINUE         1\n"}
+,{"stream_name":"stdout","time":14.79865904,"data":"                    PIVOT            1\n"}
+,{"stream_name":"stdout","time":14.798663378,"data":"adversarial_mid     ADJUST_PARAMS    1\n"}
+,{"stream_name":"stdout","time":14.798667488,"data":"                    CONTINUE         1\n"}
+,{"stream_name":"stdout","time":14.798671253,"data":"                    PIVOT            1\n"}
+,{"stream_name":"stdout","time":14.79867512,"data":"clear_signal_few    ADJUST_PARAMS    1\n"}
+,{"stream_name":"stdout","time":14.798679075999999,"data":"                    CONTINUE         1\n"}
+,{"stream_name":"stdout","time":14.798683234,"data":"                    PIVOT            1\n"}
+,{"stream_name":"stdout","time":14.798687296,"data":"clear_signal_many   ADJUST_PARAMS    1\n"}
+,{"stream_name":"stdout","time":14.798691411,"data":"                    CONTINUE         1\n"}
+,{"stream_name":"stdout","time":14.798695668,"data":"                    PIVOT            1\n"}
+,{"stream_name":"stdout","time":14.798699377,"data":"clear_signal_mid    ADJUST_PARAMS    1\n"}
+,{"stream_name":"stdout","time":14.798703038,"data":"                    CONTINUE         1\n"}
+,{"stream_name":"stdout","time":14.798706878,"data":"                    PIVOT            1\n"}
+,{"stream_name":"stdout","time":14.798711174,"data":"subtle_signal_few   ADJUST_PARAMS    1\n"}
+,{"stream_name":"stdout","time":14.798715154,"data":"                    CONTINUE         1\n"}
+,{"stream_name":"stdout","time":14.798719092,"data":"                    PIVOT            1\n"}
+,{"stream_name":"stdout","time":14.798723471,"data":"subtle_signal_many  ADJUST_PARAMS    1\n"}
+,{"stream_name":"stdout","time":14.798727354,"data":"                    CONTINUE         1\n"}
+,{"stream_name":"stdout","time":14.798731662,"data":"                    PIVOT            1\n"}
+,{"stream_name":"stdout","time":14.798755259,"data":"subtle_signal_mid   ADJUST_PARAMS    1\n"}
+,{"stream_name":"stdout","time":14.798760399,"data":"                    CONTINUE         1\n"}
+,{"stream_name":"stdout","time":14.798764569,"data":"                    PIVOT            1\n"}
+,{"stream_name":"stderr","time":15.080571217,"data":"/benchmarks/.venv/lib/python3.11/site-packages/joblib/parallel.py:1383: UserWarning: The backend class 'SequentialBackend' does not support timeout. You have set 'timeout=3600' in Parallel but the 'timeout' parameter will not be used.\n"}
+,{"stream_name":"stderr","time":15.080609728,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":15.080615473,"data":"\n"}
+,{"stream_name":"stderr","time":15.080619653,"data":"/benchmarks/.venv/lib/python3.11/site-packages/joblib/parallel.py:1383: UserWarning: The backend class 'SequentialBackend' does not support timeout. You have set 'timeout=3600' in Parallel but the 'timeout' parameter will not be used.\n"}
+,{"stream_name":"stderr","time":15.08062461,"data":"  warnings.warn(\n"}
+,{"stream_name":"stdout","time":17.559298016,"data":"SDK post-processing error (non-fatal): \"None of ['run_id'] are in the columns\"\n"}
+,{"stream_name":"stdout","time":17.760480522,"data":"Total runs: 0\n"}
+,{"stream_name":"stdout","time":17.76054285,"data":"\n"}
+,{"stream_name":"stdout","time":17.760547231,"data":"SCALING CHECK — Pre/Post accuracy by model:\n"}
+,{"stream_name":"stdout","time":17.760551085,"data":"======================================================================\n"}
+,{"stream_name":"stderr","time":20.140167764,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":20.140197432,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":20.140203853,"data":"  File \"/benchmarks/.venv/lib/python3.11/site-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":20.141564302,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":20.141588075,"data":"  File \"/benchmarks/.venv/lib/python3.11/site-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":20.141928279,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":20.142303356,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":20.142315921,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":20.142321234,"data":"Exception encountered at \"In [7]\":\n"}
+,{"stream_name":"stderr","time":20.142325778,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":20.142329865,"data":"KeyError                                  Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":20.142334176,"data":"Cell In[7], line 7\n"}
+,{"stream_name":"stderr","time":20.14233815,"data":"      5 print('SCALING CHECK — Pre/Post accuracy by model:')\n"}
+,{"stream_name":"stderr","time":20.142343173,"data":"      6 print('=' * 70)\n"}
+,{"stream_name":"stderr","time":20.142347248,"data":"----\u003e 7 for model in sorted(results['model'].unique()):\n"}
+,{"stream_name":"stderr","time":20.142351771,"data":"      8     sub = results[results['model'] == model]\n"}
+,{"stream_name":"stderr","time":20.142356012,"data":"      9     pre = sub['pre_correct'].mean()\n"}
+,{"stream_name":"stderr","time":20.142359866,"data":"\n"}
+,{"stream_name":"stderr","time":20.14236373,"data":"File /benchmarks/.venv/lib/python3.11/site-packages/pandas/core/frame.py:4113, in DataFrame.__getitem__(self, key)\n"}
+,{"stream_name":"stderr","time":20.142385273,"data":"   4111 if self.columns.nlevels \u003e 1:\n"}
+,{"stream_name":"stderr","time":20.142431951,"data":"   4112     return self._getitem_multilevel(key)\n"}
+,{"stream_name":"stderr","time":20.14243619,"data":"-\u003e 4113 indexer = self.columns.get_loc(key)\n"}
+,{"stream_name":"stderr","time":20.142440523,"data":"   4114 if is_integer(indexer):\n"}
+,{"stream_name":"stderr","time":20.142445012,"data":"   4115     indexer = [indexer]\n"}
+,{"stream_name":"stderr","time":20.142449266,"data":"\n"}
+,{"stream_name":"stderr","time":20.142453309,"data":"File /benchmarks/.venv/lib/python3.11/site-packages/pandas/core/indexes/range.py:417, in RangeIndex.get_loc(self, key)\n"}
+,{"stream_name":"stderr","time":20.142457682,"data":"    415         raise KeyError(key) from err\n"}
+,{"stream_name":"stderr","time":20.142461921,"data":"    416 if isinstance(key, Hashable):\n"}
+,{"stream_name":"stderr","time":20.142466175,"data":"--\u003e 417     raise KeyError(key)\n"}
+,{"stream_name":"stderr","time":20.142470245,"data":"    418 self._check_indexing_error(key)\n"}
+,{"stream_name":"stderr","time":20.142474791,"data":"    419 raise KeyError(key)\n"}
+,{"stream_name":"stderr","time":20.142479056,"data":"\n"}
+,{"stream_name":"stderr","time":20.142483247,"data":"KeyError: 'model'\n"}
+,{"stream_name":"stderr","time":20.142516899,"data":"\n"}
+,{"stream_name":"stderr","time":23.58610406,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"remove_papermill_header.RemovePapermillHeader\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":23.586252314,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":23.608319672,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":24.038292015,"data":"[NbConvertApp] Writing 87651 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":27.136646097,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"nbconvert.preprocessors.ExtractOutputPreprocessor\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":27.136782128,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":27.160653046,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":28.503454661,"data":"[NbConvertApp] Writing 367121 bytes to __results__.html\n"}
+]

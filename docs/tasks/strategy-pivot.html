@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategy Pivot &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F504;</span>
+    <h1>Strategy Pivot</h1>
+    <p class="task-hero-sub">Reinforcement Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model learn when to abandon a failing strategy? Given a history of an autonomous
+      agent&rsquo;s attempts at solving a software task, the model must decide between three
+      actions: <strong>CONTINUE</strong> (strategy is working), <strong>ADJUST_PARAMS</strong>
+      (keep strategy but vary parameters), or <strong>PIVOT</strong> (abandon the current
+      approach). This isolates a critical meta-control skill&mdash;recognizing stuck loops
+      and resisting the sunk cost fallacy&mdash;a common failure mode in real LLM agents
+      (e.g., 133 repeated JS-injection calls in one session).
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See an attempt history and decide CONTINUE / ADJUST_PARAMS / PIVOT cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Study worked examples with explicit pivot-trigger rules; write concise notes.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Answer with own study notes, applying learned rules to the same history.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>clear_signal, subtle_signal, adversarial</td>
+          <td><strong>Clear:</strong> textbook stuck loops or obvious progress.
+              <strong>Subtle:</strong> distractors like an early success on a different strategy,
+              or superficially similar errors that are actually distinct.
+              <strong>Adversarial:</strong> histories designed to trigger common LLM biases
+              (e.g., many failures across <em>different</em> strategies that look scary but
+              the <em>current</em> strategy is fine).</td>
+        </tr>
+        <tr>
+          <td><strong>Evidence</strong></td>
+          <td>few (4), mid (6), many (8 attempts)</td>
+          <td>Longer histories provide more signal but also more noise and more
+              opportunities for the model to lose track of the current strategy&rsquo;s trajectory.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Each seed produces a different decision (CONTINUE, ADJUST_PARAMS, PIVOT)
+              so every (complexity, evidence) cell contains one of each&mdash;preventing
+              label-frequency shortcuts.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 evidence &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Attempt histories are built from a vocabulary of realistic software-engineering strategies
+      (regex parsing, Selenium, LaTeX compilation, FFmpeg, etc.), each with domain-consistent
+      actions and error messages. Builder functions construct histories that encode specific
+      decision signals: stuck loops (same error, no state change) for PIVOT, evolving errors
+      with state changes for ADJUST_PARAMS, and successful trajectories for CONTINUE. The
+      study material consists of four worked examples with explicit rules (e.g., &ldquo;same
+      strategy failed 3+ times with identical error and state_changed=no &rarr; PIVOT&rdquo;).
+      Adversarial items are specifically designed to exploit known LLM biases like over-weighting
+      raw failure counts or pattern-matching on error-string prefixes.
+    </p>
+
+    <h2>Examples</h2>
+
+    <h3>Clear Signal: PIVOT (stuck loop)</h3>
+    <p>The agent repeats the same strategy with identical errors and no state change:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        HISTORY for task T-458 (scrape a JavaScript-rendered site):<br>
+        Attempt 1: Strategy=selenium, Action=driver.get(wait=5), Result=ERROR &ldquo;TimeoutException waiting for selector&rdquo;, state_changed=no<br>
+        Attempt 2: Strategy=selenium, Action=driver.get(wait=10), Result=ERROR &ldquo;TimeoutException waiting for selector&rdquo;, state_changed=no<br>
+        Attempt 3: Strategy=selenium, Action=driver.get(wait=20), Result=ERROR &ldquo;TimeoutException waiting for selector&rdquo;, state_changed=no<br>
+        Attempt 4: Strategy=selenium, Action=selenium.click(sel_v3), Result=ERROR &ldquo;TimeoutException waiting for selector&rdquo;, state_changed=no<br>
+        Available strategies: selenium, playwright, http_fetch
+      </div>
+      <div class="example-question">
+        <strong>Question:</strong> Next?<br>
+        <strong>Expected:</strong> PIVOT
+      </div>
+    </div>
+    <p>
+      The same error repeats 4 times with no state change&mdash;a textbook stuck loop.
+      The model should recognize this pattern and recommend switching strategies.
+    </p>
+
+    <h3>Adversarial: CONTINUE (scary but fine)</h3>
+    <p>Multiple failures across <em>different</em> strategies, but the current one is progressing:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        HISTORY for task T-204 (parse nested JSON from an HTTP endpoint):<br>
+        Attempt 1: Strategy=ast_parse, Action=ast.parse(file_v1), Result=ERROR &ldquo;SyntaxError at line 1&rdquo;, state_changed=no<br>
+        Attempt 2: Strategy=llm_extract, Action=llm.extract(k=2), Result=ERROR &ldquo;JSONDecodeError in model output&rdquo;, state_changed=no<br>
+        Attempt 3: Strategy=regex_parse, Action=re.search(p3), Result=ERROR &ldquo;no match for pattern (different cause)&rdquo;, state_changed=yes<br>
+        Attempt 4: Strategy=regex_parse, Action=regex_match(pattern_v4), Result=ERROR &ldquo;IndexError: group not found (different cause)&rdquo;, state_changed=yes<br>
+        Attempt 5: Strategy=regex_parse, Action=findall(expr=5), Result=SUCCESS, state_changed=yes<br>
+        Available strategies: regex_parse, ast_parse, llm_extract, manual_spec
+      </div>
+      <div class="example-question">
+        <strong>Question:</strong> Next?<br>
+        <strong>Expected:</strong> CONTINUE
+      </div>
+    </div>
+    <p>
+      Three of five attempts failed, which looks alarming. But the failures were on
+      <em>other</em> strategies, and the current strategy (regex_parse) shows clear progress&mdash;different
+      errors, state changing, ending on success. Models that over-weight raw failure counts
+      will incorrectly PIVOT.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact decision match).</li>
+      <li><strong>Extraction:</strong> Scans short last-lines for CONTINUE, ADJUST_PARAMS, or PIVOT;
+          normalizes variants like &ldquo;adjust params&rdquo; or &ldquo;adjust-params.&rdquo;</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, expected)</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Clear signal:</strong> Most models handle textbook stuck loops and obvious progress&mdash;this
+          is a baseline confirming the model understands the three-way distinction.</li>
+      <li><strong>Adversarial items:</strong> The hardest cases exploit specific LLM biases: over-weighting
+          raw failure counts (triggers false PIVOT on CONTINUE items), pattern-matching on error
+          prefixes (triggers false PIVOT on ADJUST_PARAMS items), or recency bias (ignoring the
+          current strategy&rsquo;s trajectory in favor of the latest single event).</li>
+      <li><strong>Study quality matters:</strong> Models that extract precise, actionable rules from
+          the worked examples (e.g., &ldquo;focus only on the <em>current</em> strategy&rsquo;s
+          failures&rdquo;) outperform those that produce vague summaries.</li>
+      <li><strong>Label balance:</strong> Each cell contains one CONTINUE, one ADJUST_PARAMS, and
+          one PIVOT, so a model that always guesses the same label scores at most 33%.</li>
+    </ul>
+
+    <h2>Prior Work &amp; References</h2>
+    <p>
+      Strategy pivot probes a failure mode that is well-documented in both cognitive science
+      (the sunk cost fallacy) and practical LLM agent deployments (stuck loops). No existing
+      benchmark directly measures whether an LLM can learn explicit pivot-trigger rules from
+      worked examples and apply them to novel attempt histories.
+    </p>
+
+    <h3>Cognitive Science Foundations</h3>
+    <ul>
+      <li>
+        <strong>Arkes &amp; Blumer (1985).</strong> &ldquo;The psychology of sunk cost.&rdquo;
+        <em>Organizational Behavior and Human Decision Processes</em>.
+        The foundational study demonstrating that humans irrationally escalate commitment to
+        failing courses of action due to prior investment&mdash;the exact bias our task measures
+        in LLMs.
+      </li>
+      <li>
+        <strong>Heuristics and Biases in AI Decision-Making (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2410.02820">Heuristics and Biases in AI
+        Decision-Making: Implications for Responsible AGI</a>&rdquo;.
+        Found that LLMs exhibit cognitive biases including sunk cost fallacy, with performance
+        varying significantly across models&mdash;Gemma 2 showed strengths while Llama 3.1
+        consistently relied on heuristics.
+      </li>
+      <li>
+        <strong>Sunk Cost Fallacy in Deep RL (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2506.13672">The Courage to Stop: Overcoming Sunk
+        Cost Fallacy in Deep Reinforcement Learning</a>&rdquo;.
+        Addresses the tendency of RL agents to continue failing episodes until termination&mdash;a
+        direct parallel to perseveration in our strategy-pivot scenarios.
+      </li>
+    </ul>
+
+    <h3>Explore-Exploit and Strategy Switching in LLM Agents</h3>
+    <ul>
+      <li>
+        <strong>Tang et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2405.17503">Code Repair with LLMs gives an
+        Exploration-Exploitation Tradeoff</a>&rdquo; (NeurIPS 2024).
+        Showed that LLM-guided code repair exposes an explore-exploit tradeoff: exploit by
+        refining the best current program, or explore by trying a different approach. Directly
+        analogous to our CONTINUE vs. PIVOT decision.
+      </li>
+      <li>
+        <strong>Krishnamurthy et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2502.00225">Should You Use Your Large Language Model
+        to Explore or Exploit?</a>&rdquo;
+        Found that LLMs often struggle to exploit even when given sufficient information,
+        suggesting a systematic bias toward exploration&mdash;the complement of the perseveration
+        bias our task tests.
+      </li>
+      <li>
+        <strong>SWE-Search (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2410.20285">SWE-Search: Enhancing Software Agents
+        with Monte Carlo Tree Search and Iterative Refinement</a>&rdquo;.
+        Uses MCTS to help software agents navigate strategy trees, addressing the problem of
+        getting stuck on unproductive approaches&mdash;precisely the failure mode our benchmark
+        measures.
+      </li>
+    </ul>
+
+    <h3>Adaptive Agents and Meta-Control</h3>
+    <ul>
+      <li>
+        <strong>Towards Adaptive Software Agents for Debugging (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2504.18316">Towards Adaptive Software Agents for
+        Debugging</a>&rdquo;.
+        Proposes an agentic design combining planning, multi-agent collaboration, and iterative
+        reflection to develop a flexible system capable of dynamically adapting its debugging
+        strategy&mdash;the adaptive behavior our benchmark evaluates.
+      </li>
+      <li>
+        <strong>SwitchMT (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2504.13541">SwitchMT: An Adaptive Context Switching
+        Methodology for Scalable Multi-Task Learning in Intelligent Autonomous Agents</a>&rdquo;.
+        Introduces an adaptive task-switching policy that automatically shifts the agent to a
+        new task when learning plateaus&mdash;the same &ldquo;detect stagnation, then pivot&rdquo;
+        logic our task requires.
+      </li>
+      <li>
+        <strong>Adaptation of Agentic AI (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2512.16301">Adaptation of Agentic AI</a>&rdquo;.
+        Provides practical guidance for selecting or switching among adaptation strategies during
+        system design, spanning deep research, software development, and computer use&mdash;the
+        real-world context that motivates our benchmark.
+      </li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/strategy-pivot-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novel Algorithm Execution &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x2699;</span>
+    <h1>Novel Algorithm Execution</h1>
+    <p class="task-hero-sub">Procedural Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model learn and correctly execute a novel algorithm from a written specification alone?
+      This isolates procedural learning: the ability to internalize a multi-step computational procedure
+      that does not exist in training data and execute it faithfully on new inputs. Nine invented
+      algorithms&mdash;from simple conditional swaps to stateful multi-stack operations&mdash;ensure
+      the model cannot rely on memorized implementations.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">Read an algorithm specification and execute it on a test input cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Rewrite the algorithm step-by-step, identify edge cases, work through a practice example.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Execute with own study notes + original specification.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>simple, medium, complex</td>
+          <td>Simple: 2-step algorithms (e.g., conditional swap + sum). Medium: multi-pass
+              pipelines with XOR, filters, or chunk rotations. Complex: stateful accumulators
+              with parity gates, threshold resets, and multi-stack collapse rules.</td>
+        </tr>
+        <tr>
+          <td><strong>Clarity</strong></td>
+          <td>verbose, standard, terse</td>
+          <td>Verbose: step-by-step with worked examples in the spec. Standard: concise
+              numbered steps. Terse: single-sentence descriptions&mdash;the model must
+              unpack compressed instructions.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations for statistical robustness. Each seed selects
+              a different algorithm from its complexity tier.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 clarity &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Nine novel algorithms are implemented in Python, each operating on a list of integers and returning
+      a single integer. The algorithms are named with invented names (Crinkle Sum, Zigzag Product,
+      Mirror Count, Vortex Reduce, Cascade Filter, Ripple Hash, Nexus Fold, Helix Weave, Prism Stack)
+      to prevent training-data lookup. Each algorithm has three specification variants at different
+      verbosity levels. Test inputs are randomly generated lists of 6&ndash;8 integers in the 1&ndash;20
+      range, and ground-truth answers are computed by executing the reference implementation.
+    </p>
+
+    <h2>Examples</h2>
+
+    <h3>Simple &mdash; Crinkle Sum (verbose)</h3>
+    <p>The model receives a full step-by-step specification with a worked example:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        Step 1: Go through consecutive pairs left to right. If BOTH are odd, swap them.<br>
+        Step 2: Sum all elements at even indices (0, 2, 4, &hellip;).<br>
+        Example: [3, 7, 4, 5] &rarr; pair(0,1) both odd, swap &rarr; [7, 3, 4, 5]; sum arr[0]+arr[2] = 7+4 = 11.
+      </div>
+      <div class="example-question">
+        <strong>Input:</strong> [14, 5, 17, 8, 3, 12]<br>
+        <strong>Expected:</strong> A single integer (deterministic based on the algorithm)
+      </div>
+    </div>
+
+    <h3>Complex &mdash; Nexus Fold (terse)</h3>
+    <p>At the hardest difficulty, the spec is a single compressed sentence:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        Nexus Fold: acc=0; per element: add if acc even, subtract if odd; reset to x if &gt;20, -x if &lt;-20; final: |acc|.
+      </div>
+      <div class="example-question">
+        <strong>Input:</strong> [10, 7, 3, 15, 4, 6, 18]<br>
+        <strong>Expected:</strong> A single integer (the model must unpack the parity gate, overflow
+        resets, and absolute-value transform from one line)
+      </div>
+    </div>
+    <p>
+      The model must correctly parse that &ldquo;add if acc even&rdquo; means checking the accumulator&rsquo;s
+      parity <em>before</em> each operation, and that overflow resets to the <em>current element</em>, not
+      a fixed value. Terse specs expose whether the model truly understands or just pattern-matches from
+      verbose descriptions.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact integer match).</li>
+      <li><strong>Extraction:</strong> Last integer on its own line, stripped of markdown and punctuation.</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, str(expected))</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Simple/verbose:</strong> Most models correctly execute 2-step algorithms when given
+          detailed specs with worked examples&mdash;this is a baseline.</li>
+      <li><strong>Complex/terse:</strong> Requires simultaneously unpacking compressed instructions and
+          maintaining multi-step stateful computation with conditional resets. This is where weaker
+          models break down.</li>
+      <li><strong>Study quality matters:</strong> Models that rewrite the algorithm in their own words,
+          identify tricky edge cases (e.g., &ldquo;the parity check is on the accumulator, not the
+          input&rdquo;), and verify with a practice example show the largest pre-to-post gains.</li>
+      <li><strong>Arithmetic precision:</strong> Complex algorithms like Helix Weave require many
+          intermediate calculations. Models that lose track of running state produce wrong answers
+          even when they understand the algorithm conceptually.</li>
+    </ul>
+
+    <h2>Prior Work &amp; References</h2>
+    <p>
+      Novel algorithm execution bridges program synthesis, code reasoning, and procedural reasoning
+      in LLMs. Existing benchmarks test code <em>generation</em> or <em>understanding</em>&mdash;our
+      task tests whether the model can act as an <em>executor</em> of a procedure it has never seen.
+    </p>
+
+    <h3>Code Reasoning &amp; Execution Benchmarks</h3>
+    <ul>
+      <li>
+        <strong>Gu et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2401.03065">CRUXEval: A Benchmark for Code Reasoning,
+        Understanding and Execution</a>&rdquo; (ICML 2024).
+        800 Python functions with input/output prediction tasks. Found that even GPT-4 with
+        chain-of-thought achieves only 75&ndash;81% on short functions. Our benchmark goes further
+        by using <em>novel</em> algorithms with no training-data leakage.
+      </li>
+      <li>
+        <strong>Zhuo et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2408.13001">CRUXEval-X: A Benchmark for Multilingual
+        Code Reasoning, Understanding and Execution</a>.&rdquo;
+        Extends CRUXEval to 19 languages. Confirms that code execution reasoning is a fundamental
+        challenge across languages, not just a Python-specific problem.
+      </li>
+    </ul>
+
+    <h3>Procedural Reasoning in LLMs</h3>
+    <ul>
+      <li>
+        <strong>Stechly et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2511.14777">The Illusion of Procedural Reasoning:
+        Measuring Long-Horizon FSM Execution in LLMs</a>.&rdquo;
+        Used finite-state machine execution as a minimal framework for evaluating procedural
+        reasoning. Found that LLMs can mimic algorithmic behavior for short traces but fail
+        as procedural depth grows&mdash;directly relevant to our complexity dimension.
+      </li>
+      <li>
+        <strong>Kumar et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2511.04688">Evaluating LLMs&rsquo; Reasoning Over
+        Ordered Procedural Steps</a>.&rdquo;
+        Showed that model performance declines with increasing sequence length and step
+        displacement in procedural tasks&mdash;our algorithm complexity and terse specifications
+        probe the same degradation pattern.
+      </li>
+    </ul>
+
+    <h3>Program Synthesis &amp; Algorithm Induction</h3>
+    <ul>
+      <li>
+        <strong>Xu et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2503.23145">CodeARC: Benchmarking Reasoning Capabilities
+        of LLM Agents for Inductive Program Synthesis</a>.&rdquo;
+        Evaluates agents that interact with hidden target functions by querying inputs and synthesizing
+        candidate programs. Among 18 models, the best achieves only 52.7%&mdash;showing that algorithm
+        induction remains hard. Our task flips the direction: the algorithm is <em>given</em>, and the
+        challenge is faithful execution.
+      </li>
+      <li>
+        <strong>Shojaee et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2506.13820">Structured Program Synthesis using LLMs:
+        Results and Insights from the IPARC Challenge</a>.&rdquo;
+        Evaluated structured inductive programming with LLMs on synthetic tasks requiring
+        sequence, selection, and iteration&mdash;the same computational primitives our algorithms use.
+      </li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/novel-algorithm-execution-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,550 @@
+[{"stream_name":"stdout","time":11.481945587,"data":"Available models: ['anthropic/claude-haiku-4-5@20251001', 'anthropic/claude-opus-4-1@20250805', 'anthropic/claude-opus-4-5@20251101', 'anthropic/claude-opus-4-6@default', 'anthropic/claude-sonnet-4-5@20250929', 'anthropic/claude-sonnet-4-6@default', 'anthropic/claude-sonnet-4@20250514', 'deepseek-ai/deepseek-r1-0528', 'deepseek-ai/deepseek-v3.1', 'deepseek-ai/deepseek-v3.2', 'google/gemini-2.0-flash', 'google/gemini-2.0-flash-lite', 'google/gemini-2.5-flash', 'google/gemini-2.5-pro', 'google/gemini-3-flash-preview', 'google/gemini-3.1-flash-lite-preview', 'google/gemini-3.1-pro-preview', 'google/gemma-3-12b', 'google/gemma-3-1b', 'google/gemma-3-27b', 'google/gemma-3-4b', 'google/gemma-4-26b-a4b', 'google/gemma-4-31b', 'openai/gpt-5.4-2026-03-05', 'openai/gpt-5.4-mini-2026-03-17', 'openai/gpt-5.4-nano-2026-03-17', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3-235b-a22b-instruct-2507', 'qwen/qwen3-coder-480b-a35b-instruct', 'qwen/qwen3-next-80b-a3b-instruct', 'qwen/qwen3-next-80b-a3b-thinking', 'zai/glm-5']\n"}
+,{"stream_name":"stdout","time":11.482031387,"data":"Default model: 🤖 google/gemini-3-flash-preview\n"}
+,{"stream_name":"stdout","time":11.557989798,"data":"Loading from: /kaggle/input/datasets/eugenio0/error-severity-triage-benchmark/error_severity_triage_dataset.csv\n"}
+,{"stream_name":"stdout","time":11.558038888,"data":"Dataset: 27 items\n"}
+,{"stream_name":"stdout","time":11.558044698,"data":"Class distribution:\n"}
+,{"stream_name":"stdout","time":11.558047928,"data":"expected\n"}
+,{"stream_name":"stdout","time":11.558051208,"data":"RETRYABLE_ERROR    9\n"}
+,{"stream_name":"stdout","time":11.558054468,"data":"INFO               6\n"}
+,{"stream_name":"stdout","time":11.558058078,"data":"WARNING            6\n"}
+,{"stream_name":"stdout","time":11.558061128,"data":"TERMINAL_ERROR     6\n"}
+,{"stream_name":"stdout","time":11.558063928,"data":"Name: count, dtype: int64\n"}
+,{"stream_name":"stdout","time":26.101583175,"data":"[🤖 google/gemini-3-flash-preview         ] [single_tag_few        ] exp=INFO              pre=INFO            (Y)  post=INFO            (Y)\n"}
+,{"stream_name":"stdout","time":37.119258186,"data":"[🤖 google/gemini-3-flash-preview         ] [single_tag_few        ] exp=WARNING           pre=WARNING         (Y)  post=WARNING         (Y)\n"}
+,{"stream_name":"stdout","time":47.974024615,"data":"[🤖 google/gemini-3-flash-preview         ] [single_tag_few        ] exp=RETRYABLE_ERROR   pre=RETRYABLE_ERROR (Y)  post=RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":61.18323089,"data":"[🤖 google/gemini-3-flash-preview         ] [single_tag_mid        ] exp=TERMINAL_ERROR    pre=TERMINAL_ERROR  (Y)  post=TERMINAL_ERROR  (Y)\n"}
+,{"stream_name":"stdout","time":74.657773391,"data":"[🤖 google/gemini-3-flash-preview         ] [single_tag_mid        ] exp=RETRYABLE_ERROR   pre=RETRYABLE_ERROR (Y)  post=RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":86.680228069,"data":"[🤖 google/gemini-3-flash-preview         ] [single_tag_mid        ] exp=INFO              pre=INFO            (Y)  post=INFO            (Y)\n"}
+,{"stream_name":"stdout","time":102.493892751,"data":"[🤖 google/gemini-3-flash-preview         ] [single_tag_many       ] exp=WARNING           pre=WARNING         (Y)  post=WARNING         (Y)\n"}
+,{"stream_name":"stdout","time":119.776851588,"data":"[🤖 google/gemini-3-flash-preview         ] [single_tag_many       ] exp=TERMINAL_ERROR    pre=TERMINAL_ERROR  (Y)  post=TERMINAL_ERROR  (Y)\n"}
+,{"stream_name":"stdout","time":133.746054705,"data":"[🤖 google/gemini-3-flash-preview         ] [single_tag_many       ] exp=RETRYABLE_ERROR   pre=RETRYABLE_ERROR (Y)  post=RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":149.324327161,"data":"[🤖 google/gemini-3-flash-preview         ] [tag_plus_code_few     ] exp=INFO              pre=INFO            (Y)  post=INFO            (Y)\n"}
+,{"stream_name":"stdout","time":164.045705047,"data":"[🤖 google/gemini-3-flash-preview         ] [tag_plus_code_few     ] exp=WARNING           pre=WARNING         (Y)  post=WARNING         (Y)\n"}
+,{"stream_name":"stdout","time":178.413342493,"data":"[🤖 google/gemini-3-flash-preview         ] [tag_plus_code_few     ] exp=RETRYABLE_ERROR   pre=RETRYABLE_ERROR (Y)  post=RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":205.002353001,"data":"[🤖 google/gemini-3-flash-preview         ] [tag_plus_code_mid     ] exp=TERMINAL_ERROR    pre=TERMINAL_ERROR  (Y)  post=TERMINAL_ERROR  (Y)\n"}
+,{"stream_name":"stdout","time":221.220239322,"data":"[🤖 google/gemini-3-flash-preview         ] [tag_plus_code_mid     ] exp=RETRYABLE_ERROR   pre=RETRYABLE_ERROR (Y)  post=RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":242.466671234,"data":"[🤖 google/gemini-3-flash-preview         ] [tag_plus_code_mid     ] exp=INFO              pre=INFO            (Y)  post=INFO            (Y)\n"}
+,{"stream_name":"stdout","time":266.073601078,"data":"[🤖 google/gemini-3-flash-preview         ] [tag_plus_code_many    ] exp=WARNING           pre=WARNING         (Y)  post=WARNING         (Y)\n"}
+,{"stream_name":"stdout","time":286.880362066,"data":"[🤖 google/gemini-3-flash-preview         ] [tag_plus_code_many    ] exp=TERMINAL_ERROR    pre=TERMINAL_ERROR  (Y)  post=TERMINAL_ERROR  (Y)\n"}
+,{"stream_name":"stdout","time":305.166631247,"data":"[🤖 google/gemini-3-flash-preview         ] [tag_plus_code_many    ] exp=RETRYABLE_ERROR   pre=RETRYABLE_ERROR (Y)  post=RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":320.803060483,"data":"[🤖 google/gemini-3-flash-preview         ] [contextual_few        ] exp=INFO              pre=INFO            (Y)  post=INFO            (Y)\n"}
+,{"stream_name":"stdout","time":338.202968122,"data":"[🤖 google/gemini-3-flash-preview         ] [contextual_few        ] exp=WARNING           pre=WARNING         (Y)  post=WARNING         (Y)\n"}
+,{"stream_name":"stdout","time":354.579966808,"data":"[🤖 google/gemini-3-flash-preview         ] [contextual_few        ] exp=RETRYABLE_ERROR   pre=RETRYABLE_ERROR (Y)  post=RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":374.311768369,"data":"[🤖 google/gemini-3-flash-preview         ] [contextual_mid        ] exp=TERMINAL_ERROR    pre=TERMINAL_ERROR  (Y)  post=TERMINAL_ERROR  (Y)\n"}
+,{"stream_name":"stdout","time":393.647739581,"data":"[🤖 google/gemini-3-flash-preview         ] [contextual_mid        ] exp=RETRYABLE_ERROR   pre=RETRYABLE_ERROR (Y)  post=RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":411.025639272,"data":"[🤖 google/gemini-3-flash-preview         ] [contextual_mid        ] exp=INFO              pre=INFO            (Y)  post=INFO            (Y)\n"}
+,{"stream_name":"stdout","time":433.387233835,"data":"[🤖 google/gemini-3-flash-preview         ] [contextual_many       ] exp=WARNING           pre=WARNING         (Y)  post=WARNING         (Y)\n"}
+,{"stream_name":"stdout","time":456.986245705,"data":"[🤖 google/gemini-3-flash-preview         ] [contextual_many       ] exp=TERMINAL_ERROR    pre=TERMINAL_ERROR  (Y)  post=TERMINAL_ERROR  (Y)\n"}
+,{"stream_name":"stdout","time":480.925354418,"data":"[🤖 google/gemini-3-flash-preview         ] [contextual_many       ] exp=RETRYABLE_ERROR   pre=RETRYABLE_ERROR (Y)  post=RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.925415098,"data":"\n"}
+,{"stream_name":"stdout","time":480.925422589,"data":"Score: 27/27 = 1.0000\n"}
+,{"stream_name":"stdout","time":480.925427969,"data":"\n"}
+,{"stream_name":"stdout","time":480.925432949,"data":"Done: 1 items\n"}
+,{"stream_name":"stdout","time":480.970448193,"data":"Total runs: 27\n"}
+,{"stream_name":"stdout","time":480.970520973,"data":"\n"}
+,{"stream_name":"stdout","time":480.970527013,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":480.970530733,"data":"Model: 🤖 google/gemini-3-flash-preview\n"}
+,{"stream_name":"stdout","time":480.970534593,"data":"Pre-learning accuracy:  100.0%\n"}
+,{"stream_name":"stdout","time":480.970538243,"data":"Post-learning accuracy: 100.0%\n"}
+,{"stream_name":"stdout","time":480.970541213,"data":"Learning gain:          +0.0%\n"}
+,{"stream_name":"stdout","time":480.970544173,"data":"\n"}
+,{"stream_name":"stdout","time":480.970546703,"data":"By Difficulty:\n"}
+,{"stream_name":"stdout","time":480.970549493,"data":"------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":480.970552773,"data":"  contextual_few             pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":480.970556413,"data":"  contextual_many            pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":480.970560333,"data":"  contextual_mid             pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":480.970563683,"data":"  single_tag_few             pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":480.970566843,"data":"  single_tag_many            pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":480.970570213,"data":"  single_tag_mid             pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":480.970572883,"data":"  tag_plus_code_few          pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":480.970575943,"data":"  tag_plus_code_many         pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":480.970578973,"data":"  tag_plus_code_mid          pre=100.0%  post=100.0%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":480.970582143,"data":"\n"}
+,{"stream_name":"stdout","time":480.970584843,"data":"By Expected Class (post-learning):\n"}
+,{"stream_name":"stdout","time":480.970588083,"data":"------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":480.970591053,"data":"  INFO                post=100.0%  (n=6)\n"}
+,{"stream_name":"stdout","time":480.970594413,"data":"  WARNING             post=100.0%  (n=6)\n"}
+,{"stream_name":"stdout","time":480.970597623,"data":"  RETRYABLE_ERROR     post=100.0%  (n=9)\n"}
+,{"stream_name":"stdout","time":480.970600663,"data":"  TERMINAL_ERROR      post=100.0%  (n=6)\n"}
+,{"stream_name":"stdout","time":480.970604693,"data":"\n"}
+,{"stream_name":"stdout","time":480.970608043,"data":"Timing: pre=3.8s  study=10.5s  post=3.1s\n"}
+,{"stream_name":"stdout","time":480.994707209,"data":"STUDY NOTES INSPECTION\n"}
+,{"stream_name":"stdout","time":480.994754069,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":480.994759559,"data":"\n"}
+,{"stream_name":"stdout","time":480.994763239,"data":"--- [single_tag_few] seed=0 ---\n"}
+,{"stream_name":"stdout","time":480.994766319,"data":"Item: single_tag / tool=quarkctl\n"}
+,{"stream_name":"stdout","time":480.994769749,"data":"Test line: \u003cI\u003e validate manifest\n"}
+,{"stream_name":"stdout","time":480.994773519,"data":"Expected: INFO\n"}
+,{"stream_name":"stdout","time":480.994776939,"data":"Pre: INFO (Y)  Post: INFO (Y)\n"}
+,{"stream_name":"stdout","time":480.994780299,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.994800009,"data":"\n"}
+,{"stream_name":"stdout","time":480.994803359,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples.\n"}
+,{"stream_name":"stdout","time":480.994807079,"data":"\n"}
+,{"stream_name":"stdout","time":480.994809489,"data":"---\n"}
+,{"stream_name":"stdout","time":480.994812199,"data":"\n"}
+,{"stream_name":"stdout","time":480.994815599,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.994818959,"data":"\n"}
+,{"stream_name":"stdout","time":480.994822319,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.994825619,"data":"    *   **Prefix Tag:** `\u003cI\u003e`\n"}
+,{"stream_name":"stdout","time":480.994828999,"data":"    *   **Message Keywords:** \"drain\", \"validate\"\n"}
+,{"stream_name":"stdout","time":480.994832639,"data":"    *   **Context:** Used for ro\n"}
+,{"stream_name":"stdout","time":480.994835939,"data":"...\n"}
+,{"stream_name":"stdout","time":480.99483943,"data":"\n"}
+,{"stream_name":"stdout","time":480.99484273,"data":"--- [single_tag_few] seed=1 ---\n"}
+,{"stream_name":"stdout","time":480.99484603,"data":"Item: single_tag / tool=zephyrq\n"}
+,{"stream_name":"stdout","time":480.994849469,"data":"Test line: @mild snapshot vault\n"}
+,{"stream_name":"stdout","time":480.994852719,"data":"Expected: WARNING\n"}
+,{"stream_name":"stdout","time":480.994855629,"data":"Pre: WARNING (Y)  Post: WARNING (Y)\n"}
+,{"stream_name":"stdout","time":480.994858879,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.994861869,"data":"\n"}
+,{"stream_name":"stdout","time":480.994865049,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples.\n"}
+,{"stream_name":"stdout","time":480.994868469,"data":"\n"}
+,{"stream_name":"stdout","time":480.994871669,"data":"---\n"}
+,{"stream_name":"stdout","time":480.994874899,"data":"\n"}
+,{"stream_name":"stdout","time":480.994878059,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.994881349,"data":"\n"}
+,{"stream_name":"stdout","time":480.994895689,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.994899349,"data":"    *   **Prefix Tag:** `@ok`\n"}
+,{"stream_name":"stdout","time":480.994902769,"data":"    *   **Keywords:** \"validate\", \"fetch\"\n"}
+,{"stream_name":"stdout","time":480.994906279,"data":"    *   **Context:** Routine successful \n"}
+,{"stream_name":"stdout","time":480.994909709,"data":"...\n"}
+,{"stream_name":"stdout","time":480.994913099,"data":"\n"}
+,{"stream_name":"stdout","time":480.994916239,"data":"--- [single_tag_few] seed=2 ---\n"}
+,{"stream_name":"stdout","time":480.994919159,"data":"Item: single_tag / tool=glintd\n"}
+,{"stream_name":"stdout","time":480.994922369,"data":"Test line: ^^ replicate segment\n"}
+,{"stream_name":"stdout","time":480.994925519,"data":"Expected: RETRYABLE_ERROR\n"}
+,{"stream_name":"stdout","time":480.994928739,"data":"Pre: RETRYABLE_ERROR (Y)  Post: RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.994932049,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.994935369,"data":"\n"}
+,{"stream_name":"stdout","time":480.994938789,"data":"This guide defines the severity conventions for the CLI tool based on the provided symbolic prefixes.\n"}
+,{"stream_name":"stdout","time":480.994942319,"data":"\n"}
+,{"stream_name":"stdout","time":480.994945479,"data":"---\n"}
+,{"stream_name":"stdout","time":480.994948659,"data":"\n"}
+,{"stream_name":"stdout","time":480.994958039,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.994961939,"data":"\n"}
+,{"stream_name":"stdout","time":480.994965369,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.994968619,"data":"    *   **Prefix Tag:** `++`\n"}
+,{"stream_name":"stdout","time":480.994971939,"data":"    *   **Message Keywords:** \"flush\", \"resolve\"\n"}
+,{"stream_name":"stdout","time":480.994975289,"data":"    *   **Pattern:** Indicat\n"}
+,{"stream_name":"stdout","time":480.99497851900003,"data":"...\n"}
+,{"stream_name":"stdout","time":480.994981799,"data":"\n"}
+,{"stream_name":"stdout","time":480.994984749,"data":"--- [single_tag_mid] seed=0 ---\n"}
+,{"stream_name":"stdout","time":480.994987909,"data":"Item: single_tag / tool=orbix\n"}
+,{"stream_name":"stdout","time":480.994991039,"data":"Test line: ::halt:: bind bundle\n"}
+,{"stream_name":"stdout","time":480.994994749,"data":"Expected: TERMINAL_ERROR\n"}
+,{"stream_name":"stdout","time":480.994998219,"data":"Pre: TERMINAL_ERROR (Y)  Post: TERMINAL_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.995001749,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995005429,"data":"\n"}
+,{"stream_name":"stdout","time":480.995008859,"data":"This guide defines the severity conventions for the CLI tool based on the provided labeled log samples.\n"}
+,{"stream_name":"stdout","time":480.995012179,"data":"\n"}
+,{"stream_name":"stdout","time":480.995015329,"data":"---\n"}
+,{"stream_name":"stdout","time":480.995018509,"data":"\n"}
+,{"stream_name":"stdout","time":480.995021799,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.995025339,"data":"\n"}
+,{"stream_name":"stdout","time":480.995028279,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.995031179,"data":"    *   **Prefix Tag:** `::note::`\n"}
+,{"stream_name":"stdout","time":480.995034449,"data":"    *   **Keywords:** \"resolve\", \"bind\"\n"}
+,{"stream_name":"stdout","time":480.995037789,"data":"    *   **Context:** Routine \n"}
+,{"stream_name":"stdout","time":480.995041029,"data":"...\n"}
+,{"stream_name":"stdout","time":480.995044469,"data":"\n"}
+,{"stream_name":"stdout","time":480.995049669,"data":"--- [single_tag_mid] seed=1 ---\n"}
+,{"stream_name":"stdout","time":480.995052829,"data":"Item: single_tag / tool=quarkctl\n"}
+,{"stream_name":"stdout","time":480.995055899,"data":"Test line: \u003cEr\u003e warm cache-ring\n"}
+,{"stream_name":"stdout","time":480.995059289,"data":"Expected: RETRYABLE_ERROR\n"}
+,{"stream_name":"stdout","time":480.995062739,"data":"Pre: RETRYABLE_ERROR (Y)  Post: RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.995065909,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995069029,"data":"\n"}
+,{"stream_name":"stdout","time":480.995072119,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples.\n"}
+,{"stream_name":"stdout","time":480.995075659,"data":"\n"}
+,{"stream_name":"stdout","time":480.995079019,"data":"---\n"}
+,{"stream_name":"stdout","time":480.995082469,"data":"\n"}
+,{"stream_name":"stdout","time":480.995085529,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.995088299,"data":"\n"}
+,{"stream_name":"stdout","time":480.995091249,"data":"Classification is determined by the alphanumeric code contained within the angle brackets (`\u003c \u003e`).\n"}
+,{"stream_name":"stdout","time":480.995095179,"data":"\n"}
+,{"stream_name":"stdout","time":480.995104689,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.995108339,"data":"    *   **Pr\n"}
+,{"stream_name":"stdout","time":480.995111699,"data":"...\n"}
+,{"stream_name":"stdout","time":480.995115039,"data":"\n"}
+,{"stream_name":"stdout","time":480.995118239,"data":"--- [single_tag_mid] seed=2 ---\n"}
+,{"stream_name":"stdout","time":480.995121159,"data":"Item: single_tag / tool=glintd\n"}
+,{"stream_name":"stdout","time":480.995123949,"data":"Test line: ++ flush task-queue\n"}
+,{"stream_name":"stdout","time":480.995126799,"data":"Expected: INFO\n"}
+,{"stream_name":"stdout","time":480.995129539,"data":"Pre: INFO (Y)  Post: INFO (Y)\n"}
+,{"stream_name":"stdout","time":480.995132389,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995135279,"data":"\n"}
+,{"stream_name":"stdout","time":480.995138319,"data":"This guide defines the severity conventions for the CLI tool based on the provided symbolic prefixes.\n"}
+,{"stream_name":"stdout","time":480.995141989,"data":"\n"}
+,{"stream_name":"stdout","time":480.995145259,"data":"---\n"}
+,{"stream_name":"stdout","time":480.995148419,"data":"\n"}
+,{"stream_name":"stdout","time":480.995151449,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.995154859,"data":"\n"}
+,{"stream_name":"stdout","time":480.995158189,"data":"Severity in this tool is mapped directly to the two-character symbolic prefix at the beginning of each log line.\n"}
+,{"stream_name":"stdout","time":480.995161859,"data":"\n"}
+,{"stream_name":"stdout","time":480.995164869,"data":"*   *\n"}
+,{"stream_name":"stdout","time":480.995168079,"data":"...\n"}
+,{"stream_name":"stdout","time":480.995171099,"data":"\n"}
+,{"stream_name":"stdout","time":480.995173869,"data":"--- [single_tag_many] seed=0 ---\n"}
+,{"stream_name":"stdout","time":480.995176749,"data":"Item: single_tag / tool=quarkctl\n"}
+,{"stream_name":"stdout","time":480.995179489,"data":"Test line: \u003cW\u003e fetch shard\n"}
+,{"stream_name":"stdout","time":480.995182349,"data":"Expected: WARNING\n"}
+,{"stream_name":"stdout","time":480.995185079,"data":"Pre: WARNING (Y)  Post: WARNING (Y)\n"}
+,{"stream_name":"stdout","time":480.995187919,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995212729,"data":"\n"}
+,{"stream_name":"stdout","time":480.995216139,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples. Classification is determined by the specific code within the angle brackets at the start of each line.\n"}
+,{"stream_name":"stdout","time":480.995222259,"data":"\n"}
+,{"stream_name":"stdout","time":480.995225859,"data":"---\n"}
+,{"stream_name":"stdout","time":480.995229619,"data":"\n"}
+,{"stream_name":"stdout","time":480.995233159,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.995236809,"data":"\n"}
+,{"stream_name":"stdout","time":480.995240269,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.995243499,"data":"    *   *\n"}
+,{"stream_name":"stdout","time":480.995247009,"data":"...\n"}
+,{"stream_name":"stdout","time":480.995249939,"data":"\n"}
+,{"stream_name":"stdout","time":480.995252939,"data":"--- [single_tag_many] seed=1 ---\n"}
+,{"stream_name":"stdout","time":480.995256029,"data":"Item: single_tag / tool=orbix\n"}
+,{"stream_name":"stdout","time":480.995259359,"data":"Test line: ::halt:: migrate bundle\n"}
+,{"stream_name":"stdout","time":480.995265809,"data":"Expected: TERMINAL_ERROR\n"}
+,{"stream_name":"stdout","time":480.995275529,"data":"Pre: TERMINAL_ERROR (Y)  Post: TERMINAL_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.995279219,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995282629,"data":"\n"}
+,{"stream_name":"stdout","time":480.995286119,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples. The primary indicator of severity is the semantic tag contained within double colons (`::`).\n"}
+,{"stream_name":"stdout","time":480.995290139,"data":"\n"}
+,{"stream_name":"stdout","time":480.995293489,"data":"---\n"}
+,{"stream_name":"stdout","time":480.995296919,"data":"\n"}
+,{"stream_name":"stdout","time":480.995300439,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.995303849,"data":"\n"}
+,{"stream_name":"stdout","time":480.995307359,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.995310589,"data":"    *   **Prefix Ta\n"}
+,{"stream_name":"stdout","time":480.995314149,"data":"...\n"}
+,{"stream_name":"stdout","time":480.995318849,"data":"\n"}
+,{"stream_name":"stdout","time":480.995322329,"data":"--- [single_tag_many] seed=2 ---\n"}
+,{"stream_name":"stdout","time":480.995325719,"data":"Item: single_tag / tool=glintd\n"}
+,{"stream_name":"stdout","time":480.995328839,"data":"Test line: ^^ bind task-queue\n"}
+,{"stream_name":"stdout","time":480.995332959,"data":"Expected: RETRYABLE_ERROR\n"}
+,{"stream_name":"stdout","time":480.995336269,"data":"Pre: RETRYABLE_ERROR (Y)  Post: RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.995339379,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995343119,"data":"\n"}
+,{"stream_name":"stdout","time":480.995346519,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples. The tool uses a two-character symbolic prefix to denote the severity of every line.\n"}
+,{"stream_name":"stdout","time":480.995350589,"data":"\n"}
+,{"stream_name":"stdout","time":480.995353969,"data":"---\n"}
+,{"stream_name":"stdout","time":480.995357429,"data":"\n"}
+,{"stream_name":"stdout","time":480.995360569,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.995363839,"data":"\n"}
+,{"stream_name":"stdout","time":480.995367089,"data":"In this tool, the message body (keywords \n"}
+,{"stream_name":"stdout","time":480.995370279,"data":"...\n"}
+,{"stream_name":"stdout","time":480.995373069,"data":"\n"}
+,{"stream_name":"stdout","time":480.995375939,"data":"--- [tag_plus_code_few] seed=0 ---\n"}
+,{"stream_name":"stdout","time":480.995378919,"data":"Item: tag_plus_code / tool=nimboforge\n"}
+,{"stream_name":"stdout","time":480.995381959,"data":"Test line: OK :: snapshot buffer-pool\n"}
+,{"stream_name":"stdout","time":480.995385239,"data":"Expected: INFO\n"}
+,{"stream_name":"stdout","time":480.995389999,"data":"Pre: INFO (Y)  Post: INFO (Y)\n"}
+,{"stream_name":"stdout","time":480.995393329,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995396819,"data":"\n"}
+,{"stream_name":"stdout","time":480.995399609,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples. Classification depends primarily on the prefix tag and, in the case of errors, the specific error code in brackets.\n"}
+,{"stream_name":"stdout","time":480.995403469,"data":"\n"}
+,{"stream_name":"stdout","time":480.995415759,"data":"---\n"}
+,{"stream_name":"stdout","time":480.995425789,"data":"\n"}
+,{"stream_name":"stdout","time":480.995428929,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.995431779,"data":"\n"}
+,{"stream_name":"stdout","time":480.995434969,"data":"*   **INF\n"}
+,{"stream_name":"stdout","time":480.995438119,"data":"...\n"}
+,{"stream_name":"stdout","time":480.995441289,"data":"\n"}
+,{"stream_name":"stdout","time":480.99544456900003,"data":"--- [tag_plus_code_few] seed=1 ---\n"}
+,{"stream_name":"stdout","time":480.995447809,"data":"Item: tag_plus_code / tool=helixsync\n"}
+,{"stream_name":"stdout","time":480.995450939,"data":"Test line: SOFT :: resolve artifact\n"}
+,{"stream_name":"stdout","time":480.995454199,"data":"Expected: WARNING\n"}
+,{"stream_name":"stdout","time":480.995457419,"data":"Pre: WARNING (Y)  Post: WARNING (Y)\n"}
+,{"stream_name":"stdout","time":480.995460549,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995463869,"data":"\n"}
+,{"stream_name":"stdout","time":480.995467369,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples. Classification depends on the prefix tag and, for errors, specific bracketed numeric codes.\n"}
+,{"stream_name":"stdout","time":480.995471419,"data":"\n"}
+,{"stream_name":"stdout","time":480.995474709,"data":"---\n"}
+,{"stream_name":"stdout","time":480.995478069,"data":"\n"}
+,{"stream_name":"stdout","time":480.995481229,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.995484719,"data":"\n"}
+,{"stream_name":"stdout","time":480.995487919,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.995491519,"data":"    *   **Prefix Tag\n"}
+,{"stream_name":"stdout","time":480.995494789,"data":"...\n"}
+,{"stream_name":"stdout","time":480.995498079,"data":"\n"}
+,{"stream_name":"stdout","time":480.995501329,"data":"--- [tag_plus_code_few] seed=2 ---\n"}
+,{"stream_name":"stdout","time":480.995504859,"data":"Item: tag_plus_code / tool=lumenrun\n"}
+,{"stream_name":"stdout","time":480.995507819,"data":"Test line: BREAK :: stream artifact [rt-61]\n"}
+,{"stream_name":"stdout","time":480.995510769,"data":"Expected: RETRYABLE_ERROR\n"}
+,{"stream_name":"stdout","time":480.995513839,"data":"Pre: RETRYABLE_ERROR (Y)  Post: RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.995738229,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995757929,"data":"\n"}
+,{"stream_name":"stdout","time":480.995771359,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples. Classification is determined primarily by the prefix tag and, in the case of system breaks, the specific code prefix in brackets.\n"}
+,{"stream_name":"stdout","time":480.995782139,"data":"\n"}
+,{"stream_name":"stdout","time":480.995793719,"data":"---\n"}
+,{"stream_name":"stdout","time":480.995801219,"data":"\n"}
+,{"stream_name":"stdout","time":480.995808649,"data":"#### 1. Severity Class Featu\n"}
+,{"stream_name":"stdout","time":480.995818039,"data":"...\n"}
+,{"stream_name":"stdout","time":480.995825679,"data":"\n"}
+,{"stream_name":"stdout","time":480.995833389,"data":"--- [tag_plus_code_mid] seed=0 ---\n"}
+,{"stream_name":"stdout","time":480.995840769,"data":"Item: tag_plus_code / tool=helixsync\n"}
+,{"stream_name":"stdout","time":480.995848599,"data":"Test line: HARD :: flush segment [H1001]\n"}
+,{"stream_name":"stdout","time":480.995858128,"data":"Expected: TERMINAL_ERROR\n"}
+,{"stream_name":"stdout","time":480.995874539,"data":"Pre: TERMINAL_ERROR (Y)  Post: TERMINAL_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.995883328,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.995891708,"data":"\n"}
+,{"stream_name":"stdout","time":480.995900228,"data":"This guide defines the severity conventions for the CLI tool based on the analyzed log samples. Severity is determined by prefix tags and, for errors, a numeric parity check on the error code.\n"}
+,{"stream_name":"stdout","time":480.996001649,"data":"\n"}
+,{"stream_name":"stdout","time":480.996015119,"data":"---\n"}
+,{"stream_name":"stdout","time":480.996027379,"data":"\n"}
+,{"stream_name":"stdout","time":480.996034919,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.996043579,"data":"\n"}
+,{"stream_name":"stdout","time":480.996051029,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.996090129,"data":"    *   **Prefi\n"}
+,{"stream_name":"stdout","time":480.996098438,"data":"...\n"}
+,{"stream_name":"stdout","time":480.996105958,"data":"\n"}
+,{"stream_name":"stdout","time":480.996113809,"data":"--- [tag_plus_code_mid] seed=1 ---\n"}
+,{"stream_name":"stdout","time":480.996124629,"data":"Item: tag_plus_code / tool=lumenrun\n"}
+,{"stream_name":"stdout","time":480.996133789,"data":"Test line: BREAK :: validate manifest [rt-58]\n"}
+,{"stream_name":"stdout","time":480.996142409,"data":"Expected: RETRYABLE_ERROR\n"}
+,{"stream_name":"stdout","time":480.996150298,"data":"Pre: RETRYABLE_ERROR (Y)  Post: RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.996158238,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.996166369,"data":"\n"}
+,{"stream_name":"stdout","time":480.996176238,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples. The primary indicators of severity are the prefix tags and the bracketed codes following \"BREAK\" messages.\n"}
+,{"stream_name":"stdout","time":480.996185278,"data":"\n"}
+,{"stream_name":"stdout","time":480.996230018,"data":"---\n"}
+,{"stream_name":"stdout","time":480.996248629,"data":"\n"}
+,{"stream_name":"stdout","time":480.996257038,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.996265449,"data":"\n"}
+,{"stream_name":"stdout","time":480.996274078,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.996281618,"data":"    *\n"}
+,{"stream_name":"stdout","time":480.996289678,"data":"...\n"}
+,{"stream_name":"stdout","time":480.996297458,"data":"\n"}
+,{"stream_name":"stdout","time":480.996305288,"data":"--- [tag_plus_code_mid] seed=2 ---\n"}
+,{"stream_name":"stdout","time":480.996313848,"data":"Item: tag_plus_code / tool=nimboforge\n"}
+,{"stream_name":"stdout","time":480.996323118,"data":"Test line: OK :: drain bundle\n"}
+,{"stream_name":"stdout","time":480.996330668,"data":"Expected: INFO\n"}
+,{"stream_name":"stdout","time":480.996338148,"data":"Pre: INFO (Y)  Post: INFO (Y)\n"}
+,{"stream_name":"stdout","time":480.996345658,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.996354318,"data":"\n"}
+,{"stream_name":"stdout","time":480.996361738,"data":"This guide defines the severity conventions for the CLI tool based on the provided log samples. The primary indicators are prefix tags and, for errors, a bracketed numeric code.\n"}
+,{"stream_name":"stdout","time":480.996369498,"data":"\n"}
+,{"stream_name":"stdout","time":480.996378158,"data":"---\n"}
+,{"stream_name":"stdout","time":480.996394268,"data":"\n"}
+,{"stream_name":"stdout","time":480.996402928,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.996413708,"data":"\n"}
+,{"stream_name":"stdout","time":480.996422188,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.996429398,"data":"    *   **Prefix Tag:** `OK ::\n"}
+,{"stream_name":"stdout","time":480.996436498,"data":"...\n"}
+,{"stream_name":"stdout","time":480.996444988,"data":"\n"}
+,{"stream_name":"stdout","time":480.996452288,"data":"--- [tag_plus_code_many] seed=0 ---\n"}
+,{"stream_name":"stdout","time":480.996460898,"data":"Item: tag_plus_code / tool=nimboforge\n"}
+,{"stream_name":"stdout","time":480.996468548,"data":"Test line: WARN :: stream task-queue\n"}
+,{"stream_name":"stdout","time":480.996476628,"data":"Expected: WARNING\n"}
+,{"stream_name":"stdout","time":480.996485399,"data":"Pre: WARNING (Y)  Post: WARNING (Y)\n"}
+,{"stream_name":"stdout","time":480.996492719,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.996500099,"data":"\n"}
+,{"stream_name":"stdout","time":480.996507519,"data":"This guide defines the severity conventions for the CLI tool based on the analyzed log samples. Severity is determined by prefix tags and, for errors, a specific numeric threshold within the error code.\n"}
+,{"stream_name":"stdout","time":480.996514859,"data":"\n"}
+,{"stream_name":"stdout","time":480.996525808,"data":"---\n"}
+,{"stream_name":"stdout","time":480.996533048,"data":"\n"}
+,{"stream_name":"stdout","time":480.996540308,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.996548178,"data":"\n"}
+,{"stream_name":"stdout","time":480.996556708,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.996564658,"data":"    *\n"}
+,{"stream_name":"stdout","time":480.996572668,"data":"...\n"}
+,{"stream_name":"stdout","time":480.996580018,"data":"\n"}
+,{"stream_name":"stdout","time":480.996587648,"data":"--- [tag_plus_code_many] seed=1 ---\n"}
+,{"stream_name":"stdout","time":480.996594748,"data":"Item: tag_plus_code / tool=helixsync\n"}
+,{"stream_name":"stdout","time":480.996603058,"data":"Test line: HARD :: fetch manifest [H1013]\n"}
+,{"stream_name":"stdout","time":480.996611948,"data":"Expected: TERMINAL_ERROR\n"}
+,{"stream_name":"stdout","time":480.996620168,"data":"Pre: TERMINAL_ERROR (Y)  Post: TERMINAL_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.996628618,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.996636048,"data":"\n"}
+,{"stream_name":"stdout","time":480.996644508,"data":"This guide defines the severity conventions for the CLI tool based on the analyzed log samples. Severity is determined by prefix tags and, for high-severity errors, a numeric parity check on the error code.\n"}
+,{"stream_name":"stdout","time":480.996652278,"data":"\n"}
+,{"stream_name":"stdout","time":480.996667878,"data":"---\n"}
+,{"stream_name":"stdout","time":480.996675208,"data":"\n"}
+,{"stream_name":"stdout","time":480.996683808,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.996691558,"data":"\n"}
+,{"stream_name":"stdout","time":480.996700678,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.996709118,"data":" \n"}
+,{"stream_name":"stdout","time":480.996716318,"data":"...\n"}
+,{"stream_name":"stdout","time":480.996724388,"data":"\n"}
+,{"stream_name":"stdout","time":480.996732778,"data":"--- [tag_plus_code_many] seed=2 ---\n"}
+,{"stream_name":"stdout","time":480.996744358,"data":"Item: tag_plus_code / tool=lumenrun\n"}
+,{"stream_name":"stdout","time":480.996752508,"data":"Test line: BREAK :: unpack artifact [rt-44]\n"}
+,{"stream_name":"stdout","time":480.996761038,"data":"Expected: RETRYABLE_ERROR\n"}
+,{"stream_name":"stdout","time":480.996768568,"data":"Pre: RETRYABLE_ERROR (Y)  Post: RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.996776828,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.996784358,"data":"\n"}
+,{"stream_name":"stdout","time":480.996792558,"data":"This guide defines the severity conventions for the CLI tool based on the provided labeled examples.\n"}
+,{"stream_name":"stdout","time":480.996799948,"data":"\n"}
+,{"stream_name":"stdout","time":480.996809958,"data":"---\n"}
+,{"stream_name":"stdout","time":480.996941828,"data":"\n"}
+,{"stream_name":"stdout","time":480.996960888,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.996997548,"data":"\n"}
+,{"stream_name":"stdout","time":480.997041948,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.997057238,"data":"    *   **Prefix Tag:** `TRACE ::`\n"}
+,{"stream_name":"stdout","time":480.997071598,"data":"    *   **Keywords:** `validate`, `fetch`, `index`\n"}
+,{"stream_name":"stdout","time":480.997081688,"data":"    *   **Pattern:** \n"}
+,{"stream_name":"stdout","time":480.997089728,"data":"...\n"}
+,{"stream_name":"stdout","time":480.997093368,"data":"\n"}
+,{"stream_name":"stdout","time":480.997097018,"data":"--- [contextual_few] seed=0 ---\n"}
+,{"stream_name":"stdout","time":480.997100298,"data":"Item: contextual / tool=orbix\n"}
+,{"stream_name":"stdout","time":480.997103678,"data":"Test line: STATUS: heartbeat from pipeline\n"}
+,{"stream_name":"stdout","time":480.997107068,"data":"Expected: INFO\n"}
+,{"stream_name":"stdout","time":480.997125128,"data":"Pre: INFO (Y)  Post: INFO (Y)\n"}
+,{"stream_name":"stdout","time":480.997129228,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.997132768,"data":"\n"}
+,{"stream_name":"stdout","time":480.997136198,"data":"This guide defines the severity conventions for the CLI tool based on the provided semantic keywords within the log messages. All logs in this tool share the same `STATUS:` prefix, so classification depends entirely on keywords within the message body.\n"}
+,{"stream_name":"stdout","time":480.997139758,"data":"\n"}
+,{"stream_name":"stdout","time":480.997152628,"data":"---\n"}
+,{"stream_name":"stdout","time":480.997156658,"data":"\n"}
+,{"stream_name":"stdout","time":480.997160038,"data":"#\n"}
+,{"stream_name":"stdout","time":480.997163608,"data":"...\n"}
+,{"stream_name":"stdout","time":480.997166798,"data":"\n"}
+,{"stream_name":"stdout","time":480.997170288,"data":"--- [contextual_few] seed=1 ---\n"}
+,{"stream_name":"stdout","time":480.997173618,"data":"Item: contextual / tool=tessera\n"}
+,{"stream_name":"stdout","time":480.997177198,"data":"Test line: \u003e\u003e segment fragmentation rising\n"}
+,{"stream_name":"stdout","time":480.997180768,"data":"Expected: WARNING\n"}
+,{"stream_name":"stdout","time":480.997184218,"data":"Pre: WARNING (Y)  Post: WARNING (Y)\n"}
+,{"stream_name":"stdout","time":480.997187608,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.997213578,"data":"\n"}
+,{"stream_name":"stdout","time":480.997217578,"data":"This guide defines the severity conventions for the CLI tool based on semantic keywords found within the message body. All logs share a common `\u003e\u003e` prefix.\n"}
+,{"stream_name":"stdout","time":480.997229448,"data":"\n"}
+,{"stream_name":"stdout","time":480.997233018,"data":"---\n"}
+,{"stream_name":"stdout","time":480.997236188,"data":"\n"}
+,{"stream_name":"stdout","time":480.997239688,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.997243298,"data":"\n"}
+,{"stream_name":"stdout","time":480.997246888,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.997250228,"data":"    *   **Keywords:** `warm start`, `done`.\n"}
+,{"stream_name":"stdout","time":480.997254008,"data":"    *   \n"}
+,{"stream_name":"stdout","time":480.997257338,"data":"...\n"}
+,{"stream_name":"stdout","time":480.997260778,"data":"\n"}
+,{"stream_name":"stdout","time":480.997264238,"data":"--- [contextual_few] seed=2 ---\n"}
+,{"stream_name":"stdout","time":480.997267678,"data":"Item: contextual / tool=tessera\n"}
+,{"stream_name":"stdout","time":480.997270738,"data":"Test line: \u003e\u003e socket reset while streaming cache-ring\n"}
+,{"stream_name":"stdout","time":480.997274248,"data":"Expected: RETRYABLE_ERROR\n"}
+,{"stream_name":"stdout","time":480.997279418,"data":"Pre: RETRYABLE_ERROR (Y)  Post: RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.997282898,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.997285978,"data":"\n"}
+,{"stream_name":"stdout","time":480.997288978,"data":"This guide defines the severity conventions for the CLI tool based on semantic keywords found within the message body. All logs share a common `\u003e\u003e` prefix.\n"}
+,{"stream_name":"stdout","time":480.997292518,"data":"\n"}
+,{"stream_name":"stdout","time":480.997295438,"data":"---\n"}
+,{"stream_name":"stdout","time":480.997298278,"data":"\n"}
+,{"stream_name":"stdout","time":480.997301498,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.997304588,"data":"\n"}
+,{"stream_name":"stdout","time":480.997307548,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.997310848,"data":"    *   **Keywords:** `loaded`, `warm start`, `done`\n"}
+,{"stream_name":"stdout","time":480.997313938,"data":"...\n"}
+,{"stream_name":"stdout","time":480.997317018,"data":"\n"}
+,{"stream_name":"stdout","time":480.997320048,"data":"--- [contextual_mid] seed=0 ---\n"}
+,{"stream_name":"stdout","time":480.997323288,"data":"Item: contextual / tool=tessera\n"}
+,{"stream_name":"stdout","time":480.997326818,"data":"Test line: \u003e\u003e license for shard has expired\n"}
+,{"stream_name":"stdout","time":480.997330278,"data":"Expected: TERMINAL_ERROR\n"}
+,{"stream_name":"stdout","time":480.997333418,"data":"Pre: TERMINAL_ERROR (Y)  Post: TERMINAL_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.997336578,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.997339638,"data":"\n"}
+,{"stream_name":"stdout","time":480.997342938,"data":"This guide defines the severity conventions for the CLI tool based on semantic keywords found within the message body. All logs share a common `\u003e\u003e` prefix.\n"}
+,{"stream_name":"stdout","time":480.997346618,"data":"\n"}
+,{"stream_name":"stdout","time":480.997349748,"data":"---\n"}
+,{"stream_name":"stdout","time":480.997353188,"data":"\n"}
+,{"stream_name":"stdout","time":480.997356308,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.997359748,"data":"\n"}
+,{"stream_name":"stdout","time":480.997362888,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.997366178,"data":"    *   **Keywords:** `in sync`, `loaded`.\n"}
+,{"stream_name":"stdout","time":480.997374678,"data":"    *   *\n"}
+,{"stream_name":"stdout","time":480.997377928,"data":"...\n"}
+,{"stream_name":"stdout","time":480.997380848,"data":"\n"}
+,{"stream_name":"stdout","time":480.997383778,"data":"--- [contextual_mid] seed=1 ---\n"}
+,{"stream_name":"stdout","time":480.997386808,"data":"Item: contextual / tool=orbix\n"}
+,{"stream_name":"stdout","time":480.997390318,"data":"Test line: STATUS: throttled by manifest (try again)\n"}
+,{"stream_name":"stdout","time":480.997394078,"data":"Expected: RETRYABLE_ERROR\n"}
+,{"stream_name":"stdout","time":480.997397718,"data":"Pre: RETRYABLE_ERROR (Y)  Post: RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.997401038,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.997404108,"data":"\n"}
+,{"stream_name":"stdout","time":480.997407268,"data":"This guide defines the severity conventions for the CLI tool based on semantic keywords within the log message body. All logs share the uniform prefix `STATUS:`.\n"}
+,{"stream_name":"stdout","time":480.997411098,"data":"\n"}
+,{"stream_name":"stdout","time":480.997414338,"data":"---\n"}
+,{"stream_name":"stdout","time":480.997417448,"data":"\n"}
+,{"stream_name":"stdout","time":480.997420648,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.997423888,"data":"\n"}
+,{"stream_name":"stdout","time":480.997427108,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.997430018,"data":"    *   **Keywords:** `saved`, `ok`, `handshak\n"}
+,{"stream_name":"stdout","time":480.997433518,"data":"...\n"}
+,{"stream_name":"stdout","time":480.997437018,"data":"\n"}
+,{"stream_name":"stdout","time":480.997440308,"data":"--- [contextual_mid] seed=2 ---\n"}
+,{"stream_name":"stdout","time":480.997443568,"data":"Item: contextual / tool=tessera\n"}
+,{"stream_name":"stdout","time":480.997447038,"data":"Test line: \u003e\u003e loaded artifact index\n"}
+,{"stream_name":"stdout","time":480.997450458,"data":"Expected: INFO\n"}
+,{"stream_name":"stdout","time":480.997453408,"data":"Pre: INFO (Y)  Post: INFO (Y)\n"}
+,{"stream_name":"stdout","time":480.997456808,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.997460378,"data":"\n"}
+,{"stream_name":"stdout","time":480.997463768,"data":"This guide defines the severity conventions for the CLI tool based on semantic keywords found within the log messages. All logs share a common `\u003e\u003e` prefix.\n"}
+,{"stream_name":"stdout","time":480.997467038,"data":"\n"}
+,{"stream_name":"stdout","time":480.997470128,"data":"---\n"}
+,{"stream_name":"stdout","time":480.997473448,"data":"\n"}
+,{"stream_name":"stdout","time":480.997476778,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.997479988,"data":"\n"}
+,{"stream_name":"stdout","time":480.997482928,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.997485968,"data":"    *   **Keywords:** `opened`, `warm start`, `loade\n"}
+,{"stream_name":"stdout","time":480.997489138,"data":"...\n"}
+,{"stream_name":"stdout","time":480.997518068,"data":"\n"}
+,{"stream_name":"stdout","time":480.997522988,"data":"--- [contextual_many] seed=0 ---\n"}
+,{"stream_name":"stdout","time":480.997526988,"data":"Item: contextual / tool=orbix\n"}
+,{"stream_name":"stdout","time":480.997530388,"data":"Test line: STATUS: stale manifest detected, refreshing\n"}
+,{"stream_name":"stdout","time":480.997534157,"data":"Expected: WARNING\n"}
+,{"stream_name":"stdout","time":480.997543688,"data":"Pre: WARNING (Y)  Post: WARNING (Y)\n"}
+,{"stream_name":"stdout","time":480.997548408,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.997551988,"data":"\n"}
+,{"stream_name":"stdout","time":480.997555597,"data":"This guide defines the severity conventions for the CLI tool based on semantic keywords found in the message body. All logs use the universal prefix `STATUS:`.\n"}
+,{"stream_name":"stdout","time":480.997559078,"data":"\n"}
+,{"stream_name":"stdout","time":480.997562238,"data":"---\n"}
+,{"stream_name":"stdout","time":480.997565198,"data":"\n"}
+,{"stream_name":"stdout","time":480.997568268,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.997571358,"data":"\n"}
+,{"stream_name":"stdout","time":480.997574558,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.997577908,"data":"    *   **Keywords:** `started`, `completed`, `s\n"}
+,{"stream_name":"stdout","time":480.997581648,"data":"...\n"}
+,{"stream_name":"stdout","time":480.997584728,"data":"\n"}
+,{"stream_name":"stdout","time":480.997588378,"data":"--- [contextual_many] seed=1 ---\n"}
+,{"stream_name":"stdout","time":480.997592078,"data":"Item: contextual / tool=orbix\n"}
+,{"stream_name":"stdout","time":480.997595668,"data":"Test line: STATUS: schema mismatch: buffer-pool incompatible\n"}
+,{"stream_name":"stdout","time":480.997599228,"data":"Expected: TERMINAL_ERROR\n"}
+,{"stream_name":"stdout","time":480.997602498,"data":"Pre: TERMINAL_ERROR (Y)  Post: TERMINAL_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.997606178,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.997609218,"data":"\n"}
+,{"stream_name":"stdout","time":480.997612698,"data":"This guide defines the severity conventions for the CLI tool based on semantic keywords found within the message body. All logs share a common `STATUS:` prefix.\n"}
+,{"stream_name":"stdout","time":480.997616638,"data":"\n"}
+,{"stream_name":"stdout","time":480.997619988,"data":"---\n"}
+,{"stream_name":"stdout","time":480.997623508,"data":"\n"}
+,{"stream_name":"stdout","time":480.997646118,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.997651098,"data":"\n"}
+,{"stream_name":"stdout","time":480.997654438,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.997666618,"data":"    *   **Keywords:** `saved`, `started`, `hear\n"}
+,{"stream_name":"stdout","time":480.997670458,"data":"...\n"}
+,{"stream_name":"stdout","time":480.997673968,"data":"\n"}
+,{"stream_name":"stdout","time":480.997677168,"data":"--- [contextual_many] seed=2 ---\n"}
+,{"stream_name":"stdout","time":480.997680618,"data":"Item: contextual / tool=orbix\n"}
+,{"stream_name":"stdout","time":480.997683958,"data":"Test line: STATUS: connection timeout reaching ledger\n"}
+,{"stream_name":"stdout","time":480.997704478,"data":"Expected: RETRYABLE_ERROR\n"}
+,{"stream_name":"stdout","time":480.997707638,"data":"Pre: RETRYABLE_ERROR (Y)  Post: RETRYABLE_ERROR (Y)\n"}
+,{"stream_name":"stdout","time":480.997710858,"data":"Notes (first 300 chars): ### CLI Log Classification Study Guide\n"}
+,{"stream_name":"stdout","time":480.997713948,"data":"\n"}
+,{"stream_name":"stdout","time":480.997716958,"data":"This guide defines the severity conventions for the CLI tool based on semantic keywords found within the message body. All logs share a common `STATUS:` prefix.\n"}
+,{"stream_name":"stdout","time":480.997720498,"data":"\n"}
+,{"stream_name":"stdout","time":480.997730038,"data":"---\n"}
+,{"stream_name":"stdout","time":480.997733268,"data":"\n"}
+,{"stream_name":"stdout","time":480.997736658,"data":"#### 1. Severity Class Features\n"}
+,{"stream_name":"stdout","time":480.997740098,"data":"\n"}
+,{"stream_name":"stdout","time":480.997742947,"data":"*   **INFO**\n"}
+,{"stream_name":"stdout","time":480.997745858,"data":"    *   **Keywords:** `heartbeat`, `started`, `\n"}
+,{"stream_name":"stdout","time":480.997748878,"data":"...\n"}
+,{"stream_name":"stderr","time":492.013719392,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"remove_papermill_header.RemovePapermillHeader\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":492.013792581,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":492.035704309,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":492.373880489,"data":"[NbConvertApp] Writing 176757 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":494.776450285,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"nbconvert.preprocessors.ExtractOutputPreprocessor\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":494.776506265,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":494.796580524,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":495.756066893,"data":"[NbConvertApp] WARNING | Alternative text is missing on 1 image(s).\n"}
+,{"stream_name":"stderr","time":495.793076583,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":495.793127282,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":495.793436662,"data":"[NbConvertApp] Writing 381392 bytes to __results__.html\n"}
+]

@@ -135,19 +135,41 @@
 
     <h2>Results, Insights, and Conclusions</h2>
     <p>
-      The benchmark reveals what standard evaluations cannot: not just whether a model knows
-      things, but whether it can learn new things on demand, and whether explicit self-generated
-      reasoning aids that learning.
+      Skill Selection across four models spanning 1B to frontier shows a clean performance
+      gradient: gemma-3-1b (14.8%), gemma-3-4b (85.2%), gemini-2.5-flash (88.9%),
+      gemini-2.5-pro (100%). The gradient sharpens under adversarial conditions (misleading tool
+      names in large registries): 0% &rarr; 56% &rarr; 67% &rarr; 100%. Distinct and confusable
+      conditions hit ceiling for all models above 1B&mdash;adversarial similarity is the pure
+      discriminator.
+    </p>
+    <p>
+      The pre/post paradigm reveals something standard benchmarks cannot measure: whether
+      studying helps or hurts. Only gemini-2.5-flash shows meaningful positive learning gain
+      (+7.4%). gemma-3-4b scores <em>worse</em> after studying (&minus;3.7%)&mdash;its
+      self-generated notes introduced confusion rather than clarity, mirroring a well-documented
+      human learning phenomenon. Models below a capability threshold produce study notes that are
+      noise, not signal. This pattern replicates across tasks and models: gemma-3-27b on
+      Category Learning shows learning gain of &minus;0.67 on two-feature mid-complexity
+      conditions, confirming that self-generated study notes can actively harm performance when
+      the underlying rule exceeds the model&rsquo;s articulation capacity.
+    </p>
+    <p>
+      Error Remediation (Gemini 3 Flash, score 0.926) shows learning gain is not uniform even
+      within one model. Direct-lookup conditions with few examples show perfect learning gain
+      (+1.0), but mid-complexity conditions show negative gain (&minus;0.33). Pattern-match
+      conditions with many examples show strong gain (+0.67). This suggests learning efficacy
+      depends on the interaction between task complexity and evidence density&mdash;a signal
+      invisible to single-score benchmarks.
     </p>
     <p>
       A key methodological insight is that benchmark tasks can be systematically derived from
       observed agentic failures rather than invented from scratch. By mining 620 real Claude Code
-      sessions across 46 projects, we identified 15 recurring failure categories (stale state,
-      retry without diagnosis, tool-task mismatch, warning-as-error confusion, strategy
-      over-commitment, etc.) and abstracted five of them into benchmark tasks. This grounding in
-      real failures ensures the benchmark tests abilities that actually matter in deployed
-      systems&mdash;the stimuli are synthetic, but the cognitive gaps they target are empirically
-      observed.
+      sessions across 46 projects, we identified 15 recurring failure categories and abstracted
+      five of them into benchmark tasks. This grounding in real failures ensures the benchmark
+      tests abilities that actually matter in deployed systems. Session-mined tasks also serve as
+      calibration: Error Severity Triage hit ceiling (1.0) on Gemini 3 Flash, revealing that
+      severity classification is already saturated for frontier models&mdash;a useful negative
+      result that identifies which cognitive sub-abilities still have headroom.
     </p>
 
     <h2>Organizational Affiliations</h2>

@@ -1,0 +1,29 @@
+{
+  "taskVersion": {
+    "versionNumber": 1,
+    "name": "strategy_pivot",
+    "description": "Pre/post learning strategy pivot \u2014 decide CONTINUE / ADJUST_PARAMS / PIVOT from attempt history",
+    "definition": "@kbench.task(name='strategy_pivot',\n             description='Pre/post learning strategy pivot \u2014 decide CONTINUE / ADJUST_PARAMS / PIVOT from attempt history')\ndef strategy_pivot(llm, material: str, test_input: str, expected: str,\n                   complexity: str, evidence: str, num_attempts: int,\n                   difficulty_label: str, seed: int, item_desc: str) -> dict:\n    model_name = str(llm)\n    ts = time.strftime('%Y-%m-%d %H:%M:%S')\n    tid = f'{complexity}_{evidence}_s{seed}'\n\n    t0 = time.time()\n    pre_raw = llm.prompt(PRE_P.format(test_input=test_input))\n    pre_time = time.time() - t0\n    pre_extracted = extract_decision(pre_raw)\n    pre_correct = pre_extracted == expected\n\n    t0 = time.time()\n    study_raw = llm.prompt(STUDY_P.format(material=material))\n    study_time = time.time() - t0\n    notes = strip_thinking(study_raw)\n\n    t0 = time.time()\n    post_raw = llm.prompt(POST_P.format(notes=notes, test_input=test_input))\n    post_time = time.time() - t0\n    post_extracted = extract_decision(post_raw)\n    post_correct = post_extracted == expected\n\n    all_results.append({\n        'timestamp': ts, 'model': model_name, 'task_id': tid,\n        'complexity': complexity, 'evidence': evidence,\n        'num_attempts': int(num_attempts), 'difficulty_label': difficulty_label,\n        'seed': int(seed), 'item_desc': item_desc,\n        'test_input': test_input, 'expected': expected,\n        'pre_raw': pre_raw, 'pre_extracted': pre_extracted, 'pre_correct': int(pre_correct),\n        'study_notes': notes,\n        'post_raw': post_raw, 'post_extracted': post_extracted, 'post_correct': int(post_correct),\n        'pre_time_s': pre_time, 'study_time_s': study_time, 'post_time_s': post_time\n    })\n\n    b = 'Y' if pre_correct else 'N'\n    l = 'Y' if post_correct else 'N'\n    print(f'[{model_name:40s}] [{difficulty_label:20s}] expected=\"{expected:14s}\"  pre=\"{pre_extracted:14s}\"({b})  post=\"{post_extracted:14s}\"({l})')\n    return {'pre_correct': pre_correct, 'post_correct': post_correct}\n"
+  },
+  "modelVersion": {
+    "slug": "anthropic/claude-opus-4-6@default"
+  },
+  "state": "BENCHMARK_TASK_RUN_STATE_ERRORED",
+  "startTime": "2026-04-16T23:37:52.483707Z",
+  "endTime": "2026-04-16T23:37:52.530508Z",
+  "conversations": [
+    {
+      "id": "strategy_pivot-1191fb1b",
+      "metrics": {},
+      "modelVersionSlug": "model_version_slug for conversation is DEPRECATED"
+    }
+  ],
+  "results": [
+    {
+      "type": "AGGREGATED",
+      "booleanResult": false
+    }
+  ],
+  "pyRunId": "strategy_pivot-Run #21",
+  "errorMessage": "Traceback (most recent call last):\n  File \"/benchmarks/src/kaggle_benchmarks/tasks.py\", line 110, in run\n    run.result = self.func(*args, **kwargs)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/ipykernel_13/691404231.py\", line 14, in strategy_pivot\n    pre_raw = llm.prompt(PRE_P.format(test_input=test_input))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/benchmarks/src/kaggle_benchmarks/actors/llms.py\", line 184, in prompt\n    return self.respond(\n           ^^^^^^^^^^^^^\n  File \"/benchmarks/src/kaggle_benchmarks/chats.py\", line 118, in wrapper\n    result = func(self, *args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/benchmarks/src/kaggle_benchmarks/actors/llms.py\", line 233, in respond\n    invoke_response = self.invoke(\n                      ^^^^^^^^^^^^\n  File \"/benchmarks/src/kaggle_benchmarks/actors/llms.py\", line 322, in invoke\n    return self._call_api(raw_messages, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/benchmarks/src/kaggle_benchmarks/actors/llms.py\", line 370, in _call_api\n    response = method(\n               ^^^^^^^\n  File \"/benchmarks/.venv/lib/python3.11/site-packages/openai/_utils/_utils.py\", line 286, in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/benchmarks/.venv/lib/python3.11/site-packages/openai/resources/chat/completions/completions.py\", line 1192, in create\n    return self._post(\n           ^^^^^^^^^^^\n  File \"/benchmarks/.venv/lib/python3.11/site-packages/openai/_base_client.py\", line 1259, in post\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/benchmarks/.venv/lib/python3.11/site-packages/openai/_base_client.py\", line 1047, in request\n    raise self._make_status_error_from_response(err.response) from None\nopenai.PermissionDeniedError: Error code: 403 - {'message': 'The estimated cost of this operation ($3.20142) exceeds your available quota. Try again later.', 'type': 'invalid_request_error'}\n"
+}

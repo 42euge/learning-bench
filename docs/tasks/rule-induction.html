@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rule Induction &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F9E9;</span>
+    <h1>Rule Induction</h1>
+    <p class="task-hero-sub">Concept Formation</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model discover hidden transformation rules from input&rarr;output examples?
+      Each item presents a set of word pairs produced by a secret rule composed of one or more
+      string operations (Caesar shift, reverse, swap pairs, vowel shift, rotate half, consonant shift).
+      The model must induce the rule and apply it to a new word.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See input&rarr;output examples and apply the same rule to a new word cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Hypothesize the exact rule (may be multi-step), verify against every example, revise if wrong.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Apply the discovered rule using own study notes + original examples.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>1 op, 2 ops, 3 ops</td>
+          <td>Number of chained string operations. 1-op rules (e.g., Caesar shift by 3) are
+              straightforward. 2-op rules (e.g., reverse then vowel shift) require decomposing
+              two transformations. 3-op rules require tracking three sequential operations.</td>
+        </tr>
+        <tr>
+          <td><strong>Evidence</strong></td>
+          <td>2, 4, 8 examples</td>
+          <td>Number of input&rarr;output pairs shown. More examples make the rule easier
+              to identify but also increase the cognitive load of verification.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations for statistical robustness.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 evidence &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Rules are composed from a pool of six string operations: Caesar shift (by k), reverse,
+      swap adjacent character pairs, vowel shift (a&rarr;e&rarr;i&rarr;o&rarr;u&rarr;a),
+      rotate half (split at midpoint and swap halves), and consonant shift (by k positions
+      in the consonant alphabet). For each item, a random subset of 1&ndash;3 operations is
+      selected with random parameters, applied in sequence to common English words
+      (e.g., &ldquo;planet&rdquo;, &ldquo;bridge&rdquo;, &ldquo;castle&rdquo;). The test word
+      is held out from the examples, ensuring the model must generalize the rule rather than
+      memorize specific mappings.
+    </p>
+
+    <h2>Examples</h2>
+
+    <h3>1-Op Rule (single transformation)</h3>
+    <p>A single operation applied to each word:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        &ldquo;planet&rdquo; &rarr; &ldquo;tenalp&rdquo;<br>
+        &ldquo;bridge&rdquo; &rarr; &ldquo;egdirb&rdquo;<br>
+        &ldquo;castle&rdquo; &rarr; &ldquo;eltsac&rdquo;<br>
+        &ldquo;forest&rdquo; &rarr; &ldquo;tserof&rdquo;
+      </div>
+      <div class="example-question">
+        <strong>Apply to:</strong> &ldquo;garden&rdquo;<br>
+        <strong>Expected:</strong> nedrag
+      </div>
+    </div>
+    <p>
+      The rule is <em>reverse</em>. With 4 examples the pattern is fairly clear, but with
+      only 2 examples the model has less evidence to confirm its hypothesis.
+    </p>
+
+    <h3>2-Op Rule (chained transformations)</h3>
+    <p>Two operations applied in sequence:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        &ldquo;hunter&rdquo; &rarr; &ldquo;uhtnir&rdquo;<br>
+        &ldquo;silver&rdquo; &rarr; &ldquo;islvir&rdquo;
+      </div>
+      <div class="example-question">
+        <strong>Apply to:</strong> &ldquo;lemon&rdquo;<br>
+        <strong>Expected:</strong> <em>(depends on specific seed)</em>
+      </div>
+    </div>
+    <p>
+      The model must decompose two operations (e.g., swap adjacent pairs then vowel shift)
+      and apply them in the correct order. Getting the order wrong produces a different output.
+    </p>
+
+    <h3>3-Op Rule (triple-chained transformations)</h3>
+    <p>Three operations chained together. With only 2 examples, this is extremely hard:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        &ldquo;tunnel&rdquo; &rarr; &ldquo;???&rdquo;<br>
+        &ldquo;winter&rdquo; &rarr; &ldquo;???&rdquo;
+      </div>
+      <div class="example-question">
+        <strong>Apply to:</strong> &ldquo;purple&rdquo;<br>
+        <strong>Expected:</strong> <em>(depends on specific seed)</em>
+      </div>
+    </div>
+    <p>
+      Three chained operations (e.g., Caesar shift + reverse + consonant shift) create a
+      large hypothesis space. With 8 examples, the model can verify candidate rules
+      systematically; with 2, it often guesses wrong.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact transformed-word match).</li>
+      <li><strong>Extraction:</strong> Last short line (&le;30 chars), lowercased and stripped of quotes/punctuation.</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, expected)</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>1-op / many examples:</strong> Most models handle a single transformation with
+          8 examples&mdash;this is the baseline. Failure here indicates fundamental issues with
+          pattern matching.</li>
+      <li><strong>Multi-op / few examples:</strong> 3 operations with only 2 examples is the
+          hardest condition. The model must consider combinatorial possibilities and verify
+          each hypothesis carefully.</li>
+      <li><strong>Verification discipline:</strong> Models that systematically verify their
+          hypothesized rule against every example before answering outperform those that
+          guess after noticing a single pattern.</li>
+      <li><strong>Operation order matters:</strong> Reverse-then-Caesar produces different
+          output from Caesar-then-reverse. Models must track sequential composition, not
+          just identify which operations are present.</li>
+    </ul>
+
+    <h2>Prior Work &amp; References</h2>
+    <p>
+      Rule induction is one of the oldest paradigms in cognitive psychology, tracing back
+      to Bruner&rsquo;s concept attainment studies. Our task adapts this paradigm for LLMs
+      using string transformations as the rule space, creating a domain where prior training
+      knowledge provides no shortcut.
+    </p>
+
+    <h3>Cognitive Science Foundations</h3>
+    <ul>
+      <li>
+        <strong>Bruner, Goodnow &amp; Austin (1956).</strong> <em>A Study of Thinking</em>.
+        Pioneered the concept attainment paradigm: learners classify instances to
+        discover a hidden rule. Our task is a direct descendant&mdash;the model
+        must induce the transformation rule from input&ndash;output examples.
+      </li>
+      <li>
+        <strong>Shepard, Hovland &amp; Jenkins (1961).</strong>
+        &ldquo;Learning and memorization of classifications.&rdquo;
+        Established the difficulty ordering of six elemental classification types,
+        showing that rule complexity (single-dimension vs. XOR vs. memorization)
+        predicts human learning difficulty. Our complexity dimension (1/2/3 ops)
+        similarly tests whether more complex rules are harder to induce.
+      </li>
+    </ul>
+
+    <h3>Rule Induction &amp; Hypothesis Testing in LLMs</h3>
+    <ul>
+      <li>
+        <strong>Ainooson &amp; Kunda (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2509.01016">Analysis of Error Sources in
+        LLM-based Hypothesis Search for Few-Shot Rule Induction</a>&rdquo;.
+        Used LLMs in a hypothesis-driven search pipeline for the Abstraction and
+        Reasoning Corpus (ARC). Found that hypothesis search achieves human-level
+        performance while direct program generation falls behind&mdash;supporting
+        our study-phase approach of explicit hypothesis formation.
+      </li>
+      <li>
+        <strong>Gao et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2408.10455">IDEA: Enhancing the Rule
+        Learning Ability of Language Agent through Induction, Deduction, and Abduction</a>&rdquo;.
+        Introduced RULEARN, a benchmark for rule-learning in interactive settings.
+        Our task differs by using a pre/post framework to directly measure whether
+        studying examples improves performance, rather than testing interactive exploration.
+      </li>
+      <li>
+        <strong>Srivastava et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2410.10998">WILT: A Multi-turn,
+        Memorization-Robust Inductive Logic Benchmark for LLMs</a>&rdquo;.
+        Inspired by the Wason 2-4-6 task, WILT tests iterative hypothesis
+        refinement. Our task shares the inductive logic spirit but uses string
+        transformations to create a clean, verifiable rule space.
+      </li>
+      <li>
+        <strong>Zhang et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2505.21935">From Reasoning to Learning:
+        A Survey on Hypothesis Discovery and Rule Learning with Large Language Models</a>&rdquo;.
+        A comprehensive survey unifying abduction, deduction, and induction as modes
+        of hypothesis discovery. Our benchmark evaluates the inductive mode: forming
+        general rules from specific examples.
+      </li>
+    </ul>
+
+    <h3>In-Context Learning Foundations</h3>
+    <ul>
+      <li>
+        <strong>Min et al. (2022).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2202.12837">Rethinking the Role of Demonstrations</a>&rdquo;
+        (EMNLP 2022). Found that ICL often relies on format and label space rather
+        than learning the actual input&ndash;label mapping. Our task specifically tests
+        whether models can go beyond format-matching to induce genuine transformation rules.
+      </li>
+      <li>
+        <strong>Wei et al. (2023).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2305.08298">Symbol Tuning Improves In-Context
+        Learning</a>&rdquo; (EMNLP 2023). Showed that standard LLMs struggle with arbitrary
+        mappings. Rule induction from string transformations is a particularly demanding
+        form of this capacity.
+      </li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/rule-induction-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

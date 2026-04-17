@@ -1,0 +1,508 @@
+[{"stream_name":"stdout","time":12.254324086,"data":"Available models: ['anthropic/claude-haiku-4-5@20251001', 'anthropic/claude-opus-4-1@20250805', 'anthropic/claude-opus-4-5@20251101', 'anthropic/claude-opus-4-6@default', 'anthropic/claude-sonnet-4-5@20250929', 'anthropic/claude-sonnet-4-6@default', 'anthropic/claude-sonnet-4@20250514', 'deepseek-ai/deepseek-r1-0528', 'deepseek-ai/deepseek-v3.1', 'deepseek-ai/deepseek-v3.2', 'google/gemini-2.0-flash', 'google/gemini-2.0-flash-lite', 'google/gemini-2.5-flash', 'google/gemini-2.5-pro', 'google/gemini-3-flash-preview', 'google/gemini-3.1-flash-lite-preview', 'google/gemini-3.1-pro-preview', 'google/gemma-3-12b', 'google/gemma-3-1b', 'google/gemma-3-27b', 'google/gemma-3-4b', 'google/gemma-4-26b-a4b', 'google/gemma-4-31b', 'openai/gpt-5.4-2026-03-05', 'openai/gpt-5.4-mini-2026-03-17', 'openai/gpt-5.4-nano-2026-03-17', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3-235b-a22b-instruct-2507', 'qwen/qwen3-coder-480b-a35b-instruct', 'qwen/qwen3-next-80b-a3b-instruct', 'qwen/qwen3-next-80b-a3b-thinking', 'zai/glm-5']\n"}
+,{"stream_name":"stdout","time":12.25440527,"data":"Default model: 🤖 google/gemma-3-27b\n"}
+,{"stream_name":"stdout","time":12.338973964000001,"data":"Loading from: /kaggle/input/category-learning-benchmark/category_learning_dataset.csv\n"}
+,{"stream_name":"stdout","time":12.339013298,"data":"Dataset: 27 items\n"}
+,{"stream_name":"stdout","time":12.377438535,"data":"SQLite ready (fresh): category_runs.db\n"}
+,{"stream_name":"stdout","time":28.653551864,"data":"[🤖 google/gemma-3-27b                    ] [single_few        ] \"tiny blue plaid circle\" -\u003e B  pre=A(N)  post=B(Y)\n"}
+,{"stream_name":"stdout","time":44.686227038,"data":"[🤖 google/gemma-3-27b                    ] [single_few        ] \"small purple striped triangle\" -\u003e B  pre=B(Y)  post=B(Y)\n"}
+,{"stream_name":"stdout","time":61.997443189,"data":"[🤖 google/gemma-3-27b                    ] [single_few        ] \"large red dotted triangle\" -\u003e B  pre=B(Y)  post=B(Y)\n"}
+,{"stream_name":"stdout","time":79.470679483,"data":"[🤖 google/gemma-3-27b                    ] [single_mid        ] \"tiny blue dotted diamond\" -\u003e B  pre=B(Y)  post=B(Y)\n"}
+,{"stream_name":"stdout","time":98.50296392999999,"data":"[🤖 google/gemma-3-27b                    ] [single_mid        ] \"tiny blue striped hexagon\" -\u003e A  pre=B(N)  post=B(N)\n"}
+,{"stream_name":"stdout","time":119.747943567,"data":"[🤖 google/gemma-3-27b                    ] [single_mid        ] \"large red solid hexagon\" -\u003e B  pre=B(Y)  post=B(Y)\n"}
+,{"stream_name":"stdout","time":168.690197726,"data":"[🤖 google/gemma-3-27b                    ] [single_many       ] \"large blue dotted triangle\" -\u003e B  pre=B(Y)  post=B(Y)\n"}
+,{"stream_name":"stdout","time":207.562160592,"data":"[🤖 google/gemma-3-27b                    ] [single_many       ] \"medium blue dotted circle\" -\u003e A  pre=A(Y)  post=A(Y)\n"}
+,{"stream_name":"stdout","time":256.258118412,"data":"[🤖 google/gemma-3-27b                    ] [single_many       ] \"huge orange solid hexagon\" -\u003e B  pre=A(N)  post=B(Y)\n"}
+,{"stream_name":"stdout","time":280.677390548,"data":"[🤖 google/gemma-3-27b                    ] [two_feat_few      ] \"tiny blue plaid circle\" -\u003e C  pre=A(N)  post=C(Y)\n"}
+,{"stream_name":"stdout","time":307.495439027,"data":"[🤖 google/gemma-3-27b                    ] [two_feat_few      ] \"small purple striped triangle\" -\u003e C  pre=C(Y)  post=C(Y)\n"}
+,{"stream_name":"stdout","time":331.136447827,"data":"[🤖 google/gemma-3-27b                    ] [two_feat_few      ] \"large red dotted triangle\" -\u003e C  pre=C(Y)  post=C(Y)\n"}
+,{"stream_name":"stdout","time":363.571548006,"data":"[🤖 google/gemma-3-27b                    ] [two_feat_mid      ] \"tiny blue dotted diamond\" -\u003e B  pre=A(N)  post=A(N)\n"}
+,{"stream_name":"stdout","time":387.73414123,"data":"[🤖 google/gemma-3-27b                    ] [two_feat_mid      ] \"tiny blue striped hexagon\" -\u003e B  pre=C(N)  post=C(N)\n"}
+,{"stream_name":"stdout","time":412.736227733,"data":"[🤖 google/gemma-3-27b                    ] [two_feat_mid      ] \"large red solid hexagon\" -\u003e C  pre=C(Y)  post=C(Y)\n"}
+,{"stream_name":"stdout","time":458.787128328,"data":"[🤖 google/gemma-3-27b                    ] [two_feat_many     ] \"large blue dotted triangle\" -\u003e B  pre=B(Y)  post=A(N)\n"}
+,{"stream_name":"stdout","time":499.508774377,"data":"[🤖 google/gemma-3-27b                    ] [two_feat_many     ] \"medium blue dotted circle\" -\u003e A  pre=A(Y)  post=A(Y)\n"}
+,{"stream_name":"stdout","time":540.574203951,"data":"[🤖 google/gemma-3-27b                    ] [two_feat_many     ] \"huge orange solid hexagon\" -\u003e C  pre=C(Y)  post=B(N)\n"}
+,{"stream_name":"stdout","time":557.24205761,"data":"[🤖 google/gemma-3-27b                    ] [conditional_few   ] \"tiny blue plaid circle\" -\u003e D  pre=B(N)  post=B(N)\n"}
+,{"stream_name":"stdout","time":576.577652128,"data":"[🤖 google/gemma-3-27b                    ] [conditional_few   ] \"small purple striped triangle\" -\u003e D  pre=D(Y)  post=D(Y)\n"}
+,{"stream_name":"stdout","time":594.293895139,"data":"[🤖 google/gemma-3-27b                    ] [conditional_few   ] \"large red dotted triangle\" -\u003e B  pre=A(N)  post=A(N)\n"}
+,{"stream_name":"stdout","time":613.534758595,"data":"[🤖 google/gemma-3-27b                    ] [conditional_mid   ] \"tiny blue dotted diamond\" -\u003e B  pre=A(N)  post=C(N)\n"}
+,{"stream_name":"stdout","time":634.771067745,"data":"[🤖 google/gemma-3-27b                    ] [conditional_mid   ] \"tiny blue striped hexagon\" -\u003e B  pre=B(Y)  post=B(Y)\n"}
+,{"stream_name":"stdout","time":656.021653204,"data":"[🤖 google/gemma-3-27b                    ] [conditional_mid   ] \"large red solid hexagon\" -\u003e A  pre=A(Y)  post=A(Y)\n"}
+,{"stream_name":"stdout","time":692.268817815,"data":"[🤖 google/gemma-3-27b                    ] [conditional_many  ] \"large blue dotted triangle\" -\u003e B  pre=B(Y)  post=B(Y)\n"}
+,{"stream_name":"stdout","time":734.030550249,"data":"[🤖 google/gemma-3-27b                    ] [conditional_many  ] \"medium blue dotted circle\" -\u003e B  pre=B(Y)  post=D(N)\n"}
+,{"stream_name":"stdout","time":773.204820698,"data":"[🤖 google/gemma-3-27b                    ] [conditional_many  ] \"huge orange solid hexagon\" -\u003e A  pre=A(Y)  post=A(Y)\n"}
+,{"stream_name":"stdout","time":773.204876363,"data":"\n"}
+,{"stream_name":"stdout","time":773.204884654,"data":"Score: 18/27 = 0.6667\n"}
+,{"stream_name":"stdout","time":773.204890806,"data":"\n"}
+,{"stream_name":"stdout","time":773.204897,"data":"Done: 1 items\n"}
+,{"stream_name":"stdout","time":773.258509783,"data":"Total runs: 27\n"}
+,{"stream_name":"stdout","time":773.258551446,"data":"\n"}
+,{"stream_name":"stdout","time":773.258555985,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":773.25856101,"data":"Model: 🤖 google/gemma-3-27b\n"}
+,{"stream_name":"stdout","time":773.258582986,"data":"Pre-learning accuracy:  66.7%\n"}
+,{"stream_name":"stdout","time":773.258589531,"data":"Post-learning accuracy: 66.7%\n"}
+,{"stream_name":"stdout","time":773.258595769,"data":"Learning gain:          +0.0%\n"}
+,{"stream_name":"stdout","time":773.258601761,"data":"\n"}
+,{"stream_name":"stdout","time":773.258607575,"data":"By Difficulty:\n"}
+,{"stream_name":"stdout","time":773.258613969,"data":"------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":773.258636923,"data":"  conditional_few            pre=33.3%  post=33.3%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":773.258642415,"data":"  conditional_many           pre=100.0%  post=66.7%  gain=-33.3%  (n=3)\n"}
+,{"stream_name":"stdout","time":773.258647284,"data":"  conditional_mid            pre=66.7%  post=66.7%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":773.258650769,"data":"  single_few                 pre=66.7%  post=100.0%  gain=+33.3%  (n=3)\n"}
+,{"stream_name":"stdout","time":773.258654732,"data":"  single_many                pre=66.7%  post=100.0%  gain=+33.3%  (n=3)\n"}
+,{"stream_name":"stdout","time":773.258658775,"data":"  single_mid                 pre=66.7%  post=66.7%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":773.258662843,"data":"  two_feat_few               pre=66.7%  post=100.0%  gain=+33.3%  (n=3)\n"}
+,{"stream_name":"stdout","time":773.258667865,"data":"  two_feat_many              pre=100.0%  post=33.3%  gain=-66.7%  (n=3)\n"}
+,{"stream_name":"stdout","time":773.25867282,"data":"  two_feat_mid               pre=33.3%  post=33.3%  gain=+0.0%  (n=3)\n"}
+,{"stream_name":"stdout","time":773.258677856,"data":"\n"}
+,{"stream_name":"stdout","time":773.258681584,"data":"Timing: pre=2.1s  study=23.7s  post=2.3s\n"}
+,{"stream_name":"stdout","time":773.287521476,"data":"STUDY NOTES INSPECTION\n"}
+,{"stream_name":"stdout","time":773.287559681,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":773.287565697,"data":"\n"}
+,{"stream_name":"stdout","time":773.287569787,"data":"--- [conditional_few] seed=0 ---\n"}
+,{"stream_name":"stdout","time":773.287573762,"data":"Item: if pattern in gate -\u003e color, else -\u003e shape\n"}
+,{"stream_name":"stdout","time":773.287578495,"data":"Expected: \"D\"\n"}
+,{"stream_name":"stdout","time":773.287582319,"data":"Pre: \"B\" (N)  Post: \"B\" (N)\n"}
+,{"stream_name":"stdout","time":773.287586509,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.287590731,"data":"\n"}
+,{"stream_name":"stdout","time":773.287594866,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.287598625,"data":"\n"}
+,{"stream_name":"stdout","time":773.28760239,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.287606816,"data":"\n"}
+,{"stream_name":"stdout","time":773.287611596,"data":"*   **Size:** large, tiny, huge\n"}
+,{"stream_name":"stdout","time":773.287616185,"data":"*   **Color:** blue, purple, red\n"}
+,{"stream_name":"stdout","time":773.287620896,"data":"*   **Pattern:** solid, dotted, striped, checkered, plaid\n"}
+,{"stream_name":"stdout","time":773.287625961,"data":"*   **Shape:** triangle, circle,\n"}
+,{"stream_name":"stdout","time":773.287630375,"data":"...\n"}
+,{"stream_name":"stdout","time":773.287634029,"data":"\n"}
+,{"stream_name":"stdout","time":773.287637851,"data":"--- [conditional_few] seed=1 ---\n"}
+,{"stream_name":"stdout","time":773.287641565,"data":"Item: if color in gate -\u003e pattern, else -\u003e size\n"}
+,{"stream_name":"stdout","time":773.287645801,"data":"Expected: \"D\"\n"}
+,{"stream_name":"stdout","time":773.287649861,"data":"Pre: \"D\" (Y)  Post: \"D\" (Y)\n"}
+,{"stream_name":"stdout","time":773.287653939,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.287658513,"data":"\n"}
+,{"stream_name":"stdout","time":773.287662144,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.287666276,"data":"\n"}
+,{"stream_name":"stdout","time":773.28768415,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.287688434,"data":"\n"}
+,{"stream_name":"stdout","time":773.287692436,"data":"*   **Size:** large, medium, small\n"}
+,{"stream_name":"stdout","time":773.287696462,"data":"*   **Color:** red, blue, yellow, purple\n"}
+,{"stream_name":"stdout","time":773.287701002,"data":"*   **Pattern:** dotted, checkered, solid, striped\n"}
+,{"stream_name":"stdout","time":773.287705359,"data":"*   **Shape:** square, trian\n"}
+,{"stream_name":"stdout","time":773.287709243,"data":"...\n"}
+,{"stream_name":"stdout","time":773.287713561,"data":"\n"}
+,{"stream_name":"stdout","time":773.287717582,"data":"--- [conditional_few] seed=2 ---\n"}
+,{"stream_name":"stdout","time":773.287721875,"data":"Item: if shape in gate -\u003e pattern, else -\u003e size\n"}
+,{"stream_name":"stdout","time":773.287726105,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.28773814,"data":"Pre: \"A\" (N)  Post: \"A\" (N)\n"}
+,{"stream_name":"stdout","time":773.287743031,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.287747347,"data":"\n"}
+,{"stream_name":"stdout","time":773.287751725,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.287755962,"data":"\n"}
+,{"stream_name":"stdout","time":773.287760298,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.287765156,"data":"\n"}
+,{"stream_name":"stdout","time":773.287769532,"data":"*   **Size:** medium, tiny, large\n"}
+,{"stream_name":"stdout","time":773.287773428,"data":"*   **Color:** red, green, yellow\n"}
+,{"stream_name":"stdout","time":773.28777758,"data":"*   **Pattern:** plaid, solid, striped, dotted\n"}
+,{"stream_name":"stdout","time":773.287781833,"data":"*   **Shape:** hexagon, triangle, circle\n"}
+,{"stream_name":"stdout","time":773.287785875,"data":"...\n"}
+,{"stream_name":"stdout","time":773.287789923,"data":"\n"}
+,{"stream_name":"stdout","time":773.287793513,"data":"--- [conditional_many] seed=0 ---\n"}
+,{"stream_name":"stdout","time":773.287797944,"data":"Item: if pattern in gate -\u003e color, else -\u003e shape\n"}
+,{"stream_name":"stdout","time":773.287802163,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.287806043,"data":"Pre: \"B\" (Y)  Post: \"B\" (Y)\n"}
+,{"stream_name":"stdout","time":773.287810202,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.287814704,"data":"\n"}
+,{"stream_name":"stdout","time":773.287818455,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.28782233,"data":"\n"}
+,{"stream_name":"stdout","time":773.287826027,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.287830099,"data":"\n"}
+,{"stream_name":"stdout","time":773.287834536,"data":"*   **Size:** medium, tiny, huge, small, large\n"}
+,{"stream_name":"stdout","time":773.287839231,"data":"*   **Color:** purple, blue, yellow, red\n"}
+,{"stream_name":"stdout","time":773.287843197,"data":"*   **Pattern:** dotted, solid, checkered, striped, plaid\n"}
+,{"stream_name":"stdout","time":773.28784741,"data":"*   **Sha\n"}
+,{"stream_name":"stdout","time":773.287851359,"data":"...\n"}
+,{"stream_name":"stdout","time":773.287855587,"data":"\n"}
+,{"stream_name":"stdout","time":773.287859516,"data":"--- [conditional_many] seed=1 ---\n"}
+,{"stream_name":"stdout","time":773.287869428,"data":"Item: if color in gate -\u003e pattern, else -\u003e size\n"}
+,{"stream_name":"stdout","time":773.287873925,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.287878069,"data":"Pre: \"B\" (Y)  Post: \"D\" (N)\n"}
+,{"stream_name":"stdout","time":773.287885385,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.287889668,"data":"\n"}
+,{"stream_name":"stdout","time":773.287916082,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.287921125,"data":"\n"}
+,{"stream_name":"stdout","time":773.287924978,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.287928711,"data":"\n"}
+,{"stream_name":"stdout","time":773.287932686,"data":"*   **Size:** small, tiny, huge, medium\n"}
+,{"stream_name":"stdout","time":773.287936656,"data":"*   **Color:** orange, blue, red, yellow\n"}
+,{"stream_name":"stdout","time":773.287940976,"data":"*   **Pattern:** dotted, checkered, striped, plaid, solid\n"}
+,{"stream_name":"stdout","time":773.287945053,"data":"*   **Shape:** s\n"}
+,{"stream_name":"stdout","time":773.287948802,"data":"...\n"}
+,{"stream_name":"stdout","time":773.287952599,"data":"\n"}
+,{"stream_name":"stdout","time":773.287956673,"data":"--- [conditional_many] seed=2 ---\n"}
+,{"stream_name":"stdout","time":773.287960779,"data":"Item: if shape in gate -\u003e pattern, else -\u003e size\n"}
+,{"stream_name":"stdout","time":773.287965398,"data":"Expected: \"A\"\n"}
+,{"stream_name":"stdout","time":773.287969466,"data":"Pre: \"A\" (Y)  Post: \"A\" (Y)\n"}
+,{"stream_name":"stdout","time":773.28797359,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.287977776,"data":"\n"}
+,{"stream_name":"stdout","time":773.287981873,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.287985745,"data":"\n"}
+,{"stream_name":"stdout","time":773.287990214,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.287994522,"data":"\n"}
+,{"stream_name":"stdout","time":773.28799842,"data":"*   **Size:** tiny, small, huge\n"}
+,{"stream_name":"stdout","time":773.288002504,"data":"*   **Color:** yellow, orange, purple, blue, green, red\n"}
+,{"stream_name":"stdout","time":773.288006695,"data":"*   **Pattern:** checkered, striped, solid, plaid, dotted\n"}
+,{"stream_name":"stdout","time":773.288011,"data":"*   **Sha\n"}
+,{"stream_name":"stdout","time":773.288015104,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288019083,"data":"\n"}
+,{"stream_name":"stdout","time":773.288023689,"data":"--- [conditional_mid] seed=0 ---\n"}
+,{"stream_name":"stdout","time":773.288028233,"data":"Item: if pattern in gate -\u003e color, else -\u003e shape\n"}
+,{"stream_name":"stdout","time":773.288032735,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288036748,"data":"Pre: \"A\" (N)  Post: \"C\" (N)\n"}
+,{"stream_name":"stdout","time":773.28804085,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288044997,"data":"\n"}
+,{"stream_name":"stdout","time":773.28804913,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288053884,"data":"\n"}
+,{"stream_name":"stdout","time":773.288057499,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288062259,"data":"\n"}
+,{"stream_name":"stdout","time":773.288072451,"data":"*   **Size:** large, tiny, huge\n"}
+,{"stream_name":"stdout","time":773.288076559,"data":"*   **Color:** green, orange, blue, yellow\n"}
+,{"stream_name":"stdout","time":773.288081173,"data":"*   **Pattern:** striped, solid, checkered, dotted\n"}
+,{"stream_name":"stdout","time":773.288085319,"data":"*   **Shape:** square, diamon\n"}
+,{"stream_name":"stdout","time":773.288089394,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288093296,"data":"\n"}
+,{"stream_name":"stdout","time":773.288097496,"data":"--- [conditional_mid] seed=1 ---\n"}
+,{"stream_name":"stdout","time":773.288109193,"data":"Item: if color in gate -\u003e pattern, else -\u003e size\n"}
+,{"stream_name":"stdout","time":773.288114569,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288118416,"data":"Pre: \"B\" (Y)  Post: \"B\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288122558,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288126814,"data":"\n"}
+,{"stream_name":"stdout","time":773.288130699,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288136684,"data":"\n"}
+,{"stream_name":"stdout","time":773.288145658,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.28814918,"data":"\n"}
+,{"stream_name":"stdout","time":773.288151749,"data":"*   **Size:** huge, large, tiny, medium\n"}
+,{"stream_name":"stdout","time":773.288154336,"data":"*   **Color:** red, blue, green\n"}
+,{"stream_name":"stdout","time":773.288156923,"data":"*   **Pattern:** solid, dotted, striped, plaid\n"}
+,{"stream_name":"stdout","time":773.288159552,"data":"*   **Shape:** star, hexagon, diamon\n"}
+,{"stream_name":"stdout","time":773.288162212,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288164753,"data":"\n"}
+,{"stream_name":"stdout","time":773.288167233,"data":"--- [conditional_mid] seed=2 ---\n"}
+,{"stream_name":"stdout","time":773.288169803,"data":"Item: if shape in gate -\u003e pattern, else -\u003e size\n"}
+,{"stream_name":"stdout","time":773.288172597,"data":"Expected: \"A\"\n"}
+,{"stream_name":"stdout","time":773.288175139,"data":"Pre: \"A\" (Y)  Post: \"A\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288177789,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288180492,"data":"\n"}
+,{"stream_name":"stdout","time":773.288183035,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288185616,"data":"\n"}
+,{"stream_name":"stdout","time":773.288188079,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288190696,"data":"\n"}
+,{"stream_name":"stdout","time":773.28819332,"data":"*   **Size:** huge, small, large, tiny\n"}
+,{"stream_name":"stdout","time":773.288197554,"data":"*   **Color:** green, orange, yellow, red, purple\n"}
+,{"stream_name":"stdout","time":773.288200213,"data":"*   **Pattern:** solid, dotted, striped, plaid\n"}
+,{"stream_name":"stdout","time":773.288202806,"data":"*   **Shape:** hexa\n"}
+,{"stream_name":"stdout","time":773.288205359,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288207881,"data":"\n"}
+,{"stream_name":"stdout","time":773.288210359,"data":"--- [single_few] seed=0 ---\n"}
+,{"stream_name":"stdout","time":773.288212976,"data":"Item: pattern in ['checkered', 'solid'] -\u003e A\n"}
+,{"stream_name":"stdout","time":773.288215703,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288218222,"data":"Pre: \"A\" (N)  Post: \"B\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288225404,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288228302,"data":"\n"}
+,{"stream_name":"stdout","time":773.288230793,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.28823349,"data":"\n"}
+,{"stream_name":"stdout","time":773.288235976,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288238609,"data":"\n"}
+,{"stream_name":"stdout","time":773.288241096,"data":"*   **Size:** large, tiny, huge\n"}
+,{"stream_name":"stdout","time":773.288243705,"data":"*   **Color:** blue, purple, red\n"}
+,{"stream_name":"stdout","time":773.28824629,"data":"*   **Pattern:** solid, dotted, striped, checkered, plaid\n"}
+,{"stream_name":"stdout","time":773.28824894,"data":"*   **Shape:** triangle, circle,\n"}
+,{"stream_name":"stdout","time":773.28825151,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288254022,"data":"\n"}
+,{"stream_name":"stdout","time":773.288256484,"data":"--- [single_few] seed=1 ---\n"}
+,{"stream_name":"stdout","time":773.288259075,"data":"Item: color in ['blue', 'orange', 'yellow'] -\u003e A\n"}
+,{"stream_name":"stdout","time":773.288261763,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288264306,"data":"Pre: \"B\" (Y)  Post: \"B\" (Y)\n"}
+,{"stream_name":"stdout","time":773.28826695,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288269679,"data":"\n"}
+,{"stream_name":"stdout","time":773.288272146,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.28827473,"data":"\n"}
+,{"stream_name":"stdout","time":773.288277202,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.28827987,"data":"\n"}
+,{"stream_name":"stdout","time":773.28828569,"data":"*   **Size:** large, medium, small\n"}
+,{"stream_name":"stdout","time":773.288288528,"data":"*   **Color:** red, blue, yellow, purple\n"}
+,{"stream_name":"stdout","time":773.288291855,"data":"*   **Pattern:** dotted, checkered, solid, striped\n"}
+,{"stream_name":"stdout","time":773.288294603,"data":"*   **Shape:** square, trian\n"}
+,{"stream_name":"stdout","time":773.288297184,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288299793,"data":"\n"}
+,{"stream_name":"stdout","time":773.288309865,"data":"--- [single_few] seed=2 ---\n"}
+,{"stream_name":"stdout","time":773.288312597,"data":"Item: shape in ['circle', 'square', 'star'] -\u003e A\n"}
+,{"stream_name":"stdout","time":773.288315383,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288318108,"data":"Pre: \"B\" (Y)  Post: \"B\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288321041,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288324109,"data":"\n"}
+,{"stream_name":"stdout","time":773.288326582,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288329312,"data":"\n"}
+,{"stream_name":"stdout","time":773.288331797,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288334485,"data":"\n"}
+,{"stream_name":"stdout","time":773.288336969,"data":"*   **Size:** medium, tiny, large\n"}
+,{"stream_name":"stdout","time":773.288339596,"data":"*   **Color:** red, green, yellow\n"}
+,{"stream_name":"stdout","time":773.288342189,"data":"*   **Pattern:** plaid, solid, striped, dotted\n"}
+,{"stream_name":"stdout","time":773.288347811,"data":"*   **Shape:** hexagon, triangle, circle\n"}
+,{"stream_name":"stdout","time":773.288350657,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288353369,"data":"\n"}
+,{"stream_name":"stdout","time":773.288355975,"data":"--- [single_many] seed=0 ---\n"}
+,{"stream_name":"stdout","time":773.28835873,"data":"Item: pattern in ['checkered', 'solid'] -\u003e A\n"}
+,{"stream_name":"stdout","time":773.28836147,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288364772,"data":"Pre: \"B\" (Y)  Post: \"B\" (Y)\n"}
+,{"stream_name":"stdout","time":773.28836751,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288370277,"data":"\n"}
+,{"stream_name":"stdout","time":773.288372805,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288375392,"data":"\n"}
+,{"stream_name":"stdout","time":773.288377936,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288380665,"data":"\n"}
+,{"stream_name":"stdout","time":773.288383288,"data":"*   **Size:** medium, tiny, huge, small, large\n"}
+,{"stream_name":"stdout","time":773.288385991,"data":"*   **Color:** purple, blue, yellow, red\n"}
+,{"stream_name":"stdout","time":773.288388717,"data":"*   **Pattern:** dotted, solid, checkered, striped\n"}
+,{"stream_name":"stdout","time":773.288391472,"data":"*   **Shape:** d\n"}
+,{"stream_name":"stdout","time":773.288394098,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288396712,"data":"\n"}
+,{"stream_name":"stdout","time":773.288399279,"data":"--- [single_many] seed=1 ---\n"}
+,{"stream_name":"stdout","time":773.288402057,"data":"Item: color in ['blue', 'orange', 'yellow'] -\u003e A\n"}
+,{"stream_name":"stdout","time":773.28840481,"data":"Expected: \"A\"\n"}
+,{"stream_name":"stdout","time":773.288407352,"data":"Pre: \"A\" (Y)  Post: \"A\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288410626,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288413379,"data":"\n"}
+,{"stream_name":"stdout","time":773.288415876,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288418493,"data":"\n"}
+,{"stream_name":"stdout","time":773.288420982,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.2884236,"data":"\n"}
+,{"stream_name":"stdout","time":773.288426068,"data":"*   **Size:** small, tiny, huge, medium\n"}
+,{"stream_name":"stdout","time":773.288428669,"data":"*   **Color:** orange, blue, red, yellow\n"}
+,{"stream_name":"stdout","time":773.288431279,"data":"*   **Pattern:** dotted, checkered, striped, plaid, solid\n"}
+,{"stream_name":"stdout","time":773.288433926,"data":"*   **Shape:** s\n"}
+,{"stream_name":"stdout","time":773.288436523,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288439035,"data":"\n"}
+,{"stream_name":"stdout","time":773.288442279,"data":"--- [single_many] seed=2 ---\n"}
+,{"stream_name":"stdout","time":773.288444977,"data":"Item: shape in ['circle', 'square', 'star'] -\u003e A\n"}
+,{"stream_name":"stdout","time":773.288447654,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288450278,"data":"Pre: \"A\" (N)  Post: \"B\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288452914,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288455598,"data":"\n"}
+,{"stream_name":"stdout","time":773.288460574,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288463429,"data":"\n"}
+,{"stream_name":"stdout","time":773.288466083,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288468697,"data":"\n"}
+,{"stream_name":"stdout","time":773.28847116,"data":"*   **Size:** tiny, small, huge\n"}
+,{"stream_name":"stdout","time":773.288473837,"data":"*   **Color:** yellow, orange, purple, blue, green, red\n"}
+,{"stream_name":"stdout","time":773.288476463,"data":"*   **Pattern:** checkered, striped, solid, plaid, dotted\n"}
+,{"stream_name":"stdout","time":773.288479099,"data":"*   **Sha\n"}
+,{"stream_name":"stdout","time":773.288481709,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288484229,"data":"\n"}
+,{"stream_name":"stdout","time":773.2884867,"data":"--- [single_mid] seed=0 ---\n"}
+,{"stream_name":"stdout","time":773.288489294,"data":"Item: pattern in ['checkered', 'solid'] -\u003e A\n"}
+,{"stream_name":"stdout","time":773.288491994,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288494537,"data":"Pre: \"B\" (Y)  Post: \"B\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288497176,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288499858,"data":"\n"}
+,{"stream_name":"stdout","time":773.288502303,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288504881,"data":"\n"}
+,{"stream_name":"stdout","time":773.288507353,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288509936,"data":"\n"}
+,{"stream_name":"stdout","time":773.28851239,"data":"*   **Size:** large, tiny, huge\n"}
+,{"stream_name":"stdout","time":773.288514979,"data":"*   **Color:** green, orange, blue, yellow\n"}
+,{"stream_name":"stdout","time":773.288517608,"data":"*   **Pattern:** striped, solid, checkered, dotted\n"}
+,{"stream_name":"stdout","time":773.288520212,"data":"*   **Shape:** square, diamon\n"}
+,{"stream_name":"stdout","time":773.288522779,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288525294,"data":"\n"}
+,{"stream_name":"stdout","time":773.288527754,"data":"--- [single_mid] seed=1 ---\n"}
+,{"stream_name":"stdout","time":773.288530311,"data":"Item: color in ['blue', 'orange', 'yellow'] -\u003e A\n"}
+,{"stream_name":"stdout","time":773.288532979,"data":"Expected: \"A\"\n"}
+,{"stream_name":"stdout","time":773.288535537,"data":"Pre: \"B\" (N)  Post: \"B\" (N)\n"}
+,{"stream_name":"stdout","time":773.288538181,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288540881,"data":"\n"}
+,{"stream_name":"stdout","time":773.288543331,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288545914,"data":"\n"}
+,{"stream_name":"stdout","time":773.288548378,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288551428,"data":"\n"}
+,{"stream_name":"stdout","time":773.288555102,"data":"*   **Size:** huge, large, tiny, medium\n"}
+,{"stream_name":"stdout","time":773.288559461,"data":"*   **Color:** red, blue, green\n"}
+,{"stream_name":"stdout","time":773.288562794,"data":"*   **Pattern:** solid, dotted, striped, plaid\n"}
+,{"stream_name":"stdout","time":773.288566329,"data":"*   **Shape:** star, hexagon, diamon\n"}
+,{"stream_name":"stdout","time":773.288569013,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288571711,"data":"\n"}
+,{"stream_name":"stdout","time":773.288574227,"data":"--- [single_mid] seed=2 ---\n"}
+,{"stream_name":"stdout","time":773.288579313,"data":"Item: shape in ['circle', 'square', 'star'] -\u003e A\n"}
+,{"stream_name":"stdout","time":773.288582166,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.28858485,"data":"Pre: \"B\" (Y)  Post: \"B\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288587505,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288590331,"data":"\n"}
+,{"stream_name":"stdout","time":773.28859278,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288595371,"data":"\n"}
+,{"stream_name":"stdout","time":773.288598179,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288600788,"data":"\n"}
+,{"stream_name":"stdout","time":773.288603262,"data":"*   **Size:** huge, small, large, tiny\n"}
+,{"stream_name":"stdout","time":773.288605855,"data":"*   **Color:** green, orange, yellow, red, purple\n"}
+,{"stream_name":"stdout","time":773.288609037,"data":"*   **Pattern:** solid, dotted, striped, plaid\n"}
+,{"stream_name":"stdout","time":773.288611689,"data":"*   **Shape:** hexa\n"}
+,{"stream_name":"stdout","time":773.288614266,"data":"...\n"}
+,{"stream_name":"stdout","time":773.28861678,"data":"\n"}
+,{"stream_name":"stdout","time":773.288619249,"data":"--- [two_feat_few] seed=0 ---\n"}
+,{"stream_name":"stdout","time":773.28862183,"data":"Item: pattern+color conjunction\n"}
+,{"stream_name":"stdout","time":773.288624377,"data":"Expected: \"C\"\n"}
+,{"stream_name":"stdout","time":773.28862691,"data":"Pre: \"A\" (N)  Post: \"C\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288629563,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288632249,"data":"\n"}
+,{"stream_name":"stdout","time":773.28863471,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288637295,"data":"\n"}
+,{"stream_name":"stdout","time":773.288639764,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288642369,"data":"\n"}
+,{"stream_name":"stdout","time":773.288644855,"data":"*   **Size:** large, tiny, huge\n"}
+,{"stream_name":"stdout","time":773.288647434,"data":"*   **Color:** blue, purple, red\n"}
+,{"stream_name":"stdout","time":773.288650011,"data":"*   **Pattern:** solid, dotted, striped, checkered, plaid\n"}
+,{"stream_name":"stdout","time":773.288652643,"data":"*   **Shape:** triangle, circle,\n"}
+,{"stream_name":"stdout","time":773.288655202,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288657722,"data":"\n"}
+,{"stream_name":"stdout","time":773.288660278,"data":"--- [two_feat_few] seed=1 ---\n"}
+,{"stream_name":"stdout","time":773.288662827,"data":"Item: color+pattern conjunction\n"}
+,{"stream_name":"stdout","time":773.28866539,"data":"Expected: \"C\"\n"}
+,{"stream_name":"stdout","time":773.288667924,"data":"Pre: \"C\" (Y)  Post: \"C\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288670568,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288673251,"data":"\n"}
+,{"stream_name":"stdout","time":773.28867572,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288678311,"data":"\n"}
+,{"stream_name":"stdout","time":773.288680889,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288683494,"data":"\n"}
+,{"stream_name":"stdout","time":773.288688528,"data":"*   **Size:** large, medium, small\n"}
+,{"stream_name":"stdout","time":773.288691261,"data":"*   **Color:** red, blue, yellow, purple\n"}
+,{"stream_name":"stdout","time":773.288693919,"data":"*   **Pattern:** dotted, checkered, solid, striped\n"}
+,{"stream_name":"stdout","time":773.288696552,"data":"*   **Shape:** square, trian\n"}
+,{"stream_name":"stdout","time":773.28869913,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288701748,"data":"\n"}
+,{"stream_name":"stdout","time":773.288704212,"data":"--- [two_feat_few] seed=2 ---\n"}
+,{"stream_name":"stdout","time":773.288706769,"data":"Item: shape+pattern conjunction\n"}
+,{"stream_name":"stdout","time":773.288709342,"data":"Expected: \"C\"\n"}
+,{"stream_name":"stdout","time":773.288711886,"data":"Pre: \"C\" (Y)  Post: \"C\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288714544,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.28871725,"data":"\n"}
+,{"stream_name":"stdout","time":773.288719712,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288722315,"data":"\n"}
+,{"stream_name":"stdout","time":773.288724809,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288727445,"data":"\n"}
+,{"stream_name":"stdout","time":773.288729935,"data":"*   **Size:** medium, tiny, large\n"}
+,{"stream_name":"stdout","time":773.28873254,"data":"*   **Color:** red, green, yellow\n"}
+,{"stream_name":"stdout","time":773.288735147,"data":"*   **Pattern:** plaid, solid, striped, dotted\n"}
+,{"stream_name":"stdout","time":773.288737747,"data":"*   **Shape:** hexagon, triangle, circle\n"}
+,{"stream_name":"stdout","time":773.288740364,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288742899,"data":"\n"}
+,{"stream_name":"stdout","time":773.288745791,"data":"--- [two_feat_many] seed=0 ---\n"}
+,{"stream_name":"stdout","time":773.288748454,"data":"Item: pattern+color conjunction\n"}
+,{"stream_name":"stdout","time":773.288751017,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288753549,"data":"Pre: \"B\" (Y)  Post: \"A\" (N)\n"}
+,{"stream_name":"stdout","time":773.2887563,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288759006,"data":"\n"}
+,{"stream_name":"stdout","time":773.288761566,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288764169,"data":"\n"}
+,{"stream_name":"stdout","time":773.288766749,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288769356,"data":"\n"}
+,{"stream_name":"stdout","time":773.288771909,"data":"*   **Size:** medium, tiny, huge, small, large\n"}
+,{"stream_name":"stdout","time":773.288774537,"data":"*   **Color:** purple, blue, yellow, red\n"}
+,{"stream_name":"stdout","time":773.288777157,"data":"*   **Pattern:** dotted, solid, checkered, striped, plaid\n"}
+,{"stream_name":"stdout","time":773.288779811,"data":"*   **Sha\n"}
+,{"stream_name":"stdout","time":773.288782326,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288784848,"data":"\n"}
+,{"stream_name":"stdout","time":773.28878748,"data":"--- [two_feat_many] seed=1 ---\n"}
+,{"stream_name":"stdout","time":773.288790063,"data":"Item: color+pattern conjunction\n"}
+,{"stream_name":"stdout","time":773.288792713,"data":"Expected: \"A\"\n"}
+,{"stream_name":"stdout","time":773.288795265,"data":"Pre: \"A\" (Y)  Post: \"A\" (Y)\n"}
+,{"stream_name":"stdout","time":773.288797954,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288806117,"data":"\n"}
+,{"stream_name":"stdout","time":773.288808729,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288811499,"data":"\n"}
+,{"stream_name":"stdout","time":773.288814005,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288816618,"data":"\n"}
+,{"stream_name":"stdout","time":773.28881954,"data":"*   **Size:** small, tiny, huge, medium\n"}
+,{"stream_name":"stdout","time":773.288822225,"data":"*   **Color:** orange, blue, red, yellow\n"}
+,{"stream_name":"stdout","time":773.288824819,"data":"*   **Pattern:** dotted, checkered, striped, plaid, solid\n"}
+,{"stream_name":"stdout","time":773.288827471,"data":"*   **Shape:** s\n"}
+,{"stream_name":"stdout","time":773.288830003,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288832534,"data":"\n"}
+,{"stream_name":"stdout","time":773.288835004,"data":"--- [two_feat_many] seed=2 ---\n"}
+,{"stream_name":"stdout","time":773.288837688,"data":"Item: shape+pattern conjunction\n"}
+,{"stream_name":"stdout","time":773.288840256,"data":"Expected: \"C\"\n"}
+,{"stream_name":"stdout","time":773.2888428,"data":"Pre: \"C\" (Y)  Post: \"B\" (N)\n"}
+,{"stream_name":"stdout","time":773.28884545,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288848141,"data":"\n"}
+,{"stream_name":"stdout","time":773.288850583,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.28885318,"data":"\n"}
+,{"stream_name":"stdout","time":773.288855647,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288858953,"data":"\n"}
+,{"stream_name":"stdout","time":773.288861418,"data":"*   **Size:** tiny, small, huge\n"}
+,{"stream_name":"stdout","time":773.288864011,"data":"*   **Color:** yellow, orange, purple, blue, green, red\n"}
+,{"stream_name":"stdout","time":773.288866658,"data":"*   **Pattern:** checkered, striped, solid, plaid, dotted\n"}
+,{"stream_name":"stdout","time":773.28886928,"data":"*   **Sha\n"}
+,{"stream_name":"stdout","time":773.288871789,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288874357,"data":"\n"}
+,{"stream_name":"stdout","time":773.288876834,"data":"--- [two_feat_mid] seed=0 ---\n"}
+,{"stream_name":"stdout","time":773.288879411,"data":"Item: pattern+color conjunction\n"}
+,{"stream_name":"stdout","time":773.28888199,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288884537,"data":"Pre: \"A\" (N)  Post: \"A\" (N)\n"}
+,{"stream_name":"stdout","time":773.28888718,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288889888,"data":"\n"}
+,{"stream_name":"stdout","time":773.288928994,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288939297,"data":"\n"}
+,{"stream_name":"stdout","time":773.288948425,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.288951845,"data":"\n"}
+,{"stream_name":"stdout","time":773.288954322,"data":"*   **Size:** large, tiny, huge\n"}
+,{"stream_name":"stdout","time":773.288956894,"data":"*   **Color:** green, orange, blue, yellow\n"}
+,{"stream_name":"stdout","time":773.288959566,"data":"*   **Pattern:** striped, solid, checkered, dotted\n"}
+,{"stream_name":"stdout","time":773.288962159,"data":"*   **Shape:** square, diamon\n"}
+,{"stream_name":"stdout","time":773.288967762,"data":"...\n"}
+,{"stream_name":"stdout","time":773.288970443,"data":"\n"}
+,{"stream_name":"stdout","time":773.288972965,"data":"--- [two_feat_mid] seed=1 ---\n"}
+,{"stream_name":"stdout","time":773.288975527,"data":"Item: color+pattern conjunction\n"}
+,{"stream_name":"stdout","time":773.288978172,"data":"Expected: \"B\"\n"}
+,{"stream_name":"stdout","time":773.288980749,"data":"Pre: \"C\" (N)  Post: \"C\" (N)\n"}
+,{"stream_name":"stdout","time":773.288983424,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.288986134,"data":"\n"}
+,{"stream_name":"stdout","time":773.288988705,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.288991296,"data":"\n"}
+,{"stream_name":"stdout","time":773.288993781,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.28900105,"data":"\n"}
+,{"stream_name":"stdout","time":773.289003691,"data":"*   **Size:** huge, large, tiny, medium\n"}
+,{"stream_name":"stdout","time":773.289006315,"data":"*   **Color:** red, blue, green\n"}
+,{"stream_name":"stdout","time":773.289008906,"data":"*   **Pattern:** solid, dotted, striped, plaid\n"}
+,{"stream_name":"stdout","time":773.28901171,"data":"*   **Shape:** star, hexagon, diamon\n"}
+,{"stream_name":"stdout","time":773.289014326,"data":"...\n"}
+,{"stream_name":"stdout","time":773.289016937,"data":"\n"}
+,{"stream_name":"stdout","time":773.28901948,"data":"--- [two_feat_mid] seed=2 ---\n"}
+,{"stream_name":"stdout","time":773.289022169,"data":"Item: shape+pattern conjunction\n"}
+,{"stream_name":"stdout","time":773.289024857,"data":"Expected: \"C\"\n"}
+,{"stream_name":"stdout","time":773.289027429,"data":"Pre: \"C\" (Y)  Post: \"C\" (Y)\n"}
+,{"stream_name":"stdout","time":773.289030134,"data":"Notes (first 300 chars): Okay, let's analyze the examples to determine the classification rule.\n"}
+,{"stream_name":"stdout","time":773.28903288,"data":"\n"}
+,{"stream_name":"stdout","time":773.289035382,"data":"**1. Feature Analysis:**\n"}
+,{"stream_name":"stdout","time":773.28903809,"data":"\n"}
+,{"stream_name":"stdout","time":773.2890406,"data":"Let's break down the features of each object:\n"}
+,{"stream_name":"stdout","time":773.289043229,"data":"\n"}
+,{"stream_name":"stdout","time":773.289045759,"data":"*   **Size:** huge, small, large, tiny\n"}
+,{"stream_name":"stdout","time":773.289048417,"data":"*   **Color:** green, orange, yellow, red, purple\n"}
+,{"stream_name":"stdout","time":773.289051062,"data":"*   **Pattern:** solid, dotted, striped, plaid\n"}
+,{"stream_name":"stdout","time":773.289053717,"data":"*   **Shape:** hexa\n"}
+,{"stream_name":"stdout","time":773.289056339,"data":"...\n"}
+,{"stream_name":"stdout","time":781.371584085,"data":"SQLite closed. 27 rows to upload.\n"}
+,{"stream_name":"stdout","time":781.371646334,"data":"\n"}
+,{"stream_name":"stdout","time":823.317944698,"data":"Google auth not available: Failed to retrieve http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/?recursive=true from the Google Compute Engine metadata service. Compute Engine Metadata server unavailable due to HTTPConnectionPool(host='metadata.google.internal', port=80): Max retries exceeded with url: /computeMetadata/v1/instance/service-accounts/default/?recursive=true (Caused by NameResolutionError(\"HTTPConnection(host='metadata.google.internal', port=80): Failed to resolve 'metadata.google.internal' ([Errno -2] Name or service not known)\"))\n"}
+,{"stream_name":"stdout","time":823.318023611,"data":"\n"}
+,{"stream_name":"stdout","time":823.318044382,"data":"Done. SQLite: category_runs.db\n"}
+,{"stream_name":"stderr","time":827.92879168,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"remove_papermill_header.RemovePapermillHeader\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":827.928869661,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":827.950438557,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":828.380566881,"data":"[NbConvertApp] Writing 174830 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":831.403685735,"data":"/benchmarks/.venv/lib/python3.11/site-packages/traitlets/traitlets.py:2930: FutureWarning: --Exporter.preprocessors=[\"nbconvert.preprocessors.ExtractOutputPreprocessor\"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.\n"}
+,{"stream_name":"stderr","time":831.403783986,"data":"  warn(\n"}
+,{"stream_name":"stderr","time":831.428105117,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":832.814852387,"data":"[NbConvertApp] WARNING | Alternative text is missing on 1 image(s).\n"}
+,{"stream_name":"stderr","time":832.883257371,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":832.883296395,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":832.883726755,"data":"[NbConvertApp] Writing 408864 bytes to __results__.html\n"}
+]

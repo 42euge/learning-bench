@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stale State Recovery &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x2699;</span>
+    <h1>Stale State Recovery</h1>
+    <p class="task-hero-sub">Procedural Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model learn&mdash;from a small number of worked examples&mdash;a world model in which
+      references to state become <em>stale</em> after mutation, and then apply that model to debug and
+      repair a new operation sequence? This isolates procedural learning of state-invalidation rules:
+      the model must internalize which operations invalidate refs, detect the stale-reference bug, and
+      insert a re-snapshot at the correct position. The real-world failure mode is agents that re-use
+      stale handles after page navigations, file mutations, or deployments&mdash;producing errors like
+      <code>Ref e803 not found</code> or <code>File has been modified since read</code>.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See worked examples of valid op sequences, then fix a buggy sequence cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Extract staleness rules: which ops invalidate refs, what recovery looks like, which named ops mutate.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Fix the buggy sequence with own study notes + original examples.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>single_mutation, multiple_mutations, implicit_mutation</td>
+          <td>Single: one <code>mutate()</code> call invalidates refs. Multiple: 2&ndash;3
+              mutations with only one missing its re-snapshot. Implicit: named operations
+              like <code>write_file()</code>, <code>navigate()</code>, <code>commit()</code>,
+              and <code>deploy()</code> secretly invalidate refs as a side-effect&mdash;the
+              model must learn which ops mutate from the worked examples.</td>
+        </tr>
+        <tr>
+          <td><strong>Evidence</strong></td>
+          <td>few (3), mid (5), many (6)</td>
+          <td>Number of worked examples demonstrating valid sequences with annotations
+              (OK/FAIL/MUTATING). More examples = more evidence about the world model.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations for statistical robustness.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 evidence &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Operation sequences are built from a small abstract world model: <code>snapshot()</code> captures
+      state and returns a ref token, <code>act(ref.item_X)</code> uses a ref (fails if stale),
+      <code>mutate()</code> invalidates all prior refs. For the implicit_mutation variant, named
+      operations (<code>write_file</code>, <code>navigate</code>, <code>commit</code>,
+      <code>deploy</code>) secretly mutate, while others (<code>read_file</code>, <code>inspect</code>,
+      <code>log</code>, <code>ping</code>, <code>hash</code>) are pure. Worked examples show valid
+      sequences with OK/FAIL annotations. Test inputs are buggy sequences with one missing re-snapshot;
+      the expected answer is the corrected sequence with a re-snapshot inserted and steps renumbered.
+    </p>
+
+    <h2>Examples</h2>
+
+    <h3>Single Mutation</h3>
+    <p>The simplest case: one mutation invalidates the initial ref, and the model must insert a re-snapshot:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        1. s1 = snapshot()<br>
+        2. act(s1.item_A)<br>
+        3. mutate()<br>
+        4. act(s1.item_B) &nbsp;&larr; STALE: s1 was invalidated by mutate()
+      </div>
+      <div class="example-question">
+        <strong>Corrected sequence:</strong><br>
+        1. s1 = snapshot()<br>
+        2. act(s1.item_A)<br>
+        3. mutate()<br>
+        4. s2 = snapshot() &nbsp;# re-snapshot after mutation<br>
+        5. act(s2.item_B)
+      </div>
+    </div>
+
+    <h3>Implicit Mutation</h3>
+    <p>Named operations secretly invalidate state. The model must learn from examples which ops mutate:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        1. s1 = snapshot()<br>
+        2. act(s1.item_C)<br>
+        3. read_file() &nbsp;&larr; pure: refs remain valid<br>
+        4. write_file() &nbsp;&larr; MUTATING: invalidates all prior refs<br>
+        5. act(s1.item_D) &nbsp;&larr; STALE: s1 was invalidated by write_file()
+      </div>
+      <div class="example-question">
+        <strong>Corrected sequence:</strong><br>
+        1. s1 = snapshot()<br>
+        2. act(s1.item_C)<br>
+        3. read_file()<br>
+        4. write_file()<br>
+        5. s2 = snapshot() &nbsp;# re-snapshot after mutation<br>
+        6. act(s2.item_D)
+      </div>
+    </div>
+    <p>
+      The model must distinguish <code>read_file()</code> (pure) from <code>write_file()</code>
+      (mutating) based solely on evidence in the worked examples&mdash;there is no explicit rule
+      given for which named operations mutate.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact sequence match after normalization).</li>
+      <li><strong>Extraction:</strong> Longest contiguous block of numbered operation lines, normalized
+          (step numbers stripped, comments removed, whitespace collapsed, lowercased).</li>
+      <li><strong>Assertion:</strong> Extracted sequence must match the normalized expected sequence exactly.</li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Single mutation:</strong> Models that understand basic state invalidation handle this.
+          It serves as a baseline and sanity check.</li>
+      <li><strong>Multiple mutations:</strong> Only one of 2&ndash;3 mutations is missing its refresh.
+          Models must track ref validity across the entire sequence, not just insert a refresh after
+          every mutation.</li>
+      <li><strong>Implicit mutation:</strong> The hardest condition. Models must <em>learn from examples</em>
+          which named operations are secretly mutating&mdash;a pure inductive learning challenge.
+          Models that treat all named ops as safe (or all as mutating) fail.</li>
+      <li><strong>Study quality matters:</strong> Models that extract an explicit checklist of
+          which operations invalidate refs (citing evidence from the worked examples) show the
+          largest pre-to-post improvement on implicit_mutation items.</li>
+    </ul>
+
+    <h2>Prior Work &amp; References</h2>
+    <p>
+      Stale state recovery draws on the classical frame problem in AI, modern agent state-tracking
+      research, and software engineering benchmarks that test planning with side effects.
+    </p>
+
+    <h3>The Frame Problem &amp; State Tracking</h3>
+    <ul>
+      <li>
+        <strong>McCarthy &amp; Hayes (1969).</strong>
+        &ldquo;Some Philosophical Problems from the Standpoint of Artificial Intelligence.&rdquo;
+        Introduced the frame problem: how does an agent determine which aspects of state
+        <em>change</em> and which <em>persist</em> after an action? Our benchmark is a direct
+        instantiation&mdash;the model must learn which operations change the world (invalidating
+        refs) and which leave it intact.
+      </li>
+      <li>
+        <strong>Li et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2410.02810">StateAct: Enhancing LLM Base Agents via
+        Self-prompting and State-tracking</a>.&rdquo;
+        Introduces &ldquo;chain-of-states,&rdquo; extending chain-of-thought with explicit state
+        tracking over time. Our task evaluates whether models can learn state-tracking rules
+        from examples without needing architectural modifications.
+      </li>
+    </ul>
+
+    <h3>Agent Failures &amp; Stale Context</h3>
+    <ul>
+      <li>
+        <strong>Chen et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2510.23853">Your LLM Agents are Temporally Blind:
+        The Misalignment Between Tool Use Decisions and Human Time Perception</a>.&rdquo;
+        Found that LLM agents over-rely on stale context and skip needed tool calls when time
+        elapses&mdash;the temporal analogue of our stale-ref problem. Our benchmark isolates the
+        structural (not temporal) version of this failure.
+      </li>
+      <li>
+        <strong>Agarwal et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2503.07832">RefactorBench: Evaluating Stateful
+        Reasoning in Language Agents Through Code</a>.&rdquo;
+        Identified failure modes in tracking past actions, showing 43.9% improvement when agents
+        condition on state representations. Our task measures whether the state-tracking rules
+        themselves can be learned from examples.
+      </li>
+      <li>
+        <strong>Zhang et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2603.27343">Beyond Completion: Probing Cumulative
+        State Tracking to Predict LLM Agent Performance</a>.&rdquo;
+        Showed that cumulative state-tracking ability is predictive of overall agent performance,
+        directly motivating benchmarks that isolate state-tracking as a learnable skill.
+      </li>
+    </ul>
+
+    <h3>Software Engineering Benchmarks</h3>
+    <ul>
+      <li>
+        <strong>Jimenez et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2310.06770">SWE-bench: Can Language Models Resolve
+        Real-world Github Issues?</a>&rdquo; (ICLR 2024).
+        The leading benchmark for LLM software engineering. SWE-bench tasks implicitly require
+        state management (understanding what changed in a codebase), but do not isolate or
+        measure state-tracking as a learnable skill. Our task complements SWE-bench by providing
+        a controlled, minimal evaluation of this specific capability.
+      </li>
+      <li>
+        <strong>Yang et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2509.16941">SWE-Bench Pro: Can AI Agents Solve
+        Long-Horizon Software Engineering Tasks?</a>&rdquo;
+        Extends SWE-bench to long-horizon tasks where state management across many steps becomes
+        critical. Our benchmark provides a focused diagnostic for the state-tracking sub-skill
+        that these longer tasks require.
+      </li>
+    </ul>
+
+    <h3>Planning with Side Effects</h3>
+    <ul>
+      <li>
+        <strong>Wang et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2509.25370">Where LLM Agents Fail and How They
+        Can Learn From Failures</a>.&rdquo;
+        Catalogues common LLM agent failure modes, including failure to account for
+        side effects of previous actions. Our benchmark turns this failure mode into a
+        measurable, learnable task.
+      </li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/stale-state-recovery-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

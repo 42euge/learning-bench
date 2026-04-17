@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batch Error Diagnosis &mdash; GenoBench-Learning</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">Geno<span>Bench</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#tasks">&larr; All Tasks</a></li>
+      <li><a href="https://github.com/42euge/learning-bench">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="task-hero">
+  <div class="container">
+    <span class="task-hero-icon">&#x1F441;</span>
+    <h1>Batch Error Diagnosis</h1>
+    <p class="task-hero-sub">Observational Learning</p>
+  </div>
+</header>
+
+<section>
+  <div class="container task-detail">
+
+    <h2>What It Tests</h2>
+    <p>
+      Can the model identify ALL distinct root causes in a multi-error build output in one pass&mdash;not
+      just the first one? This isolates observational learning: the ability to internalize a diagnostic
+      procedure from worked examples and transfer it to a new multi-error scenario. The real-world failure
+      mode is agents that fix one error, re-run, see the next, fix it, re-run&hellip; doing N build cycles
+      instead of 1.
+    </p>
+
+    <h2>Three-Phase Framework</h2>
+    <div class="method-diagram">
+      <div class="method-step pre">
+        <div class="step-icon">&#x1F4DD;</div>
+        <div class="step-title">Pre-Test</div>
+        <div class="step-desc">See worked examples of multi-error diagnosis, then count root causes in a new build output cold.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step study">
+        <div class="step-icon">&#x1F4D6;</div>
+        <div class="step-title">Study</div>
+        <div class="step-desc">Analyze examples: extract the diagnostic procedure, learn to collapse duplicates and handle chains.</div>
+      </div>
+      <div class="method-arrow">&rarr;</div>
+      <div class="method-step post">
+        <div class="step-icon">&#x2705;</div>
+        <div class="step-title">Post-Test</div>
+        <div class="step-desc">Answer with own study notes + original worked examples.</div>
+      </div>
+    </div>
+
+    <h2>Difficulty Dimensions</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Levels</th><th>What Varies</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Complexity</strong></td>
+          <td>independent, chained, redundant</td>
+          <td>Independent: errors don&rsquo;t affect each other. Chained: fixing one
+              would expose another (but the count is still N distinct root causes).
+              Redundant: multiple symptoms of the same root cause&mdash;the model
+              must not over-count.</td>
+        </tr>
+        <tr>
+          <td><strong>Evidence</strong></td>
+          <td>few (3), mid (4), many (5)</td>
+          <td>Number of worked examples demonstrating the diagnostic procedure.
+              More examples = more evidence to learn from.</td>
+        </tr>
+        <tr>
+          <td><strong>Seeds</strong></td>
+          <td>0, 1, 2</td>
+          <td>Independent random generations for statistical robustness.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="detail-grid">
+      <strong>Total:</strong> 3 complexity &times; 3 evidence &times; 3 seeds = <strong>27 items</strong>
+    </p>
+
+    <h2>Dataset Generation</h2>
+    <p>
+      Error lines are generated from template pools modelling real TypeScript compiler errors (TS2345 type
+      mismatches, TS2304 missing imports, TS18047 null accesses, TS2741 missing properties, TS6133 unused
+      variables, TS2769 overload failures) and Jest test failures. Each template is paired with a
+      root-cause key so the generator can control whether multiple lines point to the same underlying
+      issue (redundant) or different ones (independent). For <strong>chained</strong> conditions, errors
+      are ordered so that earlier fixes would expose later symptoms. Worked examples show a build output,
+      the full enumeration of distinct root causes, and the count.
+    </p>
+
+    <h2>Examples</h2>
+
+    <h3>Independent Errors</h3>
+    <p>The model sees worked examples of multi-error build outputs with full enumerations, then must count root causes in a new output:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        src/auth/session.ts:42:8 - error TS2345: Argument of type &lsquo;string&rsquo; is not assignable to parameter of type &lsquo;UserProfile&rsquo;.<br>
+        src/api/orders.ts:91:12 - error TS2304: Cannot find name &lsquo;config&rsquo;. Did you forget to import from &lsquo;@/lib/config&rsquo;?<br>
+        FAIL test/authflow.test.ts &gt; AuthFlow &gt; returns 200 on success
+      </div>
+      <div class="example-question">
+        <strong>Question:</strong> How many distinct root causes are there?<br>
+        <strong>Expected:</strong> 3
+      </div>
+    </div>
+    <p>
+      Each error line is independent&mdash;a type mismatch, a missing import, and a test failure.
+      The model must enumerate all three, not stop at the first.
+    </p>
+
+    <h3>Redundant Errors (same root cause, multiple symptoms)</h3>
+    <p>Multiple error lines trace back to fewer distinct root causes:</p>
+    <div class="example-box">
+      <div class="example-vocab">
+        src/models/user.ts:23:5 - error TS2345: Argument of type &lsquo;string&rsquo; is not assignable to parameter of type &lsquo;OrderItem&rsquo;.<br>
+        src/pages/dashboard.tsx:67:10 - error TS2769: No overload matches this call. Overload 1 expected &lsquo;OrderItem&rsquo; but got &lsquo;string&rsquo;.<br>
+        src/api/users.ts:45:3 - error TS18047: &lsquo;formatDate&rsquo; is possibly &lsquo;null&rsquo;.
+      </div>
+      <div class="example-question">
+        <strong>Question:</strong> How many distinct root causes are there?<br>
+        <strong>Expected:</strong> 2
+      </div>
+    </div>
+    <p>
+      The first two errors share the same root cause (type mismatch on <code>OrderItem</code>),
+      while the null access is separate. Models that count lines instead of root causes will over-count.
+    </p>
+
+    <h2>Scoring</h2>
+    <ul>
+      <li><strong>Metric:</strong> Post-learning accuracy (exact integer match).</li>
+      <li><strong>Extraction:</strong> Last integer on its own line, stripped of markdown and punctuation.</li>
+      <li><strong>Assertion:</strong> <code>kbench.assertions.assert_equal(post_extracted, str(expected))</code></li>
+    </ul>
+
+    <h2>What Discriminates Models</h2>
+    <ul>
+      <li><strong>Independent/few:</strong> Most models handle straightforward enumeration of 2&ndash;3 unrelated
+          errors&mdash;this is a baseline.</li>
+      <li><strong>Redundant:</strong> Models must collapse multiple symptoms into shared root causes.
+          Over-counters fail here, revealing whether the model truly learned the diagnostic pattern
+          or just counts error lines.</li>
+      <li><strong>Chained:</strong> Errors are causally linked. Models that collapse the entire chain
+          into &ldquo;just the first error&rdquo; under-count. The correct answer is still N distinct
+          root causes.</li>
+      <li><strong>Study quality matters:</strong> Models that extract a clear, reusable diagnostic checklist
+          from the worked examples outperform those that produce vague summaries.</li>
+    </ul>
+
+    <h2>Prior Work &amp; References</h2>
+    <p>
+      Batch error diagnosis draws on research in automated fault localization, root cause analysis,
+      and multi-fault program repair. No existing benchmark evaluates whether LLMs can learn a
+      diagnostic enumeration procedure from worked examples and transfer it to new multi-error outputs.
+    </p>
+
+    <h3>Root Cause Analysis &amp; Fault Localization</h3>
+    <ul>
+      <li>
+        <strong>Kang et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2510.22530">Finding the Needle in the Crash Stack:
+        Industrial-Scale Crash Root Cause Localization with AutoCrashFL</a>.&rdquo;
+        Proposes an LLM agent for crash root cause localization given only the crashdump and source
+        repository&mdash;demonstrating the need for systematic enumeration rather than surface-level
+        pattern matching.
+      </li>
+      <li>
+        <strong>Chen et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2504.20462">TAMO: Fine-Grained Root Cause Analysis
+        via Tool-Assisted LLM Agent</a>.&rdquo;
+        Uses multi-modality observation data for fine-grained RCA in cloud-native systems, showing
+        that LLMs benefit from structured diagnostic procedures&mdash;the same principle our
+        study phase exploits.
+      </li>
+    </ul>
+
+    <h3>Multi-Fault Program Repair</h3>
+    <ul>
+      <li>
+        <strong>Xiang et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2407.08958">Towards Practical and Useful Automated
+        Program Repair for Debugging</a>.&rdquo;
+        Found that ~49.5% of multi-location bugs are multi-fault bugs, yet current APR techniques
+        repair at most 8 of 118 single-fault multi-location bugs&mdash;highlighting the gap
+        our benchmark targets.
+      </li>
+      <li>
+        <strong>Wang et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2604.05481">On the Role of Fault Localization Context
+        for LLM-Based Program Repair</a>.&rdquo;
+        A large-scale empirical study showing how fault localization context granularity affects
+        LLM repair quality. Our benchmark isolates the upstream problem: can the model even
+        enumerate all faults before attempting repair?
+      </li>
+    </ul>
+
+    <h3>Observational Learning in LLMs</h3>
+    <ul>
+      <li>
+        <strong>Agarwal et al. (2025).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2509.19379">Learning from Observation: A Survey
+        of Recent Advances</a>.&rdquo;
+        Surveys state-only imitation learning (learning from observed sequences without action
+        labels)&mdash;our worked-example paradigm is a text analogue of this framework.
+      </li>
+      <li>
+        <strong>Majumdar et al. (2024).</strong>
+        &ldquo;<a href="https://arxiv.org/abs/2412.01441">LMAct: A Benchmark for In-Context
+        Imitation Learning with Long Multimodal Demonstrations</a>.&rdquo;
+        Evaluates in-context imitation learning across zero-, few-, and many-shot regimes.
+        Our evidence dimension (3/4/5 examples) tests a similar axis in a text-only setting.
+      </li>
+    </ul>
+
+    <div class="task-cta">
+      <a href="https://www.kaggle.com/datasets/eugenio0/batch-error-diagnosis-benchmark" class="cta">View Dataset on Kaggle</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>GenoBench-Learning</strong> by Eugenio Rivera Ramos</p>
+    <div class="footer-links">
+      <a href="https://github.com/42euge/learning-bench">GitHub</a>
+      <a href="../index.html">Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
